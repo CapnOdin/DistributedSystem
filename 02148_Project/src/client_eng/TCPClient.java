@@ -47,7 +47,7 @@ public class TCPClient {
 				message = (String) input.readObject();
 				System.out.println(message);
 				sendMessage("Hello");
-				//sendMessage("END");
+				sendMessage("END");
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -59,17 +59,17 @@ public class TCPClient {
 		output = new ObjectOutputStream(connection.getOutputStream());
 		output.flush();
 		input = new ObjectInputStream(connection.getInputStream());
-		System.out.println("Streams successfully created.");
+		System.out.println("[CLIENT]Streams successfully created.");
 	}
 
 	private void connectToServer() throws IOException {
-		System.out.println("Attempting connection...");
+		System.out.println("[CLIENT]Attempting connection...");
 		connection = new Socket(InetAddress.getByName(serverIP), 1234);
-		System.out.println("Connected to " + connection.getInetAddress().getHostName());
+		System.out.println("[CLIENT]Connected to " + connection.getInetAddress().getHostName());
 	}
 
 	private void cleanUp() {
-		System.out.println("Closing connection and streams.");
+		System.out.println("[CLIENT]Closing connection and streams.");
 		try {
 			output.close();
 			input.close();

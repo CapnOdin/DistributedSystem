@@ -62,17 +62,17 @@ public class TCPServer implements Runnable {
 		output = new ObjectOutputStream(connection.getOutputStream());
 		output.flush();
 		input = new ObjectInputStream(connection.getInputStream());
-		System.out.println("Input and Output streams are now set up.");
+		System.out.println("[SERVER]Streams successfully created.");
 	}
 
 	private void waitForConnection() throws IOException {
-		System.out.println("Waiting for someone to connect...");
+		System.out.println("[SERVER]Waiting for someone to connect...");
 		connection = server.accept();
-		System.out.println("Now connected to " + connection.getInetAddress().getHostName());
+		System.out.println("[SERVER]Now connected to " + connection.getInetAddress().getHostName());
 	}
 
 	private void cleanUp() {
-		System.out.println("Closing connections");
+		System.out.println("[SERVER]Closing connections");
 		try {
 			output.close();
 			input.close();
