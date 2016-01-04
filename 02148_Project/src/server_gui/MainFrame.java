@@ -1,5 +1,6 @@
 package server_gui;
 
+import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -25,10 +26,13 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	private void setGridBagConstraints(int x, int y) {
 		c.gridx = x;
 		c.gridy = y;
+		c.fill = GridBagConstraints.BOTH;
 	}
 
 	private void setDefaultProperties() {
 		this.setLayout(new GridBagLayout());
+		this.setUndecorated(true);
+		//this.setLayout(new BorderLayout());
 		this.setPreferredSize(frameSize);
 		this.pack();
 		this.setLocationRelativeTo(null);
