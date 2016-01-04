@@ -5,8 +5,8 @@ import javax.swing.JPanel;
 public abstract class PanelTemplate extends JPanel implements GeneralProperties {
 	
 	public PanelTemplate() {
-		this.setPreferredSize(frameSize);
-		this.setBackground(bg_color);
+		this.setVisible(true);
+		setBackgroundColor();
 	}
 	
 	abstract void setBackgroundColor();

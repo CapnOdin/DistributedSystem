@@ -2,15 +2,13 @@ package server_gui;
 
 import java.awt.Color;
 
-public class DataPanel extends PanelTemplate {
+public class DataPanel2 extends PanelTemplate {
 
 	private static final long serialVersionUID = 1L;
 	
-	
 	@Override
 	void setBackgroundColor() {
-		this.setBackground(Color.orange);
-		this.validate();	
+		this.setBackground(Color.black);
 	}
 
 	@Override
