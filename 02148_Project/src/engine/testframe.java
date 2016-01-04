@@ -4,11 +4,11 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-public class fgffcfd {
+public class testframe {
 	
 	private JFrame frame = new JFrame();
 	
-	public fgffcfd() {
+	public testframe() {
 		
 		frame.setLocationRelativeTo(null);
 		frame.setPreferredSize(new Dimension(400,400));
@@ -17,7 +17,7 @@ public class fgffcfd {
 	}
 	
 	public static void main(String[] args) {
-		new fgffcfd();
+		new testframe();
 	}
 	
 }
