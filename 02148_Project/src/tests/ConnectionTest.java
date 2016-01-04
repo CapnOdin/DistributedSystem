@@ -1,6 +1,7 @@
-package server_eng;
+package tests;
 
 import client_eng.TCPClient;
+import server_eng.TCPServer;
 
 public class ConnectionTest {
 	
