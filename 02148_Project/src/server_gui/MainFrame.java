@@ -14,7 +14,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	private DataPanel2 dp2 = new DataPanel2();
 	private DataPanel3 dp3 = new DataPanel3();
 	
-	public Dimension contentPaneSize;
+	public static Dimension contentPaneSize;
 	
 	public MainFrame() {
 		//Dimension screenSize1 = new Dimension (this.getContentPane().getSize());
@@ -38,6 +38,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	}
 
 	private void setDefaultProperties() {
+		contentPaneSize = this.getContentPane().getSize();
 		this.setLayout(new GridBagLayout());
 		//this.setUndecorated(true);
 		//this.setLayout(new BorderLayout());
@@ -50,7 +51,5 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	public Dimension getFrameContentPaneSize() {
 		return contentPaneSize;
 	}
-	
-	
 
 }
