@@ -20,7 +20,6 @@ public class DataPanel2 extends PanelTemplate {
 	@Override
 	void setPanelSize() {
 		this.setPreferredSize(new Dimension(frameSize.width, (frameSize.height/10)*2));
-		
 	}
 
 	@Override
@@ -44,7 +43,7 @@ public class DataPanel2 extends PanelTemplate {
 	
 	
 	private void setJLabel(JLabel name){
-		name.setPreferredSize(labelSize);
+		//name.setPreferredSize(labelSize);
 		name.setVisible(true);
 	}
 

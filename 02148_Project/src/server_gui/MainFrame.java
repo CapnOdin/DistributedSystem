@@ -10,14 +10,16 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	private static final long serialVersionUID = 1L;
 	private GridBagConstraints c = new GridBagConstraints();
 	
-	
 	private DataPanel dp = new DataPanel();
 	private DataPanel2 dp2 = new DataPanel2();
 	private DataPanel3 dp3 = new DataPanel3();
 	
+	public Dimension contentPaneSize;
+	
 	public MainFrame() {
-		Dimension screenSize1 = new Dimension (this.getContentPane().getSize());
+		//Dimension screenSize1 = new Dimension (this.getContentPane().getSize());
 		setDefaultProperties();
+		contentPaneSize = getContentPane().getSize();
 		setGridBagConstraints(0, 0,frameSize.height/10, frameSize.width);
 		this.add(dp, c);
 		setGridBagConstraints(0, 1, (frameSize.height/20)*3, frameSize.width);
@@ -43,6 +45,10 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+	}
+	
+	public Dimension getFrameContentPaneSize() {
+		return contentPaneSize;
 	}
 	
 	
