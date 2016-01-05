@@ -1,15 +1,17 @@
 package server_eng;
 
 public class ServerSlave implements Runnable {
-	private TCPServer parent;
+	private ServerTupleSpace space;
 	
-	public ServerSlave(TCPServer parent) {
-		this.parent = parent;
+	public ServerSlave(ServerTupleSpace space) {
+		this.space = space;
 	}
 
 	@Override
 	public void run() {
-		
+		while(true) {
+			
+		}
 	}
 
 }
