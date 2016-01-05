@@ -45,6 +45,7 @@ public class MainFrame extends JFrame{
 
 	private void setDefaultProperties() {
 		contentPaneSize = this.getContentPane().getSize();
+		this.setResizable(false);
 		this.setLayout(new GridBagLayout());
 		//this.setUndecorated(true);
 		//this.setLayout(new BorderLayout());

@@ -2,7 +2,7 @@ package server_gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 
@@ -24,11 +24,12 @@ public class DataPanel2 extends PanelTemplate {
 
 	@Override
 	void setup() {
-		this.setLayout(new FlowLayout(FlowLayout.CENTER));
-		Data = new JLabel("Data");
-		Connect = new JLabel("Connect");
-		Vagter = new JLabel("Vagter");
-		Oversigt = new JLabel("Oversigt");
+		//this.setLayout(new FlowLayout(FlowLayout.CENTER));
+		this.setLayout(new GridLayout(0,4));
+		Data = new JLabel("Data", JLabel.CENTER);
+		Connect = new JLabel("Connect", JLabel.CENTER);
+		Vagter = new JLabel("Vagter", JLabel.CENTER);
+		Oversigt = new JLabel("Oversigt", JLabel.CENTER);
 		setJLabel(Data);
 		setJLabel(Connect);
 		setJLabel(Vagter);
