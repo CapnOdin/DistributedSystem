@@ -3,6 +3,7 @@ package server_gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -20,15 +21,16 @@ public class DataPanel extends PanelTemplate {
 
 	@Override
 	void setBackgroundColor() {
-		this.setBackground(Color.orange);
+		this.setBackground(Color.white);
 		this.validate();	
 	}
 
 	@Override
-	void setPanelSize() {
-		this.setPreferredSize(new Dimension(GeneralProperties.frameSize.width, GeneralProperties.frameSize.height/10));
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
+
 	
 	
 

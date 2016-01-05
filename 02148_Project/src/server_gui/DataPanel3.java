@@ -2,6 +2,7 @@ package server_gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 
 public class DataPanel3 extends PanelTemplate{
 	private static final long serialVersionUID = 1L;
@@ -13,13 +14,13 @@ public class DataPanel3 extends PanelTemplate{
 	}
 
 	@Override
-	void setPanelSize() {
-		this.setPreferredSize(new Dimension(GeneralProperties.frameSize.width, (GeneralProperties.frameSize.height/10)*7));
+	void setup() {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	void setup() {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,10 +1,11 @@
 package server_gui;
 
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-public abstract class PanelTemplate extends JPanel {
+public abstract class PanelTemplate extends JPanel implements GeneralProperties, ActionListener {
 	
 	public PanelTemplate() {
 		this.setVisible(true);
@@ -15,6 +16,5 @@ public abstract class PanelTemplate extends JPanel {
 	}
 	
 	abstract void setBackgroundColor();
-	abstract void setPanelSize();
 	abstract void setup();
 }

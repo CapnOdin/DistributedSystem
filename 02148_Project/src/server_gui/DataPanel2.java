@@ -3,6 +3,7 @@ package server_gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
 
@@ -18,13 +19,7 @@ public class DataPanel2 extends PanelTemplate {
 	}
 
 	@Override
-	void setPanelSize() {
-		this.setPreferredSize(new Dimension(GeneralProperties.frameSize.width, (GeneralProperties.frameSize.height/10)*2));
-	}
-
-	@Override
 	void setup() {
-		//this.setLayout(new FlowLayout(FlowLayout.CENTER));
 		this.setLayout(new GridLayout(0,4));
 		Data = new JLabel("Data", JLabel.CENTER);
 		Connect = new JLabel("Connect", JLabel.CENTER);
@@ -44,8 +39,12 @@ public class DataPanel2 extends PanelTemplate {
 	
 	
 	private void setJLabel(JLabel name){
-		name.setPreferredSize(MainFrame.JLabelSize);
-		name.setVisible(true);
+		name.setVisible(true);		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 
