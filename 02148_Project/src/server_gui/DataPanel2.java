@@ -43,7 +43,7 @@ public class DataPanel2 extends PanelTemplate {
 	
 	
 	private void setJLabel(JLabel name){
-		name.setPreferredSize(GeneralProperties.labelSize);
+		name.setPreferredSize(MainFrame.JLabelSize);
 		name.setVisible(true);
 		
 	}

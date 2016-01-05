@@ -8,18 +8,24 @@ import javax.swing.JFrame;
 
 public class MainFrame extends JFrame{
 	private GridBagConstraints c = new GridBagConstraints();	
-	private DataPanel dp = new DataPanel();
-	private DataPanel2 dp2 = new DataPanel2();
-	private DataPanel3 dp3 = new DataPanel3();
+	private DataPanel dp;
+	private DataPanel2 dp2;
+	private DataPanel3 dp3;
 	
 	public static Dimension contentPaneSize;
+	public static Dimension JLabelSize;
 	
 	public MainFrame() {
-		Dimension screenSize = new Dimension (this.getContentPane().getSize());
 		setDefaultProperties();
-		GeneralProperties.screenSize = screenSize;
-		System.out.println(screenSize);
+		Dimension CPSize = new Dimension (this.getContentPane().getSize());		
 		contentPaneSize = getContentPane().getSize();
+		JLabelSize = new Dimension((contentPaneSize.width / 4), (contentPaneSize.height/10*2));
+		dp = new DataPanel();
+		dp2 = new DataPanel2();
+		dp3 = new DataPanel3();
+		System.out.println(contentPaneSize);
+		System.out.println(JLabelSize);
+		System.out.println(GeneralProperties.frameSize);
 		setGridBagConstraints(0, 0,GeneralProperties.frameSize.height/10, GeneralProperties.frameSize.width);
 		this.add(dp, c);
 		setGridBagConstraints(0, 1, (GeneralProperties.frameSize.height/20)*3, GeneralProperties.frameSize.width);
