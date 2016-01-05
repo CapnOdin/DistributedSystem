@@ -10,11 +10,12 @@ import javax.swing.JLabel;
 public class DataPanel extends PanelTemplate {
 	
 	
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Override
 	void setup(){
-
+		
 	}
 
 	@Override
