@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-public interface GeneralProperties {
-	public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	public Dimension frameSize = new Dimension(screenSize.width / 2, screenSize.height / 2);
-	//public Dimension labelSize = new Dimension(MainFrame.frameContentPaneSize.width / 4, (frameSize.height/10*2));
-	public Color bg_color = Color.white;
+public class GeneralProperties {
+	
+	public static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	public static Dimension frameSize = new Dimension(screenSize.width / 2, screenSize.height / 2);
+	public static Dimension ContentPaneSize;
+	public static Dimension labelSize = new Dimension(ContentPaneSize.width / 4, (frameSize.height/10*2));
+	public static Color bg_color = Color.white;
 }

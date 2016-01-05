@@ -7,8 +7,6 @@ import java.awt.FlowLayout;
 import javax.swing.JLabel;
 
 public class DataPanel2 extends PanelTemplate {
-	
-	private GeneralProperties2 gp2 = new GeneralProperties2();
 
 	private static final long serialVersionUID = 1L;
 	private JLabel Data, Connect, Vagter, Oversigt;
@@ -21,7 +19,7 @@ public class DataPanel2 extends PanelTemplate {
 
 	@Override
 	void setPanelSize() {
-		this.setPreferredSize(new Dimension(frameSize.width, (frameSize.height/10)*2));
+		this.setPreferredSize(new Dimension(GeneralProperties.frameSize.width, (GeneralProperties.frameSize.height/10)*2));
 	}
 
 	@Override
@@ -45,7 +43,7 @@ public class DataPanel2 extends PanelTemplate {
 	
 	
 	private void setJLabel(JLabel name){
-		//name.setPreferredSize(labelSize);
+		name.setPreferredSize(GeneralProperties.labelSize);
 		name.setVisible(true);
 		
 	}

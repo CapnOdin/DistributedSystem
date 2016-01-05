@@ -14,7 +14,7 @@ public class DataPanel3 extends PanelTemplate{
 
 	@Override
 	void setPanelSize() {
-		this.setPreferredSize(new Dimension(frameSize.width, (frameSize.height/10)*7));
+		this.setPreferredSize(new Dimension(GeneralProperties.frameSize.width, (GeneralProperties.frameSize.height/10)*7));
 		
 	}
 

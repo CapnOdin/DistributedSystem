@@ -6,10 +6,8 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 
-public class MainFrame extends JFrame implements GeneralProperties {
-	private static final long serialVersionUID = 1L;
-	private GridBagConstraints c = new GridBagConstraints();
-	
+public class MainFrame extends JFrame{
+	private GridBagConstraints c = new GridBagConstraints();	
 	private DataPanel dp = new DataPanel();
 	private DataPanel2 dp2 = new DataPanel2();
 	private DataPanel3 dp3 = new DataPanel3();
@@ -17,14 +15,16 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	public static Dimension contentPaneSize;
 	
 	public MainFrame() {
-		//Dimension screenSize1 = new Dimension (this.getContentPane().getSize());
+		Dimension screenSize = new Dimension (this.getContentPane().getSize());
 		setDefaultProperties();
+		GeneralProperties.screenSize = screenSize;
+		System.out.println(screenSize);
 		contentPaneSize = getContentPane().getSize();
-		setGridBagConstraints(0, 0,frameSize.height/10, frameSize.width);
+		setGridBagConstraints(0, 0,GeneralProperties.frameSize.height/10, GeneralProperties.frameSize.width);
 		this.add(dp, c);
-		setGridBagConstraints(0, 1, (frameSize.height/20)*3, frameSize.width);
+		setGridBagConstraints(0, 1, (GeneralProperties.frameSize.height/20)*3, GeneralProperties.frameSize.width);
 		this.add(dp2, c);
-		setGridBagConstraints(0,2, (frameSize.height/4)*3, frameSize.width);
+		setGridBagConstraints(0,2, (GeneralProperties.frameSize.height/4)*3, GeneralProperties.frameSize.width);
 		this.add(dp3,c);
 		this.validate();
 	}
@@ -42,7 +42,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		this.setLayout(new GridBagLayout());
 		//this.setUndecorated(true);
 		//this.setLayout(new BorderLayout());
-		this.setPreferredSize(frameSize);
+		this.setPreferredSize(GeneralProperties.frameSize);
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);

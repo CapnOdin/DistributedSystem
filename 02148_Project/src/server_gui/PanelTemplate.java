@@ -4,12 +4,11 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
-public abstract class PanelTemplate extends JPanel implements GeneralProperties {
+public abstract class PanelTemplate extends JPanel {
 	
 	public PanelTemplate() {
 		this.setVisible(true);
-		System.out.println();
-		this.setPreferredSize(new Dimension(frameSize.width, frameSize.height));
+		this.setPreferredSize(new Dimension(GeneralProperties.frameSize.width, GeneralProperties.frameSize.height));
 		setBackgroundColor();
 		setup();
 		this.validate();
