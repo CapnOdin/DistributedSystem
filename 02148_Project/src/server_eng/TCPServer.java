@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class TCPServer implements Runnable {
 	
-	private ArrayList<String> taskBuffer = new ArrayList<String>();
+	private static ArrayList<String> taskBuffer = new ArrayList<String>();
 	
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
@@ -98,7 +98,7 @@ public class TCPServer implements Runnable {
 		serverSleepMode();
 	}
 
-	public ArrayList<String> getTaskBuffer() {
+	public static ArrayList<String> getTaskBuffer() {
 		return taskBuffer;
 	}
 
