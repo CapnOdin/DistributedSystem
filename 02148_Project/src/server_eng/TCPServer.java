@@ -5,8 +5,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class TCPServer implements Runnable {
+	
+	private ArrayList<String> taskBuffer = new ArrayList<String>();
 	
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
@@ -51,7 +54,9 @@ public class TCPServer implements Runnable {
 		do {
 			try {
 				message = (String) input.readObject();
-				System.out.println(message);
+				taskBuffer.add(message);
+				//System.out.println(message);
+				System.out.println(taskBuffer.get(0));
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
