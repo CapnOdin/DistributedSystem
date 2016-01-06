@@ -19,7 +19,7 @@ public abstract class TaskTemplate {
 		this.description = description;
 	}
 
-	abstract void runTask();
+	abstract void runTask(ServerTupleSpace space);
 	
 	public String getId() {
 		return id;

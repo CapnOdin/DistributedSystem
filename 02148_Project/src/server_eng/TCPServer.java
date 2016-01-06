@@ -18,6 +18,7 @@ public class TCPServer implements Runnable {
 	private Socket connection;
 	
 	private int port;
+	public static int currentTask = 0;
 	
 	public TCPServer(int port) {
 		this.port = port;
@@ -55,7 +56,6 @@ public class TCPServer implements Runnable {
 			try {
 				message = (String) input.readObject();
 				taskBuffer.add(message);
-				//System.out.println(message);
 				System.out.println(taskBuffer.get(0));
 			} catch(Exception e) {
 				e.printStackTrace();
@@ -96,6 +96,14 @@ public class TCPServer implements Runnable {
 			e.printStackTrace();
 		}
 		serverSleepMode();
+	}
+
+	public ArrayList<String> getTaskBuffer() {
+		return taskBuffer;
+	}
+
+	public void setTaskBuffer(ArrayList<String> taskBuffer) {
+		this.taskBuffer = taskBuffer;
 	}
 
 }
