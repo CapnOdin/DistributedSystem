@@ -1,11 +1,11 @@
-package server_gui;
+package client_gui;
 
 import java.awt.Dimension;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
-public abstract class PanelTemplate extends JPanel implements GeneralProperties, ActionListener {
+public abstract class PanelTemplate extends JPanel implements GeneralProperties{
 	
 	public PanelTemplate() {
 		this.setVisible(true);

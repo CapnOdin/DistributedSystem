@@ -1,4 +1,4 @@
-package server_gui;
+package client_gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,14 +24,5 @@ public class DataPanel extends PanelTemplate {
 		this.setBackground(Color.white);
 		this.validate();	
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	
 
 }
