@@ -56,7 +56,7 @@ public class TCPServer implements Runnable {
 			try {
 				message = (String) input.readObject();
 				taskBuffer.add(message);
-				System.out.println(taskBuffer.get(0));
+				System.out.println(taskBuffer.toString());
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -77,7 +77,7 @@ public class TCPServer implements Runnable {
 	}
 
 	private void cleanUp() {
-		System.out.println("[SERVER]Closing connections");
+		System.out.println("[SERVER]Connections closed");
 		try {
 			output.close();
 			input.close();

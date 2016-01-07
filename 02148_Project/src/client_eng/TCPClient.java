@@ -47,7 +47,7 @@ public class TCPClient {
 				message = (String) input.readObject();
 				System.out.println(message);
 				sendMessage("Hello");
-				sendMessage("END");
+				sendMessage("EEND");
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
