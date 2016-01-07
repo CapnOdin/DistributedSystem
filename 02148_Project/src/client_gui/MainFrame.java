@@ -20,6 +20,7 @@ public class MainFrame extends JFrame implements GeneralProperties{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		contentPaneSize = getContentPane().getSize();
+		System.out.println( "hej");
 		
 		dp = new DataPanel();
 		dp2 = new DataPanel2();

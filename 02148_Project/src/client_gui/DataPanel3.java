@@ -27,5 +27,7 @@ public class DataPanel3 extends PanelTemplate{
 		this.add(dp3Data);
 		this.add(dp3Connect);
 
+			
+
 	}
 }

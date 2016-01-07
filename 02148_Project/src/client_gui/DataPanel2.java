@@ -9,7 +9,6 @@ import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 
 public class DataPanel2 extends PanelTemplate implements GeneralProperties{
-
 	private static final long serialVersionUID = 1L;
 	private JLabel Data, Connect, Kalender, Oversigt;
 	
@@ -21,6 +20,8 @@ public class DataPanel2 extends PanelTemplate implements GeneralProperties{
 
 	@Override
 	void setup() {
+		
+		System.out.println("Hej1");
 		this.setLayout(new GridLayout(0,4));
 		Data = new JLabel("Data", JLabel.CENTER);
 		Connect = new JLabel("Connect", JLabel.CENTER);
@@ -55,8 +56,7 @@ public class DataPanel2 extends PanelTemplate implements GeneralProperties{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			
-			//MainFrame.setBool(true);
+			System.out.println("Hej");
 		}
 
 		@Override
