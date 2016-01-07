@@ -6,8 +6,9 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 
-public class MainFrame extends JFrame{
+public class MainFrame extends JFrame implements GeneralProperties{
 	public static Dimension contentPaneSize;
+	public boolean dataPanel = false, connectPanel = false, kalenderPanel = false , oversigtPanel = false;
 	
 	private GridBagConstraints c = new GridBagConstraints();	
 	private DataPanel dp;
@@ -23,11 +24,11 @@ public class MainFrame extends JFrame{
 		dp = new DataPanel();
 		dp2 = new DataPanel2();
 		dp3 = new DataPanel3();
-		setGridBagConstraints(0, 0,GeneralProperties.frameSize.height/20, GeneralProperties.frameSize.width);
+		setGridBagConstraints(0, 0,frameSize.height/20, frameSize.width);
 		this.add(dp, c);
-		setGridBagConstraints(0, 1, (GeneralProperties.frameSize.height/20)*2, GeneralProperties.frameSize.width);
+		setGridBagConstraints(0, 1, (frameSize.height/20)*2, frameSize.width);
 		this.add(dp2, c);
-		setGridBagConstraints(0,2, (GeneralProperties.frameSize.height/20)*17, GeneralProperties.frameSize.width);		
+		setGridBagConstraints(0,2, (frameSize.height/20)*17, frameSize.width);		
 		this.add(dp3,c);
 		this.validate();
 	}
@@ -48,6 +49,13 @@ public class MainFrame extends JFrame{
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+	}
+	
+	public boolean getBool(){
+		return dataPanel;
+	}
+	public void setBool(boolean bool){
+		dataPanel  = bool;
 	}
 
 }

@@ -1,13 +1,14 @@
 package client_gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 
-public class DataPanel2 extends PanelTemplate{
+public class DataPanel2 extends PanelTemplate implements GeneralProperties{
 
 	private static final long serialVersionUID = 1L;
 	private JLabel Data, Connect, Kalender, Oversigt;
@@ -43,6 +44,7 @@ public class DataPanel2 extends PanelTemplate{
 	
 	
 	private void setJLabel(JLabel name){
+		name.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		name.setVisible(true);		
 	}
 
@@ -54,6 +56,7 @@ public class DataPanel2 extends PanelTemplate{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			
+			//MainFrame.setBool(true);
 		}
 
 		@Override

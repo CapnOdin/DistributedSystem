@@ -2,10 +2,7 @@ package client_gui;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import java.awt.GridLayout;
 
 public class DataPanel3 extends PanelTemplate{
 	private static final long serialVersionUID = 1L;
@@ -28,10 +25,7 @@ public class DataPanel3 extends PanelTemplate{
 		dp3Kalender = new DataPanel3Kalender();
 		dp3Oversigt = new DataPanel3Oversigt();
 		this.add(dp3Data);
+		this.add(dp3Connect);
 
 	}
-
-	
-
-
 }
