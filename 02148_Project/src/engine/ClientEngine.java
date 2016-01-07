@@ -1,9 +1,7 @@
 package engine;
 
-public class Engine {
-
+public class ClientEngine {
 	public static void main(String[] args) {
 		
 	}
-
 }

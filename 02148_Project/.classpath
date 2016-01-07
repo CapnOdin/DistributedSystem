@@ -2,5 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Mathias/Desktop/eclipse-jee-mars-1-win32/eclipse/plugins/javax.servlet.jsp_2.2.0.v201112011158.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mathias/Desktop/eclipse-jee-mars-1-win32/eclipse/plugins/javax.servlet_3.1.0.v201410161800.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

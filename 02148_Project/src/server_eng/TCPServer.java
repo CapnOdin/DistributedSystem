@@ -5,8 +5,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class TCPServer implements Runnable {
+	
+	private static ArrayList<String> taskBuffer = new ArrayList<String>();
 	
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
@@ -15,6 +18,7 @@ public class TCPServer implements Runnable {
 	private Socket connection;
 	
 	private int port;
+	public static int currentTask = 0;
 	
 	public TCPServer(int port) {
 		this.port = port;
@@ -51,7 +55,8 @@ public class TCPServer implements Runnable {
 		do {
 			try {
 				message = (String) input.readObject();
-				System.out.println(message);
+				taskBuffer.add(message);
+				System.out.println(taskBuffer.toString());
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -72,7 +77,7 @@ public class TCPServer implements Runnable {
 	}
 
 	private void cleanUp() {
-		System.out.println("[SERVER]Closing connections");
+		System.out.println("[SERVER]Connections closed");
 		try {
 			output.close();
 			input.close();
@@ -91,6 +96,14 @@ public class TCPServer implements Runnable {
 			e.printStackTrace();
 		}
 		serverSleepMode();
+	}
+
+	public static ArrayList<String> getTaskBuffer() {
+		return taskBuffer;
+	}
+
+	public void setTaskBuffer(ArrayList<String> taskBuffer) {
+		this.taskBuffer = taskBuffer;
 	}
 
 }
