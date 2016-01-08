@@ -1,8 +1,6 @@
 package client_gui;
 
 import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridLayout;
 
 public class DataPanel3 extends PanelTemplate{
 	private static final long serialVersionUID = 1L;
