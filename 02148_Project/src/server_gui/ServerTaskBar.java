@@ -27,9 +27,19 @@ public class ServerTaskBar extends JMenuBar implements ServerProperties, MouseLi
 	public ServerTaskBar(ServerMainFrame parent) {
 		this.parent = parent;
 		setDefaultProperties();
-		
+		addButtons();
 	}
 	
+	private void addButtons() {
+		power_button.addMouseListener(this);
+		options_button.addMouseListener(this);
+		
+		button_holder.add(options_button);
+		button_holder.add(power_button);
+		this.add(button_holder, BorderLayout.EAST);
+		this.validate();
+	}
+
 	private void setDefaultProperties() {
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
@@ -48,6 +58,9 @@ public class ServerTaskBar extends JMenuBar implements ServerProperties, MouseLi
 	@Override
 	public void mousePressed(MouseEvent e) {
 		mouse_pos_x = e.getX(); mouse_pos_y = e.getY();
+		if(e.getSource() == power_button) {
+			System.exit(0);
+		}
 		
 	}
 
