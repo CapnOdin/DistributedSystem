@@ -10,11 +10,22 @@ public class AddressUtil {
 		String res = "";
 		List<String> address = new ArrayList<String>();
 		
-		Pattern ALPHAnum = Pattern.compile("[A-Z0-9]");
-		Pattern special = Pattern.compile("[^a-zA-Z0-9&&[^ß-ýÀ-Ý]&&[^,.]]");
+		Pattern ALPHA = Pattern.compile("[A-ZÀ-Ý]");
+		Pattern number = Pattern.compile("[0-9]");
+		Pattern special = Pattern.compile("[^a-zA-Z0-9&&[^ß-ýÀ-Ý]&&[^,.-]&&[^\\u0027]]"); // \u0027 is '
+		Pattern dontThinkAboutIt = Pattern.compile("[×÷]");
+		
+		System.out.println(term);
 		
 		for(String str : term.split(" ")){
-			if(ALPHAnum.matcher(str).find() && !special.matcher(str).find()){
+			if(str.contains("-")){
+				int index = str.indexOf("-");
+				String temp = str.substring(index + 1, index + 2);
+				if(!ALPHA.matcher(temp).find()){
+					continue;
+				}
+			}
+			if((ALPHA.matcher(str).find() || number.matcher(str).find()) && !special.matcher(str).find() && !dontThinkAboutIt.matcher(str).find()){
 				res += str + " ";
 			}
 		}
