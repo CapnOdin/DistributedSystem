@@ -6,17 +6,19 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class TCPClient {
+public class TCPClient implements Runnable {
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	
 	private String message = "";
 	private String serverIP;
+	private int port;
 	
 	private Socket connection;
 	
-	public TCPClient(String host) {
+	public TCPClient(String host, int port) {
 		serverIP = host;
+		this.port = port;
 	}
 	
 	public void run() {
@@ -35,7 +37,6 @@ public class TCPClient {
 		try {
 			output.writeObject("CLIENT - " + message);
 			output.flush();
-			//System.out.println("CLIENT - " + message);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -47,12 +48,12 @@ public class TCPClient {
 				message = (String) input.readObject();
 				System.out.println(message);
 				sendMessage("Hello");
-				sendMessage("EEND");
+				//sendMessage("END");
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 		}while(!message.equals("SERVER - END"));
-		
+		System.out.println("CLIENT DEAD");
 	}
 
 	private void setupStreams() throws IOException {
@@ -64,7 +65,7 @@ public class TCPClient {
 
 	private void connectToServer() throws IOException {
 		System.out.println("[CLIENT]Attempting connection...");
-		connection = new Socket(InetAddress.getByName(serverIP), 1234);
+		connection = new Socket(InetAddress.getByName(serverIP), port);
 		System.out.println("[CLIENT]Connected to " + connection.getInetAddress().getHostName());
 	}
 
@@ -78,4 +79,5 @@ public class TCPClient {
 			e.printStackTrace();
 		}
 	}
+
 }
