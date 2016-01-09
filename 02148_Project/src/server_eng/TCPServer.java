@@ -17,6 +17,9 @@ public class TCPServer implements Runnable {
 	private ServerSocket server;
 	private Socket connection;
 	
+	private ArrayList<ConnectionThread> allConnections = new ArrayList<ConnectionThread>();
+	private int userCount = 0;
+	
 	private int port;
 	public static int currentTask = 0;
 	
@@ -73,7 +76,11 @@ public class TCPServer implements Runnable {
 	private void waitForConnection() throws IOException {
 		System.out.println("[SERVER]Waiting for someone to connect...");
 		connection = server.accept();
+		System.out.println(allConnections.size());
 		System.out.println("[SERVER]Now connected to " + connection.getInetAddress().getHostName());
+		ConnectionThread newClient = new ConnectionThread(connection, userCount++);
+		allConnections.add(newClient);
+		newClient.start();
 	}
 
 	private void cleanUp() {
