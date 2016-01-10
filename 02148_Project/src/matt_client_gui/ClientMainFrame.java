@@ -21,7 +21,6 @@ public class ClientMainFrame extends JFrame {
 	private ClientMenuPanel cmp;
 	private ClientTaskBar ctb;
 	private ClientStatusBar csb;
-	//private ClientDataPanel test;
 	
 	private ClientPanelTemplate current_panel;
 	
@@ -34,7 +33,6 @@ public class ClientMainFrame extends JFrame {
 		removeVariablePanel();
 		current_panel = panel;
 		addC(panel, 0, 2, 1, 1);
-		//this.add(panel, BorderLayout.CENTER);
 		panel.setVisible(true);
 		this.validate();
 		this.pack();
@@ -71,7 +69,6 @@ public class ClientMainFrame extends JFrame {
 		this.setPreferredSize(frameSize);
 		this.setUndecorated(true);
 		this.setLayout(new GridBagLayout());
-		//this.getRootPane().setBorder(BorderFactory.createLineBorder(Color.black));
 		this.pack();
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
