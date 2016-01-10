@@ -7,30 +7,43 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-public class DataPanel2 extends PanelTemplate implements GeneralProperties{
+import server_gui.ServerMainFrame;
+
+public class DataPanel2 extends PanelTemplate implements GeneralProperties, MouseListener{
 	private static final long serialVersionUID = 1L;
-	private JLabel Data, Connect, Kalender, Oversigt;
 	
-	@Override
-	void setBackgroundColor() {
-		this.setBackground(Color.gray);
-		this.validate();
+	private JLabel Data = new JLabel("Data", JLabel.CENTER);
+	private JLabel Connect = new JLabel("Connect", JLabel.CENTER);
+	private JLabel Kalender = new JLabel("Kalender", JLabel.CENTER);
+	private JLabel Oversigt = new JLabel("Oversigt", JLabel.CENTER);
+	
+	private DataPanel3Data dp3Data = new DataPanel3Data();
+	private DataPanel3Connect dp3Connect = new DataPanel3Connect();
+	private DataPanel3Kalender dp3Kalender = new DataPanel3Kalender();
+	private DataPanel3Oversigt dp3Oversigt = new DataPanel3Oversigt();
+	
+	private MainFrame parent;
+	
+	public DataPanel2(MainFrame parent) {
+		this.parent = parent;
+		addLabels();
 	}
 
-	@Override
-	void setup() {
-		
-		System.out.println("Hej1");
+	void setDefaultProperties(){
+		this.setBackground(Color.gray);
+		this.setPreferredSize(frameSizeDataPanel2);
 		this.setLayout(new GridLayout(0,4));
-		Data = new JLabel("Data", JLabel.CENTER);
-		Connect = new JLabel("Connect", JLabel.CENTER);
-		Kalender = new JLabel("Vagter", JLabel.CENTER);
-		Oversigt = new JLabel("Oversigt", JLabel.CENTER);
-		Data.addMouseListener(mData);
-		Connect.addMouseListener(mConnect);
-		Kalender.addMouseListener(mKalender);
-		Oversigt.addMouseListener(mOversigt);
+		this.setVisible(true);
+		this.validate();
+	}
+	
+	private void addLabels(){
+		Data.addMouseListener(this);
+		Connect.addMouseListener(this);
+		Kalender.addMouseListener(this);
+		Oversigt.addMouseListener(this);
 		setJLabel(Data);
 		setJLabel(Connect);
 		setJLabel(Kalender);
@@ -39,121 +52,61 @@ public class DataPanel2 extends PanelTemplate implements GeneralProperties{
 		this.add(Connect);
 		this.add(Kalender);
 		this.add(Oversigt);
-		this.validate();
-		
 	}
-	
 	
 	private void setJLabel(JLabel name){
 		name.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		name.setVisible(true);		
 	}
 
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(e.getSource() == Data) {
+			System.out.println("Data pressed!");
+			parent.removePanel();
+			parent.addPanel(dp3Data);
+		}
+		if(e.getSource() == Connect) {
+			System.out.println("Connect pressed");
+			parent.removePanel();
+			parent.addPanel(dp3Connect);
+		}
+		if(e.getSource() == Kalender) {
+			System.out.println("Kalender pressed!");
+			parent.removePanel();
+			parent.addPanel(dp3Kalender);
+		}
+		if(e.getSource() == Oversigt) {
+			System.out.println("Oversigt pressed");
+			parent.removePanel();
+			parent.addPanel(dp3Oversigt);
+		}
+		
+	}
 
-	
-	MouseListener mData = new MouseListener(){
-	
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			System.out.println("Hej");
-		}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
-		@Override
-		public void mousePressed(MouseEvent e) {
-			
-		}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			
-		}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			
-		}
-	};
-	
-	MouseListener mConnect = new MouseListener(){
-		public void mouseClicked(MouseEvent e){
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-		}
-	};
-	
-	MouseListener mKalender = new MouseListener(){
-		public void mouseClicked(MouseEvent e){
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			
-		}
-	};
-	
-	MouseListener mOversigt = new MouseListener(){
-		public void mouseClicked(MouseEvent e){
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-		}
-	};
 
 }

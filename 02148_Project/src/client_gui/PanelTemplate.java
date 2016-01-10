@@ -10,11 +10,9 @@ public abstract class PanelTemplate extends JPanel implements GeneralProperties{
 	public PanelTemplate() {
 		this.setVisible(true);
 		this.setPreferredSize(new Dimension(GeneralProperties.frameSize.width, GeneralProperties.frameSize.height));
-		setBackgroundColor();
-		setup();
+		setDefaultProperties();
 		this.validate();
 	}
 	
-	abstract void setBackgroundColor();
-	abstract void setup();
+	abstract void setDefaultProperties();
 }

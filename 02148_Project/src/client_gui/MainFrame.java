@@ -1,10 +1,12 @@
 package client_gui;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class MainFrame extends JFrame implements GeneralProperties{
 	public static Dimension contentPaneSize;
@@ -13,25 +15,47 @@ public class MainFrame extends JFrame implements GeneralProperties{
 	private GridBagConstraints c = new GridBagConstraints();	
 	private DataPanel dp;
 	private DataPanel2 dp2;
-	private DataPanel3 dp3;
+	private DataPanel3Data dp3Data;
+	private JPanel current_panel = new JPanel();
 	
 	public MainFrame() {
-		setDefaultProperties();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		contentPaneSize = getContentPane().getSize();
-		System.out.println( "hej");
-		
-		dp = new DataPanel();
-		dp2 = new DataPanel2();
-		dp3 = new DataPanel3();
-		setGridBagConstraints(0, 0,frameSize.height/20, frameSize.width);
-		this.add(dp, c);
-		setGridBagConstraints(0, 1, (frameSize.height/20)*2, frameSize.width);
-		this.add(dp2, c);
-		setGridBagConstraints(0,2, (frameSize.height/20)*17, frameSize.width);		
-		this.add(dp3,c);
+		setDefaultProperties();
+		addDataPanel1();
+		addDataPanel2();
+		addDataPanel3();
 		this.validate();
+	}
+	
+	public void addDataPanel1(){
+		dp = new DataPanel(this);
+		setGridBagConstraints(0, 0,frameSize.height/20, frameSize.width);
+		this.add(dp,c);
+	}
+	
+	public void addDataPanel2(){
+		dp2 = new DataPanel2(this);
+		setGridBagConstraints(0, 1, (frameSize.height/20)*2, frameSize.width);
+		this.add(dp2, c);	
+	}
+	
+	public void addDataPanel3(){
+		dp3Data = new DataPanel3Data();
+		setGridBagConstraints(0,2, (frameSize.height/20)*17, frameSize.width);	
+		this.add(dp3Data,c);
+	}
+	public void removePanel() {
+		this.current_panel.setVisible(false);
+		this.validate();
+		this.pack();
+	}
+
+	public void addPanel(JPanel panel) {
+		current_panel = panel;
+		this.add(panel, c);
+		panel.setVisible(true);
+		this.validate();
+		this.pack();
 	}
 	
 	private void setGridBagConstraints(int x, int y, int height, int width) {
@@ -44,19 +68,10 @@ public class MainFrame extends JFrame implements GeneralProperties{
 
 	private void setDefaultProperties() {
 		contentPaneSize = this.getContentPane().getSize();
-		//this.setResizable(false);
 		this.setLayout(new GridBagLayout());
 		this.setPreferredSize(GeneralProperties.frameSize);
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
-	
-	public boolean getBool(){
-		return dataPanel;
-	}
-	public void setBool(boolean bool){
-		dataPanel  = bool;
-	}
-
 }

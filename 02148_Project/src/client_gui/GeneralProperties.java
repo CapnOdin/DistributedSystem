@@ -8,8 +8,7 @@ public interface GeneralProperties {
 	
 	public static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public static Dimension frameSize = new Dimension((screenSize.width / 4)*3, (screenSize.height / 4)*3);
-	public static Dimension frameSizeDP1 = new Dimension(frameSize.width,frameSize.height/20);
-	public static Dimension frameSizeDP2 = new Dimension( frameSize.width, (frameSize.height/20)*2);
-	public static Dimension frameSizeDP3 = new Dimension(frameSize.width, (frameSize.height/20)*17);
-	public static Color bg_color = Color.white;
+	public static Dimension frameSizeDataPanel1 = new Dimension(frameSize.width, frameSize.height / 20);
+	public static Dimension frameSizeDataPanel2 = new Dimension(frameSize.width, (frameSize.height / 20)*2);
+	public static Dimension frameSizeDataPanel3 = new Dimension(frameSize.width, (frameSize.height / 20)*17);
 }
