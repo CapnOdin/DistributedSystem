@@ -42,7 +42,7 @@ public class ServerMainFrame extends JFrame implements ServerProperties {
 	}
 
 	private void addTaskBar() {
-		stb = new ServerTaskBar(this);
+		stb = new ServerTaskBar(this, "Server");
 		this.add(stb, BorderLayout.NORTH);
 	}
 
