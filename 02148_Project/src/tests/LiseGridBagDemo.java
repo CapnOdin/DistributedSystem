@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 
 public class LiseGridBagDemo extends JFrame {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private GridBagConstraints c = new GridBagConstraints();
 	private JPanel[] panels = new JPanel[4];
 	
