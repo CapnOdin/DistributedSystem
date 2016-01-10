@@ -59,7 +59,7 @@ public class MainFrame extends JFrame implements GeneralProperties{
 	}
 	
 	private void setGridBagConstraints(int x, int y, int height, int width) {
-		c.fill = GridBagConstraints.BOTH;
+		//c.fill = GridBagConstraints.BOTH;
 		c.gridx = x;
 		c.gridy = y;
 		c.weighty = height;
