@@ -29,19 +29,19 @@ public class MainFrame extends JFrame implements GeneralProperties{
 	
 	public void addDataPanel1(){
 		dp = new DataPanel(this);
-		setGridBagConstraints(0, 0,frameSize.height/20, frameSize.width);
+		setGridBagConstraints(0, 0,1,1);
 		this.add(dp,c);
 	}
 	
 	public void addDataPanel2(){
 		dp2 = new DataPanel2(this);
-		setGridBagConstraints(0, 1, (frameSize.height/20)*2, frameSize.width);
+		setGridBagConstraints(0, 1, 1,1);
 		this.add(dp2, c);	
 	}
 	
 	public void addDataPanel3(){
 		dp3Data = new DataPanel3Data();
-		setGridBagConstraints(0,2, (frameSize.height/20)*17, frameSize.width);	
+		setGridBagConstraints(0,2, 1,1);	
 		this.add(dp3Data,c);
 	}
 	public void removePanel() {
@@ -59,11 +59,10 @@ public class MainFrame extends JFrame implements GeneralProperties{
 	}
 	
 	private void setGridBagConstraints(int x, int y, int height, int width) {
-		//c.fill = GridBagConstraints.BOTH;
 		c.gridx = x;
 		c.gridy = y;
-		c.weighty = height;
-		c.weightx = width;	
+		c.gridheight = height;
+		c.gridwidth = width;	
 	}
 
 	private void setDefaultProperties() {

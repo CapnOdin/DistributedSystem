@@ -2,6 +2,7 @@ package client_gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -23,6 +24,7 @@ public class DataPanel2 extends PanelTemplate implements GeneralProperties, Mous
 	private DataPanel3Connect dp3Connect = new DataPanel3Connect();
 	private DataPanel3Kalender dp3Kalender = new DataPanel3Kalender();
 	private DataPanel3Oversigt dp3Oversigt = new DataPanel3Oversigt();
+	GridBagConstraints gbc = new GridBagConstraints();
 	
 	private MainFrame parent;
 	
@@ -32,6 +34,7 @@ public class DataPanel2 extends PanelTemplate implements GeneralProperties, Mous
 	}
 
 	void setDefaultProperties(){
+		
 		this.setBackground(Color.gray);
 		this.setPreferredSize(frameSizeDataPanel2);
 		this.setLayout(new GridLayout(0,4));
