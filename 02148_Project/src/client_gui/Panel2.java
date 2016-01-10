@@ -17,12 +17,12 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 	private static final long serialVersionUID = 1L;
 	private MainFrame parent;
 	private JLabel Data = new JLabel("Data", JLabel.CENTER);
-	private JLabel Connect = new JLabel("Connect", JLabel.CENTER);
+	private JLabel Forbind = new JLabel("Forbind", JLabel.CENTER);
 	private JLabel Kalender = new JLabel("Kalender", JLabel.CENTER);
 	private JLabel Oversigt = new JLabel("Oversigt", JLabel.CENTER);
 	
 	private Panel3Data p3Data;
-	private Panel3Connect p3Connect;
+	private Panel3Forbind p3Forbind;
 	private Panel3Kalender p3Kalender;
 	private Panel3Oversigt p3Oversigt;
 	GridBagConstraints gbc = new GridBagConstraints();
@@ -31,7 +31,7 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 	public Panel2(MainFrame parent) {
 		this.parent = parent;
 		p3Data = new Panel3Data(parent);
-		p3Connect = new Panel3Connect(parent);
+		p3Forbind = new Panel3Forbind(parent);
 		p3Kalender = new Panel3Kalender(parent);
 		p3Oversigt = new Panel3Oversigt(parent);
 		
@@ -49,15 +49,15 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 	
 	private void addLabels(){
 		Data.addMouseListener(this);
-		Connect.addMouseListener(this);
+		Forbind.addMouseListener(this);
 		Kalender.addMouseListener(this);
 		Oversigt.addMouseListener(this);
 		setJLabel(Data);
-		setJLabel(Connect);
+		setJLabel(Forbind);
 		setJLabel(Kalender);
 		setJLabel(Oversigt);		
 		this.add(Data);
-		this.add(Connect);
+		this.add(Forbind);
 		this.add(Kalender);
 		this.add(Oversigt);
 	}
@@ -73,9 +73,9 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 			System.out.println("Data pressed!");
 			parent.addPanel(p3Data);
 		}
-		if(e.getSource() == Connect) {
+		if(e.getSource() == Forbind) {
 			System.out.println("Connect pressed");
-			parent.addPanel(p3Connect);
+			parent.addPanel(p3Forbind);
 		}
 		if(e.getSource() == Kalender) {
 			System.out.println("Kalender pressed!");

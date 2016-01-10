@@ -19,43 +19,65 @@ import javax.swing.SwingConstants;
 public class Panel3Data extends PanelTemplate implements GeneralProperties{
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private MainFrame parent;
-	private JTextField JTNavn, JTAdresse;
-	private JLabel JLNavn, JLAdresse, JLBillede;
+	private JTextField JTNavn, JTAdresse, JTPostnummer, JTBy;
+	private JLabel JLPersonlig, JLNavn, JLAdresse, JLBillede, JLPostnummer, JLBy, JLSkiftBillede;
 	private JButton JBGem;
 	private JCheckBox JCHarBil;
 	
 	public Panel3Data(MainFrame parent){
+		System.out.println(frameSizePanel3);
 		this.parent = parent;
 		JPanel panel = new JPanel();
 		this.add(panel);
 		JTNavn = new JTextField();
 		JTAdresse = new JTextField();
+		JTPostnummer = new JTextField();
+		JTBy = new JTextField();
+		JLPersonlig = new JLabel("Personlig profil");
+		JLPersonlig.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		JLNavn = new JLabel("Navn");
 		JLAdresse = new JLabel("Adresse");
+		JLPostnummer = new JLabel("Postnummer");
+		JLBy = new JLabel("By");
+		JLSkiftBillede = new JLabel("Skift billede");
 		JCHarBil = new JCheckBox("Har bil");
 		JBGem = new JButton("Gem");	
 		JLBillede = new JLabel("Billede", SwingConstants.CENTER);
 		setJTextField(JTNavn);
 		setJTextField(JTAdresse);
+		setJTextField(JTPostnummer);
+		setJTextField(JTBy);
 		setJLabel(JLNavn);
 		setJLabel(JLAdresse);
+		setJLabel(JLPostnummer);
+		setJLabel(JLBy);
+		setJLabel(JLSkiftBillede);
 		setJCheckBox(JCHarBil);
 		setJButton(JBGem);
 		setJLabel(JLBillede);
-		
-		gbc.anchor = GridBagConstraints.NORTHWEST;	
-		gbc.insets = new Insets(2,2,2,2);
-		addC(JLNavn,0,0,1,1);
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		addC(JTNavn,0,1,1,1);
-		addC(JLAdresse,0,2,1,1);
-		addC(JTAdresse,0,3,1,1);
-		addC(JCHarBil,0,4,1,1);
-		addC(JBGem,0,5,1,1);
-		gbc.ipady = 200;
-		gbc.ipadx = 100;
-		addC(JLBillede,1,0,1,6);
 		JLBillede.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		
+		//Panel 1 - Insets = Top, Venstre, Bund, Højre
+		gbc.anchor = GridBagConstraints.NORTHWEST;	
+		addC(JLPersonlig,	0,	0,	1,	1,	0,		new Insets(2,80,20,20));
+		addC(JLNavn,		0,	1,	1,	1,	0, 		new Insets(2,80,2,20));
+		addC(JTNavn,		0,	2,	1,	1,	300, 	new Insets(2,80,30,20));
+		addC(JLAdresse,		0,	3,	1,	1,	0, 		new Insets(2,80,2,20));
+		addC(JTAdresse,		0,	4,	1,	1,	300, 	new Insets(2,80,2,2));
+		addC(JLPostnummer,	0,	5,	1,	1,	0,		new Insets(2,80,2,2));
+		addC(JTPostnummer,	0,	6,	1,	1,	100, 	new Insets(2,80,2,2));
+		addC(JLBy,			0,	7,	1,	1,	0, 		new Insets(2,80,2,2));
+		addC(JTBy,			0,	8,	1,	1,	300, 	new Insets(2,80,2,2));
+		addC(JCHarBil,		0,	9,	1,	1,	0, 		new Insets(2,80,2,20));
+		addC(JBGem,			0,	10,	1,	1,	0, 		new Insets(2,80,2,2));
+		
+		
+		//Panel 2
+		gbc.ipady = 200;
+		addC(JLBillede,		1,	1,	1,	9,	100, 	new Insets(2,2,2,2));
+		gbc.anchor = GridBagConstraints.CENTER;		
+		addC(JLSkiftBillede,1,	8,	1,	1,	100, 	new Insets(2,2,2,2));
+		
 		this.setVisible(true);
 	}
 	
@@ -68,18 +90,20 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties{
 		this.validate();
 	}
 
-	private void addC(JComponent comp, int gridx, int gridy, int width, int height) {
+	private void addC(JComponent comp, int gridx, int gridy, int gridwidth, int gridheight, int width, Insets space) {
+		gbc.insets = space;
 		gbc.gridx = gridx;
 		gbc.gridy = gridy;
-		gbc.gridwidth = width;
-		gbc.gridheight = height;
+		gbc.gridwidth = gridwidth;
+		gbc.gridheight = gridheight;
+		gbc.ipadx = width;
 		this.add(comp, gbc);
 		this.validate();
 	}
 
 	
 	private void setJTextField(JTextField name){
-		name.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		name.setFont(new Font("SansSerif", Font.ITALIC, 14));
 		name.setVisible(true);		
 	}
 	

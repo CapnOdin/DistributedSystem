@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Panel3Connect extends PanelTemplate implements GeneralProperties{
+public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
 	private MainFrame parent;
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private JLabel JLForbind, JLEMail, JLKodeord;
@@ -23,7 +23,7 @@ public class Panel3Connect extends PanelTemplate implements GeneralProperties{
 	private JCheckBox JCGemOplysninger;
 	private JButton JBForbind;
 	
-	public Panel3Connect(MainFrame parent){
+	public Panel3Forbind(MainFrame parent){
 		this.parent = parent;
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
@@ -45,16 +45,15 @@ public class Panel3Connect extends PanelTemplate implements GeneralProperties{
 		setJCheckBox(JCGemOplysninger);
 		setJButton(JBForbind);
 		
-		gbc.insets = new Insets(2,2,2,2);
+		// Insets = Top, Venstre, Bund, Højre
 		gbc.anchor = GridBagConstraints.NORTHWEST;
-		addC(JLForbind,0,0,1,1);
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		addC(JLEMail,0,1,1,1);
-		addC(JTEMail,0,2,1,1);
-		addC(JLKodeord,0,3,1,1);
-		addC(JTKodeord,0,4,1,1);
-		addC(JCGemOplysninger,0,5,1,1);
-		addC(JBForbind,0,6,1,1);
+		addC(JLForbind,			0,	0,	1,	1,	0,		new Insets(80,2,2,2));
+		addC(JLEMail,			0,	1,	1,	1,	0,		new Insets(20,2,2,2));
+		addC(JTEMail,			0,	2,	1,	1,	300,	new Insets(2,2,2,2));
+		addC(JLKodeord,			0,	3,	1,	1,	0,		new Insets(2,2,2,2));
+		addC(JTKodeord,			0,	4,	1,	1,	300,	new Insets(2,2,2,2));
+		addC(JCGemOplysninger,	0,	5,	1,	1,	0,		new Insets(20,2,2,2));
+		addC(JBForbind,			0,	6,	1,	1,	0,		new Insets(20,2,300,2));
 		this.setVisible(true);
 	}
 	
@@ -67,11 +66,13 @@ public class Panel3Connect extends PanelTemplate implements GeneralProperties{
 		this.validate();
 	}
 	
-	private void addC(JComponent comp, int gridx, int gridy, int width, int height) {
+	private void addC(JComponent comp, int gridx, int gridy, int gridwidth, int gridheight, int width, Insets space) {
+		gbc.insets = space;
 		gbc.gridx = gridx;
 		gbc.gridy = gridy;
-		gbc.gridwidth = width;
-		gbc.gridheight = height;
+		gbc.gridwidth = gridwidth;
+		gbc.gridheight = gridheight;
+		gbc.ipadx = width;
 		this.add(comp, gbc);
 		this.validate();
 	}
@@ -97,6 +98,7 @@ public class Panel3Connect extends PanelTemplate implements GeneralProperties{
 	}
 
 	public static void main(String[] args) {
+		System.out.println(frameSizePanel3);
 		JFrame test = new JFrame();
 		test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		test.setPreferredSize(frameSizePanel3);
