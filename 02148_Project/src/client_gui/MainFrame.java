@@ -20,7 +20,10 @@ public class MainFrame extends JFrame implements GeneralProperties{
 	private PanelTemplate current_panel;
 	
 	public MainFrame() {	
-		
+		System.out.println(frameSize);
+		System.out.println(frameSizePanel1);
+		System.out.println(frameSizePanel2);
+		System.out.println(frameSizePanel3);
 		setDefaultProperties();
 		tb = new TaskBar(this);
 		p1 = new Panel1(this);
