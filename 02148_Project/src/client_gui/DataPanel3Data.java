@@ -9,6 +9,7 @@ import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -125,5 +126,17 @@ public class DataPanel3Data extends PanelTemplate implements GeneralProperties{
 	private void setJCheckBox(JCheckBox name){
 		name.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		name.setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+		JFrame test = new JFrame();
+		test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		test.setPreferredSize(frameSize);
+		test.setVisible(true);
+		test.pack();
+		test.setLocationRelativeTo(null);
+		
+		test.add(new DataPanel3Data());
+		test.validate();
 	}
 }

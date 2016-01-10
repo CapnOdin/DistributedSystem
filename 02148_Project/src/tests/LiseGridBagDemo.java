@@ -32,7 +32,6 @@ public class LiseGridBagDemo extends JFrame {
 		addC(panels[2], 1, 1, 1, 1);
 		addC(panels[3], 0, 2, 2, 1);
 		
-		
 		// DÅRLIG LØSNING
 		/*c.gridx = 0;
 		c.gridy = 0;
