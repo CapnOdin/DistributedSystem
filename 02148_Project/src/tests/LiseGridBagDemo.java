@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -22,7 +23,16 @@ public class LiseGridBagDemo extends JFrame {
 	}
 	
 	private void addPanels() {
-		c.gridx = 0;
+		
+		// BEDRE LØSNING
+		addC(panels[0], 0, 0, 2, 1);
+		addC(panels[1], 0, 1, 1, 1);
+		addC(panels[2], 1, 1, 1, 1);
+		addC(panels[3], 0, 2, 2, 1);
+		
+		
+		// DÅRLIG LØSNING
+		/*c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 2;
 		this.add(panels[0],c);
@@ -36,6 +46,15 @@ public class LiseGridBagDemo extends JFrame {
 		c.gridy = 2;
 		c.gridwidth = 2;
 		this.add(panels[3], c);
+		this.validate();*/
+	}
+	
+	private void addC(JComponent comp, int gridx, int gridy, int gridwidth, int gridheight) {
+		c.gridx = gridx;
+		c.gridy = gridy;
+		c.gridwidth = gridwidth;
+		c.gridheight = gridheight;
+		this.add(comp, c);
 		this.validate();
 	}
 
