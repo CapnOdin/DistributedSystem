@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 public interface GeneralProperties {
-	
+	//Prøve	
 	public static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public static Dimension frameSize = new Dimension((screenSize.width / 4)*3, (screenSize.height / 4)*3);
 	public static Dimension frameSizePanel1 = new Dimension(frameSize.width, frameSize.height / 20);
