@@ -18,7 +18,6 @@ public class DataPanel extends PanelTemplate implements GeneralProperties{
 		this.setPreferredSize(frameSizeDataPanel1);
 		this.setVisible(true);
 		this.validate();
-		
 	}
 	
 
