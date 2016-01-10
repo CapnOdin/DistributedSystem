@@ -15,22 +15,26 @@ import server_gui.ServerMainFrame;
 
 public class Panel2 extends PanelTemplate implements GeneralProperties, MouseListener{
 	private static final long serialVersionUID = 1L;
-	
+	private MainFrame parent;
 	private JLabel Data = new JLabel("Data", JLabel.CENTER);
 	private JLabel Connect = new JLabel("Connect", JLabel.CENTER);
 	private JLabel Kalender = new JLabel("Kalender", JLabel.CENTER);
 	private JLabel Oversigt = new JLabel("Oversigt", JLabel.CENTER);
 	
-	private Panel3Data dp3Data = new Panel3Data();
-	private Panel3Connect dp3Connect = new Panel3Connect();
-	private Panel3Kalender dp3Kalender = new Panel3Kalender();
-	private Panel3Oversigt dp3Oversigt = new Panel3Oversigt();
+	private Panel3Data p3Data;
+	private Panel3Connect p3Connect;
+	private Panel3Kalender p3Kalender;
+	private Panel3Oversigt p3Oversigt;
 	GridBagConstraints gbc = new GridBagConstraints();
 	
-	private MainFrame parent;
 	
 	public Panel2(MainFrame parent) {
 		this.parent = parent;
+		p3Data = new Panel3Data(parent);
+		p3Connect = new Panel3Connect(parent);
+		p3Kalender = new Panel3Kalender(parent);
+		p3Oversigt = new Panel3Oversigt(parent);
+		
 		addLabels();
 	}
 
@@ -67,23 +71,19 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == Data) {
 			System.out.println("Data pressed!");
-			parent.removePanel();
-			parent.addPanel(dp3Data);
+			parent.addPanel(p3Data);
 		}
 		if(e.getSource() == Connect) {
 			System.out.println("Connect pressed");
-			parent.removePanel();
-			parent.addPanel(dp3Connect);
+			parent.addPanel(p3Connect);
 		}
 		if(e.getSource() == Kalender) {
 			System.out.println("Kalender pressed!");
-			parent.removePanel();
-			parent.addPanel(dp3Kalender);
+			parent.addPanel(p3Kalender);
 		}
 		if(e.getSource() == Oversigt) {
 			System.out.println("Oversigt pressed");
-			parent.removePanel();
-			parent.addPanel(dp3Oversigt);
+			parent.addPanel(p3Oversigt);
 		}
 		
 	}

@@ -9,9 +9,10 @@ import javax.swing.JPanel;
 import com.sun.prism.paint.Color;
 
 public class Panel3Kalender extends PanelTemplate implements GeneralProperties{
-
+	private MainFrame parent;
 	
-	public Panel3Kalender(){
+	public Panel3Kalender(MainFrame parent){
+		this.parent = parent;
 		GridBagConstraints gbc = new GridBagConstraints();
 		JPanel panel = new JPanel();
 		this.add(panel);
@@ -32,7 +33,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties{
 		test.pack();
 		test.setLocationRelativeTo(null);
 		
-		test.add(new Panel3Kalender());
+		//test.add(new Panel3Kalender());
 		test.validate();
 	}
 }

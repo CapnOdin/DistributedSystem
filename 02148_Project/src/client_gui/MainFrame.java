@@ -13,65 +13,51 @@ public class MainFrame extends JFrame implements GeneralProperties{
 	public boolean dataPanel = false, connectPanel = false, kalenderPanel = false , oversigtPanel = false;
 	
 	private GridBagConstraints c = new GridBagConstraints();	
-	private Panel1 p;
+	private TaskBar tb;
+	private Panel1 p1;
 	private Panel2 p2;
-	private Panel3 p3;
-	private JPanel current_panel = new JPanel();
+	private PanelTemplate current_panel;
 	
-	public MainFrame() {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public MainFrame() {		
 		setDefaultProperties();
-		addPanel1();
-		addPanel2();
-		addPanel3();
+		tb = new TaskBar(this);
+		p1 = new Panel1(this);
+		p2 = new Panel2(this);
+		current_panel = new Panel3Data(this);
+		//addC(tb,0,0,1,1);
+		addC(p1,0,1,1,1);
+		addC(p2,0,2,1,1);
+		addC(current_panel,0,3,1,1);
+
 		this.validate();
 	}
-	
-	public void addPanel1(){
-		p = new Panel1(this);
-		setGridBagConstraints(0, 0,1,1);
-		//frameSize.height/20, frameSize.width);
-		this.add(p,c);
-	}
-	
-	public void addPanel2(){
-		p2 = new Panel2(this);
-		setGridBagConstraints(0, 1, 1,1);
-		//(frameSize.height/20)*2, frameSize.width);
-		this.add(p2, c);	
-	}
-	
-	public void addPanel3(){
-		p3 = new Panel3(this);
-		setGridBagConstraints(0,2,1,1);
-		//(frameSize.height/20)*17, frameSize.width);	
-		this.add(p3,c);
-	}
+
 	public void removePanel() {
 		this.current_panel.setVisible(false);
 		this.validate();
 		this.pack();
 	}
 
-	public void addPanel(JPanel panel) {
+	public void addPanel(PanelTemplate panel) {
+		removePanel();
 		current_panel = panel;
-		this.add(panel, c);
+		addC(panel, 0,3,1,1);
 		panel.setVisible(true);
 		this.validate();
 		this.pack();
 	}
 	
-	private void setGridBagConstraints(int x, int y, int height, int width) {
-		//c.fill = GridBagConstraints.BOTH;
+	private void addC(JComponent comp, int x, int y, int height, int width) {
 		c.gridx = x;
 		c.gridy = y;
 		c.gridwidth = width;
 		c.gridheight = height;
-		//c.weighty = height;
-		//c.weightx = width;	
+		this.add(comp,c);	
 	}
 
 	private void setDefaultProperties() {
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setUndecorated(true);
 		contentPaneSize = this.getContentPane().getSize();
 		this.setLayout(new GridBagLayout());
 		this.setPreferredSize(GeneralProperties.frameSize);

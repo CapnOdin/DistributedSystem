@@ -8,8 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Panel3Oversigt extends PanelTemplate implements GeneralProperties{
-
-	public Panel3Oversigt(){
+	private MainFrame parent;
+	
+	public Panel3Oversigt(MainFrame parent){
+		this.parent = parent;
 		GridBagConstraints gbc = new GridBagConstraints();
 		JPanel panel = new JPanel();
 		this.add(panel);
@@ -32,7 +34,7 @@ public class Panel3Oversigt extends PanelTemplate implements GeneralProperties{
 		test.pack();
 		test.setLocationRelativeTo(null);
 		
-		test.add(new Panel3Oversigt());
+		//test.add(new Panel3Oversigt());
 		test.validate();
 	}
 

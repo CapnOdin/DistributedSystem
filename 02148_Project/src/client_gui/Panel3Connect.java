@@ -16,15 +16,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Panel3Connect extends PanelTemplate implements GeneralProperties{
+	private MainFrame parent;
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private JLabel JLForbind, JLEMail, JLKodeord;
 	private JTextField JTEMail, JTKodeord;
 	private JCheckBox JCGemOplysninger;
 	private JButton JBForbind;
 	
-	
-	public Panel3Connect(){
-		
+	public Panel3Connect(MainFrame parent){
+		this.parent = parent;
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
 		panel.setVisible(true);
@@ -104,7 +104,7 @@ public class Panel3Connect extends PanelTemplate implements GeneralProperties{
 		test.pack();
 		test.setLocationRelativeTo(null);
 		
-		test.add(new Panel3Connect());
+		//test.add(new Panel3Connect());
 		test.validate();
 	}
 }

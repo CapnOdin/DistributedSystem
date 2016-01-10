@@ -18,13 +18,14 @@ import javax.swing.SwingConstants;
 
 public class Panel3Data extends PanelTemplate implements GeneralProperties{
 	private GridBagConstraints gbc = new GridBagConstraints();
+	private MainFrame parent;
 	private JTextField JTNavn, JTAdresse;
 	private JLabel JLNavn, JLAdresse, JLBillede;
 	private JButton JBGem;
 	private JCheckBox JCHarBil;
 	
-	public Panel3Data(){
-		
+	public Panel3Data(MainFrame parent){
+		this.parent = parent;
 		JPanel panel = new JPanel();
 		this.add(panel);
 		JTNavn = new JTextField();
@@ -105,7 +106,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties{
 		test.pack();
 		test.setLocationRelativeTo(null);
 		
-		test.add(new Panel3Data());
+		//test.add(new Panel3Data());
 		test.validate();
 	}
 }
