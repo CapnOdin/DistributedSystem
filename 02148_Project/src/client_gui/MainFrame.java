@@ -13,14 +13,14 @@ public class MainFrame extends JFrame implements GeneralProperties{
 	public boolean dataPanel = false, connectPanel = false, kalenderPanel = false , oversigtPanel = false;
 	
 	private GridBagConstraints c = new GridBagConstraints();	
-	private TaskBar tb;
+	//private TaskBar tb;
 	private Panel1 p1;
 	private Panel2 p2;
 	private PanelTemplate current_panel;
 	
 	public MainFrame() {		
 		setDefaultProperties();
-		tb = new TaskBar(this);
+		//tb = new TaskBar(this);
 		p1 = new Panel1(this);
 		p2 = new Panel2(this);
 		current_panel = new Panel3Data(this);
