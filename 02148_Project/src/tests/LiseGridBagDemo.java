@@ -68,6 +68,7 @@ public class LiseGridBagDemo extends JFrame {
 		panels[2].setBackground(Color.cyan);
 		panels[3].setBackground(Color.green);
 		
+		// DÅRLIG LØSNING, BRUGER SAMME DIMENSION FLERE GANGE...
 		panels[0].setPreferredSize(new Dimension((int)this.getContentPane().getSize().getWidth(), (int)this.getContentPane().getSize().getHeight()/3));
 		panels[1].setPreferredSize(new Dimension((int)this.getContentPane().getSize().getWidth()/2,(int)this.getContentPane().getSize().getHeight()/3));
 		panels[2].setPreferredSize(new Dimension((int)this.getContentPane().getSize().getWidth()/2,(int)this.getContentPane().getSize().getHeight()/3));
