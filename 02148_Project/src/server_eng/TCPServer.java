@@ -52,6 +52,7 @@ public class TCPServer implements Runnable {
 			ConnectionThread newClient = new ConnectionThread(connection, userCount);
 			allConnections.add(newClient);
 			allConnections2.put(userCount++, newClient);
+			
 			newClient.start();
 			System.out.println(allConnections2);
 			try {
