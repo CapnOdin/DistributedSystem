@@ -59,24 +59,24 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties{
 		
 		//Panel 1 - Insets = Top, Venstre, Bund, Højre
 		gbc.anchor = GridBagConstraints.NORTHWEST;	
-		addC(JLPersonlig,	0,	0,	1,	1,	0,		new Insets(2,80,20,20));
-		addC(JLNavn,		0,	1,	1,	1,	0, 		new Insets(2,80,2,20));
-		addC(JTNavn,		0,	2,	1,	1,	300, 	new Insets(2,80,30,20));
-		addC(JLAdresse,		0,	3,	1,	1,	0, 		new Insets(2,80,2,20));
-		addC(JTAdresse,		0,	4,	1,	1,	300, 	new Insets(2,80,2,2));
-		addC(JLPostnummer,	0,	5,	1,	1,	0,		new Insets(2,80,2,2));
-		addC(JTPostnummer,	0,	6,	1,	1,	100, 	new Insets(2,80,2,2));
-		addC(JLBy,			0,	7,	1,	1,	0, 		new Insets(2,80,2,2));
-		addC(JTBy,			0,	8,	1,	1,	300, 	new Insets(2,80,2,2));
-		addC(JCHarBil,		0,	9,	1,	1,	0, 		new Insets(2,80,2,20));
-		addC(JBGem,			0,	10,	1,	1,	0, 		new Insets(2,80,2,2));
+		addC(JLPersonlig,	0,	0,	1,	1,	0,		new Insets(10,	80,	2,	40));
+		addC(JLNavn,		0,	1,	1,	1,	0, 		new Insets(40,	80,	2,	40));
+		addC(JTNavn,		0,	2,	1,	1,	300, 	new Insets(2,	80,	2,	40));
+		addC(JLAdresse,		0,	3,	1,	1,	0, 		new Insets(20,	80,	2,	40));
+		addC(JTAdresse,		0,	4,	1,	1,	300, 	new Insets(2,	80,	2,	40));
+		addC(JLPostnummer,	0,	5,	1,	1,	0,		new Insets(4,	80,	2,	40));
+		addC(JTPostnummer,	0,	6,	1,	1,	100, 	new Insets(2,	80,	2,	40));
+		addC(JLBy,			0,	7,	1,	1,	0, 		new Insets(4,	80,	2,	40));
+		addC(JTBy,			0,	8,	1,	1,	300, 	new Insets(2,	80,	2,	40));
+		addC(JCHarBil,		0,	9,	1,	1,	0, 		new Insets(20,	80,	2,	40));
+		addC(JBGem,			0,	10,	1,	1,	0, 		new Insets(2,	80,	100,	40));
 		
 		
 		//Panel 2
 		gbc.ipady = 200;
-		addC(JLBillede,		1,	1,	1,	9,	100, 	new Insets(2,2,2,2));
-		gbc.anchor = GridBagConstraints.CENTER;		
-		addC(JLSkiftBillede,1,	8,	1,	1,	100, 	new Insets(2,2,2,2));
+		gbc.anchor = GridBagConstraints.NORTH;	
+		addC(JLBillede,		1,	1,	1,	10,	100, 	new Insets(40,	2,	100,	80));	
+		//addC(JLSkiftBillede,1,	10,	1,	1,	0, 		new Insets(2,	2,	2,	80));
 		
 		this.setVisible(true);
 	}
@@ -121,7 +121,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties{
 		name.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		name.setVisible(true);
 	}
-	
+	/*
 	public static void main(String[] args) {
 		JFrame test = new JFrame();
 		test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -130,7 +130,8 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties{
 		test.pack();
 		test.setLocationRelativeTo(null);
 		
-		//test.add(new Panel3Data());
+		test.add(new Panel3Data());
 		test.validate();
 	}
+	*/
 }

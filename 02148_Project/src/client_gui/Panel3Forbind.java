@@ -47,13 +47,13 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
 		
 		// Insets = Top, Venstre, Bund, Højre
 		gbc.anchor = GridBagConstraints.NORTHWEST;
-		addC(JLForbind,			0,	0,	1,	1,	0,		new Insets(80,2,2,2));
-		addC(JLEMail,			0,	1,	1,	1,	0,		new Insets(20,2,2,2));
-		addC(JTEMail,			0,	2,	1,	1,	300,	new Insets(2,2,2,2));
-		addC(JLKodeord,			0,	3,	1,	1,	0,		new Insets(2,2,2,2));
-		addC(JTKodeord,			0,	4,	1,	1,	300,	new Insets(2,2,2,2));
-		addC(JCGemOplysninger,	0,	5,	1,	1,	0,		new Insets(20,2,2,2));
-		addC(JBForbind,			0,	6,	1,	1,	0,		new Insets(20,2,300,2));
+		addC(JLForbind,			0,	0,	1,	1,	0,		new Insets(80,	2,	2,	2));
+		addC(JLEMail,			0,	1,	1,	1,	0,		new Insets(20,	2,	2,	2));
+		addC(JTEMail,			0,	2,	1,	1,	300,	new Insets(2,	2,	2,	2));
+		addC(JLKodeord,			0,	3,	1,	1,	0,		new Insets(10,	2,	2,	2));
+		addC(JTKodeord,			0,	4,	1,	1,	300,	new Insets(2,	2,	2,	2));
+		addC(JCGemOplysninger,	0,	5,	1,	1,	0,		new Insets(20,	2,	2,	2));
+		addC(JBForbind,			0,	6,	1,	1,	0,		new Insets(2,	2,	300,2));
 		this.setVisible(true);
 	}
 	
@@ -78,7 +78,7 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
 	}
 	
 	private void setJTextField(JTextField name){
-		name.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		name.setFont(new Font("SansSerif", Font.ITALIC, 14));
 		name.setVisible(true);
 	}
 	

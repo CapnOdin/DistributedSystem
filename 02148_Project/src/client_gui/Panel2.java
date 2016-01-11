@@ -22,7 +22,7 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 	private JLabel Oversigt = new JLabel("Oversigt", JLabel.CENTER);
 	
 	private Panel3Data p3Data;
-	private Panel3Forbind p3Forbind;
+	private Panel3Forbind p3Connect;
 	private Panel3Kalender p3Kalender;
 	private Panel3Oversigt p3Oversigt;
 	GridBagConstraints gbc = new GridBagConstraints();
@@ -31,7 +31,7 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 	public Panel2(MainFrame parent) {
 		this.parent = parent;
 		p3Data = new Panel3Data(parent);
-		p3Forbind = new Panel3Forbind(parent);
+		p3Connect = new Panel3Forbind(parent);
 		p3Kalender = new Panel3Kalender(parent);
 		p3Oversigt = new Panel3Oversigt(parent);
 		
@@ -75,7 +75,7 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 		}
 		if(e.getSource() == Forbind) {
 			System.out.println("Connect pressed");
-			parent.addPanel(p3Forbind);
+			parent.addPanel(p3Connect);
 		}
 		if(e.getSource() == Kalender) {
 			System.out.println("Kalender pressed!");
