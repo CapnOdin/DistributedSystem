@@ -19,6 +19,9 @@ public class MainFrame extends JFrame implements GeneralProperties{
 	private Panel2 p2;
 	private PanelTemplate current_panel;
 	
+	
+	// JDialog til ændring af password og login
+	
 	public MainFrame() {	
 		setDefaultProperties();
 		tb = new TaskBar(this);

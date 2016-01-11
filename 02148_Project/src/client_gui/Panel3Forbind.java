@@ -46,20 +46,25 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
 		setJButton(JBForbind);
 		int JTWidth = frameSizePanel3.width / 2;
 		int spaceLeft = frameSizePanel3.width / 4;
-		int spaceTop = spaceLeft;
 		int spaceRight = spaceLeft;
+		int spaceTop = 40;
+		int spaceSTD = 4;
+		int spaceExtra = 20;
+		int spaceButtom = 	frameSizePanel3.height - spaceTop - JLForbind.getHeight() - spaceExtra - JLEMail.getHeight() - spaceSTD- 
+							JTEMail.getHeight() - spaceExtra - JLKodeord.getHeight() - spaceSTD - JTKodeord.getHeight() - spaceExtra - 
+							JCGemOplysninger.getHeight() - spaceSTD -JBForbind.getHeight();
 		
 		
 		// Insets = Top, Venstre, Bund, Højre
 		int i = 0;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		addC(JLForbind,			0,	i,	1,	1,	0,			new Insets(spaceTop,	spaceLeft,	2,	spaceRight));i++;
-		addC(JLEMail,			0,	i,	1,	1,	0,			new Insets(20,	spaceLeft,	2,	spaceRight));i++;
-		addC(JTEMail,			0,	i,	1,	1,	JTWidth,	new Insets(2,	spaceLeft,	2,	spaceRight));i++;
-		addC(JLKodeord,			0,	i,	1,	1,	0,			new Insets(10,	spaceLeft,	2,	spaceRight));i++;
-		addC(JTKodeord,			0,	i,	1,	1,	JTWidth,	new Insets(2,	spaceLeft,	2,	spaceRight));i++;
-		addC(JCGemOplysninger,	0,	i,	1,	1,	0,			new Insets(20,	spaceLeft,	2,	spaceRight));i++;
-		addC(JBForbind,			0,	i,	1,	1,	0,			new Insets(2,	spaceLeft,	100,spaceRight));i++;
+		addC(JLEMail,			0,	i,	1,	1,	0,			new Insets(spaceExtra,			spaceLeft,	0,	spaceRight));i++;
+		addC(JTEMail,			0,	i,	1,	1,	JTWidth,	new Insets(spaceSTD,			spaceLeft,	0,	spaceRight));i++;
+		addC(JLKodeord,			0,	i,	1,	1,	0,			new Insets(spaceExtra,			spaceLeft,	0,	spaceRight));i++;
+		addC(JTKodeord,			0,	i,	1,	1,	JTWidth,	new Insets(spaceSTD,			spaceLeft,	0,	spaceRight));i++;
+		addC(JCGemOplysninger,	0,	i,	1,	1,	0,			new Insets(spaceExtra,			spaceLeft,	0,	spaceRight));i++;
+		addC(JBForbind,			0,	i,	1,	1,	0,			new Insets(spaceSTD,			spaceLeft,	40,	spaceRight));i++;
 		this.setVisible(true);
 	}
 	
@@ -102,7 +107,8 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
 		name.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		name.setVisible(true);
 	}
-
+	
+	/*
 	public static void main(String[] args) {
 		System.out.println(frameSizePanel3);
 		JFrame test = new JFrame();
@@ -112,7 +118,8 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
 		test.pack();
 		test.setLocationRelativeTo(null);
 		
-		//test.add(new Panel3Connect());
+		test.add(new Panel3Connect());
 		test.validate();
 	}
+	*/
 }

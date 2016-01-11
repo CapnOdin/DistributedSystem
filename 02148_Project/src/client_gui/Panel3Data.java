@@ -27,8 +27,6 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties{
 	public Panel3Data(MainFrame parent){
 		System.out.println(frameSizePanel3);
 		this.parent = parent;
-		JPanel panel = new JPanel();
-		this.add(panel);
 		JTNavn = new JTextField();
 		JTAdresse = new JTextField();
 		JTPostnummer = new JTextField();
@@ -57,11 +55,14 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties{
 		setJLabel(JLBillede);
 		JLBillede.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		int JTWidth = frameSizePanel3.width/2;
-		int spaceLeft = 100;
-		int spaceTop = spaceLeft;
+		//int spaceLeft = 100;
+		//int spaceTop = spaceLeft;
+		int spaceTop = 100;
 		int spaceMiddle = 40;
 		int JPWidth = frameSizePanel3.width/6;
-		int spaceRight = frameSizePanel3.width - spaceLeft - JTWidth - spaceMiddle - JPWidth;
+		//int spaceRight = frameSizePanel3.width - spaceLeft - JTWidth - spaceMiddle - JPWidth;
+		int spaceRight = (frameSizePanel3.width  - JTWidth - spaceMiddle - JPWidth)/2;
+		int spaceLeft = spaceRight;
 		//int spaceButtom = frameSizePanel3.height - spaceTop -
 		
 		//Panel 1 - Insets = Top, Venstre, Bund, Højre
@@ -78,7 +79,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties{
 		addC(JLBy,			0,	i,	1,	1,	0, 			new Insets(4,			spaceLeft,	2,		spaceMiddle));i++;
 		addC(JTBy,			0,	i,	1,	1,	JTWidth, 	new Insets(2,			spaceLeft,	2,		spaceMiddle));i++;
 		addC(JCHarBil,		0,	i,	1,	1,	0, 			new Insets(20,			spaceLeft,	2,		spaceMiddle));i++;
-		addC(JBGem,			0,	i,	1,	1,	0, 			new Insets(2,			spaceLeft,	200,	spaceMiddle));i++;
+		addC(JBGem,			0,	i,	1,	1,	0, 			new Insets(2,			spaceLeft,	0,	spaceMiddle));i++;
 		
 		
 		//Panel 2

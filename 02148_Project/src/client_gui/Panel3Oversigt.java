@@ -14,7 +14,7 @@ public class Panel3Oversigt extends PanelTemplate implements GeneralProperties{
 		this.parent = parent;
 		GridBagConstraints gbc = new GridBagConstraints();
 		JPanel panel = new JPanel();
-		this.add(panel);
+		//this.add(panel);
 	}
 	
 	@Override
