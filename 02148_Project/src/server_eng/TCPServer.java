@@ -26,7 +26,7 @@ public class TCPServer implements Runnable {
 	}
 
 	private void serverSleepMode() {
-		setupSlave();
+		//setupSlave();
 		while(true) {
 			try {
 				waitForConnection();
