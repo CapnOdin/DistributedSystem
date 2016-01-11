@@ -69,6 +69,7 @@ public class ClientMainFrame extends JFrame {
 		this.setPreferredSize(frameSize);
 		this.setUndecorated(true);
 		this.setLayout(new GridBagLayout());
+		this.getContentPane().setBackground(Color.magenta);
 		this.pack();
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
