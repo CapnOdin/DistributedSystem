@@ -35,7 +35,7 @@ public class TCPClient implements Runnable {
 	
 	public void sendMessage(String message) {
 		try {
-			output.writeObject("CLIENT - " + message);
+			output.writeObject(message);
 			output.flush();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -47,7 +47,8 @@ public class TCPClient implements Runnable {
 			try {
 				message = (String) input.readObject();
 				System.out.println(message);
-				sendMessage("Hello");
+				sendMessage("ENDCONNECTION");
+				break;
 				//sendMessage("END");
 			}catch(Exception e) {
 				e.printStackTrace();

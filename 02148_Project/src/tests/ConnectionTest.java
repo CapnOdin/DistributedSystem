@@ -8,7 +8,12 @@ public class ConnectionTest {
 	public static void main(String[] args) {
 		(new Thread(new TCPServer(1234))).start();
 		
-		TCPClient client = new TCPClient("localhost", 1234);
-		client.run();
+		//(new Thread(new TCPClient("localhost", 1234))).start();
+		
+		TCPClient c2 = new TCPClient("localhost", 1234);
+		c2.run();
+		
+		//TCPClient client = new TCPClient("localhost", 1234);
+		//client.run();
 	}
 }

@@ -1,12 +1,14 @@
 package server_eng;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import javax.swing.Timer;
-
 public class ConnectionThread extends Thread {
+	
+	private ObjectInputStream input;
+	private ObjectOutputStream output;
 	
 	private Socket client;
 	private int userNo;
@@ -16,15 +18,52 @@ public class ConnectionThread extends Thread {
 		this.userNo = userNo;
 	}
 	
+	private void cleanUp() {
+		System.out.println("[SERVER]Thread " + client.getInetAddress() + " closed.");
+		try {
+			input.close();
+			output.close();
+			client.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void setupStreams() throws IOException {
+		output = new ObjectOutputStream(client.getOutputStream());
+		output.flush();
+		input = new ObjectInputStream(client.getInputStream());
+		System.out.println("[THREAD "+ userNo + "]Streams successfully created.");
+	}
+	
+	private void sendMessage(String message) {
+		try {
+			output.writeObject("[THREAD " + userNo + "]" + message);
+			output.flush();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void run() {
-		Timer t = new Timer(2000, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Hello from " + client.getInetAddress() + " user number " + userNo + " server connection thread.");
-			}
-		});
-		t.start();	
 		super.run();
+		try {
+			setupStreams();
+			String message = "Conversation ready!";
+			sendMessage(message);
+			do {
+				try {
+					message = (String) input.readObject();
+					TCPServer.putTask(message);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			} while(!message.equals("ENDCONNECTION"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} finally {
+			cleanUp();
+		}
 	}
 }

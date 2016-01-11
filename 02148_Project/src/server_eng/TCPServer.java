@@ -11,11 +11,11 @@ public class TCPServer implements Runnable {
 	
 	private static ArrayList<String> taskBuffer = new ArrayList<String>();
 	
-	private ObjectOutputStream output;
-	private ObjectInputStream input;
-	
+	private ServerSlave slave;
 	private ServerSocket server;
 	private Socket connection;
+	
+	private ServerTupleSpace space;
 	
 	private ArrayList<ConnectionThread> allConnections = new ArrayList<ConnectionThread>();
 	private int userCount = 0;
@@ -30,9 +30,8 @@ public class TCPServer implements Runnable {
 	private void serverSleepMode() {
 		while(true) {
 			try {
+				setupSlave();
 				waitForConnection();
-				setupStreams();
-				whileConnected();
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally{
@@ -42,57 +41,39 @@ public class TCPServer implements Runnable {
 		}
 	}
 	
-	private void sendMessage(String message) {
-		try {
-			output.writeObject("SERVER - " + message);
-			output.flush();
-			//System.out.println("SERVER - " + message);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+	private void setupSlave() {
+		space = new ServerTupleSpace();
+		(new Thread(new ServerSlave(space))).start();
 	}
 	
-	private void whileConnected() throws IOException {
-		String message = "Conversation ready!";
-		sendMessage(message);
-		do {
-			try {
-				message = (String) input.readObject();
-				taskBuffer.add(message);
-				System.out.println(taskBuffer.toString());
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-		} while(!message.equals("CLIENT - END"));
-	}
-
-	private void setupStreams() throws IOException {
-		output = new ObjectOutputStream(connection.getOutputStream());
-		output.flush();
-		input = new ObjectInputStream(connection.getInputStream());
-		System.out.println("[SERVER]Streams successfully created.");
-	}
-
 	private void waitForConnection() throws IOException {
-		System.out.println("[SERVER]Waiting for someone to connect...");
-		connection = server.accept();
-		System.out.println(allConnections.size());
-		System.out.println("[SERVER]Now connected to " + connection.getInetAddress().getHostName());
-		ConnectionThread newClient = new ConnectionThread(connection, userCount++);
-		allConnections.add(newClient);
-		newClient.start();
+		while(true) {
+			System.out.println("[SERVER]Waiting for someone to connect...");
+			connection = server.accept();
+			System.out.println("[SERVER]Now connected to " + connection.getInetAddress().getHostName());
+			ConnectionThread newClient = new ConnectionThread(connection, userCount++);
+			allConnections.add(newClient);
+			newClient.start();
+		}
+		
 	}
 
 	private void cleanUp() {
 		System.out.println("[SERVER]Connections closed");
 		try {
-			output.close();
-			input.close();
 			connection.close();
 			server.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static ArrayList<String> getTaskBuffer() {
+		return taskBuffer;
+	}
+	
+	public static void putTask(String task) {
+		taskBuffer.add(task);
 	}
 
 	@Override
@@ -103,14 +84,6 @@ public class TCPServer implements Runnable {
 			e.printStackTrace();
 		}
 		serverSleepMode();
-	}
-
-	public static ArrayList<String> getTaskBuffer() {
-		return taskBuffer;
-	}
-
-	public void setTaskBuffer(ArrayList<String> taskBuffer) {
-		this.taskBuffer = taskBuffer;
 	}
 
 }
