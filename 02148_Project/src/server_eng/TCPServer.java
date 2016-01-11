@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TCPServer implements Runnable {
 	
@@ -11,6 +12,7 @@ public class TCPServer implements Runnable {
 	public static int currentTask = 0;
 	
 	private ArrayList<ConnectionThread> allConnections = new ArrayList<ConnectionThread>();
+	private HashMap<Integer, ConnectionThread> allConnections2 = new HashMap<Integer, ConnectionThread>();
 	
 	private ServerTupleSpace space;
 	private ServerSocket server;
@@ -47,10 +49,11 @@ public class TCPServer implements Runnable {
 			System.out.println("[SERVER]Waiting for someone to connect...");
 			connection = server.accept();
 			System.out.println("[SERVER]Now connected to " + connection.getInetAddress().getHostName());
-			ConnectionThread newClient = new ConnectionThread(connection, userCount++);
+			ConnectionThread newClient = new ConnectionThread(connection, userCount);
 			allConnections.add(newClient);
+			allConnections2.put(userCount++, newClient);
 			newClient.start();
-			System.out.println(allConnections);
+			System.out.println(allConnections2);
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
