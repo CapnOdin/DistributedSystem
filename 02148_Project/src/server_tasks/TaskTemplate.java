@@ -1,4 +1,6 @@
-package server_eng;
+package server_tasks;
+
+import server_eng.ServerTupleSpace;
 
 public abstract class TaskTemplate {
 	private String id;

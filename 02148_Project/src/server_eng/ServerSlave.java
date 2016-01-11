@@ -23,6 +23,7 @@ public class ServerSlave implements Runnable {
 				System.out.println("DECODED STRING INSTRUCTION CODE: " + decoded[0]);
 				break;
 			case "A1":
+				
 				break;
 			case "A2":
 				break;
