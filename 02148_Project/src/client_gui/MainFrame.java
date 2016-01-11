@@ -24,7 +24,7 @@ public class MainFrame extends JFrame implements GeneralProperties{
 		tb = new TaskBar(this);
 		p1 = new Panel1(this);
 		p2 = new Panel2(this);
-		current_panel = new Panel3Data(this);
+		current_panel = new Panel3Data(this);	
 		addC(tb,0,0,1,1);
 		addC(p1,0,1,1,1);
 		addC(p2,0,2,1,1);

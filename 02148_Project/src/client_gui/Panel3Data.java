@@ -10,9 +10,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -56,27 +56,36 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties{
 		setJButton(JBGem);
 		setJLabel(JLBillede);
 		JLBillede.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		int JTWidth = frameSizePanel3.width/2;
+		int spaceLeft = 100;
+		int spaceTop = spaceLeft;
+		int spaceMiddle = 40;
+		int JPWidth = frameSizePanel3.width/6;
+		int spaceRight = frameSizePanel3.width - spaceLeft - JTWidth - spaceMiddle - JPWidth;
+		//int spaceButtom = frameSizePanel3.height - spaceTop -
 		
 		//Panel 1 - Insets = Top, Venstre, Bund, Højre
+		int i = 0;
 		gbc.anchor = GridBagConstraints.NORTHWEST;	
-		addC(JLPersonlig,	0,	0,	1,	1,	0,		new Insets(10,	80,	2,	40));
-		addC(JLNavn,		0,	1,	1,	1,	0, 		new Insets(40,	80,	2,	40));
-		addC(JTNavn,		0,	2,	1,	1,	300, 	new Insets(2,	80,	2,	40));
-		addC(JLAdresse,		0,	3,	1,	1,	0, 		new Insets(20,	80,	2,	40));
-		addC(JTAdresse,		0,	4,	1,	1,	300, 	new Insets(2,	80,	2,	40));
-		addC(JLPostnummer,	0,	5,	1,	1,	0,		new Insets(4,	80,	2,	40));
-		addC(JTPostnummer,	0,	6,	1,	1,	100, 	new Insets(2,	80,	2,	40));
-		addC(JLBy,			0,	7,	1,	1,	0, 		new Insets(4,	80,	2,	40));
-		addC(JTBy,			0,	8,	1,	1,	300, 	new Insets(2,	80,	2,	40));
-		addC(JCHarBil,		0,	9,	1,	1,	0, 		new Insets(20,	80,	2,	40));
-		addC(JBGem,			0,	10,	1,	1,	0, 		new Insets(2,	80,	100,	40));
+		addC(JLPersonlig,	0,	i,	1,	1,	0,			new Insets(spaceTop,	spaceLeft,	2,		spaceMiddle));i++;
+		this.add(new JSeparator(SwingConstants.HORIZONTAL));
+		addC(JLNavn,		0,	i,	1,	1,	0, 			new Insets(40,			spaceLeft,	2,		spaceMiddle));i++;
+		addC(JTNavn,		0,	i,	1,	1,	JTWidth, 	new Insets(2,			spaceLeft,	2,		spaceMiddle));i++;
+		addC(JLAdresse,		0,	i,	1,	1,	0, 			new Insets(20,			spaceLeft,	2,		spaceMiddle));i++;
+		addC(JTAdresse,		0,	i,	1,	1,	JTWidth, 	new Insets(2,			spaceLeft,	2,		spaceMiddle));i++;
+		addC(JLPostnummer,	0,	i,	1,	1,	0,			new Insets(4,			spaceLeft,	2,		spaceMiddle));i++;
+		addC(JTPostnummer,	0,	i,	1,	1,	JTWidth/3, 	new Insets(2,			spaceLeft,	2,		spaceMiddle));i++;
+		addC(JLBy,			0,	i,	1,	1,	0, 			new Insets(4,			spaceLeft,	2,		spaceMiddle));i++;
+		addC(JTBy,			0,	i,	1,	1,	JTWidth, 	new Insets(2,			spaceLeft,	2,		spaceMiddle));i++;
+		addC(JCHarBil,		0,	i,	1,	1,	0, 			new Insets(20,			spaceLeft,	2,		spaceMiddle));i++;
+		addC(JBGem,			0,	i,	1,	1,	0, 			new Insets(2,			spaceLeft,	200,	spaceMiddle));i++;
 		
 		
 		//Panel 2
-		gbc.ipady = 200;
+		gbc.ipady = frameSizePanel3.height/2;
 		gbc.anchor = GridBagConstraints.NORTH;	
-		addC(JLBillede,		1,	1,	1,	10,	100, 	new Insets(40,	2,	100,	80));	
-		//addC(JLSkiftBillede,1,	10,	1,	1,	0, 		new Insets(2,	2,	2,	80));
+		addC(JLBillede,		1,	1,	1,	10,	JPWidth, 	new Insets(40,	2,	100,	spaceRight));	
+		//addC(JLSkiftBillede,1,	10,	1,	1,	0, 		new Insets(spaceTop;	2,	2,	spaceRight));
 		
 		this.setVisible(true);
 	}

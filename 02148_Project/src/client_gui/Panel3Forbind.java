@@ -44,16 +44,22 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
 		setJTextField(JTKodeord);
 		setJCheckBox(JCGemOplysninger);
 		setJButton(JBForbind);
+		int JTWidth = frameSizePanel3.width / 2;
+		int spaceLeft = frameSizePanel3.width / 4;
+		int spaceTop = spaceLeft;
+		int spaceRight = spaceLeft;
+		
 		
 		// Insets = Top, Venstre, Bund, Højre
+		int i = 0;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
-		addC(JLForbind,			0,	0,	1,	1,	0,		new Insets(80,	2,	2,	2));
-		addC(JLEMail,			0,	1,	1,	1,	0,		new Insets(20,	2,	2,	2));
-		addC(JTEMail,			0,	2,	1,	1,	300,	new Insets(2,	2,	2,	2));
-		addC(JLKodeord,			0,	3,	1,	1,	0,		new Insets(10,	2,	2,	2));
-		addC(JTKodeord,			0,	4,	1,	1,	300,	new Insets(2,	2,	2,	2));
-		addC(JCGemOplysninger,	0,	5,	1,	1,	0,		new Insets(20,	2,	2,	2));
-		addC(JBForbind,			0,	6,	1,	1,	0,		new Insets(2,	2,	100,2));
+		addC(JLForbind,			0,	i,	1,	1,	0,			new Insets(spaceTop,	spaceLeft,	2,	spaceRight));i++;
+		addC(JLEMail,			0,	i,	1,	1,	0,			new Insets(20,	spaceLeft,	2,	spaceRight));i++;
+		addC(JTEMail,			0,	i,	1,	1,	JTWidth,	new Insets(2,	spaceLeft,	2,	spaceRight));i++;
+		addC(JLKodeord,			0,	i,	1,	1,	0,			new Insets(10,	spaceLeft,	2,	spaceRight));i++;
+		addC(JTKodeord,			0,	i,	1,	1,	JTWidth,	new Insets(2,	spaceLeft,	2,	spaceRight));i++;
+		addC(JCGemOplysninger,	0,	i,	1,	1,	0,			new Insets(20,	spaceLeft,	2,	spaceRight));i++;
+		addC(JBForbind,			0,	i,	1,	1,	0,			new Insets(2,	spaceLeft,	100,spaceRight));i++;
 		this.setVisible(true);
 	}
 	
