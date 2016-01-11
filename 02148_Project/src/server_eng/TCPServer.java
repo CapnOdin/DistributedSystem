@@ -1,8 +1,6 @@
 package server_eng;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -10,33 +8,31 @@ import java.util.ArrayList;
 public class TCPServer implements Runnable {
 	
 	private static ArrayList<String> taskBuffer = new ArrayList<String>();
+	public static int currentTask = 0;
 	
-	private ServerSlave slave;
+	private ArrayList<ConnectionThread> allConnections = new ArrayList<ConnectionThread>();
+	
+	private ServerTupleSpace space;
 	private ServerSocket server;
 	private Socket connection;
 	
-	private ServerTupleSpace space;
-	
-	private ArrayList<ConnectionThread> allConnections = new ArrayList<ConnectionThread>();
-	private int userCount = 0;
-	
 	private int port;
-	public static int currentTask = 0;
+	private int userCount = 0;
 	
 	public TCPServer(int port) {
 		this.port = port;
 	}
 
 	private void serverSleepMode() {
+		setupSlave();
 		while(true) {
 			try {
-				setupSlave();
 				waitForConnection();
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally{
 				cleanUp();
-				System.exit(1);
+				System.exit(0);
 			}
 		}
 	}
@@ -54,8 +50,13 @@ public class TCPServer implements Runnable {
 			ConnectionThread newClient = new ConnectionThread(connection, userCount++);
 			allConnections.add(newClient);
 			newClient.start();
+			System.out.println(allConnections);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
-		
 	}
 
 	private void cleanUp() {
