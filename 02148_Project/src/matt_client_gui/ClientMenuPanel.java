@@ -60,7 +60,7 @@ public class ClientMenuPanel extends JPanel implements MouseListener {
 	}
 
 	private void setDefaultProperties() {
-		this.setBackground(Color.white);
+		this.setBackground(Color.gray);
 		this.setPreferredSize(clientMenuPanelSize);
 		this.setLayout(new GridLayout(1,4));
 		this.setVisible(true);

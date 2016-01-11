@@ -13,7 +13,5 @@ public class ConnectionTest {
 		TCPClient c2 = new TCPClient("localhost", 1234);
 		c2.run();
 		
-		//TCPClient client = new TCPClient("localhost", 1234);
-		//client.run();
 	}
 }

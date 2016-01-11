@@ -47,8 +47,8 @@ public class TCPClient implements Runnable {
 			try {
 				message = (String) input.readObject();
 				System.out.println(message);
-				sendMessage("ENDCONNECTION");
-				break;
+				sendMessage("A0.SOMETHING");
+				//break;
 				//sendMessage("END");
 			}catch(Exception e) {
 				e.printStackTrace();
