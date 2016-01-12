@@ -22,13 +22,9 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	private PanelTemplate vist_panel;
 
 	public MainFrame() {
-
 		DLogin = new DialogLogin(this);
+		DLogin.setAlwaysOnTop(true);
 	    DLogin.setVisible(true);
-	    if (DLogin.isSucceeded()){
-	    	DLogin.setVisible(false);
-	    }
-	    
 	    setDefaultProperties();
 		tb = new TaskBar(this);
 		p1 = new Panel1(this);
@@ -67,7 +63,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	}
 
 	private void setDefaultProperties() {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		//this.setUndecorated(true);
 		contentPaneSize = this.getContentPane().getSize();
 		this.setLayout(new GridBagLayout());

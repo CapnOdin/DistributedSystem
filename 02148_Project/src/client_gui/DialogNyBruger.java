@@ -1,14 +1,17 @@
 package client_gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -20,40 +23,50 @@ import javax.swing.JTextField;
 public class DialogNyBruger extends JDialog implements ActionListener,MouseListener {
 	private MainFrame parent;
 	private GridBagConstraints c = new GridBagConstraints();
-	private JLabel JLNavn, JLKodeord, JLGentagKodeord;
+	private DialogLogin DLogin;
+	private JLabel JLOpret, JLNavn, JLKodeord, JLGentagKodeord;
 	private JTextField JTNavn;
 	private JPasswordField Kodeord, GentagKodeord;
 	private JButton JBGem, JBAnnuller;
-	private JPanel panel;
+	private JPanel panel = new JPanel(new GridBagLayout());
+	private boolean loggedIn = false;
+    private Insets normalInsets = new Insets(2,2,2,2);
+    private Insets biggerInsets = new Insets(10,0,0,0);
 
 	public DialogNyBruger(MainFrame parent) {
-		super(parent, "Login", true);
-		
+		this.parent = parent;
 		setDefaultProperties();
 		setJComponents();
+		
+		
 		int i = 0;
+		c.anchor = GridBagConstraints.NORTHWEST;	
+		addC(JLOpret,0,i,1);i++;  c.insets = biggerInsets;
 		addC(JLNavn,0,i,1); i++;
-		addC(JTNavn,0,i,2); i++;
+		addC(JTNavn,0,i,2); i++; c.insets = normalInsets;
 		addC(JLKodeord,0,i,1); i++;
 		addC(Kodeord,0,i,2); i++;
 		addC(JLGentagKodeord,0,i,1); i++;
 		addC(GentagKodeord,0,i,2);i++;
-		addC(JBGem,0,i,1);
-		addC(JBAnnuller,0,i,1);
-		this.add(panel,c);
+		addC(JBGem,0,i,1); 
+		addC(JBAnnuller,1,i,1);
 		
-		/*pack();
-        setResizable(false);
-        setLocationRelativeTo(parent);*/
+		GentagKodeord.addActionListener(this);
+		JBGem.addMouseListener(this);
+		JBAnnuller.addMouseListener(this);
+		
+		this.add(panel);
+		this.pack();
+		this.setModal(true);
+
 	}
 
 	private void addC(JComponent comp, int x, int y, int width){
-
-		panel = new JPanel(new GridBagLayout());
     	c.gridx = x;
 		c.gridy = y;
 		c.gridwidth = width;
 		panel.add(comp, c);
+		panel.validate();
     }
 	
 	private void setJTextField(JTextField name) {
@@ -72,7 +85,8 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 	}
 
 	private void setJComponents() {
-		JLNavn = new JLabel("Brugernavn");
+		JLOpret = new JLabel("<HTML><U>Opret Ny Bruger</U></HTML>");
+		JLNavn = new JLabel("Ønskede Brugernavn");
 		JLKodeord = new JLabel("Kodeord");
 		JLGentagKodeord = new JLabel("Gentag Kodeord");
 		JTNavn = new JTextField(20);
@@ -80,6 +94,7 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 		GentagKodeord = new JPasswordField(20);
 		JBGem = new JButton("Gem");
 		JBAnnuller = new JButton("Annuller");
+		JLOpret.setFont(new Font("SansSerif",Font.PLAIN,25));
 		setJLabel(JLNavn);
 		setJLabel(JLKodeord);
 		setJLabel(JLGentagKodeord);
@@ -92,22 +107,24 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 
 	private void setDefaultProperties() {
 		this.setUndecorated(true);
-        this.setModal(true);
-        this.setPreferredSize(new Dimension(500, 200));
-        this.setLayout(new GridBagLayout());
-        this.pack();
-        this.setLocationRelativeTo(null);  
-        this.setVisible(true);
-	
-		/*this.setUndecorated(true);
+		this.setPreferredSize(new Dimension(500,300));
+		this.getRootPane().setBorder(BorderFactory.createLineBorder(Color.black));
+		this.pack();
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-		this.setPreferredSize(new Dimension(500, 200));
-		this.setLayout(new GridBagLayout());*/
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource() == JBGem){
+			dispose();
+		}
+		if (e.getSource() == JBAnnuller){
+			this.setVisible(false);
+			DLogin = new DialogLogin(parent);
+			DLogin.setAlwaysOnTop(true);
+			DLogin.setVisible(true);		
+		}
 
 	}
 
@@ -137,7 +154,16 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource() == GentagKodeord){
+			dispose();
+			loggedIn = true;
+			//parent.setVisible(true);
+			
+		}
 
+	}
+	
+	public boolean isLoggedIn(){
+		return loggedIn;
 	}
 }
