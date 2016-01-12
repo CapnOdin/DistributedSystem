@@ -7,6 +7,8 @@ import java.util.HashMap;
 
 import javax.swing.Timer;
 
+import api.GoogleWebApi;
+
 public class ServerSlave implements Runnable {
 
 	private ServerTupleSpace space;
@@ -20,10 +22,10 @@ public class ServerSlave implements Runnable {
 		try {
 			switch (decoded[0]) {
 			case "A0":
-				System.out.println("DECODED STRING INSTRUCTION CODE: " + decoded[0]);
+				System.out.println("DECODED STRING " + java.util.Arrays.toString(decoded));
+				System.out.println(GoogleWebApi.distMatrix(GoogleWebApi.seachPlaces(decoded[1]).get(1), GoogleWebApi.seachPlaces(decoded[2]).get(1)));
 				break;
 			case "A1":
-				
 				break;
 			case "A2":
 				break;
@@ -48,7 +50,7 @@ public class ServerSlave implements Runnable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		TCPServer.getTaskBuffer().remove(TCPServer.currentTask);
 	}
 
 	@Override
@@ -62,7 +64,12 @@ public class ServerSlave implements Runnable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println(TCPServer.getTaskBuffer().get(TCPServer.currentTask));
-				decodeTask(TCPServer.getTaskBuffer().get(TCPServer.currentTask));
+				try {
+					decodeTask(TCPServer.getTaskBuffer().get(TCPServer.currentTask));
+				} catch(Exception ex) {
+					//System.out.println("HELLO");
+				}
+				
 			}
 		});
 		t.start();
