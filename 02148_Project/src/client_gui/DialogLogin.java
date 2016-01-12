@@ -149,6 +149,7 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 			DNyBruger = new DialogNyBruger(parent);		
 		    this.setVisible(false);
 		    DNyBruger.setVisible(true);
+			//dispose();
 		}
 		if (e.getSource() == JBAnnuller){
 			System.exit(0);
