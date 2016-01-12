@@ -48,7 +48,7 @@ public class TCPClient implements Runnable {
 			try {
 				message = (String) input.readObject();
 				System.out.println(message);
-				sendMessage("A0.SOMETHING");
+				sendMessage("A0.DSB.vanløse st");
 			}catch(Exception e) {
 				break;
 			}
