@@ -29,6 +29,7 @@ public class TCPClient implements Runnable {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
+			System.out.println("CLIENT DEAD");
 			cleanUp();
 		}
 	}
@@ -52,7 +53,6 @@ public class TCPClient implements Runnable {
 				break;
 			}
 		}while(!message.equals("SERVER - END"));
-		System.out.println("CLIENT DEAD");
 	}
 
 	private void setupStreams() throws IOException {
@@ -69,7 +69,6 @@ public class TCPClient implements Runnable {
 	}
 
 	private void cleanUp() {
-		System.out.println("[CLIENT]Closing connection and streams.");
 		try {
 			output.close();
 			input.close();
@@ -77,6 +76,7 @@ public class TCPClient implements Runnable {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("[CLIENT]Closing connection and streams.");
 	}
 
 }
