@@ -27,32 +27,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties{
 	public Panel3Data(MainFrame parent){
 		System.out.println(frameSizePanel3);
 		this.parent = parent;
-		JTNavn = new JTextField();
-		JTAdresse = new JTextField();
-		JTPostnummer = new JTextField();
-		JTBy = new JTextField();
-		JLPersonlig = new JLabel("Personlig profil");
-		JLPersonlig.setFont(new Font("SansSerif", Font.PLAIN, 20));
-		JLNavn = new JLabel("Navn");
-		JLAdresse = new JLabel("Adresse");
-		JLPostnummer = new JLabel("Postnummer");
-		JLBy = new JLabel("By");
-		JLSkiftBillede = new JLabel("Skift billede");
-		JCHarBil = new JCheckBox("Har bil");
-		JBGem = new JButton("Gem");	
-		JLBillede = new JLabel("Billede", SwingConstants.CENTER);
-		setJTextField(JTNavn);
-		setJTextField(JTAdresse);
-		setJTextField(JTPostnummer);
-		setJTextField(JTBy);
-		setJLabel(JLNavn);
-		setJLabel(JLAdresse);
-		setJLabel(JLPostnummer);
-		setJLabel(JLBy);
-		setJLabel(JLSkiftBillede);
-		setJCheckBox(JCHarBil);
-		setJButton(JBGem);
-		setJLabel(JLBillede);
+		setJComponents();		
 		JLBillede.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		int JTWidth = frameSizePanel3.width/2;
 		//int spaceLeft = 100;
@@ -130,6 +105,35 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties{
 	private void setJCheckBox(JCheckBox name){
 		name.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		name.setVisible(true);
+	}
+	
+	private void setJComponents(){
+		JTNavn = new JTextField();
+		JTAdresse = new JTextField();
+		JTPostnummer = new JTextField();
+		JTBy = new JTextField();
+		JLPersonlig = new JLabel("Personlig profil");
+		JLPersonlig.setFont(new Font("SansSerif", Font.PLAIN, 20));
+		JLNavn = new JLabel("Navn");
+		JLAdresse = new JLabel("Adresse");
+		JLPostnummer = new JLabel("Postnummer");
+		JLBy = new JLabel("By");
+		JLSkiftBillede = new JLabel("Skift billede");
+		JCHarBil = new JCheckBox("Har bil");
+		JBGem = new JButton("Gem");	
+		JLBillede = new JLabel("Billede", SwingConstants.CENTER);
+		setJTextField(JTNavn);
+		setJTextField(JTAdresse);
+		setJTextField(JTPostnummer);
+		setJTextField(JTBy);
+		setJLabel(JLNavn);
+		setJLabel(JLAdresse);
+		setJLabel(JLPostnummer);
+		setJLabel(JLBy);
+		setJLabel(JLSkiftBillede);
+		setJCheckBox(JCHarBil);
+		setJButton(JBGem);
+		setJLabel(JLBillede);
 	}
 	/*
 	public static void main(String[] args) {
