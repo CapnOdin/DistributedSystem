@@ -16,6 +16,7 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -31,6 +32,7 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
     private JButton JBAnnuller;
     private boolean succeeded;
     private boolean nyBruger = false;
+    private JPanel panel;
     
     private DialogNyBruger DNyBruger;
       
@@ -38,7 +40,8 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
         super(parent, "Login", true);
         setDefaultProperties();
         setJComponents();
-
+        
+        
         int i = 0;
         addC(JLBrugernavn, 0,i,1);i++;
         addC(JTBrugernavn,0,i,2);i++;
@@ -49,22 +52,23 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
         c.insets = new Insets(2,0,0,0);
         addC(JBLogin,0,i,1);
         addC(JBAnnuller,1,i,1);
+        this.add(panel,c);
         
         Kodeord.addActionListener(this);
         JBLogin.addMouseListener(this);
         JLNyBruger.addMouseListener(this);
         JBAnnuller.addMouseListener(this);
-
         pack();
         setResizable(false);
         setLocationRelativeTo(parent);
     }
     
     private void addC(JComponent comp, int x, int y, int width){
+        panel = new JPanel(new GridBagLayout());
     	c.gridx = x;
 		c.gridy = y;
 		c.gridwidth = width;
-		this.add(comp, c);
+		panel.add(comp, c);
     }
     
     private void setJTextField(JTextField name){
@@ -146,9 +150,22 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
             }
 		}
 		if (e.getSource() == JLNyBruger){	
-			DNyBruger = new DialogNyBruger(parent);		
-		    this.setVisible(false);
-		    DNyBruger.setVisible(true);
+			/*DNyBruger = new DialogNyBruger(parent);
+			DNyBruger.setVisible(true);
+		    this.setVisible(false);*/
+			JDialog test = new JDialog();
+            JPanel dialogpane = new JPanel();
+            dialogpane.setVisible(true);
+            dialogpane.setBackground(Color.magenta);
+           
+            test.setUndecorated(true);
+            test.setModal(true);
+            test.setPreferredSize(new Dimension(500,200));
+            test.add(dialogpane);
+            test.pack();
+            test.setLocationRelativeTo(null);
+            test.setVisible(true);
+		    
 			//dispose();
 		}
 		if (e.getSource() == JBAnnuller){

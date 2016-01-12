@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -23,9 +24,11 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 	private JTextField JTNavn;
 	private JPasswordField Kodeord, GentagKodeord;
 	private JButton JBGem, JBAnnuller;
+	private JPanel panel;
 
 	public DialogNyBruger(MainFrame parent) {
 		super(parent, "Login", true);
+		
 		setDefaultProperties();
 		setJComponents();
 		int i = 0;
@@ -37,17 +40,20 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 		addC(GentagKodeord,0,i,2);i++;
 		addC(JBGem,0,i,1);
 		addC(JBAnnuller,0,i,1);
+		this.add(panel,c);
 		
-		pack();
+		/*pack();
         setResizable(false);
-        setLocationRelativeTo(parent);
+        setLocationRelativeTo(parent);*/
 	}
 
 	private void addC(JComponent comp, int x, int y, int width){
+
+		panel = new JPanel(new GridBagLayout());
     	c.gridx = x;
 		c.gridy = y;
 		c.gridwidth = width;
-		this.add(comp, c);
+		panel.add(comp, c);
     }
 	
 	private void setJTextField(JTextField name) {
@@ -86,9 +92,17 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 
 	private void setDefaultProperties() {
 		this.setUndecorated(true);
+        this.setModal(true);
+        this.setPreferredSize(new Dimension(500, 200));
+        this.setLayout(new GridBagLayout());
+        this.pack();
+        this.setLocationRelativeTo(null);  
+        this.setVisible(true);
+	
+		/*this.setUndecorated(true);
 		this.setVisible(true);
 		this.setPreferredSize(new Dimension(500, 200));
-		this.setLayout(new GridBagLayout());
+		this.setLayout(new GridBagLayout());*/
 	}
 
 	@Override

@@ -68,7 +68,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 
 	private void setDefaultProperties() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setUndecorated(true);
+		//this.setUndecorated(true);
 		contentPaneSize = this.getContentPane().getSize();
 		this.setLayout(new GridBagLayout());
 		this.setPreferredSize(GeneralProperties.frameSize);
