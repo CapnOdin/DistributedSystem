@@ -19,14 +19,15 @@ public class ConnectionThread extends Thread {
 	}
 	
 	private void cleanUp() {
-		System.out.println("[SERVER]Thread " + client.getInetAddress() + " closed.");
 		try {
 			input.close();
 			output.close();
 			client.close();
+			TCPServer.removeConnection(userNo);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("[SERVER]Thread " + client.getInetAddress() + " closed.");
 	}
 	
 	private void setupStreams() throws IOException {
@@ -47,7 +48,7 @@ public class ConnectionThread extends Thread {
 	
 	@Override
 	public void run() {
-		super.run();
+		//super.run();
 		try {
 			setupStreams();
 			String message = "Conversation ready!";
@@ -57,7 +58,7 @@ public class ConnectionThread extends Thread {
 					message = (String) input.readObject();
 					TCPServer.putTask(message);
 				} catch(Exception e) {
-					e.printStackTrace();
+					break;
 				}
 			} while(!message.equals("ENDCONNECTION"));
 		} catch (IOException e1) {

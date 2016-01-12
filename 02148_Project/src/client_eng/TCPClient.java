@@ -48,10 +48,8 @@ public class TCPClient implements Runnable {
 				message = (String) input.readObject();
 				System.out.println(message);
 				sendMessage("A0.SOMETHING");
-				//break;
-				//sendMessage("END");
 			}catch(Exception e) {
-				e.printStackTrace();
+				break;
 			}
 		}while(!message.equals("SERVER - END"));
 		System.out.println("CLIENT DEAD");

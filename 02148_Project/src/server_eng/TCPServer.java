@@ -11,8 +11,7 @@ public class TCPServer implements Runnable {
 	private static ArrayList<String> taskBuffer = new ArrayList<String>();
 	public static int currentTask = 0;
 	
-	private ArrayList<ConnectionThread> allConnections = new ArrayList<ConnectionThread>();
-	private HashMap<Integer, ConnectionThread> allConnections2 = new HashMap<Integer, ConnectionThread>();
+	private static HashMap<Integer, ConnectionThread> allConnections = new HashMap<Integer, ConnectionThread>();
 	
 	private ServerTupleSpace space;
 	private ServerSocket server;
@@ -50,11 +49,8 @@ public class TCPServer implements Runnable {
 			connection = server.accept();
 			System.out.println("[SERVER]Now connected to " + connection.getInetAddress().getHostName());
 			ConnectionThread newClient = new ConnectionThread(connection, userCount);
-			allConnections.add(newClient);
-			
-			allConnections2.put(userCount++, newClient);
-			System.out.println(allConnections2);
-			
+			allConnections.put(userCount++, newClient);
+			System.out.println(allConnections);
 			newClient.start();
 			try {
 				Thread.sleep(1000);
@@ -80,6 +76,13 @@ public class TCPServer implements Runnable {
 	
 	public static void putTask(String task) {
 		taskBuffer.add(task);
+	}
+	
+	public static void removeConnection(int key) {
+		if(allConnections.containsKey(key)) {
+			allConnections.remove(key);
+		}
+		System.out.println(allConnections);
 	}
 
 	@Override
