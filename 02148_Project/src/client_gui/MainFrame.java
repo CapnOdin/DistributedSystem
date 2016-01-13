@@ -1,59 +1,74 @@
 package client_gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
+import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 public class MainFrame extends JFrame implements GeneralProperties {
 	public static Dimension contentPaneSize;
 	private GridBagConstraints c = new GridBagConstraints();
-	private TaskBar tb;
-	private Panel1 p1;
-	private Panel2 p2;
-	private PanelTemplate vist_panel;
+	private TaskBar taskBar;
+	private Panel2 panel2;
+	private PanelTemplate vistPanel3,vistPanel1;
 	
 	private DialogLogin DLogin;
 	private DialogNyBruger DNyBruger;
 
 	public MainFrame() {
-		DLogin = new DialogLogin(this);
+		/*DLogin = new DialogLogin(this);
 		DLogin.setAlwaysOnTop(true);
-	    DLogin.setVisible(true);			
+	    DLogin.setVisible(true);*/			
 	    setDefaultProperties();
-		tb = new TaskBar(this);
-		p1 = new Panel1(this);
-		p2 = new Panel2(this);
-		vist_panel = new Panel3Data(this);
-		addC(tb, 0, 0, 1, 1);
-		addC(p1, 0, 1, 1, 1);
-		addC(p2, 0, 2, 1, 1);
-		addC(vist_panel, 0, 3, 1, 1);
+		taskBar = new TaskBar(this);
+		vistPanel1 = new Panel1(this);
+		panel2 = new Panel2(this);
+		vistPanel3 = new Panel3Data(this);
+		addC(taskBar, 0, 0, 1, 1);
+		addC(vistPanel1, 0, 1, 1, 1);
+		addC(panel2, 0, 2, 1, 1);
+		addC(vistPanel3, 0, 3, 1, 1);
 		this.validate();;
-		//mainFrameSetVisible();
+		mainFrameSetVisible();
 		
 	}
-
-	public void removePanel() {
-		this.vist_panel.setVisible(false);
+	
+	public void removePanel1(){
+		this.vistPanel1.setVisible(false);
+		this.validate();
+		this.pack();
+	}
+	
+	public void addPanel1(PanelTemplate panel){
+		//removePanel1();
+		vistPanel1 = panel;
+		addC(panel,0,1,1,1);
+		panel.setVisible(true);;
 		this.validate();
 		this.pack();
 	}
 
-	public void addPanel(PanelTemplate panel) {
-		removePanel();
-		vist_panel = panel;
+	public void removePanel3() {
+		this.vistPanel3.setVisible(false);
+		this.validate();
+		this.pack();
+	}
+
+	public void addPanel3(PanelTemplate panel) {
+		removePanel3();
+		vistPanel3 = panel;
 		addC(panel, 0, 3, 1, 1);
 		panel.setVisible(true);
 		this.validate();
 		this.pack();
 	}
+	
+	
 
 	private void addC(JComponent comp, int x, int y, int height, int width) {
 		c.gridx = x;
@@ -64,14 +79,22 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	}
 
 	private void setDefaultProperties() {
+		System.setProperty("apple.laf.useScreenMenuBar", "true");
+        System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WikiTeX");
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+           
+        }
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		this.setUndecorated(true);
+		this.getContentPane().setBackground(Color.white);
+		//this.getRootPane().setBorder(BorderFactory.createLineBorder(Color.black));
 		contentPaneSize = this.getContentPane().getSize();
 		this.setLayout(new GridBagLayout());
 		this.setPreferredSize(GeneralProperties.frameSize);
 		this.pack();
 		this.setLocationRelativeTo(null);
-		//this.setVisible(true);
 	}
 	
 	public void mainFrameSetVisible(){

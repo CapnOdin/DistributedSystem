@@ -4,18 +4,20 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
+public class Panel3Forbind extends PanelTemplate implements GeneralProperties, ActionListener, MouseListener{
 	private MainFrame parent;
 	private GridBagConstraints c = new GridBagConstraints();
 	JPanel panel = new JPanel(new GridBagLayout());
@@ -23,6 +25,7 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
 	private JTextField JTEMail, JTKodeord;
 	private JCheckBox JCGemOplysninger;
 	private JButton JBForbind;
+	
 	
 	public Panel3Forbind(MainFrame parent){
 		this.parent = parent;
@@ -35,9 +38,6 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
 		int spaceTop = 40;
 		int spaceSTD = 4;
 		int spaceExtra = 20;
-		int spaceButtom = 	frameSizePanel3.height - spaceTop - JLForbind.getHeight() - spaceExtra - JLEMail.getHeight() - spaceSTD- 
-							JTEMail.getHeight() - spaceExtra - JLKodeord.getHeight() - spaceSTD - JTKodeord.getHeight() - spaceExtra - 
-							JCGemOplysninger.getHeight() - spaceSTD -JBForbind.getHeight();
 		
 		
 		// Insets = Top, Venstre, Bund, Højre
@@ -51,6 +51,10 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
 		addC(JTKodeord,			0,	i,	1,	1,	JTWidth,	new Insets(spaceSTD,			spaceLeft,	0,	spaceRight));i++;
 		addC(JCGemOplysninger,	0,	i,	1,	1,	0,			new Insets(spaceExtra,			spaceLeft,	0,	spaceRight));i++;
 		addC(JBForbind,			0,	i,	1,	1,	0,			new Insets(spaceSTD,			spaceLeft,	40,	spaceRight));i++;
+		
+		JTKodeord.addActionListener(this);
+		JBForbind.addMouseListener(this);
+		
 		this.add(panel);
 		this.setVisible(true);
 	}
@@ -111,6 +115,43 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
 		setJTextField(JTKodeord);
 		setJCheckBox(JCGemOplysninger);
 		setJButton(JBForbind);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == JBForbind){
+		}
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/*

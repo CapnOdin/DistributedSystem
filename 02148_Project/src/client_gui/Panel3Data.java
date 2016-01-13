@@ -60,9 +60,9 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		addC(JLAdresse,		0,	i,	1,	1, 		new Insets(20,			spaceLeft,	2,		spaceMiddle));i++;
 		addC(JTAdresse,		0,	i,	7,	1, 		new Insets(2,			spaceLeft,	2,		spaceMiddle));i++;
 		addC(JLPostnummer,	0,	i,	1,	1,		new Insets(4,			spaceLeft,	2,		spaceMiddle));i++;
-		addC(JTPostnummer,	0,	i,	7,	1,	 	new Insets(2,			spaceLeft,	2,		spaceMiddle));i++;
+		addC(JTPostnummer,	0,	i,	2,	1,	 	new Insets(2,			spaceLeft,	2,		spaceMiddle));i++;
 		addC(JLBy,			0,	i,	1,	1, 		new Insets(4,			spaceLeft,	2,		spaceMiddle));i++;
-		addC(JTBy,			0,	i,	1,	1, 		new Insets(2,			spaceLeft,	2,		spaceMiddle));i++;
+		addC(JTBy,			0,	i,	7,	1, 		new Insets(2,			spaceLeft,	2,		spaceMiddle));i++;
 		addC(JCHarBil,		0,	i,	1,	1, 		new Insets(20,			spaceLeft,	2,		spaceMiddle));i++;
 		addC(JBGem,			0,	i,	1,	1, 		new Insets(2,			spaceLeft,	0,		spaceMiddle));i++;
 		

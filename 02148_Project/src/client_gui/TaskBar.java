@@ -8,9 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
@@ -46,12 +44,13 @@ public class TaskBar extends JMenuBar implements MouseListener, MouseMotionListe
 	}
 
 	private void setDefaultProperties() {
+		this.setBackground(Color.white);
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
 		this.setPreferredSize(TaskBarSize);
 		this.setLayout(new BorderLayout());
 		this.setVisible(true);	
-		this.setBackground(Color.lightGray);
+		//this.setBackground(Color.lightGray);
 	}
 	
 	@Override
