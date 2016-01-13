@@ -47,7 +47,7 @@ public class ClientStatusBar extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				activePanel.setText(" Active Panel: " + parent.getCurrent_panel().getID());
-				time.setText(new Date().toString()+ " ");
+				time.setText("Time: " + new Date().toString().substring(11, 19)+ " ");
 			}
 		});
 		t.start();	

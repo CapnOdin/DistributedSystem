@@ -1,7 +1,6 @@
 package matt_client_gui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -12,12 +11,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JLayer;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -145,6 +145,9 @@ public class ClientLoginPrompt extends JDialog implements ActionListener, MouseL
 	public void mousePressed(MouseEvent e) {
 		if(e.getSource() == buttons[0]) {
 			System.out.println("Connect pressed");
+			this.getContentPane().removeAll();
+			this.setContentPane(new JLabel(new ImageIcon("load.gif")));
+			this.pack();
 		}
 		
 		if(e.getSource() == buttons[1]) {

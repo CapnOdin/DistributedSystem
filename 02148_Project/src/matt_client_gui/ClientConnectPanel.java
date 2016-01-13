@@ -13,10 +13,10 @@ public class ClientConnectPanel extends ClientPanelTemplate {
 
 	public ClientConnectPanel(ClientMainFrame parent, String ID) {
 		super(parent, ID);
-
 		TOBEDELETED.setVisible(true);
 		this.add(TOBEDELETED, BorderLayout.CENTER);
 	}
+	
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {

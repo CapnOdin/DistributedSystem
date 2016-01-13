@@ -8,21 +8,18 @@ public class ClientPlaceHolderPanel extends ClientPanelTemplate {
 
 	private static final long serialVersionUID = 1L;
 	private ClientLoginPrompt login;
-	private ClientMainFrame parent;
 	
 	public ClientPlaceHolderPanel(ClientMainFrame parent, String ID) {
 		super(parent, ID);
-		this.parent = parent;
 		setPlaceHolderProperties();
 		addLoginPrompt();
 	}
 
 	private void addLoginPrompt() {
-		login = new ClientLoginPrompt(parent);
+		login = new ClientLoginPrompt(super.getParent());
 	}
 
 	private void setPlaceHolderProperties() {
-		this.setBackground(Color.white);
 		this.setLayout(new BorderLayout());
 	}
 

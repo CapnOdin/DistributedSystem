@@ -27,7 +27,7 @@ public class ClientBlurGlass extends JComponent {
         int h = f.getHeight();
         setLocation(0,0);
         setSize(w,h);
-        g.setColor(new Color(0,0,0,.9f));
+        g.setColor(new Color(0,0,0,.6f));
         g.fillRect(0,0,w,h);
     }
 }

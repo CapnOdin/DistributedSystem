@@ -29,7 +29,11 @@ public abstract class ClientPanelTemplate extends JPanel implements MouseListene
 	
 	public abstract void setDefaultProperties();
 	public abstract void addContent();
-
+	
+	public ClientMainFrame getParent() {
+		return parent;
+	}
+	
 	public String getID() {
 		return ID;
 	}
