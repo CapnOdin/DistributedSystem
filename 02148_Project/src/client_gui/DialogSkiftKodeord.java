@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -109,6 +110,13 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBGem){
 			dispose();
+			if (true){
+				dispose();
+				JOptionPane.showMessageDialog(null,
+                        "Nuværende kodeord forkert",
+                        "Fejl",
+                        JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		if ( e.getSource() == JBAnnuller){
 			dispose();
@@ -143,6 +151,13 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == JTGentagKodeord){
+			if (true){
+				dispose();
+				JOptionPane.showMessageDialog(null,
+                        "Nuværende kodeord forkert",
+                        "Fejl",
+                        JOptionPane.ERROR_MESSAGE);
+			}
 			dispose();
 		}
 		

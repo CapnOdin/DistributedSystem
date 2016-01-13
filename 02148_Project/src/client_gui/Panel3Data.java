@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class Panel3Data extends PanelTemplate implements GeneralProperties, MouseListener{
-	private GridBagConstraints gbc = new GridBagConstraints();
+	private GridBagConstraints c = new GridBagConstraints();
 	private MainFrame parent;
 	private JPanel panelLeft = new JPanel(new GridBagLayout());
 	private JPanel panelRight = new JPanel();
@@ -34,8 +34,10 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	
 	public Panel3Data(MainFrame parent){
 		this.parent = parent;
-		setJComponents();		
-		JLBillede.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		setDefaultProperties();
+		setJComponents();	
+		
+		
 		int JTWidth = frameSizePanel3.width/2;
 		int spaceTop = 10;
 		int spaceMiddle = 40;
@@ -45,8 +47,8 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		
 		//Panel 1 - Insets = Top, Venstre, Bund, Højre
 		int i = 0;
-		gbc.anchor = GridBagConstraints.NORTHWEST;	
-		gbc.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTHWEST;	
+		c.fill = GridBagConstraints.HORIZONTAL;
 		addC(JLPersonlig,	0,	i,	3,	1,		new Insets(spaceTop,	spaceLeft,	2,		spaceMiddle));i++;
 		addC(JLBrugernavn,	0,	i,	1,	1,		new Insets(30,			spaceLeft,	2,		2));
 		addC(JLKodeord,		4,	i,	1,	1,		new Insets(30,			2,			2,		spaceRight));i++;
@@ -87,12 +89,12 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	}
 
 	private void addC(JComponent comp, int gridx, int gridy, int gridwidth, int gridheight, Insets space) {
-		gbc.insets = space;
-		gbc.gridx = gridx;
-		gbc.gridy = gridy;
-		gbc.gridwidth = gridwidth;
-		gbc.gridheight = gridheight;
-		panelLeft.add(comp, gbc);
+		c.insets = space;
+		c.gridx = gridx;
+		c.gridy = gridy;
+		c.gridwidth = gridwidth;
+		c.gridheight = gridheight;
+		panelLeft.add(comp, c);
 		panelLeft.validate();
 	}
 
@@ -137,6 +139,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		JCHarBil = new JCheckBox("Har bil");
 		JBGem = new JButton("Gem");	
 		JLBillede = new JLabel("Billede", SwingConstants.CENTER);
+		JLBillede.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		setJLabel(JLBrugernavn);
 		setJLabel(JLKodeord);
 		setJLabel(JLSkiftKodeord);
