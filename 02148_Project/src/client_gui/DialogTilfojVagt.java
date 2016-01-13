@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class DialogTilføjVagt extends JDialog implements GeneralProperties, ActionListener, MouseListener {
+public class DialogTilfojVagt extends JDialog implements GeneralProperties, ActionListener, MouseListener {
 	private MainFrame parent;
 	private GridBagConstraints c = new GridBagConstraints();
 	private JPanel panel = new JPanel(new GridBagLayout());
@@ -27,7 +27,7 @@ public class DialogTilføjVagt extends JDialog implements GeneralProperties, Act
 	private JTextField JTDato, JTOpgaveTitel, JTAdresse, JTPostnummer, JTStarttid;
 	private JButton JBTilføj, JBAnnuller;
 	
-	public  DialogTilføjVagt(MainFrame parent){
+	public  DialogTilfojVagt(MainFrame parent){
 		this.parent = parent;
 		setDefaultProperties();
 		setJComponents();

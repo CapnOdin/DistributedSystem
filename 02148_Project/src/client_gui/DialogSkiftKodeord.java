@@ -24,8 +24,8 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	private MainFrame parent;
 	private JPanel panel = new JPanel(new GridBagLayout());
 	private GridBagConstraints c = new GridBagConstraints();
-	private JLabel JLSkiftKodeord, JLNuværendeKodeord, JLNyeKodeord, JLGentagKodeord;
-	private JTextField JTNuværendeKodeord, JTNyeKodeord, JTGentagKodeord;
+	private JLabel JLSkiftKodeord, JLNuvarendeKodeord, JLNyeKodeord, JLGentagKodeord;
+	private JTextField JTNuvarendeKodeord, JTNyeKodeord, JTGentagKodeord;
 	private JButton JBGem, JBAnnuller;
 	
 	public DialogSkiftKodeord(MainFrame parent){
@@ -36,8 +36,8 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 		int i = 0;
 		c.anchor = GridBagConstraints.NORTHWEST;
 		addC(JLSkiftKodeord, 0, i, 1);i++; c.insets = new Insets(20,2,2,2);
-		addC(JLNuværendeKodeord,0,i,1);i++; c.insets = new Insets(2,2,2,2);
-		addC(JTNuværendeKodeord,0,i,2);i++;
+		addC(JLNuvarendeKodeord,0,i,1);i++; c.insets = new Insets(2,2,2,2);
+		addC(JTNuvarendeKodeord,0,i,2);i++;
 		addC(JLNyeKodeord,0,i,1);i++;
 		addC(JTNyeKodeord,0,i,2);i++;
 		addC(JLGentagKodeord,0,i,1);i++;
@@ -88,18 +88,18 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	private void setJComponents(){
 		JLSkiftKodeord = new JLabel("<HTML><U>Skift Kodeord</U></HTML>");
 		JLSkiftKodeord.setFont(new Font("SanfSerif", Font.PLAIN,25));
-		JLNuværendeKodeord = new JLabel("Nuværende Kodeord");
+		JLNuvarendeKodeord = new JLabel("Nuværende Kodeord");
 		JLNyeKodeord = new JLabel("Nyt Kodeord");
 		JLGentagKodeord = new JLabel("Gentag Kodeord");
-		JTNuværendeKodeord = new JTextField(20);
+		JTNuvarendeKodeord = new JTextField(20);
 		JTNyeKodeord = new JTextField(20);
 		JTGentagKodeord = new JTextField(20);
 		JBGem = new JButton("Gem");
 		JBAnnuller = new JButton("Annuller");
-		setJLabel(JLNuværendeKodeord);
+		setJLabel(JLNuvarendeKodeord);
 		setJLabel(JLNyeKodeord);
 		setJLabel(JLGentagKodeord);
-		setJTextField(JTNuværendeKodeord);
+		setJTextField(JTNuvarendeKodeord);
 		setJTextField(JTNyeKodeord);
 		setJTextField(JTGentagKodeord);
 		setJButton(JBGem);
