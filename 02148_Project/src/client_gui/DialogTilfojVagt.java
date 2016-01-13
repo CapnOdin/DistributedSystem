@@ -120,6 +120,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 		this.getRootPane().setBorder(BorderFactory.createLineBorder(Color.black));
 		this.pack();
 		this.setLocationRelativeTo(null);
+		//this.setModal(true);
 		this.setVisible(true);
 	}
 

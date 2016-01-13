@@ -49,8 +49,7 @@ public class TaskBar extends JMenuBar implements MouseListener, MouseMotionListe
 		this.addMouseMotionListener(this);
 		this.setPreferredSize(TaskBarSize);
 		this.setLayout(new BorderLayout());
-		this.setVisible(true);	
-		//this.setBackground(Color.lightGray);
+		this.setVisible(true);
 	}
 	
 	@Override
