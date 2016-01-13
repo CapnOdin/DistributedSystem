@@ -23,9 +23,10 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	private DialogNyBruger DNyBruger;
 
 	public MainFrame() {
-		DLogin = new DialogLogin(this);
+		/*DLogin = new DialogLogin(this);
 		DLogin.setAlwaysOnTop(true);
-	    DLogin.setVisible(true);
+	    DLogin.setVisible(true);*/
+				
 	    setDefaultProperties();
 		tb = new TaskBar(this);
 		p1 = new Panel1(this);
@@ -36,7 +37,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		addC(p2, 0, 2, 1, 1);
 		addC(vist_panel, 0, 3, 1, 1);
 		this.validate();;
-
+		mainFrameSetVisible();
 		
 	}
 
