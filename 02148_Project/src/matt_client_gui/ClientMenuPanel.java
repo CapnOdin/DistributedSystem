@@ -38,8 +38,8 @@ public class ClientMenuPanel extends JPanel implements MouseListener {
 	}
 
 	private void addMenus() {
-		dataPanel = new ClientDataPanel(parent, "DATA");
-		connectPanel = new ClientConnectPanel(parent, "CONNECT");
+		dataPanel = new ClientDataPanel(parent, "PROFILE");
+		connectPanel = new ClientConnectPanel(parent, "MOMENT");
 		calendarPanel = new ClientCalendarPanel(parent, "CALENDAR");
 		overviewPanel = new ClientOverviewPanel(parent, "OVERVIEW");
 	}
@@ -49,18 +49,17 @@ public class ClientMenuPanel extends JPanel implements MouseListener {
 			menus[i] = new JLabel("", JLabel.CENTER);
 			menus[i].addMouseListener(this);
 			menus[i].setVisible(true);
-			//menus[i].setBorder(BorderFactory.createLineBorder(Color.black));
 			this.add(menus[i]);
 		}
-		menus[0].setText("Data");
-		menus[1].setText("Connect");
-		menus[2].setText("Kalender");
-		menus[3].setText("Oversigt");
+		menus[0].setText("Profile");
+		menus[1].setText("Moment");
+		menus[2].setText("Calendar");
+		menus[3].setText("Overview");
 		this.validate();
 	}
 
 	private void setDefaultProperties() {
-		this.setBackground(Color.gray);
+		this.setBackground(Color.lightGray);
 		this.setPreferredSize(clientMenuPanelSize);
 		this.setLayout(new GridLayout(1,4));
 		this.setVisible(true);
