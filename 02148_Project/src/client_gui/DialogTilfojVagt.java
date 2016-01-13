@@ -25,7 +25,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	private JPanel panel = new JPanel(new GridBagLayout());
 	private JLabel JLTilfojVagt, JLDato, JLOpgaveTitel, JLAdresse, JLPostnummer, JLStarttid;
 	private JTextField JTDato, JTOpgaveTitel, JTAdresse, JTPostnummer, JTStarttid;
-	private JButton JBTilføj, JBAnnuller;
+	private JButton JBTilfoj, JBAnnuller;
 	
 	public  DialogTilfojVagt(MainFrame parent){
 		this.parent = parent;
@@ -51,10 +51,10 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 		c.fill = GridBagConstraints.NONE;
 		addC(JBAnnuller,i-1,3,1);i++;
 		c.fill = GridBagConstraints.HORIZONTAL;
-		addC(JBTilføj,i,3,1);
+		addC(JBTilfoj,i,3,1);
 		
 		JTStarttid.addActionListener(this);
-		JBTilføj.addMouseListener(this);
+		JBTilfoj.addMouseListener(this);
 		JBAnnuller.addMouseListener(this);
 		
 		this.add(panel);
@@ -98,7 +98,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 		JTAdresse = new JTextField(25);
 		JTPostnummer = new JTextField(7);
 		JTStarttid = new JTextField(8);
-		JBTilføj = new JButton("Tilføj");
+		JBTilfoj = new JButton("Tilføj");
 		JBAnnuller = new JButton("Annuller");
 		setJLabel(JLDato);
 		setJLabel(JLOpgaveTitel);
@@ -110,7 +110,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 		setJTextField(JTAdresse);
 		setJTextField(JTPostnummer);
 		setJTextField(JTStarttid);
-		setJButton(JBTilføj);
+		setJButton(JBTilfoj);
 		setJButton(JBAnnuller);
 	}
 	
@@ -133,7 +133,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == JBTilføj){
+		if (e.getSource() == JBTilfoj){
 			dispose();
 		}
 		if (e.getSource() == JBAnnuller){

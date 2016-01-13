@@ -23,7 +23,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 	private JButton JBTilfoj;
 	
 	
-	private DialogTilfojVagt DTilføjVagt;
+	private DialogTilfojVagt DTilfojVagt;
 	
 	public Panel3Kalender(MainFrame parent){
 		this.parent = parent;
@@ -67,9 +67,9 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBTilfoj){
-			DTilføjVagt = new DialogTilfojVagt(parent);
-			DTilføjVagt.setAlwaysOnTop(true);
-			DTilføjVagt.setVisible(true);;
+			DTilfojVagt = new DialogTilfojVagt(parent);
+			DTilfojVagt.setAlwaysOnTop(true);
+			DTilfojVagt.setVisible(true);;
 		}
 		
 	}
