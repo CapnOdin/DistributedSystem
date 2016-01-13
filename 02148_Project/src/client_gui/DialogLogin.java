@@ -115,15 +115,13 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 		if( e.getSource() == Kodeord){
 			if (Login.authenticate(getUsername(), getPassword())) {
                 this.setVisible(false);
+                parent.mainFrameSetVisible();
                 dispose();
             } else {
-            	Object[] options = { "Glemt kodeord","Prøv igen", "Opret ny bruger"};
-            	int n = JOptionPane.showOptionDialog(parent, "Ugyldigt login", "Fejl",
-            			JOptionPane.YES_NO_OPTION,
-            			JOptionPane.WARNING_MESSAGE,
-            			null,     //do not use a custom Icon
-            			options,  //the titles of buttons
-            			options[0]); //default button title
+            	this.setVisible(false);         	
+            	DForkertLogin = new DialogForkertLogin(parent);
+            	DForkertLogin.setAlwaysOnTop(true);
+            	DForkertLogin.setVisible(true);
             }
 		}
 		
@@ -134,8 +132,8 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 		if (e.getSource() == JBLogin){
 			if (Login.authenticate(getUsername(), getPassword())) {
                 this.setVisible(false);
+                parent.mainFrameSetVisible();
                 dispose();
-                parent.setVisible(true);
             } else {
             	this.setVisible(false);         	
             	DForkertLogin = new DialogForkertLogin(parent);
@@ -177,5 +175,5 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
  
     public String getPassword() {
         return new String(Kodeord.getPassword());
-    }    
+    } 
 }

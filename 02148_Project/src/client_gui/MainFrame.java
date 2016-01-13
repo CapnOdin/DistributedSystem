@@ -13,13 +13,14 @@ import javax.swing.JFrame;
 
 public class MainFrame extends JFrame implements GeneralProperties {
 	public static Dimension contentPaneSize;
-	private DialogLogin DLogin;
-	private DialogNyBruger DNyBruger;
 	private GridBagConstraints c = new GridBagConstraints();
 	private TaskBar tb;
 	private Panel1 p1;
 	private Panel2 p2;
 	private PanelTemplate vist_panel;
+	
+	private DialogLogin DLogin;
+	private DialogNyBruger DNyBruger;
 
 	public MainFrame() {
 		DLogin = new DialogLogin(this);
@@ -64,12 +65,16 @@ public class MainFrame extends JFrame implements GeneralProperties {
 
 	private void setDefaultProperties() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		//this.setUndecorated(true);
+		this.setUndecorated(true);
 		contentPaneSize = this.getContentPane().getSize();
 		this.setLayout(new GridBagLayout());
 		this.setPreferredSize(GeneralProperties.frameSize);
 		this.pack();
 		this.setLocationRelativeTo(null);
+		//this.setVisible(true);
+	}
+	
+	public void mainFrameSetVisible(){
 		this.setVisible(true);
 	}
 }
