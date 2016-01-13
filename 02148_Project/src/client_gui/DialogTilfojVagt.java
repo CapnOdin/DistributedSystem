@@ -23,7 +23,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	private MainFrame parent;
 	private GridBagConstraints c = new GridBagConstraints();
 	private JPanel panel = new JPanel(new GridBagLayout());
-	private JLabel JLTilføjVagt, JLDato, JLOpgaveTitel, JLAdresse, JLPostnummer, JLStarttid;
+	private JLabel JLTilfojVagt, JLDato, JLOpgaveTitel, JLAdresse, JLPostnummer, JLStarttid;
 	private JTextField JTDato, JTOpgaveTitel, JTAdresse, JTPostnummer, JTStarttid;
 	private JButton JBTilføj, JBAnnuller;
 	
@@ -35,7 +35,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 		
 		int i = 0;
 		c.anchor = GridBagConstraints.NORTHWEST;
-		addC(JLTilføjVagt,i,0,1);c.insets = new Insets(10,4,2,0);
+		addC(JLTilfojVagt,i,0,1);c.insets = new Insets(10,4,2,0);
 		addC(JLDato,i,1,1); c.insets = new Insets(2,4,2,0);
 		addC(JTDato,i,2,1);i++; c.insets = new Insets(10,1,2,0);
 		addC(JLStarttid,i,1,1);c.insets = new Insets(2,1,2,0);
@@ -86,8 +86,8 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	}
 	
 	private void setJComponents(){
-		JLTilføjVagt = new JLabel("<HTML><U> Tilføj Vagt <U> </HTML>");
-		JLTilføjVagt.setFont(new Font("SanSerif",Font.PLAIN,25));
+		JLTilfojVagt = new JLabel("<HTML><U> Tilføj Vagt <U> </HTML>");
+		JLTilfojVagt.setFont(new Font("SanSerif",Font.PLAIN,25));
 		JLDato = new JLabel("Dato");
 		JLOpgaveTitel = new JLabel("Opgave Titel");
 		JLAdresse = new JLabel("Adresse");

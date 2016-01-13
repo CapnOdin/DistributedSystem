@@ -20,7 +20,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 	private JPanel panel = new JPanel(new GridBagLayout());
 	private JTextArea textArea;
 	private JScrollPane scrollPane;
-	private JButton JBTilføj;
+	private JButton JBTilfoj;
 	
 	
 	private DialogTilfojVagt DTilføjVagt;
@@ -31,8 +31,8 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		setJComponents();
 		addC(textArea,0,0,1);
 		c.anchor = GridBagConstraints.SOUTHEAST;
-		addC(JBTilføj,0,1,1);
-		JBTilføj.addMouseListener(this);
+		addC(JBTilfoj,0,1,1);
+		JBTilfoj.addMouseListener(this);
 		
 		this.add(panel);                                       
 	}
@@ -40,7 +40,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 	private void setJComponents(){
 		textArea = new JTextArea("Fyld ud med vagter \n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEr jeg ude over nu?\n");
 		scrollPane = new JScrollPane(textArea);  
-		JBTilføj = new JButton("Tilføj");
+		JBTilfoj = new JButton("Tilføj");
 		textArea.setPreferredSize(JTextAreaDimension);
 		textArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		//textArea.setLineWrap(true);  
@@ -66,7 +66,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == JBTilføj){
+		if (e.getSource() == JBTilfoj){
 			DTilføjVagt = new DialogTilfojVagt(parent);
 			DTilføjVagt.setAlwaysOnTop(true);
 			DTilføjVagt.setVisible(true);;

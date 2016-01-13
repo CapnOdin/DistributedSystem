@@ -21,7 +21,7 @@ public class DialogForkertLogin extends JDialog implements MouseListener {
 	private GridBagConstraints c = new GridBagConstraints();
 	private JPanel panel = new JPanel(new GridBagLayout());
 	private JLabel JLUgyldig, JLNyBruger;
-	private JButton JBPrøvIgen, JBGlemtKodeord;
+	private JButton JBProvIgen, JBGlemtKodeord;
 	
 	private DialogNyBruger DNyBruger;
 	private DialogLogin DLogin;
@@ -35,11 +35,11 @@ public class DialogForkertLogin extends JDialog implements MouseListener {
 		c.anchor = GridBagConstraints.CENTER;
 		addC(JLUgyldig,0,i,2); i++; c.insets = new Insets(20,2,2,2);
 		addC(JLNyBruger,0,i,2);i++;c.insets = new Insets(2,2,2,2);
-		addC(JBPrøvIgen,0,i,1);
+		addC(JBProvIgen,0,i,1);
 		addC(JBGlemtKodeord,1,i,1);
 		
 		JLNyBruger.addMouseListener(this);
-		JBPrøvIgen.addMouseListener(this);
+		JBProvIgen.addMouseListener(this);
 		JBGlemtKodeord.addMouseListener(this);
 		
 		this.add(panel);
@@ -78,10 +78,10 @@ public class DialogForkertLogin extends JDialog implements MouseListener {
 		JLUgyldig.setFont(new Font("SanSerif", Font.PLAIN, 25));
 		JLNyBruger = new JLabel("<HTML><U>Opret Ny bruger</U></HTML>");
 		JLNyBruger.setForeground(Color.blue);
-		JBPrøvIgen = new JButton("Prøv igen");
+		JBProvIgen = new JButton("Prøv igen");
 		JBGlemtKodeord = new JButton("Glemt Kodeord");
 		setJLabel(JLNyBruger);
-		setJButton(JBPrøvIgen);
+		setJButton(JBProvIgen);
 		setJButton(JBGlemtKodeord);		
 	}
 	@Override
@@ -92,7 +92,7 @@ public class DialogForkertLogin extends JDialog implements MouseListener {
 			DNyBruger.setAlwaysOnTop(true);
 			DNyBruger.setVisible(true);
 		}
-		if (e.getSource() == JBPrøvIgen) {
+		if (e.getSource() == JBProvIgen) {
 			this.setVisible(false);
 			DLogin = new DialogLogin(parent);
 			DLogin.setAlwaysOnTop(true);
