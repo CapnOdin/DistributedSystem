@@ -73,7 +73,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		chatLabels[1] = new JLabel("Chat:", JLabel.LEFT);
 		addC(chat, chatLabels[1], 0, 1, 1, 1, 0, 0);
 		
-		addC(chat, chatPane, 0, 2, 3, 1, 300, 50);
+		addC(chat, chatPane, 0, 2, 3, 1, 0, 40);
 		addC(chat, chatMessage, 0, 3, 2, 1, 0, 0);
 		
 		addC(chat, send, 2, 3, 1, 1, 0, 0);
