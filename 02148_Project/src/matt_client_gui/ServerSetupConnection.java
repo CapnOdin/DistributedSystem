@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,7 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class ClientLoginPrompt extends JDialog implements ActionListener, MouseListener {
+public class ServerSetupConnection extends JDialog implements ActionListener, MouseListener {
 
 	private static final long serialVersionUID = 1L;
 	private ClientMainFrame parent;
@@ -35,7 +34,7 @@ public class ClientLoginPrompt extends JDialog implements ActionListener, MouseL
 	private JTextField usernameField = new JTextField(20);
 	private JButton[] buttons = new JButton[2];
 
-	public ClientLoginPrompt(ClientMainFrame parent) {
+	public ServerSetupConnection(ClientMainFrame parent) {
 		this.parent = parent;
 		setDialogProperties();
 		setContentProperties();

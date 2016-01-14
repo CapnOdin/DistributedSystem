@@ -5,6 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import server_gui.ServerConnectedClientsPanel;
+
 public class ConnectionThread extends Thread {
 	
 	private ObjectInputStream input;
@@ -53,6 +55,7 @@ public class ConnectionThread extends Thread {
 			setupStreams();
 			String message = "Conversation ready!";
 			sendMessage(message);
+			ServerConnectedClientsPanel.addElementToList("[" + userNo + "]     " + client.getRemoteSocketAddress().toString());
 			do {
 				try {
 					message = (String) input.readObject();

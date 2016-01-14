@@ -6,7 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class TCPClient implements Runnable {
+public class TCPClient extends Thread {
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	
