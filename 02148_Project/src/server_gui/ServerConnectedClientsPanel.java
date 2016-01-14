@@ -60,17 +60,17 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 	private void addChatPanelContent() {
 		chatArea.setEditable(false);
 		
-		chatLabels[0] = new JLabel("Actions", JLabel.LEFT);
+		chatLabels[0] = new JLabel(" Actions", JLabel.LEFT);
 		chatLabels[0].setFont(bigFont);
-		addC(info, chatLabels[0], 0, 7, 3, 1, 0, 0);
+		addC(info, chatLabels[0], 0, 7, 3, 0);
 		
-		chatLabels[1] = new JLabel("Chat:", JLabel.LEFT);
-		addC(info, chatLabels[1], 0, 8, 1, 1, 0, 0);
+		chatLabels[1] = new JLabel(" Chat:", JLabel.LEFT);
+		addC(info, chatLabels[1], 0, 8, 1, 0);
 		
-		addC(info, chatPane, 0, 9, 3, 1, 0, 40);
-		addC(info, chatMessage, 0, 10, 2, 1, 0, 0);
+		addC(info, chatPane, 0, 9, 3, 50);
+		addC(info, chatMessage, 0, 10, 2, 0);
 		
-		addC(info, send, 2, 10, 1, 1, 0, 0);
+		addC(info, send, 2, 10, 1, 0);
 		
 		for(int i = 0; i < actionButtons.length; i++) {
 			actionButtons[i] = new JButton(""+(i+1)); 
@@ -78,7 +78,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 			button_holder.add(actionButtons[i]);
 		}
 		
-		addC(info, button_holder, 0, 12, 3, 1, 0, 20);
+		addC(info, button_holder, 0, 12, 3, 20);
 		
 		actionButtons[0].setText("Disconnect");
 		
@@ -110,34 +110,33 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		
 		bigFont = new Font(infoLabels[0].getFont().getFontName(), Font.BOLD, 16);
 		
-		infoLabels[0] = new JLabel("Connection Information", JLabel.LEFT);
+		infoLabels[0] = new JLabel(" Connection Information", JLabel.LEFT);
 		infoLabels[0].setFont(bigFont);
 		
-		addC(info, infoLabels[0], 0, 0, 2, 1, 0, 20);
+		addC(info, infoLabels[0], 0, 0, 2, 0);
 		
 		for(int i = 1; i < infoLabels.length-1; i++) {
-			addC(info, infoLabels[i], 0, i, 1, 1, 0, 0);
-			addC(info, infoLabelFields[i], 1, i, 1, 1, 0, 0);
+			addC(info, infoLabels[i], 0, i, 1, 0);
+			addC(info, infoLabelFields[i], 1, i, 1, 0);
 		}
 		
-		infoLabels[1].setText("Client Alias: ");
-		infoLabels[2].setText("Client IP-Address: ");
-		infoLabels[3].setText("Connected to port: ");
-		infoLabels[4].setText("Client Type: ");
-		infoLabels[5].setText("Client action history: ");
+		infoLabels[1].setText(" Client Alias: ");
+		infoLabels[2].setText(" Client IP-Address: ");
+		infoLabels[3].setText(" Connected to port: ");
+		infoLabels[4].setText(" Client Type: ");
+		infoLabels[5].setText(" Client action history: ");
 		
-		addC(info, infoLabels[5], 0, 5, 1, 1, 0, 20);
+		addC(info, infoLabels[5], 0, 5, 1, 0);
 		clientHistory = new JScrollPane(infoLabelFields[0]);
-		addC(info, clientHistory, 0, 6, 3, 1, info.getWidth(), 33);
+		addC(info, clientHistory, 0, 6, 3, 50);
 	}
 	
-	private void addC(JComponent comp1, JComponent comp, int gridx, int gridy, int gridwidth, int gridheight, int ipadx, int ipady) {
+	private void addC(JComponent comp1, JComponent comp, int gridx, int gridy, int gridwidth, int ipady) {
 		c.gridx = gridx; 
 		c.gridy = gridy;
 		c.gridwidth = gridwidth;
-		c.gridheight = gridheight;
-		c.ipadx = ipadx;
 		c.ipady = ipady;
+		c.weightx = c.weighty = 1;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		comp1.add(comp, c);
 	}
