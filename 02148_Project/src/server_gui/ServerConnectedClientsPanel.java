@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -23,7 +24,7 @@ import javax.swing.ListSelectionModel;
 
 import server_eng.TCPServer;
 
-public class ServerConnectedClientsPanel extends ServerPanelTemplate implements ActionListener {
+public class ServerConnectedClientsPanel extends ServerPanelTemplate implements ActionListener, MouseMotionListener {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -85,8 +86,10 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		
 		allConnections = new JList<String>(model);
 		allConnections.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		allConnections.addMouseListener(this);
 		allConnections.setBackground(ServerPanelTemplate.barColor);
+		allConnections.addMouseMotionListener(this);
+		allConnections.addMouseListener(this);
+		allConnections.setSelectionBackground(twitchPanel);
 		
 		pane = new JScrollPane(allConnections);
 		pane.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -199,13 +202,13 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public void mouseEntered(MouseEvent e) {
+		
+		
 	}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {
+	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
@@ -222,6 +225,18 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 	
 	public static void removeElementFromList(String x) {
 		model.removeElement(x);
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
