@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -66,7 +65,6 @@ public class ServerConnectionDialog extends JDialog implements ActionListener, M
 			buttons[i].setVisible(true);
 			buttons[i].addActionListener(this);
 			buttons[i].addMouseListener(this);
-			buttons[i].setBackground(Color.white);
 			buttonHolder.add(buttons[i]);
 		}
 

@@ -3,12 +3,10 @@ package server_gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 
@@ -16,6 +14,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import server_eng.TCPServer;
 
 public class ServerStatusBar extends JPanel {
 
@@ -34,8 +34,8 @@ public class ServerStatusBar extends JPanel {
 		clientStatusBarSize = new Dimension((int)parent.getContentPane().getWidth(), (int)parent.getContentPane().getHeight()/20);
 		setDefaultProperties();
 		addElements();
-		lookForActivePanel();
 		findPublicIP();
+		lookForActivePanel();
 	}
 
 	private void findPublicIP() {
@@ -48,13 +48,10 @@ public class ServerStatusBar extends JPanel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-
-		
-		
 	}
 
 	private void addElements() {
+		connection.setBackground(Color.black);
 		this.add(connection, BorderLayout.WEST);
 		this.add(serverStatus, BorderLayout.CENTER);	
 		this.add(time, BorderLayout.EAST);
@@ -68,7 +65,7 @@ public class ServerStatusBar extends JPanel {
 				try {
 					serverStatus.setText(" Server Status: " + ServerMainFrame.server.getServerStatus());
 					if(ServerMainFrame.server.isRunning()) {
-						connection.setText(" Server: " + publicIP + "/" + ServerMainFrame.server.getPort());
+						connection.setText(" Server: " + publicIP + "/" + ServerMainFrame.server.getPort() + " [" + TCPServer.userCount + "]");
 					} else {
 						connection.setText(" Server: DEAD ");
 					}

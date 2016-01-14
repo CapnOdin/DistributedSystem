@@ -21,7 +21,11 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 	private ServerConnectedClientsPanel sccp; 
 	
 	private JLabel[] menus = new JLabel[2];
-	private Color menusColor = new Color(155,85,85);
+	private Color twitchColor = new Color(100,65,165);
+	private Color menusColor = new Color(68,97,157);
+	private Color youtubeColor = new Color(204,24,30);
+	private Color matrixBack = new Color(0,0,0);
+	private Color matrixFront = new Color(0, 255, 0);
 	
 	public ServerMenuPanel(ServerMainFrame parent) {
 		this.parent = parent;
@@ -40,7 +44,8 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 			menus[i] = new JLabel("", JLabel.CENTER);
 			menus[i].addMouseListener(this);
 			menus[i].setVisible(true);
-			menus[i].setBackground(menusColor);
+			menus[i].setBackground(twitchColor);
+			menus[i].setForeground(Color.white);
 			menus[i].setBorder(BorderFactory.createRaisedSoftBevelBorder());
 			this.add(menus[i]);
 		}
@@ -52,7 +57,7 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 	}
 
 	private void setDefaultProperties() {
-		this.setBackground(menusColor);
+		this.setBackground(twitchColor);
 		this.setPreferredSize(clientMenuPanelSize);
 		this.setLayout(new GridLayout(1,4));
 		this.setVisible(true);
@@ -72,7 +77,7 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 		//Server Setup Pressed
 		if(e.getSource() == menus[1]) {
 			menus[1].setBorder(BorderFactory.createLoweredSoftBevelBorder());
-			TCPClient a = new TCPClient("localhost", 1234);
+			TCPClient a = new TCPClient("localhost", 1234, "Matt");
 			a.start();
 		}
 	}

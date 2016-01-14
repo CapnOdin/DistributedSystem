@@ -49,8 +49,8 @@ public class ServerTaskBar extends JMenuBar implements MouseListener, MouseMotio
 		this.addMouseMotionListener(this);
 		this.setPreferredSize(clientTaskBarSize);
 		this.setLayout(new BorderLayout());
-		this.setVisible(true);	
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.setVisible(true);
 	}
 	
 	@Override

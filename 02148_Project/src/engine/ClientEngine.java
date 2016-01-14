@@ -5,6 +5,6 @@ import client_eng.TCPClient;
 public class ClientEngine {
 	public static void main(String[] args) {
 		//(new Thread(new TCPClient("localhost", 1234))).start();
-		new TCPClient("169.254.187.28", 1234).run();
+		new TCPClient("169.254.187.28", 1234, "Matt").run();
 	}
 }

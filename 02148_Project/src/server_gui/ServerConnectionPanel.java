@@ -1,7 +1,6 @@
 package server_gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 
 public class ServerConnectionPanel extends ServerPanelTemplate {

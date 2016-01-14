@@ -12,13 +12,16 @@ public class TCPClient extends Thread {
 	
 	private String message = "";
 	private String serverIP;
+	private String alias;
+	
 	private int port;
 	
 	private Socket connection;
 	
-	public TCPClient(String host, int port) {
+	public TCPClient(String host, int port, String alias) {
 		serverIP = host;
 		this.port = port;
+		this.alias = alias;
 	}
 	
 	public void run() {
@@ -48,7 +51,7 @@ public class TCPClient extends Thread {
 			try {
 				message = (String) input.readObject();
 				System.out.println(message);
-				sendMessage("A0.DSB.vanløse st");
+				sendMessage("ALIAS%"+alias);
 			}catch(Exception e) {
 				break;
 			}

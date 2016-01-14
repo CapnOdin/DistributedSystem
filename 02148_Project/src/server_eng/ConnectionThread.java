@@ -12,12 +12,16 @@ public class ConnectionThread extends Thread {
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
 	
+	private String clientAlias;
+	private String clientIP = "";
+	
 	private Socket client;
 	private int userNo;
 	
 	public ConnectionThread(Socket client, int userNo) {
 		this.client = client;
 		this.userNo = userNo;
+		clientIP = client.getRemoteSocketAddress().toString();
 	}
 	
 	private void cleanUp() {
@@ -48,6 +52,11 @@ public class ConnectionThread extends Thread {
 		}
 	}
 	
+	public void disconnectClient() { 
+		sendMessage("Disconnected from server");
+		cleanUp();
+	}
+	
 	@Override
 	public void run() {
 		//super.run();
@@ -55,20 +64,24 @@ public class ConnectionThread extends Thread {
 			setupStreams();
 			String message = "Conversation ready!";
 			sendMessage(message);
-			ServerConnectedClientsPanel.addElementToList("[" + userNo + "]     " + client.getRemoteSocketAddress().toString());
 			do {
 				try {
 					message = (String) input.readObject();
 					TCPServer.putTask(message);
+					if(message.substring(0,6).equals("ALIAS%")) {
+						clientAlias = message.substring(6); 
+						ServerConnectedClientsPanel.addElementToList(userNo + "/" + clientAlias + clientIP);
+					}
 					System.out.println(message);
 				} catch(Exception e) {
 					break;
 				}
-			} while(!message.equals("ENDCONNECTION"));
+			} while(!message.equals("%DISCONNECT%"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} finally {
 			cleanUp();
 		}
 	}
+
 }

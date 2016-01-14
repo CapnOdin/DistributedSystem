@@ -1,6 +1,5 @@
 package server_gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -82,12 +81,12 @@ public class ServerMainFrame extends JFrame {
         } catch (Exception e) {
            
         }
-		this.getContentPane().setBackground(Color.white);
+		this.getContentPane().setBackground(ServerPanelTemplate.barColor);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(frameSize);
 		this.setUndecorated(true);
 		this.setLayout(new GridBagLayout());
-		this.getContentPane().setBackground(Color.magenta);
+		this.getContentPane().setBackground(ServerPanelTemplate.barColor);
 		this.pack();
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
