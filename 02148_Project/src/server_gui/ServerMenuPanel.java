@@ -1,6 +1,5 @@
 package server_gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -10,6 +9,8 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import client_eng.TCPClient;
 
 public class ServerMenuPanel extends JPanel implements MouseListener {
 	
@@ -71,6 +72,8 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 		//Server Setup Pressed
 		if(e.getSource() == menus[1]) {
 			menus[1].setBorder(BorderFactory.createLoweredSoftBevelBorder());
+			TCPClient a = new TCPClient("localhost", 1234);
+			a.start();
 		}
 	}
 	
