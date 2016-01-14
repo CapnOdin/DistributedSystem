@@ -55,7 +55,7 @@ public class ConnectionThread extends Thread {
 			setupStreams();
 			String message = "Conversation ready!";
 			sendMessage(message);
-			ServerConnectedClientsPanel.addElementToList(client.getRemoteSocketAddress().toString());
+			ServerConnectedClientsPanel.addElementToList("[" + userNo + "]     " + client.getRemoteSocketAddress().toString());
 			do {
 				try {
 					message = (String) input.readObject();
