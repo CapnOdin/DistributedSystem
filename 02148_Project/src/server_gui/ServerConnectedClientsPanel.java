@@ -125,7 +125,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		
 		addC(info, infoLabels[5], 0, 5, 1, 1, 0, 20);
 		clientHistory = new JScrollPane(infoLabelFields[0]);
-		addC(info, clientHistory, 0, 6, 2, 1, 300, 60);
+		addC(info, clientHistory, 0, 6, 2, 1, 300, 30);
 		
 		infoHolder.add(info, BorderLayout.NORTH);
 	}
