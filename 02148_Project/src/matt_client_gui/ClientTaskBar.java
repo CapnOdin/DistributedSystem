@@ -21,7 +21,6 @@ public class ClientTaskBar extends JMenuBar implements MouseListener, MouseMotio
 	
 	private JLabel frametitle;
 	private JLabel power_button = new JLabel(new ImageIcon("pw.png"));
-	private JLabel options_button = new JLabel(new ImageIcon("opt.png"));
 	private JPanel button_holder = new JPanel(new GridLayout(1,2));
 	
 	private Dimension clientTaskBarSize;
@@ -37,12 +36,10 @@ public class ClientTaskBar extends JMenuBar implements MouseListener, MouseMotio
 	}
 
 	private void addElements() {
-		button_holder.add(options_button);
 		button_holder.add(power_button);
 		button_holder.addMouseListener(this);
 		button_holder.addMouseMotionListener(this);
 		power_button.addMouseListener(this);
-		options_button.addMouseListener(this);
 		this.add(button_holder, BorderLayout.EAST);
 		this.add(frametitle, BorderLayout.CENTER);
 	}
@@ -53,7 +50,6 @@ public class ClientTaskBar extends JMenuBar implements MouseListener, MouseMotio
 		this.setPreferredSize(clientTaskBarSize);
 		this.setLayout(new BorderLayout());
 		this.setVisible(true);	
-		this.setBackground(Color.white);
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 	

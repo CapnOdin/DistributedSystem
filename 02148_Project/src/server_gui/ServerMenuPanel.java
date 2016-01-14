@@ -1,5 +1,6 @@
-package matt_client_gui;
+package server_gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -10,26 +11,18 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class ClientMenuPanel extends JPanel implements MouseListener {
+public class ServerMenuPanel extends JPanel implements MouseListener {
 	
 	private static final long serialVersionUID = 1L;
-	private ClientMainFrame parent;
-	
-	private ClientDataPanel dataPanel; 
-	private ClientConnectPanel connectPanel;
-	private ClientCalendarPanel calendarPanel;
-	private ClientOverviewPanel overviewPanel;
-	
+	private ServerMainFrame parent;
 	private Dimension clientMenuPanelSize;
-	/*
-	 * menus[0] = 'Data'
-	 * menus[1] = 'Connect'
-	 * menus[2] = 'Kalender'
-	 * menus[3] = 'Oversigt'  
-	 */
-	private JLabel[] menus = new JLabel[4];
 	
-	public ClientMenuPanel(ClientMainFrame parent) {
+	private ServerConnectedClientsPanel sccp; 
+	
+	private JLabel[] menus = new JLabel[2];
+	private Color menusColor = new Color(155,85,85);
+	
+	public ServerMenuPanel(ServerMainFrame parent) {
 		this.parent = parent;
 		clientMenuPanelSize = new Dimension((int)parent.getContentPane().getWidth(), (int)parent.getContentPane().getHeight()/10);
 		setDefaultProperties();
@@ -38,10 +31,7 @@ public class ClientMenuPanel extends JPanel implements MouseListener {
 	}
 
 	private void addMenus() {
-		dataPanel = new ClientDataPanel(parent, "PROFILE");
-		connectPanel = new ClientConnectPanel(parent, "MOMENT");
-		calendarPanel = new ClientCalendarPanel(parent, "CALENDAR");
-		overviewPanel = new ClientOverviewPanel(parent, "OVERVIEW");
+		sccp = new ServerConnectedClientsPanel(parent, "SCCP");
 	}
 
 	private void addMenuProperties() {
@@ -49,17 +39,19 @@ public class ClientMenuPanel extends JPanel implements MouseListener {
 			menus[i] = new JLabel("", JLabel.CENTER);
 			menus[i].addMouseListener(this);
 			menus[i].setVisible(true);
+			menus[i].setBackground(menusColor);
+			menus[i].setBorder(BorderFactory.createRaisedSoftBevelBorder());
 			this.add(menus[i]);
 		}
-		menus[0].setText("Profile");
-		menus[1].setText("Moment");
-		menus[2].setText("Calendar");
-		menus[3].setText("Overview");
+		
+		menus[0].setText("Connected Clients");
+		menus[1].setText("Server Setup");
+		
 		this.validate();
 	}
 
 	private void setDefaultProperties() {
-		this.setBackground(Color.lightGray);
+		this.setBackground(menusColor);
 		this.setPreferredSize(clientMenuPanelSize);
 		this.setLayout(new GridLayout(1,4));
 		this.setVisible(true);
@@ -70,26 +62,16 @@ public class ClientMenuPanel extends JPanel implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		System.out.println(((JLabel)e.getSource()).getText() + " pressed!");
 		
-		// IF DATA-MENU PRESSED
+		//Connected Clients Pressed
 		if(e.getSource() == menus[0]) {
-			parent.addVariablePanel(dataPanel);
+			menus[0].setBorder(BorderFactory.createLoweredSoftBevelBorder());
+			parent.addVariablePanel(sccp);
 		}
 		
-		// IF CONNECT-MENU PRESSED
+		//Server Setup Pressed
 		if(e.getSource() == menus[1]) {
-			parent.addVariablePanel(connectPanel);
+			menus[1].setBorder(BorderFactory.createLoweredSoftBevelBorder());
 		}
-		
-		// IF KALENDER-MENU PRESSED
-		if(e.getSource() == menus[2]) {
-			parent.addVariablePanel(calendarPanel);
-		}
-		
-		// IF OVERSIGT-MENU PRESSED
-		if(e.getSource() == menus[3]) {
-			parent.addVariablePanel(overviewPanel);
-		}
-		
 	}
 	
 	@Override
@@ -111,8 +93,13 @@ public class ClientMenuPanel extends JPanel implements MouseListener {
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mouseReleased(MouseEvent e) {
+		if(e.getSource() == menus[0]) {
+			menus[0].setBorder(BorderFactory.createRaisedSoftBevelBorder());
+		}
+		if(e.getSource() == menus[1]) {
+			menus[1].setBorder(BorderFactory.createRaisedSoftBevelBorder());
+		}
 		
 	}
 

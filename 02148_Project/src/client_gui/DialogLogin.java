@@ -1,0 +1,179 @@
+package client_gui;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+public class DialogLogin extends JDialog implements ActionListener, MouseListener{
+	private MainFrame parent;
+    private GridBagConstraints c = new GridBagConstraints();
+	private JTextField JTBrugernavn;
+    private JPasswordField Kodeord;
+    private JLabel JLLogin, JLBrugernavn, JLKodeord, JLNyBruger;
+    private JButton JBLogin, JBAnnuller;
+    private JPanel panel = new JPanel(new GridBagLayout());
+    private Insets normalInsets = new Insets(2,2,2,2);
+    private Insets biggerInsets = new Insets(10,2,2,2);
+    
+    private DialogNyBruger DNyBruger;
+    private DialogForkertLogin DForkertLogin;
+      
+    public DialogLogin(MainFrame parent) {
+        this.parent = parent;
+        setDefaultProperties();
+        setJComponents();      
+        
+        int i = 0;
+        c.anchor = GridBagConstraints.NORTHWEST;
+        addC(JLLogin,0,i,1);i++; c.insets = biggerInsets;
+        addC(JLBrugernavn, 0,i,1);i++;c.insets = biggerInsets;
+        addC(JTBrugernavn,0,i,2);i++;
+        addC(JLKodeord,0,i,1);i++;
+        addC(Kodeord,0,i,2);i++; c.insets = biggerInsets;
+        addC(JLNyBruger,0,i,1);i++; c.insets = normalInsets;
+        addC(JBLogin,0,i,1);
+        addC(JBAnnuller,1,i,1);
+        this.add(panel);
+        
+        Kodeord.addActionListener(this);
+        JBLogin.addMouseListener(this);
+        JLNyBruger.addMouseListener(this);
+        JBAnnuller.addMouseListener(this);
+
+        pack();
+        setResizable(false);
+        setLocationRelativeTo(parent);
+    }
+    
+    private void addC(JComponent comp, int x, int y, int width){
+    	c.gridx = x;
+		c.gridy = y;
+		c.gridwidth = width;
+		panel.add(comp, c);
+    }
+    
+    private void setJTextField(JTextField name){
+		name.setFont(new Font("SansSerif", Font.ITALIC, 14));
+		name.setVisible(true);		
+	}
+	
+	private void setJLabel(JLabel name){
+		name.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		name.setVisible(true);		
+	}
+	
+	private void setJButton(JButton name){
+		name.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		name.setVisible(true);		
+	}
+	
+	private void setJComponents(){
+		JLLogin = new JLabel("<HTML><U>Log ind</U></HTML>");
+		JLLogin.setFont(new Font("SansSerif",Font.PLAIN,25));
+        JLBrugernavn = new JLabel("Brugernavn: ");
+        JTBrugernavn = new JTextField(20);
+        JLKodeord = new JLabel("Kodeord: ");
+        Kodeord = new JPasswordField(20);
+        JBLogin = new JButton("Log ind");
+        JLNyBruger = new JLabel("<HTML><U>Opret Ny bruger</U></HTML>");
+        JLNyBruger.setForeground(Color.blue);
+        JBAnnuller = new JButton("Annuller");
+        setJTextField(JTBrugernavn);
+        setJTextField(Kodeord);
+        setJLabel(JLBrugernavn);
+        setJLabel(JLKodeord);
+        setJButton(JBLogin);
+        setJLabel(JLNyBruger);
+        setJButton(JBAnnuller);
+	}
+	
+    private void setDefaultProperties(){
+    	this.getRootPane().setBorder(BorderFactory.createLineBorder(Color.black));
+    	this.setUndecorated(true);
+    	this.setPreferredSize(new Dimension(500,300));
+    }
+    
+    @Override
+	public void actionPerformed(ActionEvent e) {
+		if( e.getSource() == Kodeord){
+			if (Login.authenticate(getUsername(), getPassword())) {
+                this.setVisible(false);
+                parent.mainFrameSetVisible();
+                dispose();
+            } else {
+            	this.setVisible(false);         	
+            	DForkertLogin = new DialogForkertLogin(parent);
+            	DForkertLogin.setAlwaysOnTop(true);
+            	DForkertLogin.setVisible(true);
+            }
+		}
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == JBLogin){
+			if (Login.authenticate(getUsername(), getPassword())) {
+                this.setVisible(false);
+                parent.mainFrameSetVisible();
+                dispose();
+            } else {
+            	this.setVisible(false);         	
+            	DForkertLogin = new DialogForkertLogin(parent);
+            	DForkertLogin.setAlwaysOnTop(true);
+            	DForkertLogin.setVisible(true);
+            }
+		}
+		if (e.getSource() == JLNyBruger){	
+			this.setVisible(false);
+			DNyBruger = new DialogNyBruger(parent);
+			DNyBruger.setAlwaysOnTop(true);
+			DNyBruger.setVisible(true);
+		}
+		if (e.getSource() == JBAnnuller){
+			System.exit(0);
+		}
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+	
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+
+	}
+    
+    public String getUsername() {
+        return JTBrugernavn.getText().trim();
+    }
+ 
+    public String getPassword() {
+        return new String(Kodeord.getPassword());
+    } 
+}

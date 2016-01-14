@@ -1,4 +1,4 @@
-package matt_client_gui;
+package server_gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,15 +8,15 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-public abstract class ClientPanelTemplate extends JPanel implements MouseListener {
+public abstract class ServerPanelTemplate extends JPanel implements MouseListener {
 
 	private static final long serialVersionUID = 1L;
-	private ClientMainFrame parent;
+	private ServerMainFrame parent;
 	private String ID;
 	
 	private Dimension panelTemplateSize;
 	
-	public ClientPanelTemplate(ClientMainFrame parent, String ID) {
+	public ServerPanelTemplate(ServerMainFrame parent, String ID) {
 		this.parent = parent; this.ID = ID;
 		panelTemplateSize = new Dimension((int)parent.getContentPane().getWidth(),(int)(parent.getContentPane().getHeight()*0.8));
 		this.setPreferredSize(panelTemplateSize);
@@ -30,7 +30,7 @@ public abstract class ClientPanelTemplate extends JPanel implements MouseListene
 	public abstract void setDefaultProperties();
 	public abstract void addContent();
 	
-	public ClientMainFrame getParent() {
+	public ServerMainFrame getParent() {
 		return parent;
 	}
 	

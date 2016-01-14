@@ -3,6 +3,7 @@ package matt_client_gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -19,8 +20,10 @@ public class ClientStatusBar extends JPanel {
 	private ClientMainFrame parent;
 	private Dimension clientStatusBarSize;
 	
+	private JPanel label_holder = new JPanel(new GridLayout(1,2));
 	private JLabel activePanel = new JLabel(" Active Panel: none", JLabel.CENTER);
 	private JLabel time = new JLabel("", JLabel.CENTER);
+	private JLabel connection = new JLabel("Connection: null", JLabel.CENTER);
 	
 	public ClientStatusBar(ClientMainFrame parent) {
 		this.parent = parent;
@@ -31,7 +34,10 @@ public class ClientStatusBar extends JPanel {
 	}
 
 	private void addElements() {
-		this.add(activePanel, BorderLayout.WEST);
+		label_holder.add(activePanel);
+		label_holder.add(connection);
+		label_holder.setBackground(Color.white);
+		this.add(label_holder, BorderLayout.WEST);
 		this.add(time, BorderLayout.EAST);
 		this.validate();
 	}
@@ -41,7 +47,7 @@ public class ClientStatusBar extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				activePanel.setText(" Active Panel: " + parent.getCurrent_panel().getID());
-				time.setText(new Date().toString()+ " ");
+				time.setText("Time: " + new Date().toString().substring(11, 19)+ " ");
 			}
 		});
 		t.start();	

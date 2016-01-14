@@ -1,22 +1,27 @@
-package matt_client_gui;
+package server_gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JLabel;
-
-public class ClientConnectPanel extends ClientPanelTemplate {
+public class ServerConnectionPanel extends ServerPanelTemplate {
 
 	private static final long serialVersionUID = 1L;
+	private ServerConnectionDialog login;
 	
-	private JLabel TOBEDELETED = new JLabel("CONNECT MENU", JLabel.CENTER);
-
-	public ClientConnectPanel(ClientMainFrame parent, String ID) {
+	public ServerConnectionPanel(ServerMainFrame parent, String ID) {
 		super(parent, ID);
-		TOBEDELETED.setVisible(true);
-		this.add(TOBEDELETED, BorderLayout.CENTER);
+		setPlaceHolderProperties();
+		addLoginPrompt();
 	}
-	
+
+	private void addLoginPrompt() {
+		login = new ServerConnectionDialog(super.getParent());
+	}
+
+	private void setPlaceHolderProperties() {
+		this.setLayout(new BorderLayout());
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {

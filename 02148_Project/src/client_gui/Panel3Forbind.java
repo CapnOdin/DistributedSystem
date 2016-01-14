@@ -4,60 +4,46 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
+public class Panel3Forbind extends PanelTemplate implements GeneralProperties, ActionListener, MouseListener{
 	private MainFrame parent;
-	private GridBagConstraints gbc = new GridBagConstraints();
+	private GridBagConstraints c = new GridBagConstraints();
+	JPanel panel = new JPanel(new GridBagLayout());
 	private JLabel JLForbind, JLEMail, JLKodeord;
 	private JTextField JTEMail, JTKodeord;
 	private JCheckBox JCGemOplysninger;
 	private JButton JBForbind;
 	
+	
 	public Panel3Forbind(MainFrame parent){
 		this.parent = parent;
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridBagLayout());
-		panel.setVisible(true);
-		this.add(panel);
-		JLForbind = new JLabel("Forbind bruger med Moment konto");
-		JLEMail = new JLabel("E-Mail");
-		JLKodeord = new JLabel("Kodeord");
-		JTEMail = new JTextField();
-		JTKodeord = new JTextField();
-		JCGemOplysninger = new JCheckBox("Gem oplysninger");
-		JBForbind = new JButton("Forbind");
-		JLForbind.setFont(new Font("SansSerif", Font.PLAIN, 20));
-		JLForbind.setVisible(true);
-		setJLabel(JLEMail);
-		setJLabel(JLKodeord);
-		setJTextField(JTEMail);
-		setJTextField(JTKodeord);
-		setJCheckBox(JCGemOplysninger);
-		setJButton(JBForbind);
+		setDefaultProperties();
+		setJComponents();
+		
 		int JTWidth = frameSizePanel3.width / 2;
 		int spaceLeft = frameSizePanel3.width / 4;
 		int spaceRight = spaceLeft;
 		int spaceTop = 40;
 		int spaceSTD = 4;
 		int spaceExtra = 20;
-		int spaceButtom = 	frameSizePanel3.height - spaceTop - JLForbind.getHeight() - spaceExtra - JLEMail.getHeight() - spaceSTD- 
-							JTEMail.getHeight() - spaceExtra - JLKodeord.getHeight() - spaceSTD - JTKodeord.getHeight() - spaceExtra - 
-							JCGemOplysninger.getHeight() - spaceSTD -JBForbind.getHeight();
 		
 		
 		// Insets = Top, Venstre, Bund, Højre
 		int i = 0;
-		gbc.anchor = GridBagConstraints.NORTHWEST;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		c.fill = GridBagConstraints.BOTH;
 		addC(JLForbind,			0,	i,	1,	1,	0,			new Insets(spaceTop,	spaceLeft,	2,	spaceRight));i++;
 		addC(JLEMail,			0,	i,	1,	1,	0,			new Insets(spaceExtra,			spaceLeft,	0,	spaceRight));i++;
 		addC(JTEMail,			0,	i,	1,	1,	JTWidth,	new Insets(spaceSTD,			spaceLeft,	0,	spaceRight));i++;
@@ -65,6 +51,11 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
 		addC(JTKodeord,			0,	i,	1,	1,	JTWidth,	new Insets(spaceSTD,			spaceLeft,	0,	spaceRight));i++;
 		addC(JCGemOplysninger,	0,	i,	1,	1,	0,			new Insets(spaceExtra,			spaceLeft,	0,	spaceRight));i++;
 		addC(JBForbind,			0,	i,	1,	1,	0,			new Insets(spaceSTD,			spaceLeft,	40,	spaceRight));i++;
+		
+		JTKodeord.addActionListener(this);
+		JBForbind.addMouseListener(this);
+		
+		this.add(panel);
 		this.setVisible(true);
 	}
 	
@@ -78,14 +69,14 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
 	}
 	
 	private void addC(JComponent comp, int gridx, int gridy, int gridwidth, int gridheight, int width, Insets space) {
-		gbc.insets = space;
-		gbc.gridx = gridx;
-		gbc.gridy = gridy;
-		gbc.gridwidth = gridwidth;
-		gbc.gridheight = gridheight;
-		gbc.ipadx = width;
-		this.add(comp, gbc);
-		this.validate();
+		c.insets = space;
+		c.gridx = gridx;
+		c.gridy = gridy;
+		c.gridwidth = gridwidth;
+		c.gridheight = gridheight;
+		c.ipadx = width;
+		panel.add(comp, c);
+		panel.validate();
 	}
 	
 	private void setJTextField(JTextField name){
@@ -106,6 +97,61 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties{
 	private void setJCheckBox(JCheckBox name){
 		name.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		name.setVisible(true);
+	}
+	
+	private void setJComponents(){
+		JLForbind = new JLabel("Forbind bruger med Moment konto");
+		JLEMail = new JLabel("E-Mail");
+		JLKodeord = new JLabel("Kodeord");
+		JTEMail = new JTextField();
+		JTKodeord = new JTextField();
+		JCGemOplysninger = new JCheckBox("Gem oplysninger");
+		JBForbind = new JButton("Forbind");
+		JLForbind.setFont(new Font("SansSerif", Font.PLAIN, 20));
+		JLForbind.setVisible(true);
+		setJLabel(JLEMail);
+		setJLabel(JLKodeord);
+		setJTextField(JTEMail);
+		setJTextField(JTKodeord);
+		setJCheckBox(JCGemOplysninger);
+		setJButton(JBForbind);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == JBForbind){
+		}
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/*

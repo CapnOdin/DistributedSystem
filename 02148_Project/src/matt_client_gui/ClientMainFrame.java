@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 public class ClientMainFrame extends JFrame {
 
@@ -64,6 +65,13 @@ public class ClientMainFrame extends JFrame {
 	}
 
 	private void setDefaultProperties() {
+		System.setProperty("apple.laf.useScreenMenuBar", "true");
+        System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WikiTeX");
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+           
+        }
 		this.getContentPane().setBackground(Color.white);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(frameSize);
