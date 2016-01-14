@@ -34,7 +34,8 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 		
 		int i = 0;
 		c.anchor = GridBagConstraints.NORTHWEST;
-		addC(JLTilfojVagt,i,0,1);c.insets = new Insets(10,4,2,0);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		addC(JLTilfojVagt,i,0,3);c.insets = new Insets(10,4,2,0);
 		addC(JLDato,i,1,1); c.insets = new Insets(2,4,2,0);
 		addC(JTDato,i,2,1);i++; c.insets = new Insets(10,1,2,0);
 		addC(JLStarttid,i,1,1);c.insets = new Insets(2,1,2,0);
@@ -92,11 +93,11 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 		JLAdresse = new JLabel("Adresse");
 		JLPostnummer = new JLabel("Postnummer");
 		JLStarttid = new JLabel("Starttid");
-		JTDato = new JTextField(8);
-		JTOpgaveTitel = new JTextField(26);
-		JTAdresse = new JTextField(25);
-		JTPostnummer = new JTextField(7);
-		JTStarttid = new JTextField(8);
+		JTDato = new JTextField(6);
+		JTOpgaveTitel = new JTextField(22);
+		JTAdresse = new JTextField(22);
+		JTPostnummer = new JTextField(4);
+		JTStarttid = new JTextField(6);
 		JBTilfoj = new JButton("Tilføj");
 		JBAnnuller = new JButton("Annuller");
 		setJLabel(JLDato);

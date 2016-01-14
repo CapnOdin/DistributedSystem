@@ -16,5 +16,5 @@ public interface GeneralProperties {
 	
 	//public static Dimension frameSizePanel3 = new Dimension(frameSize.width, ((frameSize.height-25) / 20)*16+26); 
 	public static Dimension frameSizePanel3 = 	new Dimension(frameSize.width, ((frameSize.height-25) *16/ 20)+30);
-	public static Dimension JTextAreaDimension = new Dimension(frameSizePanel3.width*19/20,frameSizePanel3.height *9/10);										 
+	public static Dimension JTextAreaDimension = new Dimension(frameSizePanel3.width*18/20,frameSizePanel3.height *8/10);										 
 }

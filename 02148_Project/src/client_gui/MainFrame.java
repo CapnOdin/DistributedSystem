@@ -1,15 +1,13 @@
 package client_gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
-
-import client_eng.TCPClient;
 
 public class MainFrame extends JFrame implements GeneralProperties {
 	private GridBagConstraints c = new GridBagConstraints();

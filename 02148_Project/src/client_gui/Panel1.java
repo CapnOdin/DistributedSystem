@@ -13,14 +13,8 @@ public class Panel1 extends PanelTemplate implements GeneralProperties{
 	private static final long serialVersionUID = 1L;
 	private MainFrame parent;
 	private static JPanel panel = new JPanel(new GridLayout());
-	private static JLabel JLForbundet = new JLabel(" Forbundet ");
 	
 	public Panel1(MainFrame parent){
-		//JLForbundet.setBorder(BorderFactory.createLineBorder(Color.lightGray));
-		JLForbundet.setForeground(Color.gray);
-		panel.setBackground(Color.white);
-		panel.add(JLForbundet);
-		JLForbundet.setVisible(false);
 		this.parent = parent; 
 		this.add(panel, BorderLayout.EAST);
 		this.setVisible(true);
@@ -35,10 +29,7 @@ public class Panel1 extends PanelTemplate implements GeneralProperties{
 		this.validate();
 		
 	}
-	
-	public static void addForbundet(){	
-		JLForbundet.setVisible(true);
-	}
+
 	/*
 	public static void main(String[] args) {
 		JFrame test = new JFrame();
