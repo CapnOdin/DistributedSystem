@@ -25,7 +25,7 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	private JTextField JTEMail, JTKodeord;
 	private JCheckBox JCGemOplysninger;
 	private JButton JBForbind;
-	
+	private String clientData = "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.Lise_Noerby@hotmail.com.1", email;
 	
 	public Panel3Forbind(MainFrame parent){
 		this.parent = parent;
@@ -102,8 +102,8 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		JLForbind = new JLabel("<HTML> <U>Forbind bruger med Moment konto</U></HTML>"); 
 		JLEMail = new JLabel("E-Mail");
 		JLKodeord = new JLabel("Kodeord");
-		JTEMail = new JTextField(50);
-		JTKodeord = new JTextField(50);
+		JTEMail = new JTextField(getEMail());
+		JTKodeord = new JTextField(40);
 		JCGemOplysninger = new JCheckBox("Gem oplysninger");
 		JBForbind = new JButton("Forbind");
 		JLForbind.setFont(new Font("SansSerif", Font.PLAIN, 20));
@@ -114,6 +114,12 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		setJTextField(JTKodeord);
 		setJCheckBox(JCGemOplysninger);
 		setJButton(JBForbind);
+	}
+	
+	private String getEMail(){
+		String[] array = clientData.split("\\.");
+		email = array[6];
+		return email;
 	}
 
 	@Override

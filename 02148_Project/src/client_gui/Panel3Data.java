@@ -24,13 +24,13 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	private GridBagConstraints c = new GridBagConstraints();
 	private MainFrame parent;
 	private JPanel panel = new JPanel(new GridBagLayout());
-	private JTextField JTBrugernavn, JTNavn, JTAdresse, JTPostnummer, JTBy;
-	private JLabel JLBrugernavn, JLKodeord,JLSkiftKodeord, JLPersonlig, JLNavn, JLAdresse, JLBillede, JLPostnummer, JLBy, JLSkiftBillede;
+	private JTextField JTBrugernavn, JTEMail, JTNavn, JTAdresse, JTPostnummer, JTBy;
+	private JLabel JLBrugernavn, JLKodeord,JLSkiftKodeord, JLEMail, JLPersonlig, JLNavn, JLAdresse, JLBillede, JLPostnummer, JLBy, JLSkiftBillede;
 	private JPasswordField Kodeord;
 	private JButton JBGem;
 	private JCheckBox JCHarBil;
-	private String info = "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.1", brugernavn, kodeord, navn, adresse, postnummer, by, harBil;
-	
+	private String clientData = "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.Lise_Noerby@hotmail.com.1", brugernavn, kodeord, navn, adresse, postnummer, by, email, harBil;
+
 	private DialogSkiftKodeord DSkiftKodeord;
 	
 	public Panel3Data(MainFrame parent){
@@ -38,7 +38,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		setDefaultProperties();
 		setInfo();
 		setJComponents();	
-		int spaceTop = 20;
+		int spaceTop = 60;
 		int spaceMiddle = 50;
 		int space = 2;
 				
@@ -50,20 +50,22 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		addC(JLBrugernavn,	0,	i,	1,	1,		new Insets(30,			space,	2,		space));
 		addC(JLKodeord,		4,	i,	1,	1,		new Insets(30,			space,	2,		space));i++;		
 		addC(JTBrugernavn,	0,	i,	3,	1,		new Insets(space,		space,	2,		space));			
-		addC(Kodeord,		4,	i,	2,	1,		new Insets(space,		space,	2,		space));			
-		addC(JLSkiftKodeord,6,	i,	1,	1,		new Insets(space,		space,	2,		spaceMiddle));i++;			
-		addC(JLNavn,		0,	i,	1,	1, 		new Insets(40,			space,	2,		spaceMiddle));i++; 	c.ipadx = 530;
-		addC(JTNavn,		0,	i,	7,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++; 	c.ipadx = 0;
+		addC(Kodeord,		4,	i,	3,	1,		new Insets(space,		space,	2,		space));			
+		addC(JLSkiftKodeord,7,	i,	1,	1,		new Insets(space,		space,	2,		spaceMiddle));i++;	
+		addC(JLNavn,		0,	i,	1,	1, 		new Insets(40,			space,	2,		spaceMiddle));i++; 	c.ipadx = 430;
+		addC(JTNavn,		0,	i,	8,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++; 	c.ipadx = 0;
 		addC(JLAdresse,		0,	i,	1,	1, 		new Insets(4,			space,	2,		spaceMiddle));i++;
-		addC(JTAdresse,		0,	i,	7,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++;
+		addC(JTAdresse,		0,	i,	8,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++;
 		addC(JLPostnummer,	0,	i,	1,	1,		new Insets(4,			space,	2,		space));
 		addC(JLBy,			2,	i,	1,	1, 		new Insets(4,			space,	2,		spaceMiddle));i++;
 		addC(JTPostnummer,	0,	i,	2,	1,	 	new Insets(space,		space,	2,		space));		
-		addC(JTBy,			2,	i,	5,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++;
-		addC(JCHarBil,		0,	i,	1,	1, 		new Insets(20,			space,	2,		spaceMiddle));i++;
-		addC(JBGem,			0,	i,	1,	1, 		new Insets(space,		space,	100,	spaceMiddle));i++;
-		//addC(JLBillede,		7,	2,	1,	8,		new Insets(space,		space,	space,	space));
-		//addC(JLSkiftBillede,7,	10,	1,	1,		new Insets(space,		space,	space,	space));
+		addC(JTBy,			2,	i,	6,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++;
+		addC(JLEMail,		0,	i,	1,	1,		new Insets(20	,		space,	2,		spaceMiddle));i++;
+		addC(JTEMail,		0,	i,	8,	1,		new Insets(space,		space,	2,		spaceMiddle));i++;
+		addC(JCHarBil,		0,	i,	1,	1, 		new Insets(10,			space,	2,		spaceMiddle));i++;
+		addC(JBGem,			0,	i,	8,	1, 		new Insets(space,		space,	100,	spaceMiddle));i++;
+		//addC(JLBillede,		8,	2,	1,	8,		new Insets(space,		space,	space,	space));
+		//addC(JLSkiftBillede,8,	10,	1,	1,		new Insets(space,		space,	space,	space));
 		
 		JTBy.addActionListener(this);
 		JLSkiftKodeord.addMouseListener(this);
@@ -127,12 +129,14 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		JTAdresse = new JTextField(adresse);
 		JTPostnummer = new JTextField(postnummer);
 		JTBy = new JTextField(by);
+		JTEMail = new JTextField(email);
 		JLPersonlig = new JLabel("<HTML><U>Personlig Profil</U></HTML>");
 		JLPersonlig.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		JLNavn = new JLabel("Navn");
 		JLAdresse = new JLabel("Adresse");
 		JLPostnummer = new JLabel("Postnummer");
 		JLBy = new JLabel("By");
+		JLEMail = new JLabel("E-Mail");
 		JLSkiftBillede = new JLabel("Skift billede");
 		JCHarBil = new JCheckBox("Har bil");
 		if (harBil.equals("1")){
@@ -144,12 +148,14 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		setJLabel(JLBrugernavn);
 		setJLabel(JLKodeord);
 		setJLabel(JLSkiftKodeord);
+		setJLabel(JLEMail);
 		setJTextField(JTBrugernavn);
 		setJTextField(Kodeord);
 		setJTextField(JTNavn);
 		setJTextField(JTAdresse);
 		setJTextField(JTPostnummer);
 		setJTextField(JTBy);
+		setJTextField(JTEMail);
 		setJLabel(JLNavn);
 		setJLabel(JLAdresse);
 		setJLabel(JLPostnummer);
@@ -162,7 +168,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	
 	private void setInfo(){
 		//System.out.println(info);
-		String[] array = info.split("\\.");
+		String[] array = clientData.split("\\.");
 		//System.out.println(java.util.Arrays.toString(array));
 		int i = 0;
 		brugernavn = array[i];i++;
@@ -171,6 +177,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		adresse = array[i];i++;
 		postnummer = array[i];i++;
 		by = array[i];i++;
+		email = array[i];i++;
 		harBil = array[i];
 	}
 	
@@ -181,13 +188,22 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		adresse = JTAdresse.getText();
 		postnummer = JTPostnummer.getText();
 		by = JTBy.getText();
+		email = JTEMail.getText();
 		if (JCHarBil.isSelected()){
 			harBil = "1";}
 		else{
 			harBil = "0";}
-		info = brugernavn + "." + kodeord + "."+ navn+"."+adresse+"."+postnummer+"."+by + "." + harBil;
-		return info;
+		clientData = brugernavn + "." + kodeord + "."+ navn+"."+adresse+"."+postnummer+"."+by + "." + email +"."+ harBil;
+		return clientData;
 		
+	}
+	
+	public String getEMail(){
+		return email;
+	}
+	
+	public void opdaterKodeord(String nyeKodeord){
+		kodeord = nyeKodeord;
 	}
 
 	@Override

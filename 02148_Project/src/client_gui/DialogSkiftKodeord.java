@@ -18,6 +18,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class DialogSkiftKodeord extends JDialog implements ActionListener, MouseListener {
@@ -25,8 +26,10 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	private JPanel panel = new JPanel(new GridBagLayout());
 	private GridBagConstraints c = new GridBagConstraints();
 	private JLabel JLSkiftKodeord, JLNuvarendeKodeord, JLNyeKodeord, JLGentagKodeord;
-	private JTextField JTNuvarendeKodeord, JTNyeKodeord, JTGentagKodeord;
+	private JPasswordField JTNuvarendeKodeord, JTNyeKodeord, JTGentagKodeord;
 	private JButton JBGem, JBAnnuller;
+	private String authentication = "Lise.projekt", kodeord, tastetKodeord, nyeKodeord, gentagKodeord;
+	private String[] array;
 	
 	public DialogSkiftKodeord(MainFrame parent){
 		this.parent = parent;
@@ -51,7 +54,6 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 		
 		this.add(panel);
 		this.pack();
-		this.setModal(true);
 		
 	}
 	
@@ -91,9 +93,9 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 		JLNuvarendeKodeord = new JLabel("Nuværende Kodeord");
 		JLNyeKodeord = new JLabel("Nyt Kodeord");
 		JLGentagKodeord = new JLabel("Gentag Kodeord");
-		JTNuvarendeKodeord = new JTextField(20);
-		JTNyeKodeord = new JTextField(20);
-		JTGentagKodeord = new JTextField(20);
+		JTNuvarendeKodeord = new JPasswordField(20);
+		JTNyeKodeord = new JPasswordField(20);
+		JTGentagKodeord = new JPasswordField(20);
 		JBGem = new JButton("Gem");
 		JBAnnuller = new JButton("Annuller");
 		setJLabel(JLNuvarendeKodeord);
@@ -105,23 +107,56 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 		setJButton(JBGem);
 		setJButton(JBAnnuller);
 	}
+	
+	private String getKodeord(){
+		array = authentication.split("\\.");
+		kodeord = array[1];
+		return kodeord;
+	}
+	
+	private void getNyeKodeord(){
+		tastetKodeord = JTNuvarendeKodeord.getText();
+		nyeKodeord = JTNyeKodeord.getText();
+		gentagKodeord = JTGentagKodeord.getText();
+	}
+	
+	private void setAuthentication(){
+		authentication = array[0]+"."+kodeord;
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBGem){
-			dispose();
-			if (true){
+			getKodeord();
+			getNyeKodeord();
+			System.out.println(kodeord);
+			if (tastetKodeord.equals(kodeord)){
+				if (nyeKodeord.equals(gentagKodeord)){
+					kodeord = nyeKodeord;
+					setAuthentication();
+					dispose();
+					JDialog dialog = new JDialog();
+					dialog.setAlwaysOnTop(true);    
+					JOptionPane.showMessageDialog(dialog, "Kodeordet ændret");
+				}
+				else{
+					dispose();
+					JDialog dialog = new JDialog();
+					dialog.setAlwaysOnTop(true);    
+					JOptionPane.showMessageDialog(dialog, "Nye kodeord og gentagelse af nye kodeord stemmer ikke overens");
+					
+				}
+			}
+			else{
 				dispose();
-				JOptionPane.showMessageDialog(null,
-                        "Nuværende kodeord forkert",
-                        "Fejl",
-                        JOptionPane.ERROR_MESSAGE);
+				JDialog dialog = new JDialog();
+				dialog.setAlwaysOnTop(true);    
+				JOptionPane.showMessageDialog(dialog, "Nuværende kodeord forkert");
 			}
 		}
 		if ( e.getSource() == JBAnnuller){
 			dispose();
-		}
-		
+		}		
 	}
 
 	@Override
@@ -151,15 +186,32 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == JTGentagKodeord){
-			if (true){
-				dispose();
-				JOptionPane.showMessageDialog(null,
-                        "Nuværende kodeord forkert",
-                        "Fejl",
-                        JOptionPane.ERROR_MESSAGE);
+			getKodeord();
+			getNyeKodeord();
+			System.out.println(kodeord);
+			if (tastetKodeord.equals(kodeord)){
+				if (nyeKodeord.equals(gentagKodeord)){
+					kodeord = nyeKodeord;
+					setAuthentication();
+					dispose();
+					JDialog dialog = new JDialog();
+					dialog.setAlwaysOnTop(true);    
+					JOptionPane.showMessageDialog(dialog, "Kodeordet ændret");
+				}
+				else{
+					dispose();
+					JDialog dialog = new JDialog();
+					dialog.setAlwaysOnTop(true);    
+					JOptionPane.showMessageDialog(dialog, "Nye kodeord og gentagelse af nye kodeord stemmer ikke overens");
+					
+				}
 			}
-			dispose();
-		}
-		
+			else{
+				dispose();
+				JDialog dialog = new JDialog();
+				dialog.setAlwaysOnTop(true);    
+				JOptionPane.showMessageDialog(dialog, "Nuværende kodeord forkert");
+			}
+		}		
 	}
 }
