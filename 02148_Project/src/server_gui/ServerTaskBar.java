@@ -2,7 +2,6 @@ package server_gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -23,13 +22,10 @@ public class ServerTaskBar extends JMenuBar implements MouseListener, MouseMotio
 	private JLabel power_button = new JLabel(new ImageIcon("pw.png"));
 	private JPanel button_holder = new JPanel(new GridLayout(1,2));
 	
-	private Dimension clientTaskBarSize;
-	
 	private int mouse_pos_x, mouse_pos_y;
 	
 	public ServerTaskBar(ServerMainFrame parent, String title) {
 		this.parent = parent;
-		clientTaskBarSize = new Dimension((int)parent.getContentPane().getWidth(), (int)parent.getContentPane().getHeight()/20);
 		frametitle = new JLabel(title, JLabel.CENTER);
 		setDefaultProperties();
 		addElements();

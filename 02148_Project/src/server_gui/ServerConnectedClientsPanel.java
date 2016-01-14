@@ -59,17 +59,14 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 
 	private void addChatPanelContent() {
 		chatArea.setEditable(false);
-		
 		chatLabels[0] = new JLabel(" Actions", JLabel.LEFT);
 		chatLabels[0].setFont(bigFont);
-		addC(info, chatLabels[0], 0, 7, 3, 0);
-		
 		chatLabels[1] = new JLabel(" Chat:", JLabel.LEFT);
-		addC(info, chatLabels[1], 0, 8, 1, 0);
 		
+		addC(info, chatLabels[0], 0, 7, 3, 0);
+		addC(info, chatLabels[1], 0, 8, 1, 0);
 		addC(info, chatPane, 0, 9, 3, 50);
 		addC(info, chatMessage, 0, 10, 2, 0);
-		
 		addC(info, send, 2, 10, 1, 0);
 		
 		for(int i = 0; i < actionButtons.length; i++) {
@@ -81,7 +78,6 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		addC(info, button_holder, 0, 12, 3, 20);
 		
 		actionButtons[0].setText("Disconnect");
-		
 	}
 
 	private void addInfoPanelContent() {
@@ -104,7 +100,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		}
 		
 		for(int i = 0; i < infoLabelFields.length; i++) {
-			infoLabelFields[i] = new JTextField(20);
+			infoLabelFields[i] = new JTextField(15);
 			infoLabelFields[i].setEditable(false);
 		}
 		
@@ -116,7 +112,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		addC(info, infoLabels[0], 0, 0, 2, 0);
 		
 		for(int i = 1; i < infoLabels.length-1; i++) {
-			addC(info, infoLabels[i], 0, i, 1, 0);
+			addC(info, infoLabels[i], 0, i, 0, 0);
 			addC(info, infoLabelFields[i], 1, i, 1, 0);
 		}
 		

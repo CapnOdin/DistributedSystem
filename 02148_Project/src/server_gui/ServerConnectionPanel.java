@@ -6,7 +6,6 @@ import java.awt.event.MouseEvent;
 public class ServerConnectionPanel extends ServerPanelTemplate {
 
 	private static final long serialVersionUID = 1L;
-	private ServerConnectionDialog login;
 	
 	public ServerConnectionPanel(ServerMainFrame parent, String ID) {
 		super(parent, ID);
@@ -15,7 +14,7 @@ public class ServerConnectionPanel extends ServerPanelTemplate {
 	}
 
 	private void addLoginPrompt() {
-		login = new ServerConnectionDialog(super.getParent());
+		new ServerConnectionDialog(super.getParent());
 	}
 
 	private void setPlaceHolderProperties() {

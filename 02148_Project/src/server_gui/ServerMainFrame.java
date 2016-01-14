@@ -3,10 +3,8 @@ package server_gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.Toolkit;
 
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -19,10 +17,7 @@ public class ServerMainFrame extends JFrame {
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private Dimension frameSize = new Dimension((int)screenSize.getWidth()/2,(int)screenSize.getHeight()/2);
 	
-	private GridBagConstraints c = new GridBagConstraints();
-	
 	private ServerMenuPanel smp;
-	//private ServerTaskBar stb;
 	private ServerStatusBar ssb;
 	
 	private ServerPanelTemplate current_panel;
@@ -43,9 +38,8 @@ public class ServerMainFrame extends JFrame {
 	public void addVariablePanel(ServerPanelTemplate panel) {
 		removeVariablePanel();
 		current_panel = panel;
-		//addC(panel, 0, 2, 1, 1, 0, 100);
-		this.add(panel, BorderLayout.CENTER);
 		panel.setVisible(true);
+		this.add(panel, BorderLayout.CENTER);
 		this.validate();
 		this.pack();
 	}
@@ -57,28 +51,13 @@ public class ServerMainFrame extends JFrame {
 	}
 	
 	private void addStaticPanels() {
-		//stb = new ServerTaskBar(this, "SERVER");
 		smp = new ServerMenuPanel(this);
 		ssb = new ServerStatusBar(this);
 		current_panel = new ServerConnectionPanel(this, "PLACEHOLDER");
 		
-		//addC(stb, 0, 0, 1, 1, this.getWidth()-65, 0);
-		//addC(smp, 0, 1, 1, 1, 0, 0);
-		//addC(current_panel, 0, 2, 1, 1, 0, (int)(this.getHeight()*0.877));
-		//addC(ssb, 0, 3, 1, 1, 0, 0);
 		this.add(smp, BorderLayout.NORTH);
 		this.add(current_panel, BorderLayout.CENTER);
 		this.add(ssb, BorderLayout.SOUTH);
-	}
-	
-	private void addC(JComponent comp, int gridx, int gridy, int gridwidth, int gridheight, int ipadx, int ipady) {
-		c.gridx = gridx; c.gridy = gridy;
-		c.gridwidth = gridwidth; c.gridheight = gridheight;
-		c.ipadx = ipadx;
-		c.ipady = ipady;
-		c.fill = GridBagConstraints.BOTH;
-		this.add(comp, c);
-		this.validate();
 	}
 
 	private void setDefaultProperties() {
@@ -93,7 +72,7 @@ public class ServerMainFrame extends JFrame {
 		this.setPreferredSize(frameSize);
 		this.setUndecorated(true);
 		this.setLayout(new BorderLayout());
-		this.getContentPane().setBackground(Color.magenta);
+		this.getContentPane().setBackground(Color.black);
 		this.pack();
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);

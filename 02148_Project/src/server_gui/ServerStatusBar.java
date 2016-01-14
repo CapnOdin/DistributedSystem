@@ -2,7 +2,6 @@ package server_gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -20,18 +19,13 @@ import server_eng.TCPServer;
 public class ServerStatusBar extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	
-	private ServerMainFrame parent;
-	private Dimension clientStatusBarSize;
-	
+
 	private JLabel serverStatus = new JLabel(" Server Status: - ", JLabel.CENTER);
 	private JLabel time = new JLabel("", JLabel.CENTER);
 	private JLabel connection = new JLabel(" Server: - ", JLabel.CENTER);
 	private String publicIP;
 	
 	public ServerStatusBar(ServerMainFrame parent) {
-		this.parent = parent;
-		clientStatusBarSize = new Dimension((int)parent.getContentPane().getWidth(), (int)parent.getContentPane().getHeight()/20);
 		setDefaultProperties();
 		addElements();
 		findPublicIP();
