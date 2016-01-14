@@ -28,7 +28,7 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	private JLabel JLSkiftKodeord, JLNuvarendeKodeord, JLNyeKodeord, JLGentagKodeord;
 	private JPasswordField JTNuvarendeKodeord, JTNyeKodeord, JTGentagKodeord;
 	private JButton JBGem, JBAnnuller;
-	private String authentication = "Lise.projekt", kodeord, tastetKodeord, nyeKodeord, gentagKodeord;
+	private String authentication, kodeord, tastetKodeord, nyeKodeord, gentagKodeord;
 	private String[] array;
 	
 	public DialogSkiftKodeord(MainFrame parent){
@@ -108,6 +108,11 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 		setJButton(JBAnnuller);
 	}
 	
+	private void getAuthentication(){
+		// Senere: Hent authentication direkte fra server 
+		authentication = "Lise.projekt";
+	}
+	
 	private String getKodeord(){
 		array = authentication.split("\\.");
 		kodeord = array[1];
@@ -121,12 +126,14 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	}
 	
 	private void setAuthentication(){
+		//Senere: Send opdaterede authentication til serveren
 		authentication = array[0]+"."+kodeord;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBGem){
+			getAuthentication();
 			getKodeord();
 			getNyeKodeord();
 			System.out.println(kodeord);
@@ -186,6 +193,7 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == JTGentagKodeord){
+			getAuthentication();
 			getKodeord();
 			getNyeKodeord();
 			System.out.println(kodeord);

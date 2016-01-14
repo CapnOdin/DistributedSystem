@@ -31,7 +31,7 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
     private JPanel panel = new JPanel(new GridBagLayout());
     private Insets normalInsets = new Insets(2,2,2,2);
     private Insets biggerInsets = new Insets(10,2,2,2);
-    private String info, brugernavn, kodeord, godkendtInfo;
+    private String info, brugernavn, kodeord, authentication;
     
     private DialogNyBruger DNyBruger;
     private DialogForkertLogin DForkertLogin;
@@ -111,8 +111,9 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
     	this.setPreferredSize(new Dimension(500,300));
     }
     
-    private void getGodkendtInfo(){
-    	godkendtInfo = "Lise.projekt";
+    private void getAuthentication(){
+    	//Senere: Hent authentication direkte fra server
+    	authentication = "Lise.projekt";
     }
     
     private void getInfo(){
@@ -124,9 +125,9 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
     @Override
 	public void actionPerformed(ActionEvent e) {
 		if( e.getSource() == Kodeord){
-			getGodkendtInfo();
+			getAuthentication();
 			getInfo();
-			if (info.equals(godkendtInfo)) {
+			if (info.equals(authentication)) {
                 this.setVisible(false);
                 parent.mainFrameSetVisible();
                 dispose();
@@ -143,9 +144,9 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBLogin){
-			getGodkendtInfo();
+			getAuthentication();
 			getInfo();
-			if (info.equals(godkendtInfo)) {
+			if (info.equals(authentication)) {
                 this.setVisible(false);
                 parent.mainFrameSetVisible();
                 dispose();

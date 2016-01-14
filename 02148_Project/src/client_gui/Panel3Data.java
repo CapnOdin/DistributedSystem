@@ -29,13 +29,14 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	private JPasswordField Kodeord;
 	private JButton JBGem;
 	private JCheckBox JCHarBil;
-	private String clientData = "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.Lise_Noerby@hotmail.com.1", brugernavn, kodeord, navn, adresse, postnummer, by, email, harBil;
+	private String clientData, brugernavn, kodeord, navn, adresse, postnummer, by, email, harBil;
 
 	private DialogSkiftKodeord DSkiftKodeord;
 	
 	public Panel3Data(MainFrame parent){
 		this.parent = parent;
 		setDefaultProperties();
+		getInfo();
 		setInfo();
 		setJComponents();	
 		int spaceTop = 60;
@@ -166,10 +167,14 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		setJLabel(JLBillede);
 	}
 	
+	private void getInfo(){
+		
+		//Senere : hent clientdata direkte fra serveren
+		clientData = "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.Lise_Noerby@hotmail.com.1";
+	}
+	
 	private void setInfo(){
-		//System.out.println(info);
 		String[] array = clientData.split("\\.");
-		//System.out.println(java.util.Arrays.toString(array));
 		int i = 0;
 		brugernavn = array[i];i++;
 		kodeord = array[i];i++;
@@ -181,7 +186,8 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		harBil = array[i];
 	}
 	
-	private String getInfo(){
+	private void getNewInfo(){
+		// Senere: Send opdaterede clientData til serveren
 		brugernavn = JTBrugernavn.getText();
 		kodeord = Kodeord.getText();
 		navn = JTNavn.getText();
@@ -193,9 +199,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 			harBil = "1";}
 		else{
 			harBil = "0";}
-		clientData = brugernavn + "." + kodeord + "."+ navn+"."+adresse+"."+postnummer+"."+by + "." + email +"."+ harBil;
-		return clientData;
-		
+		clientData = brugernavn + "." + kodeord + "."+ navn+"."+adresse+"."+postnummer+"."+by + "." + email +"."+ harBil;		
 	}
 	
 	public String getEMail(){
@@ -216,7 +220,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		if (e.getSource() == JLSkiftBillede){
 		}
 		if (e.getSource() == JBGem){
-			System.out.println(getInfo());
+			getNewInfo();
 		}
 	}
 
@@ -247,7 +251,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == JTBy){
-			System.out.println(getInfo());
+			getNewInfo();
 		}
 		
 	}
