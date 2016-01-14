@@ -92,7 +92,7 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 		JLSkiftKodeord.setFont(new Font("SanfSerif", Font.PLAIN,25));
 		JLNuvarendeKodeord = new JLabel("Nuværende Kodeord");
 		JLNyeKodeord = new JLabel("Nyt Kodeord");
-		JLGentagKodeord = new JLabel("Gentag Kodeord");
+		JLGentagKodeord = new JLabel("Gentag Nyt Kodeord");
 		JTNuvarendeKodeord = new JPasswordField(20);
 		JTNyeKodeord = new JPasswordField(20);
 		JTGentagKodeord = new JPasswordField(20);
@@ -111,12 +111,9 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	private void getAuthentication(){
 		// Senere: Hent authentication direkte fra server 
 		authentication = "Lise.projekt";
-	}
-	
-	private String getKodeord(){
+		
 		array = authentication.split("\\.");
 		kodeord = array[1];
-		return kodeord;
 	}
 	
 	private void getNyeKodeord(){
@@ -134,7 +131,6 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBGem){
 			getAuthentication();
-			getKodeord();
 			getNyeKodeord();
 			System.out.println(kodeord);
 			if (tastetKodeord.equals(kodeord)){
@@ -150,7 +146,7 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 					dispose();
 					JDialog dialog = new JDialog();
 					dialog.setAlwaysOnTop(true);    
-					JOptionPane.showMessageDialog(dialog, "Nye kodeord og gentagelse af nye kodeord stemmer ikke overens");
+					JOptionPane.showMessageDialog(dialog, "\"Nyt kodeord\" og \"Gentag nyt kodeord\" er ikke ens");
 					
 				}
 			}
@@ -194,7 +190,6 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == JTGentagKodeord){
 			getAuthentication();
-			getKodeord();
 			getNyeKodeord();
 			System.out.println(kodeord);
 			if (tastetKodeord.equals(kodeord)){

@@ -25,15 +25,14 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	private JTextField JTEMail, JTKodeord;
 	private JCheckBox JCGemOplysninger;
 	private JButton JBForbind;
-	private String clientData = "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.Lise_Noerby@hotmail.com.1", email;
+	private String clientData, email, connectInfo, kodeord;
+	private String[] array, array1;
 	
 	public Panel3Forbind(MainFrame parent){
 		this.parent = parent;
 		setDefaultProperties();
 		setJComponents();
 		
-		//int JTWidth = frameSizePanel3.width / 2;
-		//int spaceLeft = frameSizePanel3.width / 4;
 		int space = 2;
 		int spaceTop = 40;
 		int spaceSTD = 4;
@@ -45,8 +44,8 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.fill = GridBagConstraints.BOTH;
 		addC(JLForbind,			0,	i,	1,	1,		new Insets(spaceTop,			space,	2,	space));i++;
-		addC(JLEMail,			0,	i,	1,	1,		new Insets(spaceExtra,			space,	0,	space));i++;
-		addC(JTEMail,			0,	i,	1,	1,		new Insets(spaceSTD,			space,	0,	space));i++;
+		addC(JLEMail,			0,	i,	1,	1,		new Insets(spaceExtra,			space,	0,	space));i++;c.ipadx = 450;
+		addC(JTEMail,			0,	i,	1,	1,		new Insets(spaceSTD,			space,	0,	space));i++;c.ipadx = 0;
 		addC(JLKodeord,			0,	i,	1,	1,		new Insets(spaceExtra,			space,	0,	space));i++;
 		addC(JTKodeord,			0,	i,	1,	1,		new Insets(spaceSTD,			space,	0,	space));i++;
 		addC(JCGemOplysninger,	0,	i,	1,	1,		new Insets(spaceExtra,			space,	0,	space));i++;
@@ -57,6 +56,8 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		panel.setBackground(Color.white);
 		this.add(panel);
 		this.setVisible(true);
+
+		System.out.println(panel.getWidth());
 	}
 	
 	@Override
@@ -103,7 +104,7 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		JLEMail = new JLabel("E-Mail");
 		JLKodeord = new JLabel("Kodeord");
 		JTEMail = new JTextField(getEMail());
-		JTKodeord = new JTextField(40);
+		JTKodeord = new JTextField();
 		JCGemOplysninger = new JCheckBox("Gem oplysninger");
 		JBForbind = new JButton("Forbind");
 		JLForbind.setFont(new Font("SansSerif", Font.PLAIN, 20));
@@ -117,10 +118,21 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	}
 	
 	private String getEMail(){
-		String[] array = clientData.split("\\.");
+		// Senere: Hent clientdata direkte fra server
+		clientData = "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.Lise_Noerby@hotmail.com.1";
+		
+		array = clientData.split("\\.");
 		email = array[6];
 		return email;
 	}
+	
+	private void getConnectInfo(){
+		// Senere: Hent ConnectInfo direkte fra serveren tilsvarende email
+		connectInfo = "Lise_Noerby@hotmail.com.projekt";
+		array1 = connectInfo.split("\\.");
+		
+	}
+	
 
 	@Override
 	public void mouseClicked(MouseEvent e) {

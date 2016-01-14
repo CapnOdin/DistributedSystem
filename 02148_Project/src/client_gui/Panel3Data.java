@@ -30,35 +30,38 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	private JButton JBGem;
 	private JCheckBox JCHarBil;
 	private String clientData, brugernavn, kodeord, navn, adresse, postnummer, by, email, harBil;
+	private String[] array;
 
 	private DialogSkiftKodeord DSkiftKodeord;
+	private Panel1 panel1;
+	private TaskBar taskbar;
 	
 	public Panel3Data(MainFrame parent){
 		this.parent = parent;
 		setDefaultProperties();
-		getInfo();
-		setInfo();
+		getClientData();
 		setJComponents();	
 		int spaceTop = 60;
-		int spaceMiddle = 50;
+		int spaceMiddle = 2;
 		int space = 2;
 				
 		//PanelLeft - Insets = Top, Venstre, Bund, Højre
 		int i = 0;
 		c.anchor = GridBagConstraints.NORTHWEST;	
 		c.fill = GridBagConstraints.HORIZONTAL;
-		addC(JLPersonlig,	0,	i,	3,	1,		new Insets(spaceTop,	space,	2,		spaceMiddle));i++;
-		addC(JLBrugernavn,	0,	i,	1,	1,		new Insets(30,			space,	2,		space));
-		addC(JLKodeord,		4,	i,	1,	1,		new Insets(30,			space,	2,		space));i++;		
+		
+		addC(JLPersonlig,	0,	i,	6,	1,		new Insets(spaceTop,	space,	2,		spaceMiddle));i++;
+		addC(JLBrugernavn,	0,	i,	1,	1,		new Insets(20,			space,	2,		space));			c.ipadx = 150;
+		addC(JLKodeord,		4,	i,	1,	1,		new Insets(20,			space,	2,		space));i++;		c.ipadx = 0;
 		addC(JTBrugernavn,	0,	i,	3,	1,		new Insets(space,		space,	2,		space));			
 		addC(Kodeord,		4,	i,	3,	1,		new Insets(space,		space,	2,		space));			
 		addC(JLSkiftKodeord,7,	i,	1,	1,		new Insets(space,		space,	2,		spaceMiddle));i++;	
-		addC(JLNavn,		0,	i,	1,	1, 		new Insets(40,			space,	2,		spaceMiddle));i++; 	c.ipadx = 430;
+		addC(JLNavn,		0,	i,	1,	1, 		new Insets(30,			space,	2,		spaceMiddle));i++; 	c.ipadx = 650;
 		addC(JTNavn,		0,	i,	8,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++; 	c.ipadx = 0;
 		addC(JLAdresse,		0,	i,	1,	1, 		new Insets(4,			space,	2,		spaceMiddle));i++;
 		addC(JTAdresse,		0,	i,	8,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++;
-		addC(JLPostnummer,	0,	i,	1,	1,		new Insets(4,			space,	2,		space));
-		addC(JLBy,			2,	i,	1,	1, 		new Insets(4,			space,	2,		spaceMiddle));i++;
+		addC(JLPostnummer,	0,	i,	1,	1,		new Insets(4,			space,	2,		space));			c.ipadx = 150;
+		addC(JLBy,			2,	i,	1,	1, 		new Insets(4,			space,	2,		spaceMiddle));i++;	c.ipadx = 0;
 		addC(JTPostnummer,	0,	i,	2,	1,	 	new Insets(space,		space,	2,		space));		
 		addC(JTBy,			2,	i,	6,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++;
 		addC(JLEMail,		0,	i,	1,	1,		new Insets(20	,		space,	2,		spaceMiddle));i++;
@@ -131,7 +134,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		JTPostnummer = new JTextField(postnummer);
 		JTBy = new JTextField(by);
 		JTEMail = new JTextField(email);
-		JLPersonlig = new JLabel("<HTML><U>Personlig Profil</U></HTML>");
+		JLPersonlig = new JLabel("<HTML><U>Personlig profil</U></HTML>");
 		JLPersonlig.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		JLNavn = new JLabel("Navn");
 		JLAdresse = new JLabel("Adresse");
@@ -167,14 +170,12 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		setJLabel(JLBillede);
 	}
 	
-	private void getInfo(){
+	private void getClientData(){
 		
 		//Senere : hent clientdata direkte fra serveren
 		clientData = "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.Lise_Noerby@hotmail.com.1";
-	}
-	
-	private void setInfo(){
-		String[] array = clientData.split("\\.");
+		
+		array = clientData.split("\\.");
 		int i = 0;
 		brugernavn = array[i];i++;
 		kodeord = array[i];i++;
@@ -186,7 +187,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		harBil = array[i];
 	}
 	
-	private void getNewInfo(){
+	private void getNewClientData(){
 		// Senere: Send opdaterede clientData til serveren
 		brugernavn = JTBrugernavn.getText();
 		kodeord = Kodeord.getText();
@@ -220,7 +221,8 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		if (e.getSource() == JLSkiftBillede){
 		}
 		if (e.getSource() == JBGem){
-			getNewInfo();
+			getNewClientData();
+			taskbar.addForbundet();
 		}
 	}
 
@@ -251,7 +253,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == JTBy){
-			getNewInfo();
+			getNewClientData();
 		}
 		
 	}
