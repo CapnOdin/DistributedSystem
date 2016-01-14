@@ -32,9 +32,9 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		setDefaultProperties();
 		setJComponents();
 		
-		int JTWidth = frameSizePanel3.width / 2;
-		int spaceLeft = frameSizePanel3.width / 4;
-		int spaceRight = spaceLeft;
+		//int JTWidth = frameSizePanel3.width / 2;
+		//int spaceLeft = frameSizePanel3.width / 4;
+		int space = 2;
 		int spaceTop = 40;
 		int spaceSTD = 4;
 		int spaceExtra = 20;
@@ -44,17 +44,17 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		int i = 0;
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.fill = GridBagConstraints.BOTH;
-		addC(JLForbind,			0,	i,	1,	1,	0,			new Insets(spaceTop,	spaceLeft,	2,	spaceRight));i++;
-		addC(JLEMail,			0,	i,	1,	1,	0,			new Insets(spaceExtra,			spaceLeft,	0,	spaceRight));i++;
-		addC(JTEMail,			0,	i,	1,	1,	JTWidth,	new Insets(spaceSTD,			spaceLeft,	0,	spaceRight));i++;
-		addC(JLKodeord,			0,	i,	1,	1,	0,			new Insets(spaceExtra,			spaceLeft,	0,	spaceRight));i++;
-		addC(JTKodeord,			0,	i,	1,	1,	JTWidth,	new Insets(spaceSTD,			spaceLeft,	0,	spaceRight));i++;
-		addC(JCGemOplysninger,	0,	i,	1,	1,	0,			new Insets(spaceExtra,			spaceLeft,	0,	spaceRight));i++;
-		addC(JBForbind,			0,	i,	1,	1,	0,			new Insets(spaceSTD,			spaceLeft,	40,	spaceRight));i++;
+		addC(JLForbind,			0,	i,	1,	1,		new Insets(spaceTop,			space,	2,	space));i++;
+		addC(JLEMail,			0,	i,	1,	1,		new Insets(spaceExtra,			space,	0,	space));i++;
+		addC(JTEMail,			0,	i,	1,	1,		new Insets(spaceSTD,			space,	0,	space));i++;
+		addC(JLKodeord,			0,	i,	1,	1,		new Insets(spaceExtra,			space,	0,	space));i++;
+		addC(JTKodeord,			0,	i,	1,	1,		new Insets(spaceSTD,			space,	0,	space));i++;
+		addC(JCGemOplysninger,	0,	i,	1,	1,		new Insets(spaceExtra,			space,	0,	space));i++;
+		addC(JBForbind,			0,	i,	1,	1,		new Insets(spaceSTD,			space,	200,	space));i++;
 		
 		JTKodeord.addActionListener(this);
 		JBForbind.addMouseListener(this);
-		
+		panel.setBackground(Color.white);
 		this.add(panel);
 		this.setVisible(true);
 	}
@@ -68,13 +68,12 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		this.validate();
 	}
 	
-	private void addC(JComponent comp, int gridx, int gridy, int gridwidth, int gridheight, int width, Insets space) {
+	private void addC(JComponent comp, int gridx, int gridy, int gridwidth, int gridheight, Insets space) {
 		c.insets = space;
 		c.gridx = gridx;
 		c.gridy = gridy;
 		c.gridwidth = gridwidth;
 		c.gridheight = gridheight;
-		c.ipadx = width;
 		panel.add(comp, c);
 		panel.validate();
 	}
@@ -103,8 +102,8 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		JLForbind = new JLabel("Forbind bruger med Moment konto");
 		JLEMail = new JLabel("E-Mail");
 		JLKodeord = new JLabel("Kodeord");
-		JTEMail = new JTextField();
-		JTKodeord = new JTextField();
+		JTEMail = new JTextField(50);
+		JTKodeord = new JTextField(50);
 		JCGemOplysninger = new JCheckBox("Gem oplysninger");
 		JBForbind = new JButton("Forbind");
 		JLForbind.setFont(new Font("SansSerif", Font.PLAIN, 20));

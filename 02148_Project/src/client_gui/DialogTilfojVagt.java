@@ -29,9 +29,8 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	
 	public  DialogTilfojVagt(MainFrame parent){
 		this.parent = parent;
-		setDefaultProperties();
 		setJComponents();
-		
+		setDefaultProperties();
 		
 		int i = 0;
 		c.anchor = GridBagConstraints.NORTHWEST;
@@ -59,7 +58,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 		
 		this.add(panel);
 		this.pack();
-		this.setModal(true);
+			
 	}
 	
 	private void addC(JComponent comp, int x, int y, int width){
@@ -115,13 +114,16 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	}
 	
 	private void setDefaultProperties(){
+
+		parent.setFocusable(false);
 		this.setUndecorated(true);
 		this.setPreferredSize(new Dimension(JTextAreaDimension.width+20,150));
 		this.getRootPane().setBorder(BorderFactory.createLineBorder(Color.black));
 		this.pack();
 		this.setLocationRelativeTo(null);
-		//this.setModal(true);
 		this.setVisible(true);
+
+		
 	}
 
 	@Override
@@ -135,9 +137,13 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBTilfoj){
+
+			parent.setFocusable(true);
 			dispose();
 		}
 		if (e.getSource() == JBAnnuller){
+
+			parent.setFocusable(true);
 			dispose();
 		}
 	}

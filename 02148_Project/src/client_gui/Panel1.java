@@ -31,7 +31,7 @@ public class Panel1 extends PanelTemplate implements GeneralProperties{
 	
 	public void addForbundet(){	
 		JLForbundet = new JLabel(" Forbundet ");
-		JLForbundet.setBackground(Color.white);
+		panel.setBackground(Color.white);
 		JLForbundet.setForeground(Color.gray);
 		panel.add(JLForbundet);
 		this.add(panel, BorderLayout.EAST);
