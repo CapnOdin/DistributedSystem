@@ -1,12 +1,14 @@
 package server_gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -15,24 +17,31 @@ import client_eng.TCPClient;
 public class ServerMenuPanel extends JPanel implements MouseListener {
 	
 	private static final long serialVersionUID = 1L;
+	
 	private ServerMainFrame parent;
-	private Dimension clientMenuPanelSize;
+	private GridBagConstraints c = new GridBagConstraints();
 	
 	private ServerConnectedClientsPanel sccp; 
+	private ServerTaskBar stb;
 	
+	private JPanel menusPanel = new JPanel(new GridLayout(1,2));
 	private JLabel[] menus = new JLabel[2];
 	private Color twitchColor = new Color(100,65,165);
-	private Color menusColor = new Color(68,97,157);
-	private Color youtubeColor = new Color(204,24,30);
-	private Color matrixBack = new Color(0,0,0);
-	private Color matrixFront = new Color(0, 255, 0);
 	
 	public ServerMenuPanel(ServerMainFrame parent) {
 		this.parent = parent;
-		clientMenuPanelSize = new Dimension((int)parent.getContentPane().getWidth(), (int)parent.getContentPane().getHeight()/10);
 		setDefaultProperties();
 		addMenuProperties();
 		addMenus();
+	}
+	
+	private void addC(JComponent comp, int gridx, int gridy) {
+		c.gridx = gridx;
+		c.gridy = gridy;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = c.weighty = 1;
+		this.add(comp, c);
+		this.validate();
 	}
 
 	private void addMenus() {
@@ -40,6 +49,9 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 	}
 
 	private void addMenuProperties() {
+		stb = new ServerTaskBar(parent, "SERVER");
+		menusPanel.setBackground(twitchColor);
+		addC(stb, 0, 0);
 		for(int i = 0; i < menus.length; i++) {
 			menus[i] = new JLabel("", JLabel.CENTER);
 			menus[i].addMouseListener(this);
@@ -47,19 +59,18 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 			menus[i].setBackground(twitchColor);
 			menus[i].setForeground(Color.white);
 			menus[i].setBorder(BorderFactory.createRaisedSoftBevelBorder());
-			this.add(menus[i]);
+			menusPanel.add(menus[i]);
 		}
 		
 		menus[0].setText("Connected Clients");
 		menus[1].setText("Server Setup");
-		
+		addC(menusPanel, 0, 1);
 		this.validate();
 	}
 
 	private void setDefaultProperties() {
 		this.setBackground(twitchColor);
-		//this.setPreferredSize(clientMenuPanelSize);
-		this.setLayout(new GridLayout(1,4));
+		this.setLayout(new GridBagLayout());
 		this.setVisible(true);
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
