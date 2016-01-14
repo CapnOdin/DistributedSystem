@@ -68,7 +68,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		chatLabels[0] = new JLabel("", JLabel.CENTER);
 		chatLabels[0].setText("Actions");
 		chatLabels[0].setFont(bigFont);
-		addC(chat, chatLabels[0], 0, 0, 3, 1, 0, 0);
+		//addC(chat, chatLabels[0], 0, 0, 3, 1, 0, 0);
 		
 		chatLabels[1] = new JLabel("Chat:", JLabel.LEFT);
 		addC(chat, chatLabels[1], 0, 1, 1, 1, 0, 0);
