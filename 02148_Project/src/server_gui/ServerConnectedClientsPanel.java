@@ -21,6 +21,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 import server_eng.TCPServer;
 
@@ -60,9 +64,12 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 
 	private void addChatPanelContent() {
 		chatArea.setEditable(false);
+		
 		chatLabels[0] = new JLabel(" Actions", JLabel.LEFT);
 		chatLabels[0].setFont(bigFont);
 		chatLabels[1] = new JLabel(" Chat:", JLabel.LEFT);
+		
+		send.addActionListener(this);
 		
 		addC(info, chatLabels[0], 0, 7, 3, 0);
 		addC(info, chatLabels[1], 0, 8, 1, 0);
@@ -83,7 +90,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 
 	private void addInfoPanelContent() {
 		model = new DefaultListModel<String>();
-		
+		chatPane.setMaximumSize(chatPane.getSize());
 		allConnections = new JList<String>(model);
 		allConnections.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		allConnections.setBackground(ServerPanelTemplate.barColor);
@@ -103,7 +110,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		}
 		
 		for(int i = 0; i < infoLabelFields.length; i++) {
-			infoLabelFields[i] = new JTextField(15);
+			infoLabelFields[i] = new JTextField();
 			infoLabelFields[i].setEditable(false);
 		}
 		
@@ -146,7 +153,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		infoLabelFields[3].setText(String.valueOf(port));
 		infoLabelFields[4].setText(type);
 	}
-	
+
 	private void clearInformationFields() {
 		for(int i = 0; i < infoLabelFields.length; i++) {
 			infoLabelFields[i].setText("");
@@ -180,6 +187,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		clientAlias = BOBROSS[1];
 		clientIP = BOBROSS[2];
 		setInformationFields(clientAlias, clientIP, ServerMainFrame.portNumber, "User");
+		chatArea.setText("");
 	}
 	
 	@Override
@@ -191,6 +199,14 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 			model.removeElement(selectedClient);
 			clearInformationFields();
 			TCPServer.userCount--;
+		}
+		// SEND MESSAGE BUTTON
+		if(e.getSource() == send) {
+			String message = chatMessage.getText();
+			TCPServer.getAllConnections().get(clientUserNo).sendMessage(message);
+			chatArea.append("[SERVER]" + message + "\n");
+			chatMessage.setText("");
+			this.validate();
 		}
 		
 	}

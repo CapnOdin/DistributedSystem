@@ -43,7 +43,7 @@ public class ConnectionThread extends Thread {
 		System.out.println("[THREAD "+ userNo + "]Streams successfully created.");
 	}
 	
-	private void sendMessage(String message) {
+	public void sendMessage(String message) {
 		try {
 			output.writeObject("[THREAD " + userNo + "]" + message);
 			output.flush();

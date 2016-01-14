@@ -47,11 +47,11 @@ public class TCPClient extends Thread {
 	}
 
 	private void whileConnected() throws IOException {
+		sendMessage("ALIAS%"+alias);
 		do {
 			try {
 				message = (String) input.readObject();
 				System.out.println(message);
-				sendMessage("ALIAS%"+alias);
 			}catch(Exception e) {
 				break;
 			}
