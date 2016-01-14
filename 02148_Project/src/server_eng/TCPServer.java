@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TCPServer implements Runnable {
+public class TCPServer extends Thread {
 	
 	private static ArrayList<String> taskBuffer = new ArrayList<String>();
 	public static int currentTask = 0;
@@ -17,6 +17,9 @@ public class TCPServer implements Runnable {
 	private ServerSocket server;
 	private Socket connection;
 	
+	private String serverStatus = "";
+	
+	private boolean isRunning = false;
 	private int port;
 	private int userCount = 0;
 	
@@ -43,11 +46,13 @@ public class TCPServer implements Runnable {
 		(new Thread(new ServerSlave(space))).start();
 	}
 	
-	private void waitForConnection() throws IOException {
+	private void waitForConnection() throws IOException {	
 		while(true) {
+			serverStatus = "Waiting for someone to connect ...";
 			System.out.println("[SERVER]Waiting for someone to connect...");
 			connection = server.accept();
-			System.out.println("[SERVER]Now connected to " + connection.getInetAddress().getHostName());
+			serverStatus = "Now connected to " + connection.getRemoteSocketAddress();
+			System.out.println("[SERVER]Now connected to " + connection.getRemoteSocketAddress());
 			ConnectionThread newClient = new ConnectionThread(connection, userCount);
 			allConnections.put(userCount++, newClient);
 			System.out.println(allConnections);
@@ -61,6 +66,7 @@ public class TCPServer implements Runnable {
 	}
 
 	private void cleanUp() {
+		serverStatus = "Connections closed";
 		System.out.println("[SERVER]Connections closed");
 		try {
 			connection.close();
@@ -93,6 +99,26 @@ public class TCPServer implements Runnable {
 			e.printStackTrace();
 		}
 		serverSleepMode();
+	}
+	
+	public int getPort() {
+		return server.getLocalPort();
+	}
+
+	public boolean isRunning() {
+		return isRunning;
+	}
+
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
+	}
+
+	public static HashMap<Integer, ConnectionThread> getAllConnections() {
+		return allConnections;
+	}
+
+	public String getServerStatus() {
+		return serverStatus;
 	}
 
 }

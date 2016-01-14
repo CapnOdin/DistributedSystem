@@ -1,21 +1,22 @@
-package matt_client_gui;
+package server_gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 
-public class ClientPlaceHolderPanel extends ClientPanelTemplate {
+public class ServerConnectionPanel extends ServerPanelTemplate {
 
 	private static final long serialVersionUID = 1L;
-	private ServerSetupConnection login;
+	private ServerConnectionDialog login;
 	
-	public ClientPlaceHolderPanel(ClientMainFrame parent, String ID) {
+	public ServerConnectionPanel(ServerMainFrame parent, String ID) {
 		super(parent, ID);
 		setPlaceHolderProperties();
 		addLoginPrompt();
 	}
 
 	private void addLoginPrompt() {
-		login = new ServerSetupConnection(super.getParent());
+		login = new ServerConnectionDialog(super.getParent());
 	}
 
 	private void setPlaceHolderProperties() {
