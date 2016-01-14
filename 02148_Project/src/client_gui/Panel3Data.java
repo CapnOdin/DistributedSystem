@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -17,11 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
-import com.sun.medialib.mlib.Image;
-
-public class Panel3Data extends PanelTemplate implements GeneralProperties, MouseListener{
+public class Panel3Data extends PanelTemplate implements GeneralProperties, MouseListener, ActionListener{
 	private GridBagConstraints c = new GridBagConstraints();
 	private MainFrame parent;
 	private JPanel panel = new JPanel(new GridBagLayout());
@@ -30,14 +29,16 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	private JPasswordField Kodeord;
 	private JButton JBGem;
 	private JCheckBox JCHarBil;
+	private String info = "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.1", brugernavn, kodeord, navn, adresse, postnummer, by, harBil;
 	
 	private DialogSkiftKodeord DSkiftKodeord;
 	
 	public Panel3Data(MainFrame parent){
 		this.parent = parent;
 		setDefaultProperties();
+		setInfo();
 		setJComponents();	
-		int spaceTop = 10;
+		int spaceTop = 20;
 		int spaceMiddle = 50;
 		int space = 2;
 				
@@ -47,12 +48,12 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		c.fill = GridBagConstraints.HORIZONTAL;
 		addC(JLPersonlig,	0,	i,	3,	1,		new Insets(spaceTop,	space,	2,		spaceMiddle));i++;
 		addC(JLBrugernavn,	0,	i,	1,	1,		new Insets(30,			space,	2,		space));
-		addC(JLKodeord,		4,	i,	1,	1,		new Insets(30,			space,	2,		space));i++;
-		addC(JTBrugernavn,	0,	i,	3,	1,		new Insets(space,		space,	2,		space));
-		addC(Kodeord,		4,	i,	2,	1,		new Insets(space,		space,	2,		space));
+		addC(JLKodeord,		4,	i,	1,	1,		new Insets(30,			space,	2,		space));i++;		
+		addC(JTBrugernavn,	0,	i,	3,	1,		new Insets(space,		space,	2,		space));			
+		addC(Kodeord,		4,	i,	2,	1,		new Insets(space,		space,	2,		space));			
 		addC(JLSkiftKodeord,6,	i,	1,	1,		new Insets(space,		space,	2,		spaceMiddle));i++;			
-		addC(JLNavn,		0,	i,	1,	1, 		new Insets(40,			space,	2,		spaceMiddle));i++;
-		addC(JTNavn,		0,	i,	7,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++;
+		addC(JLNavn,		0,	i,	1,	1, 		new Insets(40,			space,	2,		spaceMiddle));i++; 	c.ipadx = 530;
+		addC(JTNavn,		0,	i,	7,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++; 	c.ipadx = 0;
 		addC(JLAdresse,		0,	i,	1,	1, 		new Insets(4,			space,	2,		spaceMiddle));i++;
 		addC(JTAdresse,		0,	i,	7,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++;
 		addC(JLPostnummer,	0,	i,	1,	1,		new Insets(4,			space,	2,		space));
@@ -61,11 +62,13 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		addC(JTBy,			2,	i,	5,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++;
 		addC(JCHarBil,		0,	i,	1,	1, 		new Insets(20,			space,	2,		spaceMiddle));i++;
 		addC(JBGem,			0,	i,	1,	1, 		new Insets(space,		space,	100,	spaceMiddle));i++;
-		addC(JLBillede,		7,	2,	1,	8,		new Insets(space,		space,	space,	space));
-		addC(JLSkiftBillede,7,	10,	1,	1,		new Insets(space,		space,	space,	space));
+		//addC(JLBillede,		7,	2,	1,	8,		new Insets(space,		space,	space,	space));
+		//addC(JLSkiftBillede,7,	10,	1,	1,		new Insets(space,		space,	space,	space));
 		
+		JTBy.addActionListener(this);
 		JLSkiftKodeord.addMouseListener(this);
 		JLSkiftBillede.addMouseListener(this);
+		JBGem.addMouseListener(this);
 		panel.setBackground(Color.white);
 		this.add(panel);		
 		this.setVisible(true);
@@ -114,14 +117,16 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	private void setJComponents(){		
 		ImageIcon IProfilBillede = new ImageIcon("download.jpeg");
 		JLBrugernavn = new JLabel("Brugernavn");
-		JTBrugernavn = new JTextField(20);
+		JTBrugernavn = new JTextField(brugernavn);
+		JTBrugernavn.setEditable(false);
 		JLKodeord = new JLabel("Kodeord");
-		Kodeord = new JPasswordField(20);
+		Kodeord = new JPasswordField(kodeord);
+		Kodeord.setEditable(false);
 		JLSkiftKodeord = new JLabel("<HTML><U>Skift Kodeord</U></HTML>");
-		JTNavn = new JTextField(30);
-		JTAdresse = new JTextField(30);
-		JTPostnummer = new JTextField();
-		JTBy = new JTextField();
+		JTNavn = new JTextField(navn);
+		JTAdresse = new JTextField(adresse);
+		JTPostnummer = new JTextField(postnummer);
+		JTBy = new JTextField(by);
 		JLPersonlig = new JLabel("<HTML><U>Personlig Profil</U></HTML>");
 		JLPersonlig.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		JLNavn = new JLabel("Navn");
@@ -130,6 +135,9 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		JLBy = new JLabel("By");
 		JLSkiftBillede = new JLabel("Skift billede");
 		JCHarBil = new JCheckBox("Har bil");
+		if (harBil.equals("1")){
+			JCHarBil.setSelected(true);
+		}		
 		JBGem = new JButton("Gem");	
 		JLBillede = new JLabel(IProfilBillede);
 		JLBillede.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -151,6 +159,36 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		setJButton(JBGem);
 		setJLabel(JLBillede);
 	}
+	
+	private void setInfo(){
+		//System.out.println(info);
+		String[] array = info.split("\\.");
+		//System.out.println(java.util.Arrays.toString(array));
+		int i = 0;
+		brugernavn = array[i];i++;
+		kodeord = array[i];i++;
+		navn = array[i];i++;
+		adresse = array[i];i++;
+		postnummer = array[i];i++;
+		by = array[i];i++;
+		harBil = array[i];
+	}
+	
+	private String getInfo(){
+		brugernavn = JTBrugernavn.getText();
+		kodeord = Kodeord.getText();
+		navn = JTNavn.getText();
+		adresse = JTAdresse.getText();
+		postnummer = JTPostnummer.getText();
+		by = JTBy.getText();
+		if (JCHarBil.isSelected()){
+			harBil = "1";}
+		else{
+			harBil = "0";}
+		info = brugernavn + "." + kodeord + "."+ navn+"."+adresse+"."+postnummer+"."+by + "." + harBil;
+		return info;
+		
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -160,16 +198,9 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 			DSkiftKodeord.setVisible(true);
 		}
 		if (e.getSource() == JLSkiftBillede){
-			
 		}
-		if (e. getSource() == JBGem){
-			String navn = JTNavn.getText();
-			System.out.println(navn);
-			System.out.println(JTNavn.getText());
-			System.out.println(JTAdresse.getText());
-			System.out.println(JTPostnummer.getText());
-			System.out.println(JTBy.getText());
-			
+		if (e.getSource() == JBGem){
+			System.out.println(getInfo());
 		}
 	}
 
@@ -194,6 +225,14 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == JTBy){
+			System.out.println(getInfo());
+		}
 		
 	}
 	

@@ -23,7 +23,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	public MainFrame() {
 		/*DLogin = new DialogLogin(this);
 		DLogin.setAlwaysOnTop(true);
-	    DLogin.setVisible(true);*/			
+	    DLogin.setVisible(true);*/		
 	    setDefaultProperties();
 		taskBar = new TaskBar(this);
 		vistPanel1 = new Panel1(this);

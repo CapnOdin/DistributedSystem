@@ -99,7 +99,7 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	}
 	
 	private void setJComponents(){
-		JLForbind = new JLabel("Forbind bruger med Moment konto");
+		JLForbind = new JLabel("<HTML> <U>Forbind bruger med Moment konto</U></HTML>"); 
 		JLEMail = new JLabel("E-Mail");
 		JLKodeord = new JLabel("Kodeord");
 		JTEMail = new JTextField(50);

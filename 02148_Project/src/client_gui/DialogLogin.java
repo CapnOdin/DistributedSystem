@@ -31,6 +31,7 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
     private JPanel panel = new JPanel(new GridBagLayout());
     private Insets normalInsets = new Insets(2,2,2,2);
     private Insets biggerInsets = new Insets(10,2,2,2);
+    private String info, brugernavn, kodeord, godkendtInfo;
     
     private DialogNyBruger DNyBruger;
     private DialogForkertLogin DForkertLogin;
@@ -110,10 +111,22 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
     	this.setPreferredSize(new Dimension(500,300));
     }
     
+    private void getGodkendtInfo(){
+    	godkendtInfo = "Lise.projekt";
+    }
+    
+    private void getInfo(){
+    	brugernavn = JTBrugernavn.getText();
+    	kodeord = Kodeord.getText();
+    	info = brugernavn + "." + kodeord;
+    }
+    
     @Override
 	public void actionPerformed(ActionEvent e) {
 		if( e.getSource() == Kodeord){
-			if (Login.authenticate(getUsername(), getPassword())) {
+			getGodkendtInfo();
+			getInfo();
+			if (info.equals(godkendtInfo)) {
                 this.setVisible(false);
                 parent.mainFrameSetVisible();
                 dispose();
@@ -130,7 +143,9 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBLogin){
-			if (Login.authenticate(getUsername(), getPassword())) {
+			getGodkendtInfo();
+			getInfo();
+			if (info.equals(godkendtInfo)) {
                 this.setVisible(false);
                 parent.mainFrameSetVisible();
                 dispose();
@@ -168,12 +183,4 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	public void mouseExited(MouseEvent e) {
 
 	}
-    
-    public String getUsername() {
-        return JTBrugernavn.getText().trim();
-    }
- 
-    public String getPassword() {
-        return new String(Kodeord.getPassword());
-    } 
 }
