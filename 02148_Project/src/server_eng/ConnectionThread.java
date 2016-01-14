@@ -60,6 +60,7 @@ public class ConnectionThread extends Thread {
 				try {
 					message = (String) input.readObject();
 					TCPServer.putTask(message);
+					System.out.println(message);
 				} catch(Exception e) {
 					break;
 				}
