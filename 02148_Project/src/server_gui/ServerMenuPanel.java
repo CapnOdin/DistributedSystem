@@ -58,7 +58,7 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 
 	private void setDefaultProperties() {
 		this.setBackground(twitchColor);
-		this.setPreferredSize(clientMenuPanelSize);
+		//this.setPreferredSize(clientMenuPanelSize);
 		this.setLayout(new GridLayout(1,4));
 		this.setVisible(true);
 		this.setBorder(BorderFactory.createLineBorder(Color.black));

@@ -1,5 +1,6 @@
 package server_gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -20,9 +21,9 @@ public class ServerMainFrame extends JFrame {
 	
 	private GridBagConstraints c = new GridBagConstraints();
 	
-	private ServerMenuPanel cmp;
-	private ServerTaskBar ctb;
-	private ServerStatusBar csb;
+	private ServerMenuPanel smp;
+	private ServerTaskBar stb;
+	private ServerStatusBar ssb;
 	
 	private ServerPanelTemplate current_panel;
 	public static TCPServer server;
@@ -42,7 +43,7 @@ public class ServerMainFrame extends JFrame {
 	public void addVariablePanel(ServerPanelTemplate panel) {
 		removeVariablePanel();
 		current_panel = panel;
-		addC(panel, 0, 2, 1, 1);
+		addC(panel, 0, 2, 1, 1, 0, 100);
 		panel.setVisible(true);
 		this.validate();
 		this.pack();
@@ -55,20 +56,23 @@ public class ServerMainFrame extends JFrame {
 	}
 	
 	private void addStaticPanels() {
-		cmp = new ServerMenuPanel(this);
-		ctb = new ServerTaskBar(this, "SERVER");
-		csb = new ServerStatusBar(this);
+		stb = new ServerTaskBar(this, "SERVER");
+		smp = new ServerMenuPanel(this);
+		ssb = new ServerStatusBar(this);
 		current_panel = new ServerConnectionPanel(this, "PLACEHOLDER");
 		
-		addC(ctb, 0, 0, 1, 1);
-		addC(cmp, 0, 1, 1, 1);
-		addC(current_panel, 0, 2, 1, 1);
-		addC(csb, 0, 3, 1, 1);
+		addC(stb, 0, 0, 1, 1, this.getWidth()-65, 0);
+		addC(smp, 0, 1, 1, 1, 0, 0);
+		addC(current_panel, 0, 2, 1, 1, 0, (int)(this.getHeight()*0.877));
+		addC(ssb, 0, 3, 1, 1, 0, 0);
 	}
 	
-	private void addC(JComponent comp, int gridx, int gridy, int gridwidth, int gridheight) {
+	private void addC(JComponent comp, int gridx, int gridy, int gridwidth, int gridheight, int ipadx, int ipady) {
 		c.gridx = gridx; c.gridy = gridy;
 		c.gridwidth = gridwidth; c.gridheight = gridheight;
+		c.ipadx = ipadx;
+		c.ipady = ipady;
+		c.fill = GridBagConstraints.BOTH;
 		this.add(comp, c);
 		this.validate();
 	}
@@ -81,12 +85,11 @@ public class ServerMainFrame extends JFrame {
         } catch (Exception e) {
            
         }
-		this.getContentPane().setBackground(ServerPanelTemplate.barColor);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(frameSize);
 		this.setUndecorated(true);
 		this.setLayout(new GridBagLayout());
-		this.getContentPane().setBackground(ServerPanelTemplate.barColor);
+		this.getContentPane().setBackground(Color.magenta);
 		this.pack();
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);

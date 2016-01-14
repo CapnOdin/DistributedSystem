@@ -82,7 +82,7 @@ public class ServerStatusBar extends JPanel {
 	private void setDefaultProperties() {
 		this.setVisible(true);
 		this.setBackground(Color.white);
-		this.setPreferredSize(clientStatusBarSize);
+		//this.setPreferredSize(clientStatusBarSize);
 		this.setLayout(new BorderLayout());
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 	}

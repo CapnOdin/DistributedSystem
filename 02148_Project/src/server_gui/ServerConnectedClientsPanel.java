@@ -1,6 +1,5 @@
 package server_gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -33,9 +32,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 	private JScrollPane pane;
 	
 	private JPanel info;
-	private JPanel chat;
 	private JScrollPane clientHistory;
-	private JPanel infoHolder = new JPanel(new BorderLayout());
 	
 	private GridBagConstraints c = new GridBagConstraints();
 	private JLabel[] infoLabels = new JLabel[6];
@@ -43,7 +40,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 	private Font bigFont;
 	
 	private JLabel[] chatLabels = new JLabel[2];
-	private JTextField chatMessage = new JTextField(50);
+	private JTextField chatMessage = new JTextField();
 	public static JTextArea chatArea = new JTextArea();
 	private JScrollPane chatPane = new JScrollPane(chatArea);
 	private JButton send = new JButton("Send");
@@ -61,22 +58,19 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 	}
 
 	private void addChatPanelContent() {
-		chat = new JPanel(new GridBagLayout());
-		chat.setBackground(ServerPanelTemplate.barColor);
 		chatArea.setEditable(false);
 		
-		chatLabels[0] = new JLabel("", JLabel.CENTER);
-		chatLabels[0].setText("Actions");
+		chatLabels[0] = new JLabel("Actions", JLabel.LEFT);
 		chatLabels[0].setFont(bigFont);
-		//addC(chat, chatLabels[0], 0, 0, 3, 1, 0, 0);
+		addC(info, chatLabels[0], 0, 7, 3, 1, 0, 0);
 		
 		chatLabels[1] = new JLabel("Chat:", JLabel.LEFT);
-		addC(chat, chatLabels[1], 0, 1, 1, 1, 0, 0);
+		addC(info, chatLabels[1], 0, 8, 1, 1, 0, 0);
 		
-		addC(chat, chatPane, 0, 2, 3, 1, 0, 40);
-		addC(chat, chatMessage, 0, 3, 2, 1, 0, 0);
+		addC(info, chatPane, 0, 9, 3, 1, 0, 40);
+		addC(info, chatMessage, 0, 10, 2, 1, 0, 0);
 		
-		addC(chat, send, 2, 3, 1, 1, 0, 0);
+		addC(info, send, 2, 10, 1, 1, 0, 0);
 		
 		for(int i = 0; i < actionButtons.length; i++) {
 			actionButtons[i] = new JButton(""+(i+1)); 
@@ -84,14 +78,23 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 			button_holder.add(actionButtons[i]);
 		}
 		
-		addC(chat, button_holder, 0, 4, 3, 1, 0, 30);
+		addC(info, button_holder, 0, 12, 3, 1, 0, 20);
 		
 		actionButtons[0].setText("Disconnect");
 		
-		infoHolder.add(chat, BorderLayout.CENTER);
 	}
 
 	private void addInfoPanelContent() {
+		model = new DefaultListModel<String>();
+		
+		allConnections = new JList<String>(model);
+		allConnections.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		allConnections.addMouseListener(this);
+		allConnections.setBackground(ServerPanelTemplate.barColor);
+		
+		pane = new JScrollPane(allConnections);
+		pane.setBorder(BorderFactory.createLineBorder(Color.black));
+		
 		info = new JPanel(new GridBagLayout());
 		info.setBackground(ServerPanelTemplate.barColor);
 		
@@ -105,9 +108,9 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 			infoLabelFields[i].setEditable(false);
 		}
 		
-		bigFont = new Font(infoLabels[0].getFont().getFontName(), Font.BOLD, 18);
+		bigFont = new Font(infoLabels[0].getFont().getFontName(), Font.BOLD, 16);
 		
-		infoLabels[0] = new JLabel("Connection Information", JLabel.CENTER);
+		infoLabels[0] = new JLabel("Connection Information", JLabel.LEFT);
 		infoLabels[0].setFont(bigFont);
 		
 		addC(info, infoLabels[0], 0, 0, 2, 1, 0, 20);
@@ -125,9 +128,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		
 		addC(info, infoLabels[5], 0, 5, 1, 1, 0, 20);
 		clientHistory = new JScrollPane(infoLabelFields[0]);
-		addC(info, clientHistory, 0, 6, 2, 1, 300, 30);
-		
-		infoHolder.add(info, BorderLayout.NORTH);
+		addC(info, clientHistory, 0, 6, 3, 1, info.getWidth(), 33);
 	}
 	
 	private void addC(JComponent comp1, JComponent comp, int gridx, int gridy, int gridwidth, int gridheight, int ipadx, int ipady) {
@@ -139,31 +140,6 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		c.ipady = ipady;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		comp1.add(comp, c);
-	}
-
-	private void addPanels() {
-		this.add(pane);
-		this.add(infoHolder);
-		this.validate();
-	}
-
-	@Override
-	public void addContent() {
-		model = new DefaultListModel<String>();
-		
-		allConnections = new JList<String>(model);
-		allConnections.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		allConnections.addMouseListener(this);
-		allConnections.setBackground(ServerPanelTemplate.barColor);
-		
-		pane = new JScrollPane(allConnections);
-		pane.setBorder(BorderFactory.createLineBorder(Color.black));
-	}
-	
-	@Override
-	public void setDefaultProperties() {
-		this.setLayout(new GridLayout(1, 2));
-		this.setVisible(true);
 	}
 	
 	private void setInformationFields(String alias, String IP, int port, String type) {
@@ -177,6 +153,23 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		for(int i = 0; i < infoLabelFields.length; i++) {
 			infoLabelFields[i].setText("");
 		}
+	}
+	
+	private void addPanels() {
+		this.add(pane);
+		this.add(info);
+		this.validate();
+	}
+	
+	@Override
+	public void setDefaultProperties() {
+		this.setLayout(new GridLayout(1, 2));
+		this.setVisible(true);
+	}
+	
+	@Override
+	public void addContent() {
+		
 	}
 
 	@SuppressWarnings("rawtypes")

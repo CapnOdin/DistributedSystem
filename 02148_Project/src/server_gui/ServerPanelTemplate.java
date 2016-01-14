@@ -18,12 +18,8 @@ public abstract class ServerPanelTemplate extends JPanel implements MouseListene
 	public static Color barColor = new Color(233,234,237);
 	public static Color twitchPanel = new Color(25,25,31);
 	
-	private Dimension panelTemplateSize;
-	
 	public ServerPanelTemplate(ServerMainFrame parent, String ID) {
 		this.parent = parent; this.ID = ID;
-		panelTemplateSize = new Dimension((int)parent.getContentPane().getWidth(),(int)(parent.getContentPane().getHeight()*0.8));
-		this.setPreferredSize(panelTemplateSize);
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.setBackground(barColor);
 		this.setLayout(new BorderLayout());
