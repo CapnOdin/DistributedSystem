@@ -118,13 +118,13 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		
 		for(int i = 1; i < infoLabels.length-1; i++) {
 			addC(info, infoLabels[i], 0, i, 0, 0);
-			addC(info, infoLabelFields[i], 1, i, 1, 0);
+			//addC(info, infoLabelFields[i], 1, i, 1, 0);
 		}
 		
-		infoLabels[1].setText(" Client Alias: ");
-		infoLabels[2].setText(" Client IP-Address: ");
-		infoLabels[3].setText(" Connected to port: ");
-		infoLabels[4].setText(" Client Type: ");
+		infoLabels[1].setText(" Client Alias: " + clientAlias);
+		infoLabels[2].setText(" Client IP-Address: " + clientIP);
+		infoLabels[3].setText(" Connected to port: " + 1234);
+		infoLabels[4].setText(" Client Session ID: " + clientSessionID);
 		infoLabels[5].setText(" Client action history: ");
 		
 		addC(info, infoLabels[5], 0, 5, 1, 0);
@@ -143,6 +143,11 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 	}
 	
 	private void setInformationFields(String alias, String IP, int port, String type) {
+		infoLabels[1].setText(" Client Alias: " + clientAlias);
+		infoLabels[2].setText(" Client IP-Address: " + clientIP);
+		infoLabels[3].setText(" Connected to port: " + 1234);
+		infoLabels[4].setText(" Client Session ID: " + clientSessionID);
+		
 		infoLabelFields[1].setText(alias);
 		infoLabelFields[2].setText(IP);
 		infoLabelFields[3].setText(String.valueOf(port));

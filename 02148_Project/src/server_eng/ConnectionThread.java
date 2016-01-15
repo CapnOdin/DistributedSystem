@@ -65,7 +65,7 @@ public class ConnectionThread extends Thread {
 			TCPServer.getAllConnections().put(message, this);
 		} else greetUser();
 		sessionID = message;
-		sendMessage("A0.TRUE."+message);
+		sendMessage("A2.TRUE."+message);
 		message = "Conversation ready!";
 		sendMessage(message);
 	}

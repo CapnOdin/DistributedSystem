@@ -31,8 +31,7 @@ public class TCPClient extends Thread {
 		//AUTHENTICATION
 		case "A0":
 			if(decoded[1].equals("TRUE")) {
-				System.out.println("ok");
-				this.sessionID = decoded[2];
+				
 			} 
 			if(decoded[1].equals("FALSE")) {
 				
@@ -47,6 +46,15 @@ public class TCPClient extends Thread {
 				
 			}
 			break;
+		//CONNECTION
+		case "A2":
+			if(decoded[1].equals("TRUE")) {
+				System.out.println(decoded[2]);
+				sessionID = decoded[2];
+			}
+			if(decoded[1].equals("FALSE")) {
+				
+			}
 		default:
 			System.out.println("Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");
 		}
@@ -79,9 +87,10 @@ public class TCPClient extends Thread {
 		do {
 			try {
 				message = (String) input.readObject();
-				decode(message);
 				System.out.println(message);
+				decode(message);
 			}catch(Exception e) {
+				e.printStackTrace();
 				break;
 			}
 		}while(!message.equals("SERVER - END"));
