@@ -20,6 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import client_eng.Profile;
+
 public class Panel3Data extends PanelTemplate implements GeneralProperties, MouseListener, ActionListener{
 	private GridBagConstraints c = new GridBagConstraints();
 	private MainFrame parent;
@@ -35,11 +37,12 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	private DialogSkiftKodeord DSkiftKodeord;
 	private Panel1 panel1;
 	private TaskBar taskbar;
+	private Profile profile;
 	
 	public Panel3Data(MainFrame parent){
 		this.parent = parent;
 		setDefaultProperties();
-		setClientData(getClientData()); 
+		setClientData(); 
 		setJComponents();	
 		int spaceTop = 60;
 		int spaceMiddle = 2;
@@ -175,17 +178,16 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		return "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.Lise_Noerby@hotmail.com.1"; //Senere: Hent denne direkte fra server
 	}
 	
-	private void setClientData(String clientData){ 
-		array = clientData.split("\\.");
-		int i = 0;
-		brugernavn = array[i];i++;
-		kodeord = array[i];i++;
-		navn = array[i];i++;
-		adresse = array[i];i++;
-		postnummer = array[i];i++;
-		by = array[i];i++;
-		email = array[i];i++;
-		harBil = array[i];
+	private void setClientData(){
+		brugernavn = profile.getUsername();
+		kodeord = profile.getPassword();
+		navn = profile.getNavn();
+		adresse = profile.getAdresse();
+		postnummer = profile.getPostnummer();
+		by = profile.getBy();
+		//email = profile.getEmail();
+		harBil = profile.getHarBil();
+		 
 	}
 	
 	private String getNewClientData(){
