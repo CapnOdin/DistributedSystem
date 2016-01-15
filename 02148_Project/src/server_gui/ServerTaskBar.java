@@ -34,6 +34,7 @@ public class ServerTaskBar extends JMenuBar implements MouseListener, MouseMotio
 
 	private void addElements() {
 		button_holder.add(power_button);
+		button_holder.setBackground(Color.white);
 		button_holder.addMouseListener(this);
 		button_holder.addMouseMotionListener(this);
 		power_button.addMouseListener(this);
@@ -44,7 +45,7 @@ public class ServerTaskBar extends JMenuBar implements MouseListener, MouseMotio
 	private void setDefaultProperties() {
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
-		//this.setPreferredSize(clientTaskBarSize);
+		this.setBackground(Color.white);
 		this.setLayout(new BorderLayout());
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.setVisible(true);
