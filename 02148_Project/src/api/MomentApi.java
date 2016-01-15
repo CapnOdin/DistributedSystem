@@ -106,23 +106,29 @@ public class MomentApi {
 	
 	public static List<Map<String, String>> generateListOfDictionaries(String str) {
 		List<Map<String, String>> dictvagt = new ArrayList<Map<String, String>>();
-		
-		String[] dics = str.substring(1, str.length() - 2).replaceAll("\"", "").replace("{", "").split("},");
-		for (String dic : dics) {
-			dictvagt.add(generateDictionarie(dic));
+		try{
+			String[] dics = str.substring(1, str.length() - 2).replaceAll("\"", "").replace("{", "").split("},");
+			for (String dic : dics) {
+				dictvagt.add(generateDictionarie(dic));
+			}
+		} catch (Exception e) {
+			
 		}
-		
 		return dictvagt;
 	}
 	
 	
 	public static Map<String, String> generateDictionarie(String str) {
 		Map<String, String> dict = new HashMap<String, String>();
-		String[] pairs = str.replace(", ", "; ").split(",");
-		for (String pair : pairs) {
-			int index = pair.indexOf(":");
-			String tempStr = pair.replace("; ", ", ");
-			dict.put(tempStr.substring(0, index), tempStr.substring(index + 1));
+		try{
+			String[] pairs = str.replace(", ", "; ").split(",");
+			for (String pair : pairs) {
+				int index = pair.indexOf(":");
+				String tempStr = pair.replace("; ", ", ");
+				dict.put(tempStr.substring(0, index), tempStr.substring(index + 1));
+			}
+		} catch (Exception e) {
+			
 		}
 		return dict;
 	}
