@@ -33,6 +33,8 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
     private Insets normalInsets = new Insets(2,2,2,2);
     private Insets biggerInsets = new Insets(10,0,0,0);
     private String brugernavn, kodeord, newUser, gentagKodeord;
+    
+    private DialogLogin Dlogin;
 
 	public DialogNyBruger(MainFrame parent) {
 		this.parent = parent;
@@ -112,7 +114,7 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 		return newUser;
 	}
 	
-	private boolean getNyeKodeord(){
+	private boolean getNyeKodeordOK(){
 		kodeord = Kodeord.getText();
 		gentagKodeord = GentagKodeord.getText();
 		return kodeord.equals(gentagKodeord);
@@ -129,9 +131,9 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (getNyeKodeord()){
-			MainFrame.client.sendMessage(getNewUser());
-			dispose();
+		if (getNyeKodeordOK()){
+			makeNewUser();
+			
 		}
 		if (e.getSource() == JBAnnuller){
 			this.setVisible(false);
@@ -169,14 +171,17 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == GentagKodeord){
-			if (getNyeKodeord()){
-				MainFrame.client.sendMessage(getNewUser());
-				dispose();
+			if (getNyeKodeordOK()){
+				makeNewUser();
 			}			
 		}
 	}
 	
-	public boolean isLoggedIn(){
-		return loggedIn;
+	public void makeNewUser(){
+		MainFrame.client.sendMessage(getNewUser());
+		dispose();
+		DLogin = new DialogLogin(parent);
+		DLogin.setAlwaysOnTop(true);
+		DLogin.setVisible(true);
 	}
 }
