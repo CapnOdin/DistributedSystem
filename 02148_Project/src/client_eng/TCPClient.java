@@ -72,6 +72,7 @@ public class TCPClient extends Thread {
 	}
 
 	private void cleanUp() {
+		sendMessage("%DISCONNECT%");
 		try {
 			output.close();
 			input.close();
