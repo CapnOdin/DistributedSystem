@@ -27,6 +27,7 @@ public class ServerTaskBar extends JMenuBar implements MouseListener, MouseMotio
 	public ServerTaskBar(ServerMainFrame parent, String title) {
 		this.parent = parent;
 		frametitle = new JLabel(title, JLabel.CENTER);
+		frametitle.setBackground(Color.white);
 		setDefaultProperties();
 		addElements();
 	}
