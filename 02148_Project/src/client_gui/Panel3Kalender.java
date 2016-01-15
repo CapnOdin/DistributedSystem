@@ -41,10 +41,10 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		setJComponents();
 		getNewJob("01-01-2016.08:00.Novo Nordisk. Hallas alle 1. 8000"); //Senere: hent direkte fra dialog
 		getNewJob("01-10-2016.10:00.Nordea. Helgeshøjalle 67. 8000");
-		for (int i = 0; i<75;i++){ oversigt.add(textfield[i]); }
+		/*for (int i = 0; i<75;i++){ oversigt.add(textfield[i]); }
 		SpringUtilities.makeGrid(oversigt,16, 5, 0, 0, 0, 0);
-		
-		addC(oversigt,0,0,1);
+		*/
+		addC(textArea,0,0,1);
 		c.anchor = GridBagConstraints.SOUTHEAST;
 		addC(JBTilfoj,0,1,1);
 		JBTilfoj.addMouseListener(this);
@@ -53,18 +53,18 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 	}
 	
 	private void setJComponents(){
-		/*textArea = new JTextArea("Fyld ud med vagter \n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEr jeg ude over nu?\n");
+		textArea = new JTextArea("Fyld ud med vagter \n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEr jeg ude over nu?\n");
 		scrollPane = new JScrollPane(textArea);  
 		textArea.setPreferredSize(JTextAreaDimension);
 		textArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		//textArea.setLineWrap(true);  
-		//textArea.setWrapStyleWord(true); */
+		//textArea.setWrapStyleWord(true); 
 		
 		
 		/*JPVagter.setPreferredSize(JTextAreaDimension);
 		JPVagter.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		JPVagter.setBackground(Color.white);*/
-		oversigt.add(new JLabel("Dato"));
+		/*oversigt.add(new JLabel("Dato"));
 		oversigt.add(new JLabel("Tid"));
 		oversigt.add(new JLabel("Titel"));
 		oversigt.add(new JLabel("Adresse"));
@@ -73,9 +73,8 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 			textfield[i] = new JTextField();
 		    
 		}
-
 		oversigt.setPreferredSize(JTextAreaDimension);
-		oversigt.setBackground(Color.white);
+		oversigt.setBackground(Color.white);*/
 		JBTilfoj = new JButton("Tilføj");
 		panel.setBackground(Color.white);	
 	}

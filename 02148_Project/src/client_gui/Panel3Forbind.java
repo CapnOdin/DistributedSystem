@@ -117,12 +117,6 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		setJButton(JBForbind);
 	}
 	
-	private String getKodeord(String connectInfo){
-		array1 = connectInfo.split("\\.");
-		kodeord = array[1];
-		return kodeord;
-	}
-	
 	private String getConnectInfo(){
 		email = JTEMail.getText();
 		kodeord = Kodeord.getText();
@@ -131,21 +125,18 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		return connectInfo;
 	}
 
-	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
 		if (e.getSource() == JBForbind){
 			getConnectInfo();
-			//api.MomentApi.loginMoment(email,kodeord);
-			if (Kodeord.getText().equals(getKodeord(getConnectInfo()))){;
-				System.out.println("Succes");
-			}
-			else{
-				System.out.println("Lort");
-			}
-		}
-		
+			try {
+				api.MomentApi.loginMoment(email,kodeord);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}			
+		}		
 	}
 
 	@Override
@@ -175,12 +166,15 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == Kodeord){
-			if (Kodeord.getText().equals(getKodeord(getConnectInfo()))){;
-			System.out.println("Succes");
-		}
-		else{
-			System.out.println("Lort");
-		}
+			getConnectInfo();
+			try {
+			String[] var = api.MomentApi.loginMoment(email,kodeord);
+			System.out.println(var[1]);
+			api.MomentApi.getVagter("2016-01-01",var[0]);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 	}

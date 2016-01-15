@@ -96,7 +96,7 @@ public class MomentApi {
 			HttpEntity responseEntity = response.getEntity();
 			
 			String str = IOUtils.toString(responseEntity.getContent(), StandardCharsets.UTF_8);
-			
+			System.out.println(str);
 			vagter = str.substring(1, str.length() - 2);
 		} catch (Exception e) {
 			
