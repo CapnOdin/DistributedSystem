@@ -52,7 +52,7 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 		Forbind.addMouseListener(this);
 		Kalender.addMouseListener(this);
 		Oversigt.addMouseListener(this);
-		setJLabel(Data);
+		Data.setFont(new Font("SansSerif", Font.BOLD, 20));
 		setJLabel(Forbind);
 		setJLabel(Kalender);
 		setJLabel(Oversigt);		
@@ -63,27 +63,35 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 	}
 	
 	private void setJLabel(JLabel name){
-		name.setFont(new Font("SansSerif", Font.PLAIN, 20));
+		name.setFont(new Font("SansSerif", Font.PLAIN, 18));
 		name.setVisible(true);		
+	}
+	
+	private void setChosenLabel(JLabel label){
+		setJLabel(Data);
+		setJLabel(Forbind);
+		setJLabel(Kalender);
+		setJLabel(Oversigt);
+		label.setFont(new Font("SanSerif",Font.BOLD,20));
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == Data) {
-			System.out.println("Data pressed!");
-			parent.addPanel3(p3Data);
+			setChosenLabel(Data);
+			parent.addPanel(p3Data);
 		}
 		if(e.getSource() == Forbind) {
-			System.out.println("Connect pressed");
-			parent.addPanel3(p3Connect);
+			setChosenLabel(Forbind);
+			parent.addPanel(p3Connect);
 		}
 		if(e.getSource() == Kalender) {
-			System.out.println("Kalender pressed!");
-			parent.addPanel3(p3Kalender);
+			setChosenLabel(Kalender);
+			parent.addPanel(p3Kalender);
 		}
 		if(e.getSource() == Oversigt) {
-			System.out.println("Oversigt pressed");
-			parent.addPanel3(p3Oversigt);
+			setChosenLabel(Oversigt);
+			parent.addPanel(p3Oversigt);
 		}
 		
 	}
@@ -111,7 +119,7 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 		// TODO Auto-generated method stub
 		
 	}
-
+	/*
 	public static void main(String[] args) {
 		JFrame test = new JFrame();
 		test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -123,5 +131,5 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 		//test.add(new Panel2());
 		test.validate();
 	}
-
+	*/
 }

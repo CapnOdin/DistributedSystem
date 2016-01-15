@@ -5,77 +5,78 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
-public class Panel3Data extends PanelTemplate implements GeneralProperties, MouseListener{
+public class Panel3Data extends PanelTemplate implements GeneralProperties, MouseListener, ActionListener{
 	private GridBagConstraints c = new GridBagConstraints();
 	private MainFrame parent;
-	private JPanel panelLeft = new JPanel(new GridBagLayout());
-	private JPanel panelRight = new JPanel();
-	private JTextField JTBrugernavn, JTNavn, JTAdresse, JTPostnummer, JTBy;
-	private JLabel JLBrugernavn, JLKodeord,JLSkiftKodeord, JLPersonlig, JLNavn, JLAdresse, JLBillede, JLPostnummer, JLBy, JLSkiftBillede;
+	private JPanel panel = new JPanel(new GridBagLayout());
+	private JTextField JTBrugernavn, JTEMail, JTNavn, JTAdresse, JTPostnummer, JTBy;
+	private JLabel JLBrugernavn, JLKodeord,JLSkiftKodeord, JLEMail, JLPersonlig, JLNavn, JLAdresse, JLBillede, JLPostnummer, JLBy, JLSkiftBillede;
 	private JPasswordField Kodeord;
 	private JButton JBGem;
 	private JCheckBox JCHarBil;
-	
+	private String clientData, brugernavn, kodeord, navn, adresse, postnummer, by, email, harBil;
+	private String[] array;
+
 	private DialogSkiftKodeord DSkiftKodeord;
+	private Panel1 panel1;
+	private TaskBar taskbar;
 	
 	public Panel3Data(MainFrame parent){
 		this.parent = parent;
 		setDefaultProperties();
+		setClientData(getClientData()); 
 		setJComponents();	
-		
-		
-		int JTWidth = frameSizePanel3.width/2;
-		int spaceTop = 10;
-		int spaceMiddle = 40;
-		int JPWidth = frameSizePanel3.width/6;
-		int spaceRight = (frameSizePanel3.width  - JTWidth - spaceMiddle - JPWidth)/2;
-		int spaceLeft = spaceRight;
-		
-		//Panel 1 - Insets = Top, Venstre, Bund, Højre
+		int spaceTop = 60;
+		int spaceMiddle = 2;
+		int space = 2;
+				
+		//PanelLeft - Insets = Top, Venstre, Bund, Højre
 		int i = 0;
 		c.anchor = GridBagConstraints.NORTHWEST;	
 		c.fill = GridBagConstraints.HORIZONTAL;
-		addC(JLPersonlig,	0,	i,	3,	1,		new Insets(spaceTop,	spaceLeft,	2,		spaceMiddle));i++;
-		addC(JLBrugernavn,	0,	i,	1,	1,		new Insets(30,			spaceLeft,	2,		2));
-		addC(JLKodeord,		4,	i,	1,	1,		new Insets(30,			2,			2,		spaceRight));i++;
-		addC(JTBrugernavn,	0,	i,	3,	1,		new Insets(2,			spaceLeft,	2,		2));
-		addC(Kodeord,		4,	i,	2,	1,		new Insets(2,			2,			2,		2));
-		addC(JLSkiftKodeord,6,	i,	1,	1,		new Insets(2,			2,			2,		spaceRight));i++;			
-		addC(JLNavn,		0,	i,	1,	1, 		new Insets(40,			spaceLeft,	2,		spaceMiddle));i++;
-		addC(JTNavn,		0,	i,	7,	1, 		new Insets(2,			spaceLeft,	2,		spaceMiddle));i++;
-		addC(JLAdresse,		0,	i,	1,	1, 		new Insets(20,			spaceLeft,	2,		spaceMiddle));i++;
-		addC(JTAdresse,		0,	i,	7,	1, 		new Insets(2,			spaceLeft,	2,		spaceMiddle));i++;
-		addC(JLPostnummer,	0,	i,	1,	1,		new Insets(4,			spaceLeft,	2,		spaceMiddle));i++;
-		addC(JTPostnummer,	0,	i,	2,	1,	 	new Insets(2,			spaceLeft,	2,		spaceMiddle));i++;
-		addC(JLBy,			0,	i,	1,	1, 		new Insets(4,			spaceLeft,	2,		spaceMiddle));i++;
-		addC(JTBy,			0,	i,	7,	1, 		new Insets(2,			spaceLeft,	2,		spaceMiddle));i++;
-		addC(JCHarBil,		0,	i,	1,	1, 		new Insets(20,			spaceLeft,	2,		spaceMiddle));i++;
-		addC(JBGem,			0,	i,	1,	1, 		new Insets(2,			spaceLeft,	0,		spaceMiddle));i++;
 		
+		addC(JLPersonlig,	0,	i,	6,	1,		new Insets(spaceTop,	space,	2,		spaceMiddle));i++;
+		addC(JLBrugernavn,	0,	i,	1,	1,		new Insets(20,			space,	2,		space));			c.ipadx = 150;
+		addC(JLKodeord,		4,	i,	1,	1,		new Insets(20,			space,	2,		space));i++;		c.ipadx = 0;
+		addC(JTBrugernavn,	0,	i,	3,	1,		new Insets(space,		space,	2,		space));			
+		addC(Kodeord,		4,	i,	3,	1,		new Insets(space,		space,	2,		space));			
+		addC(JLSkiftKodeord,7,	i,	1,	1,		new Insets(space,		space,	2,		spaceMiddle));i++;	
+		addC(JLNavn,		0,	i,	1,	1, 		new Insets(30,			space,	2,		spaceMiddle));i++; 	c.ipadx = 650;
+		addC(JTNavn,		0,	i,	8,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++; 	c.ipadx = 0;
+		addC(JLAdresse,		0,	i,	1,	1, 		new Insets(4,			space,	2,		spaceMiddle));i++;
+		addC(JTAdresse,		0,	i,	8,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++;
+		addC(JLPostnummer,	0,	i,	1,	1,		new Insets(4,			space,	2,		space));			c.ipadx = 150;
+		addC(JLBy,			2,	i,	1,	1, 		new Insets(4,			space,	2,		spaceMiddle));i++;	c.ipadx = 0;
+		addC(JTPostnummer,	0,	i,	2,	1,	 	new Insets(space,		space,	2,		space));		
+		addC(JTBy,			2,	i,	6,	1, 		new Insets(space,		space,	2,		spaceMiddle));i++;
+		addC(JLEMail,		0,	i,	1,	1,		new Insets(20	,		space,	2,		spaceMiddle));i++;
+		addC(JTEMail,		0,	i,	8,	1,		new Insets(space,		space,	2,		spaceMiddle));i++;
+		addC(JCHarBil,		0,	i,	1,	1, 		new Insets(10,			space,	2,		spaceMiddle));i++;
+		addC(JBGem,			0,	i,	8,	1, 		new Insets(space,		space,	100,	spaceMiddle));i++;
+		//addC(JLBillede,		8,	2,	1,	8,		new Insets(space,		space,	space,	space));
+		//addC(JLSkiftBillede,8,	10,	1,	1,		new Insets(space,		space,	space,	space));
+		
+		JTBy.addActionListener(this);
 		JLSkiftKodeord.addMouseListener(this);
-		
-		//Panel 2
-		/*gbc.ipady = frameSizePanel3.height/2;
-		gbc.anchor = GridBagConstraints.NORTH;	
-		addC(JLBillede,		8,	1,	3,	12, 	new Insets(30,			2,			2,	spaceRight));	
-		addC(JLSkiftBillede,9,	12,	1,	1, 		new Insets(2,	2,			2,		spaceRight));
-		*/
-		
-		this.add(panelLeft);
+		JLSkiftBillede.addMouseListener(this);
+		JBGem.addMouseListener(this);
+		panel.setBackground(Color.white);
+		this.add(panel);		
 		this.setVisible(true);
 	}
 	
@@ -94,8 +95,8 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		c.gridy = gridy;
 		c.gridwidth = gridwidth;
 		c.gridheight = gridheight;
-		panelLeft.add(comp, c);
-		panelLeft.validate();
+		panel.add(comp, c);
+		panel.validate();
 	}
 
 	
@@ -119,36 +120,46 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		name.setVisible(true);
 	}
 	
-	private void setJComponents(){
+	private void setJComponents(){		
+		ImageIcon IProfilBillede = new ImageIcon("download.jpeg");
 		JLBrugernavn = new JLabel("Brugernavn");
-		JTBrugernavn = new JTextField("Lise");
+		JTBrugernavn = new JTextField(brugernavn);
+		JTBrugernavn.setEditable(false);
 		JLKodeord = new JLabel("Kodeord");
-		Kodeord = new JPasswordField("projekt");
+		Kodeord = new JPasswordField(kodeord);
+		Kodeord.setEditable(false);
 		JLSkiftKodeord = new JLabel("<HTML><U>Skift Kodeord</U></HTML>");
-		JTNavn = new JTextField();
-		JTAdresse = new JTextField();
-		JTPostnummer = new JTextField();
-		JTBy = new JTextField();
-		JLPersonlig = new JLabel("<HTML><U>Personlig Profil</U></HTML>");
+		JTNavn = new JTextField(navn);
+		JTAdresse = new JTextField(adresse);
+		JTPostnummer = new JTextField(postnummer);
+		JTBy = new JTextField(by);
+		JTEMail = new JTextField(email);
+		JLPersonlig = new JLabel("<HTML><U>Personlig profil</U></HTML>");
 		JLPersonlig.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		JLNavn = new JLabel("Navn");
 		JLAdresse = new JLabel("Adresse");
 		JLPostnummer = new JLabel("Postnummer");
 		JLBy = new JLabel("By");
+		JLEMail = new JLabel("E-Mail");
 		JLSkiftBillede = new JLabel("Skift billede");
 		JCHarBil = new JCheckBox("Har bil");
+		if (harBil.equals("1")){
+			JCHarBil.setSelected(true);
+		}		
 		JBGem = new JButton("Gem");	
-		JLBillede = new JLabel("Billede", SwingConstants.CENTER);
+		JLBillede = new JLabel(IProfilBillede);
 		JLBillede.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		setJLabel(JLBrugernavn);
 		setJLabel(JLKodeord);
 		setJLabel(JLSkiftKodeord);
+		setJLabel(JLEMail);
 		setJTextField(JTBrugernavn);
 		setJTextField(Kodeord);
 		setJTextField(JTNavn);
 		setJTextField(JTAdresse);
 		setJTextField(JTPostnummer);
 		setJTextField(JTBy);
+		setJTextField(JTEMail);
 		setJLabel(JLNavn);
 		setJLabel(JLAdresse);
 		setJLabel(JLPostnummer);
@@ -158,6 +169,47 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		setJButton(JBGem);
 		setJLabel(JLBillede);
 	}
+	
+	private String getClientData(){
+		return "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.Lise_Noerby@hotmail.com.1"; //Senere: Hent denne direkte fra server
+	}
+	
+	private void setClientData(String clientData){ 
+		array = clientData.split("\\.");
+		int i = 0;
+		brugernavn = array[i];i++;
+		kodeord = array[i];i++;
+		navn = array[i];i++;
+		adresse = array[i];i++;
+		postnummer = array[i];i++;
+		by = array[i];i++;
+		email = array[i];i++;
+		harBil = array[i];
+	}
+	
+	private String getNewClientData(){
+		brugernavn = JTBrugernavn.getText();
+		kodeord = Kodeord.getText();
+		navn = JTNavn.getText();
+		adresse = JTAdresse.getText();
+		postnummer = JTPostnummer.getText();
+		by = JTBy.getText();
+		email = JTEMail.getText();
+		if (JCHarBil.isSelected()){
+			harBil = "1";}
+		else{
+			harBil = "0";}
+		clientData = brugernavn + "." + kodeord + "."+ navn+"."+adresse+"."+postnummer+"."+by + "." + email +"."+ harBil;
+		return clientData;
+	}
+	
+	public String getEMail(){
+		return email;
+	}
+	
+	public void opdaterKodeord(String nyeKodeord){
+		kodeord = nyeKodeord;
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -166,7 +218,12 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 			DSkiftKodeord.setAlwaysOnTop(true);
 			DSkiftKodeord.setVisible(true);
 		}
-		
+		if (e.getSource() == JLSkiftBillede){
+		}
+		if (e.getSource() == JBGem){
+			getNewClientData(); // Senere: Send opdaterede clientData til serveren
+			taskbar.addForbundet();
+		}
 	}
 
 	@Override
@@ -190,6 +247,14 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == JTBy){
+			getNewClientData();
+		}
 		
 	}
 	

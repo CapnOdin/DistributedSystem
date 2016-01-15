@@ -7,11 +7,12 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -19,7 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ServerConnectionDialog extends JDialog implements ActionListener, MouseListener {
+public class ServerConnectionDialog extends JDialog implements ActionListener, MouseListener, KeyListener {
 
 	private static final long serialVersionUID = 1L;
 	private ServerMainFrame parent;
@@ -66,13 +67,13 @@ public class ServerConnectionDialog extends JDialog implements ActionListener, M
 			buttons[i].setVisible(true);
 			buttons[i].addActionListener(this);
 			buttons[i].addMouseListener(this);
-			buttons[i].setBackground(Color.white);
 			buttonHolder.add(buttons[i]);
 		}
 
 		buttonHolder.setVisible(true);
 		dialogContentpane.setBackground(Color.white);
 		portField.setVisible(true);
+		portField.addKeyListener(this);
 
 		// NAMING ELEMENTS
 		buttons[0].setText("Start");
@@ -119,19 +120,11 @@ public class ServerConnectionDialog extends JDialog implements ActionListener, M
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if(e.getSource() == buttons[0]) {
-			System.out.println("Connect pressed");
-			ServerMainFrame.portNumber = Integer.parseInt(portField.getText());
-			ServerMainFrame.setupServer();
-			this.setVisible(false);
-			parent.getGlassPane().setVisible(false);
-			parent.setFocusable(true);
+			buttons[0].doClick();
 		}
 		
 		if(e.getSource() == buttons[1]) {
-			System.out.println("Cancel pressed.");
-			this.setVisible(false);
-			parent.getGlassPane().setVisible(false);
-			parent.setFocusable(true);
+			buttons[1].doClick();
 		}
 		
 	}
@@ -143,9 +136,41 @@ public class ServerConnectionDialog extends JDialog implements ActionListener, M
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == buttons[0]) {
+			System.out.println("Connect pressed");
+			ServerMainFrame.portNumber = Integer.parseInt(portField.getText());
+			ServerMainFrame.setupServer();
+			this.setVisible(false);
+			parent.getGlassPane().setVisible(false);
+			parent.setFocusable(true);
+		}
+		if(e.getSource() == buttons[1]) {
+			System.out.println("Cancel pressed.");
+			this.setVisible(false);
+			parent.getGlassPane().setVisible(false);
+			parent.setFocusable(true);
+		}
+	}
 
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+			buttons[0].doClick();
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

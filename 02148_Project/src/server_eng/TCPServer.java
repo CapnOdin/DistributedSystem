@@ -21,7 +21,9 @@ public class TCPServer extends Thread {
 	
 	private boolean isRunning = false;
 	private int port;
-	private int userCount = 0;
+	
+	public static int userCount = 0;
+	public static int userNumber = 0;
 	
 	public TCPServer(int port) {
 		this.port = port;
@@ -52,9 +54,10 @@ public class TCPServer extends Thread {
 			System.out.println("[SERVER]Waiting for someone to connect...");
 			connection = server.accept();
 			serverStatus = "Now connected to " + connection.getRemoteSocketAddress();
+			userCount++;
 			System.out.println("[SERVER]Now connected to " + connection.getRemoteSocketAddress());
-			ConnectionThread newClient = new ConnectionThread(connection, userCount);
-			allConnections.put(userCount++, newClient);
+			ConnectionThread newClient = new ConnectionThread(connection, userNumber);
+			allConnections.put(userNumber++, newClient);
 			System.out.println(allConnections);
 			newClient.start();
 			try {

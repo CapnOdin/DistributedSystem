@@ -16,7 +16,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class DialogForkertLogin extends JDialog implements MouseListener {
+public class DialogForkertLogin extends JDialog implements MouseListener{
 	private MainFrame parent;
 	private GridBagConstraints c = new GridBagConstraints();
 	private JPanel panel = new JPanel(new GridBagLayout());

@@ -1,7 +1,6 @@
 package client_gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -11,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 public class MainFrame extends JFrame implements GeneralProperties {
-	public static Dimension contentPaneSize;
 	private GridBagConstraints c = new GridBagConstraints();
 	private TaskBar taskBar;
 	private Panel2 panel2;
@@ -19,11 +17,14 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	
 	private DialogLogin DLogin;
 	private DialogNyBruger DNyBruger;
+	
+	//public static TCPClient client = new TCPClient("host", port, "alias");
+
 
 	public MainFrame() {
-		/*DLogin = new DialogLogin(this);
+		DLogin = new DialogLogin(this);
 		DLogin.setAlwaysOnTop(true);
-	    DLogin.setVisible(true);*/			
+	    DLogin.setVisible(true);		
 	    setDefaultProperties();
 		taskBar = new TaskBar(this);
 		vistPanel1 = new Panel1(this);
@@ -34,33 +35,18 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		addC(panel2, 0, 2, 1, 1);
 		addC(vistPanel3, 0, 3, 1, 1);
 		this.validate();;
-		mainFrameSetVisible();
+		//mainFrameSetVisible();
 		
 	}
-	
-	public void removePanel1(){
-		this.vistPanel1.setVisible(false);
-		this.validate();
-		this.pack();
-	}
-	
-	public void addPanel1(PanelTemplate panel){
-		//removePanel1();
-		vistPanel1 = panel;
-		addC(panel,0,1,1,1);
-		panel.setVisible(true);;
-		this.validate();
-		this.pack();
-	}
 
-	public void removePanel3() {
+	public void removePanel() {
 		this.vistPanel3.setVisible(false);
 		this.validate();
 		this.pack();
 	}
 
-	public void addPanel3(PanelTemplate panel) {
-		removePanel3();
+	public void addPanel(PanelTemplate panel) {
+		removePanel();
 		vistPanel3 = panel;
 		addC(panel, 0, 3, 1, 1);
 		panel.setVisible(true);
@@ -90,7 +76,6 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		this.setUndecorated(true);
 		this.getContentPane().setBackground(Color.white);
 		//this.getRootPane().setBorder(BorderFactory.createLineBorder(Color.black));
-		contentPaneSize = this.getContentPane().getSize();
 		this.setLayout(new GridBagLayout());
 		this.setPreferredSize(GeneralProperties.frameSize);
 		this.pack();
@@ -99,5 +84,10 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	
 	public void mainFrameSetVisible(){
 		this.setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+		//client.start();
+		new MainFrame();
 	}
 }

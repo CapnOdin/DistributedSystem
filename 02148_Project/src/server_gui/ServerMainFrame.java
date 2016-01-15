@@ -1,12 +1,10 @@
 package server_gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -19,11 +17,8 @@ public class ServerMainFrame extends JFrame {
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private Dimension frameSize = new Dimension((int)screenSize.getWidth()/2,(int)screenSize.getHeight()/2);
 	
-	private GridBagConstraints c = new GridBagConstraints();
-	
-	private ServerMenuPanel cmp;
-	private ServerTaskBar ctb;
-	private ServerStatusBar csb;
+	private ServerMenuPanel smp;
+	private ServerStatusBar ssb;
 	
 	private ServerPanelTemplate current_panel;
 	public static TCPServer server;
@@ -43,8 +38,8 @@ public class ServerMainFrame extends JFrame {
 	public void addVariablePanel(ServerPanelTemplate panel) {
 		removeVariablePanel();
 		current_panel = panel;
-		addC(panel, 0, 2, 1, 1);
 		panel.setVisible(true);
+		this.add(panel, BorderLayout.CENTER);
 		this.validate();
 		this.pack();
 	}
@@ -56,22 +51,13 @@ public class ServerMainFrame extends JFrame {
 	}
 	
 	private void addStaticPanels() {
-		cmp = new ServerMenuPanel(this);
-		ctb = new ServerTaskBar(this, "SERVER");
-		csb = new ServerStatusBar(this);
+		smp = new ServerMenuPanel(this);
+		ssb = new ServerStatusBar(this);
 		current_panel = new ServerConnectionPanel(this, "PLACEHOLDER");
 		
-		addC(ctb, 0, 0, 1, 1);
-		addC(cmp, 0, 1, 1, 1);
-		addC(current_panel, 0, 2, 1, 1);
-		addC(csb, 0, 3, 1, 1);
-	}
-	
-	private void addC(JComponent comp, int gridx, int gridy, int gridwidth, int gridheight) {
-		c.gridx = gridx; c.gridy = gridy;
-		c.gridwidth = gridwidth; c.gridheight = gridheight;
-		this.add(comp, c);
-		this.validate();
+		this.add(smp, BorderLayout.NORTH);
+		this.add(current_panel, BorderLayout.CENTER);
+		this.add(ssb, BorderLayout.SOUTH);
 	}
 
 	private void setDefaultProperties() {
@@ -82,12 +68,11 @@ public class ServerMainFrame extends JFrame {
         } catch (Exception e) {
            
         }
-		this.getContentPane().setBackground(Color.white);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setPreferredSize(frameSize);
 		this.setUndecorated(true);
-		this.setLayout(new GridBagLayout());
-		this.getContentPane().setBackground(Color.magenta);
+		this.setLayout(new BorderLayout());
+		this.getContentPane().setBackground(Color.black);
 		this.pack();
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);

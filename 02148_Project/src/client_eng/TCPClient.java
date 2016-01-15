@@ -6,19 +6,22 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class TCPClient implements Runnable {
+public class TCPClient extends Thread {
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	
 	private String message = "";
 	private String serverIP;
+	private String alias;
+	
 	private int port;
 	
 	private Socket connection;
 	
-	public TCPClient(String host, int port) {
+	public TCPClient(String host, int port, String alias) {
 		serverIP = host;
 		this.port = port;
+		this.alias = alias;
 	}
 	
 	public void run() {
@@ -44,11 +47,11 @@ public class TCPClient implements Runnable {
 	}
 
 	private void whileConnected() throws IOException {
+		sendMessage("ALIAS%"+alias);
 		do {
 			try {
 				message = (String) input.readObject();
 				System.out.println(message);
-				sendMessage("A0.DSB.vanløse st");
 			}catch(Exception e) {
 				break;
 			}

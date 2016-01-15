@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -11,12 +12,12 @@ public class Panel1 extends PanelTemplate implements GeneralProperties{
 	
 	private static final long serialVersionUID = 1L;
 	private MainFrame parent;
-	private JPanel panel = new JPanel(new GridLayout());
-	private JLabel JLForbundet;
+	private static JPanel panel = new JPanel(new GridLayout());
 	
 	public Panel1(MainFrame parent){
 		this.parent = parent; 
-		addForbundet();
+		this.add(panel, BorderLayout.EAST);
+		this.setVisible(true);
 	}
 
 	@Override
@@ -28,15 +29,7 @@ public class Panel1 extends PanelTemplate implements GeneralProperties{
 		this.validate();
 		
 	}
-	
-	public void addForbundet(){	
-		JLForbundet = new JLabel(" Forbundet ");
-		JLForbundet.setBackground(Color.white);
-		JLForbundet.setForeground(Color.gray);
-		panel.add(JLForbundet);
-		this.add(panel, BorderLayout.EAST);
-		this.setVisible(true);
-	}
+
 	/*
 	public static void main(String[] args) {
 		JFrame test = new JFrame();
@@ -50,6 +43,6 @@ public class Panel1 extends PanelTemplate implements GeneralProperties{
 		test.add(new Panel1());
 		test.validate();
 	}
-	*/
-
+	
+*/
 }
