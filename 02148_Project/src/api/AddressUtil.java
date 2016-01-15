@@ -17,17 +17,21 @@ public class AddressUtil {
 		
 		System.out.println(term);
 		
-		for(String str : term.split(" ")){
-			if(str.contains("-")){
-				int index = str.indexOf("-");
-				String temp = str.substring(index + 1, index + 2);
-				if(!ALPHA.matcher(temp).find()){
-					continue;
+		try{
+			for(String str : term.split(" ")){
+				if(str.contains("-")){
+					int index = str.indexOf("-");
+					String temp = str.substring(index + 1, index + 2);
+					if(!ALPHA.matcher(temp).find()){
+						continue;
+					}
+				}
+				if((ALPHA.matcher(str).find() || number.matcher(str).find()) && !special.matcher(str).find() && !dontThinkAboutIt.matcher(str).find()){
+					res += str + " ";
 				}
 			}
-			if((ALPHA.matcher(str).find() || number.matcher(str).find()) && !special.matcher(str).find() && !dontThinkAboutIt.matcher(str).find()){
-				res += str + " ";
-			}
+		} catch (Exception e){
+			
 		}
 		
 		if(res.length() != 0){
