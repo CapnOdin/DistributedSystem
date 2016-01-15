@@ -12,8 +12,10 @@ import api.GoogleWebApi;
 public class ServerSlave implements Runnable {
 
 	private ServerTupleSpace space;
-
-	public ServerSlave(ServerTupleSpace space) {
+	private TCPServer server;
+	
+	public ServerSlave(ServerTupleSpace space, TCPServer server) {
+		this.server = server;
 		this.space = space;
 	}
 
@@ -22,10 +24,18 @@ public class ServerSlave implements Runnable {
 		try {
 			switch (decoded[0]) {
 			case "A0":
-				System.out.println("DECODED STRING " + java.util.Arrays.toString(decoded));
-				System.out.println(GoogleWebApi.distMatrix(GoogleWebApi.seachPlaces(decoded[1]).get(1), GoogleWebApi.seachPlaces(decoded[2]).get(1)));
+				System.out.println("Authenticating user ...");
+				if(server.authenticate(decoded[1], decoded[2])) {
+					// Authentication succeeded
+					System.out.println("Authentication OK");
+				} else {
+					// Authentication failed
+					System.out.println("Authentication FAILED");
+				}
 				break;
 			case "A1":
+				System.out.println("DECODED STRING " + java.util.Arrays.toString(decoded));
+				System.out.println(GoogleWebApi.distMatrix(GoogleWebApi.seachPlaces(decoded[1]).get(1), GoogleWebApi.seachPlaces(decoded[2]).get(1)));
 				break;
 			case "A2":
 				break;
@@ -42,6 +52,9 @@ public class ServerSlave implements Runnable {
 			case "A8":
 				break;
 			case "A9":
+				break;
+			case "A10":
+				server.newUser(decoded[1], decoded[2]);
 				break;
 			default:
 				System.out.println("Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");

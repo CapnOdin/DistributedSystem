@@ -9,6 +9,7 @@ import java.util.HashMap;
 public class TCPServer extends Thread {
 	
 	private static ArrayList<String> taskBuffer = new ArrayList<String>();
+	private HashMap<String, String> userMap = new HashMap<String, String>();
 	public static int currentTask = 0;
 	
 	private static HashMap<Integer, ConnectionThread> allConnections = new HashMap<Integer, ConnectionThread>();
@@ -45,7 +46,7 @@ public class TCPServer extends Thread {
 	
 	private void setupSlave() {
 		space = new ServerTupleSpace();
-		(new Thread(new ServerSlave(space))).start();
+		(new Thread(new ServerSlave(space,this))).start();
 	}
 	
 	private void waitForConnection() throws IOException {	
@@ -102,6 +103,18 @@ public class TCPServer extends Thread {
 			e.printStackTrace();
 		}
 		serverSleepMode();
+	}
+	
+	public boolean authenticate(String user, String password) {
+		if(userMap.get(user).equals(password))
+			return true;
+		else return false;
+	}
+	
+	public void newUser(String name, String password) {
+		if(!userMap.containsKey(name)) {
+			userMap.put(name, password);
+		}
 	}
 	
 	public int getPort() {
