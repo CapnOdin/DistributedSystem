@@ -150,7 +150,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		infoLabelFields[1].setText(alias);
 		infoLabelFields[2].setText(IP);
 		infoLabelFields[3].setText(String.valueOf(port));
-		infoLabelFields[4].setText(type);
+		infoLabelFields[4].setText(clientSessionID);
 	}
 
 	private void clearInformationFields() {
