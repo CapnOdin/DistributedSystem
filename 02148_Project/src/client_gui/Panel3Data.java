@@ -31,13 +31,12 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	private JPasswordField Kodeord;
 	private JButton JBGem;
 	private JCheckBox JCHarBil;
-	private String clientData, brugernavn, kodeord, navn, adresse, postnummer, by, email, harBil;
+	private String clientData, brugernavn, kodeord, navn, adresse, postnummer, by, email, harBil, sessionID;
 	private String[] array;
 
 	private DialogSkiftKodeord DSkiftKodeord;
 	private Panel1 panel1;
 	private TaskBar taskbar;
-	private Profile profile;
 	
 	public Panel3Data(MainFrame parent){
 		this.parent = parent;
@@ -174,19 +173,17 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		panel.setBackground(Color.white);
 	}
 	
-	private String getClientData(){
-		return "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.Lise_Noerby@hotmail.com.1"; //Senere: Hent denne direkte fra server
-	}
+	
 	
 	private void setClientData(){
-		brugernavn = profile.getUsername();
-		kodeord = profile.getPassword();
-		navn = profile.getNavn();
-		adresse = profile.getAdresse();
-		postnummer = profile.getPostnummer();
-		by = profile.getBy();
-		//email = profile.getEmail();
-		harBil = profile.getHarBil();
+		brugernavn = parent.profile.getUsername();
+		kodeord = parent.profile.getPassword();
+		navn = parent.profile.getNavn();
+		adresse = parent.profile.getAdresse();
+		postnummer = parent.profile.getPostnummer();
+		by = parent.profile.getBy();
+		email = parent.profile.getEMail();
+		harBil = parent.profile.getHarBil();
 		 
 	}
 	
@@ -202,7 +199,9 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 			harBil = "1";}
 		else{
 			harBil = "0";}
-		clientData = "A8." + brugernavn + "." + kodeord + "."+ navn+"."+adresse+"."+postnummer+"."+by + "." + email +"."+ harBil;
+		sessionID = MainFrame.client.getSessionID();
+		clientData = "A8." + brugernavn + "." + kodeord + "."+ navn+"."+adresse+"."+postnummer+"."+by + "." + email +"."+ harBil + "."+ sessionID;
+		
 		return clientData;
 	}
 	

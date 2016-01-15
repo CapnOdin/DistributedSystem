@@ -27,7 +27,7 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	private JPasswordField Kodeord;
 	private JCheckBox JCGemOplysninger;
 	private JButton JBForbind;
-	private String clientData, email, connectInfo, kodeord;
+	private String clientData, email, connectInfo, kodeord, sessionID;
 	private String[] array, array1;
 	
 	public Panel3Forbind(MainFrame parent){
@@ -103,7 +103,7 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		JLForbind = new JLabel("<HTML> <U>Forbind bruger med Moment konto</U></HTML>"); 
 		JLEMail = new JLabel("E-Mail");
 		JLKodeord = new JLabel("Kodeord");
-		JTEMail = new JTextField(getEMail(getClientInfo()));
+		JTEMail = new JTextField(parent.profile.getEMail());
 		Kodeord = new JPasswordField();
 		JCGemOplysninger = new JCheckBox("Gem oplysninger");
 		JBForbind = new JButton("Forbind");
@@ -117,12 +117,6 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		setJButton(JBForbind);
 	}
 	
-	private String getEMail(String clientData){
-		array = clientData.split("\\.");
-		email = array[6];
-		return email;
-	}
-	
 	private String getKodeord(String connectInfo){
 		array1 = connectInfo.split("\\.");
 		kodeord = array[1];
@@ -132,13 +126,11 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	private String getConnectInfo(){
 		email = JTEMail.getText();
 		kodeord = Kodeord.getText();
-		connectInfo = "A6."+ email + "." + kodeord;
+		sessionID = MainFrame.client.getSessionID();
+		connectInfo = "A6."+ email + "." + kodeord + "." + sessionID;
 		return connectInfo;
 	}
-	
-	private String getClientInfo(){
-		return "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.Lise_Noerby@hotmail.com.1";  // Senere: Hent clientdata direkte fra server
-	}
+
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {

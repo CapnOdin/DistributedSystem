@@ -23,7 +23,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	private DialogNyBruger DNyBruger;
 	
 	public static TCPClient client;
-
+	public Profile profile = new Profile();
 
 	public MainFrame() {
 		ip = "192.168.1.47";

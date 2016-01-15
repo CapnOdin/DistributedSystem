@@ -1,10 +1,17 @@
 package client_eng;
 
 public class Profile {	
-	private String username, password, navn, adresse, postnummer, by, harBil;
+	private String username ="", password="", navn="", adresse="", postnummer="", by="", eMail="", harBil="";
 	
-	public Profile(String username, String password, String navn, String adresse, String postnummer, String by, String harBil){
-		
+	public Profile(){
+		setUsername("Lise");
+		setPassword("projekt");
+		setNavn("Lise Andersen");
+		setAdresse("Grønnehøj 39");
+		setPostnummer("2720");
+		setBy("Vanløse");
+		setEMail("Lise_Noerby@hotmail.com");
+		setHarBil("1");
 	}
 
 	public String getUsername() {
@@ -63,5 +70,12 @@ public class Profile {
 		this.harBil = harBil;
 	}
 	
+	public String getEMail() {
+		return eMail;
+	}
+
+	public void setEMail(String eMail) {
+		this.eMail = eMail;
+	}
 
 }

@@ -32,7 +32,7 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
     private JPanel panel = new JPanel(new GridBagLayout());
     private Insets normalInsets = new Insets(2,2,2,2);
     private Insets biggerInsets = new Insets(10,2,2,2);
-    private String info, brugernavn, kodeord, authentication;
+    private String info, brugernavn, kodeord, authentication, sessionID;
     
     private DialogNyBruger DNyBruger;
     private DialogForkertLogin DForkertLogin;
@@ -120,8 +120,9 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
     private String getInfo(){
     	brugernavn = JTBrugernavn.getText();
     	kodeord = Kodeord.getText();
-    	info = brugernavn + "." + kodeord;
-    	return "A0." + info+".";
+    	sessionID = MainFrame.client.getSessionID();
+    	info = "A0." + brugernavn + "." + kodeord + "." + sessionID;
+    	return info;
     }
     
     @Override
