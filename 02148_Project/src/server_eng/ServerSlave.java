@@ -25,11 +25,11 @@ public class ServerSlave implements Runnable {
 				System.out.println("Authenticating user ...");
 				if(server.authenticate(decoded[1], decoded[2])) {
 					// Authentication succeeded
-					System.out.println("Authentication OK");
+					System.out.println("[SERVER]Authentication OK " + decoded[decoded.length-1]);
 					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A0.TRUE");
 				} else {
 					// Authentication failed
-					System.out.println("Authentication FAILED");
+					System.out.println("[SERVER]Authentication FAILED");
 					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A0.FALSE");
 				}
 				break;
@@ -55,8 +55,10 @@ public class ServerSlave implements Runnable {
 				break;
 			case "A10":
 				if(server.newUser(decoded[1], decoded[2])) {
+					System.out.println("[SERVER]ADDED NEW USER");
 					//TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.TRUE");
 				} else {
+					System.out.println("[SERVER]USER ALREADY EXISTS");
 					//TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.FALSE");
 				}
 				break;
