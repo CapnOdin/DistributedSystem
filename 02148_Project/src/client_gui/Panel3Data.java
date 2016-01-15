@@ -75,7 +75,6 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		JLSkiftKodeord.addMouseListener(this);
 		JLSkiftBillede.addMouseListener(this);
 		JBGem.addMouseListener(this);
-		panel.setBackground(Color.white);
 		this.add(panel);		
 		this.setVisible(true);
 	}
@@ -168,6 +167,8 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		setJCheckBox(JCHarBil);
 		setJButton(JBGem);
 		setJLabel(JLBillede);
+		JCHarBil.setBackground(Color.white);
+		panel.setBackground(Color.white);
 	}
 	
 	private String getClientData(){
@@ -214,15 +215,12 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JLSkiftKodeord){
-			DSkiftKodeord = new DialogSkiftKodeord(parent);
-			DSkiftKodeord.setAlwaysOnTop(true);
-			DSkiftKodeord.setVisible(true);
+			skiftKodeord();
 		}
 		if (e.getSource() == JLSkiftBillede){
 		}
 		if (e.getSource() == JBGem){
-			getNewClientData(); // Senere: Send opdaterede clientData til serveren
-			taskbar.addForbundet();
+			gem();
 		}
 	}
 
@@ -253,11 +251,20 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == JTBy){
-			getNewClientData();
-		}
-		
+		}	
 	}
 	
+	
+	private void skiftKodeord(){
+		DSkiftKodeord = new DialogSkiftKodeord(parent);
+		DSkiftKodeord.setAlwaysOnTop(true);
+		DSkiftKodeord.setVisible(true);
+	}
+	
+	private void gem(){
+		getNewClientData(); // Senere: Send opdaterede clientData til serveren
+		taskbar.addForbundet();
+	}
 	
 	/*
 	public static void main(String[] args) {

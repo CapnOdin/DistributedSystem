@@ -4,24 +4,31 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+
+import client_eng.TCPClient;
 
 public class MainFrame extends JFrame implements GeneralProperties {
 	private GridBagConstraints c = new GridBagConstraints();
 	private TaskBar taskBar;
 	private Panel2 panel2;
 	private PanelTemplate vistPanel3,vistPanel1;
+	private String ip;
+	private int port;
 	
 	private DialogLogin DLogin;
 	private DialogNyBruger DNyBruger;
 	
-	//public static TCPClient client = new TCPClient("host", port, "alias");
+	public static TCPClient client;
 
 
 	public MainFrame() {
+		ip = "localhost";
+		port = 1234;
+		client =  new TCPClient(ip, port, "Lise");
+		client.start();
 		DLogin = new DialogLogin(this);
 		DLogin.setAlwaysOnTop(true);
 	    DLogin.setVisible(true);		
@@ -87,7 +94,6 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	}
 	
 	public static void main(String[] args) {
-		//client.start();
 		new MainFrame();
 	}
 }

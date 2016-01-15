@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -16,7 +18,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class DialogForkertLogin extends JDialog implements MouseListener{
+public class DialogForkertLogin extends JDialog implements MouseListener,ActionListener{
 	private MainFrame parent;
 	private GridBagConstraints c = new GridBagConstraints();
 	private JPanel panel = new JPanel(new GridBagLayout());
@@ -39,12 +41,12 @@ public class DialogForkertLogin extends JDialog implements MouseListener{
 		addC(JBGlemtKodeord,1,i,1);
 		
 		JLNyBruger.addMouseListener(this);
-		JBProvIgen.addMouseListener(this);
+		JBProvIgen.addActionListener(this);
 		JBGlemtKodeord.addMouseListener(this);
 		
 		this.add(panel);
 		this.pack();
-		this.setModal(true);
+		//JBProvIgen.requestFocus();
 	}
 	
 	private void addC(JComponent comp, int x, int y, int width){
@@ -125,6 +127,26 @@ public class DialogForkertLogin extends JDialog implements MouseListener{
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == JLNyBruger){
+			this.setVisible(false);
+			DNyBruger = new DialogNyBruger(parent);
+			DNyBruger.setAlwaysOnTop(true);
+			DNyBruger.setVisible(true);
+		}
+		if (e.getSource() == JBProvIgen) {
+			this.setVisible(false);
+			DLogin = new DialogLogin(parent);
+			DLogin.setAlwaysOnTop(true);
+			DLogin.setVisible(true);
+		}
+		if (e.getSource() == JBGlemtKodeord){
+			System.exit(0);
+		}
 		
 	}
 
