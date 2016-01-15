@@ -139,7 +139,6 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 		jobAdresse = JTAdresse.getText();
 		postnummer = JTPostnummer.getText();
 		newJob = dato + "." + tid + "." + jobNavn + "." + jobAdresse + "." + postnummer;
-		System.out.println(newJob);
 	}
 
 	@Override
@@ -154,6 +153,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBTilfoj){
 			getNewJob();
+			//Panel3Kalender.getNewJob(newJob); Fuck.. Hvordan kalder jeg mellem klasser her?
 			parent.setFocusable(true);
 			dispose();
 		}

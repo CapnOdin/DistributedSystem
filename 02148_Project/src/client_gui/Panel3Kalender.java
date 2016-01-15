@@ -39,7 +39,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		this.parent = parent;
 		setDefaultProperties();
 		setJComponents();
-		getNewJob("01-01-2016.08:00.Novo Nordisk. Hallas alle 1. 8000");
+		getNewJob("01-01-2016.08:00.Novo Nordisk. Hallas alle 1. 8000"); //Senere: hent direkte fra dialog
 		getNewJob("01-10-2016.10:00.Nordea. Helgeshøjalle 67. 8000");
 		for (int i = 0; i<75;i++){ oversigt.add(textfield[i]); }
 		SpringUtilities.makeGrid(oversigt,16, 5, 0, 0, 0, 0);
@@ -88,8 +88,6 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 	}
 	
 	private void getNewJob(String newJob){
-		//Senere: hent direkte fra dialog
-		
 		array = newJob.split("\\.");
 		int i = 0;
 		dato = array[i];i++;
