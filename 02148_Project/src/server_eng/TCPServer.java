@@ -58,8 +58,8 @@ public class TCPServer extends Thread {
 			userCount++;
 			System.out.println("[SERVER]Now connected to " + connection.getRemoteSocketAddress());
 			ConnectionThread newClient = new ConnectionThread(connection, userNumber);
-			System.out.println(allConnections);
 			newClient.start();
+			System.out.println(allConnections);
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {

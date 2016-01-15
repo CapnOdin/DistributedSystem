@@ -19,6 +19,12 @@ public class TCPClient extends Thread {
 	
 	private Socket connection;
 	
+	public TCPClient(String host, int port, String alias) {
+		serverIP = host;
+		this.port = port;
+		this.alias = alias;
+	}
+	
 	private void decode(String message) {
 		String[] decoded = message.split("\\.");
 		switch(decoded[0]) {
@@ -44,12 +50,6 @@ public class TCPClient extends Thread {
 		default:
 			System.out.println("Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");
 		}
-	}
-	
-	public TCPClient(String host, int port, String alias) {
-		serverIP = host;
-		this.port = port;
-		this.alias = alias;
 	}
 	
 	public void run() {
