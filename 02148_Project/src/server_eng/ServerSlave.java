@@ -28,9 +28,11 @@ public class ServerSlave implements Runnable {
 				if(server.authenticate(decoded[1], decoded[2])) {
 					// Authentication succeeded
 					System.out.println("Authentication OK");
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("%AUTHOK%");
 				} else {
 					// Authentication failed
 					System.out.println("Authentication FAILED");
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("%AUTHFAIL%");
 				}
 				break;
 			case "A1":
@@ -54,7 +56,11 @@ public class ServerSlave implements Runnable {
 			case "A9":
 				break;
 			case "A10":
-				server.newUser(decoded[1], decoded[2]);
+				if(server.newUser(decoded[1], decoded[2])) {
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("%USERADDED%");
+				} else {
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("%USEREXISTS");
+				}
 				break;
 			default:
 				System.out.println("Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");
@@ -68,21 +74,14 @@ public class ServerSlave implements Runnable {
 
 	@Override
 	public void run() {
-
-		// String instruction =
-		// TCPServer.getTaskBuffer().get(TCPServer.currentTask++);
-		// TaskTemplate current_task = inst_mem.get(instruction);
-		// current_task.runTask(space);
 		Timer t = new Timer(1000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println(TCPServer.getTaskBuffer().get(TCPServer.currentTask));
 				try {
 					decodeTask(TCPServer.getTaskBuffer().get(TCPServer.currentTask));
 				} catch(Exception ex) {
-					//System.out.println("HELLO");
-				}
 				
+				}			
 			}
 		});
 		t.start();

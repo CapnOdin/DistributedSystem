@@ -48,9 +48,8 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 	private JPanel button_holder = new JPanel(new GridLayout(1,4));
 	private JButton[] actionButtons = new JButton[4];
 	
-	private String clientAlias, clientIP, selectedClient;
-	private int clientUserNo;
-	
+	private String clientAlias, clientIP, selectedClient, clientSessionID;
+	//private int clientUserNo;
 	public ServerConnectedClientsPanel(ServerMainFrame parent, String ID) {
 		super(parent, ID);
 		addInfoPanelContent();
@@ -179,7 +178,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		selectedClient = ((JList)e.getSource()).getSelectedValue().toString();
 		String[] BOBROSS = ((JList)e.getSource()).getSelectedValue().toString().split("/");
 		System.out.println(java.util.Arrays.toString(BOBROSS));
-		clientUserNo = Integer.parseInt(BOBROSS[0]);
+		clientSessionID = BOBROSS[0];
 		clientAlias = BOBROSS[1];
 		clientIP = BOBROSS[2];
 		setInformationFields(clientAlias, clientIP, ServerMainFrame.portNumber, "User");
@@ -191,7 +190,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		// DISCONNECT BUTTON
 		if(e.getSource() == actionButtons[0]) {
 			//System.out.println(clientUserNo);
-			TCPServer.getAllConnections().get(clientUserNo).disconnectClient();
+			TCPServer.getAllConnections().get(clientSessionID).disconnectClient();
 			model.removeElement(selectedClient);
 			clearInformationFields();
 			TCPServer.userCount--;
@@ -199,7 +198,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		// SEND MESSAGE BUTTON
 		if(e.getSource() == send) {
 			String message = chatMessage.getText();
-			TCPServer.getAllConnections().get(clientUserNo).sendMessage(message);
+			TCPServer.getAllConnections().get(clientSessionID).sendMessage(message);
 			chatArea.append("[SERVER]" + message + "\n");
 			chatMessage.setText("");
 			this.validate();
