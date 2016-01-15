@@ -39,7 +39,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	public Panel3Data(MainFrame parent){
 		this.parent = parent;
 		setDefaultProperties();
-		getClientData();
+		setClientData(getClientData()); 
 		setJComponents();	
 		int spaceTop = 60;
 		int spaceMiddle = 2;
@@ -170,11 +170,11 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		setJLabel(JLBillede);
 	}
 	
-	private void getClientData(){
-		
-		//Senere : hent clientdata direkte fra serveren
-		clientData = "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.Lise_Noerby@hotmail.com.1";
-		
+	private String getClientData(){
+		return "Lise.projekt.Lise Andersen.Grønnehøj 39.2720.Vanløse.Lise_Noerby@hotmail.com.1"; //Senere: Hent denne direkte fra server
+	}
+	
+	private void setClientData(String clientData){ 
 		array = clientData.split("\\.");
 		int i = 0;
 		brugernavn = array[i];i++;
@@ -187,8 +187,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		harBil = array[i];
 	}
 	
-	private void getNewClientData(){
-		// Senere: Send opdaterede clientData til serveren
+	private String getNewClientData(){
 		brugernavn = JTBrugernavn.getText();
 		kodeord = Kodeord.getText();
 		navn = JTNavn.getText();
@@ -200,7 +199,8 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 			harBil = "1";}
 		else{
 			harBil = "0";}
-		clientData = brugernavn + "." + kodeord + "."+ navn+"."+adresse+"."+postnummer+"."+by + "." + email +"."+ harBil;		
+		clientData = brugernavn + "." + kodeord + "."+ navn+"."+adresse+"."+postnummer+"."+by + "." + email +"."+ harBil;
+		return clientData;
 	}
 	
 	public String getEMail(){
@@ -221,7 +221,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		if (e.getSource() == JLSkiftBillede){
 		}
 		if (e.getSource() == JBGem){
-			getNewClientData();
+			getNewClientData(); // Senere: Send opdaterede clientData til serveren
 			taskbar.addForbundet();
 		}
 	}

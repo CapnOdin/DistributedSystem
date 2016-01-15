@@ -111,23 +111,22 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
     	this.setPreferredSize(new Dimension(500,300));
     }
     
-    private void getAuthentication(){
-    	//Senere: Hent authentication direkte fra server
-    	authentication = "Lise.projekt";
+    private String getAuthentication(){
+    	authentication = "Lise.projekt"; //Senere: Hent authentication direkte fra server
+    	return authentication;
     }
     
-    private void getInfo(){
+    private String getInfo(){
     	brugernavn = JTBrugernavn.getText();
     	kodeord = Kodeord.getText();
     	info = brugernavn + "." + kodeord;
+    	return info;
     }
     
     @Override
 	public void actionPerformed(ActionEvent e) {
 		if( e.getSource() == Kodeord){
-			getAuthentication();
-			getInfo();
-			if (info.equals(authentication)) {
+			if (getInfo().equals(getAuthentication())) {
                 this.setVisible(false);
                 parent.mainFrameSetVisible();
                 dispose();
@@ -144,9 +143,7 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBLogin){
-			getAuthentication();
-			getInfo();
-			if (info.equals(authentication)) {
+			if (getInfo().equals(getAuthentication())) {
                 this.setVisible(false);
                 parent.mainFrameSetVisible();
                 dispose();

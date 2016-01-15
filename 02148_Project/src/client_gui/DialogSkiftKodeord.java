@@ -108,31 +108,28 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 		setJButton(JBAnnuller);
 	}
 	
-	private void getAuthentication(){
-		// Senere: Hent authentication direkte fra server 
-		authentication = "Lise.projekt";
-		
-		array = authentication.split("\\.");
-		kodeord = array[1];
+	private String getAuthentication(){
+		authentication = "Lise.projekt";	// Senere: Hent authentication direkte fra server 
+		return authentication;
 	}
-	
-	private void getNyeKodeord(){
+
+	private String getKodeord(){
+		array = getAuthentication().split("\\.");
+		kodeord = array[1];
 		tastetKodeord = JTNuvarendeKodeord.getText();
 		nyeKodeord = JTNyeKodeord.getText();
 		gentagKodeord = JTGentagKodeord.getText();
+		return nyeKodeord;
 	}
 	
 	private void setAuthentication(){
-		//Senere: Send opdaterede authentication til serveren
-		authentication = array[0]+"."+kodeord;
+		authentication = array[0]+"."+kodeord; //Senere: Send opdaterede authentication til serveren
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBGem){
-			getAuthentication();
-			getNyeKodeord();
-			System.out.println(kodeord);
+			getKodeord();
 			if (tastetKodeord.equals(kodeord)){
 				if (nyeKodeord.equals(gentagKodeord)){
 					kodeord = nyeKodeord;
@@ -189,9 +186,7 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == JTGentagKodeord){
-			getAuthentication();
-			getNyeKodeord();
-			System.out.println(kodeord);
+			getKodeord();
 			if (tastetKodeord.equals(kodeord)){
 				if (nyeKodeord.equals(gentagKodeord)){
 					kodeord = nyeKodeord;
@@ -205,7 +200,7 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 					dispose();
 					JDialog dialog = new JDialog();
 					dialog.setAlwaysOnTop(true);    
-					JOptionPane.showMessageDialog(dialog, "Nye kodeord og gentagelse af nye kodeord stemmer ikke overens");
+					JOptionPane.showMessageDialog(dialog, "\"Nyt kodeord\" og \"Gentag nyt kodeord\" er ikke ens");
 					
 				}
 			}
