@@ -55,9 +55,9 @@ public class ServerSlave implements Runnable {
 				break;
 			case "A10":
 				if(server.newUser(decoded[1], decoded[2])) {
-					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.TRUE");
+					//TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.TRUE");
 				} else {
-					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.FALSE");
+					//TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.FALSE");
 				}
 				break;
 			default:

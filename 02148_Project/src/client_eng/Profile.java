@@ -1,57 +1,10 @@
 package client_eng;
 
-public class Profile {
-
-	private String firstName;
-	private String lastName;
-	private String userName;
-	private String password;
+public class Profile {	
+	private String username, password, navn, adresse, postnummer, by, harBil;
 	
-	
-	public Profile(String firstName, String lastName, String userName, String password) {
-		this.firstName = firstName; this.lastName = lastName; this.userName = userName; this.password = password;
+	private getClientData()
+		
 	}
-
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-
-	public String getLastName() {
-		return lastName;
-	}
-
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-
-	public String getUserName() {
-		return userName;
-	}
-
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	
 	
 }

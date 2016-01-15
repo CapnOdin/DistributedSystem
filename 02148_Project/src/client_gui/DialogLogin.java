@@ -120,12 +120,13 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
     	brugernavn = JTBrugernavn.getText();
     	kodeord = Kodeord.getText();
     	info = brugernavn + "." + kodeord;
-    	return "!A0." + info;
+    	return "A0." + info;
     }
     
     @Override
 	public void actionPerformed(ActionEvent e) {
 		if( e.getSource() == Kodeord){
+			login();
 			if (getInfo().equals(getAuthentication())) {
                 this.setVisible(false);
                 parent.mainFrameSetVisible();
@@ -143,10 +144,10 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBLogin){
+			login();
 			if (getInfo().equals(getAuthentication())) {
                 this.setVisible(false);
                 parent.mainFrameSetVisible();
-                MainFrame.client.sendMessage(getInfo());
                 
                 
                 dispose();
@@ -183,5 +184,9 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	@Override
 	public void mouseExited(MouseEvent e) {
 
+	}
+	
+	private void login(){
+        MainFrame.client.sendMessage(getInfo());
 	}
 }

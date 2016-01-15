@@ -25,6 +25,7 @@ public class TCPClient extends Thread {
 		//AUTHENTICATION
 		case "A0":
 			if(decoded[1].equals("TRUE")) {
+				System.out.println("ok");
 				this.sessionID = decoded[2];
 			} 
 			if(decoded[1].equals("FALSE")) {
