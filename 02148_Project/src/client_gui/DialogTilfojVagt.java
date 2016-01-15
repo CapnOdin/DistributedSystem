@@ -10,22 +10,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.DateFormatter;
+
+import com.sun.glass.ui.Pixels.Format;
 
 public class DialogTilfojVagt extends JDialog implements GeneralProperties, ActionListener, MouseListener {
 	private MainFrame parent;
 	private GridBagConstraints c = new GridBagConstraints();
 	private JPanel panel = new JPanel(new GridBagLayout());
-	private JLabel JLTilfojVagt, JLDato, JLOpgaveTitel, JLAdresse, JLPostnummer, JLStarttid;
-	private JTextField JTDato, JTOpgaveTitel, JTAdresse, JTPostnummer, JTStarttid;
+	private JLabel JLDato,JLTilfojVagt, JLOpgaveTitel, JLAdresse, JLPostnummer, JLStarttid;
+	private JTextField JTOpgaveTitel, JTAdresse, JTPostnummer, JTStarttid;
 	private JButton JBTilfoj, JBAnnuller;
+	private String dato, tid, jobNavn, jobAdresse, postnummer, newJob;
+	private JFormattedTextField JTDato, JTStarttid1;
 	
 	public  DialogTilfojVagt(MainFrame parent){
 		this.parent = parent;
@@ -86,21 +94,20 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	}
 	
 	private void setJComponents(){
+		JTDato = new JFormattedTextField(new java.util.Date());
+		JLDato = new JLabel("Dato");
 		JLTilfojVagt = new JLabel("<HTML><U> Tilføj Vagt <U> </HTML>");
 		JLTilfojVagt.setFont(new Font("SanSerif",Font.PLAIN,25));
-		JLDato = new JLabel("Dato");
 		JLOpgaveTitel = new JLabel("Opgave Titel");
 		JLAdresse = new JLabel("Adresse");
 		JLPostnummer = new JLabel("Postnummer");
-		JLStarttid = new JLabel("Starttid");
-		JTDato = new JTextField(6);
+		JLStarttid = new JLabel("Starttid");		
 		JTOpgaveTitel = new JTextField(22);
 		JTAdresse = new JTextField(22);
 		JTPostnummer = new JTextField(4);
 		JTStarttid = new JTextField(6);
 		JBTilfoj = new JButton("Tilføj");
 		JBAnnuller = new JButton("Annuller");
-		setJLabel(JLDato);
 		setJLabel(JLOpgaveTitel);
 		setJLabel(JLAdresse);
 		setJLabel(JLPostnummer);
@@ -115,8 +122,6 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	}
 	
 	private void setDefaultProperties(){
-
-		parent.setFocusable(false);
 		this.setUndecorated(true);
 		this.setPreferredSize(new Dimension(JTextAreaDimension.width+20,150));
 		this.getRootPane().setBorder(BorderFactory.createLineBorder(Color.black));
@@ -125,6 +130,16 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 		this.setVisible(true);
 
 		
+	}
+	
+	private void getNewJob(){
+		dato = JTDato.getText();
+		tid = JTStarttid.getText();
+		jobNavn = JTOpgaveTitel.getText();
+		jobAdresse = JTAdresse.getText();
+		postnummer = JTPostnummer.getText();
+		newJob = dato + "." + tid + "." + jobNavn + "." + jobAdresse + "." + postnummer;
+		System.out.println(newJob);
 	}
 
 	@Override
@@ -138,7 +153,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBTilfoj){
-
+			getNewJob();
 			parent.setFocusable(true);
 			dispose();
 		}
