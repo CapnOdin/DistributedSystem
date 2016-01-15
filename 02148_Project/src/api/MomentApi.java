@@ -76,6 +76,7 @@ public class MomentApi {
 		} catch (Exception e) {
 			
 		}
+		
 		return new String[] {vikarGUID, address};
 	}
 	

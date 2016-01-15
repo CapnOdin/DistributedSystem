@@ -53,7 +53,6 @@ public class GoogleWebApi {
 			String xml = IOUtils.toString(responseEntity.getContent(), StandardCharsets.UTF_8);
 			//System.out.println(xml);
 			
-			
 			if(xml.contains("<status>")){
 				results.add(xml.split("<status>")[1].split("</status>")[0]);
 			}
