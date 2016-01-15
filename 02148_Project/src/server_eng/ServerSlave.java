@@ -2,8 +2,6 @@ package server_eng;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
-import java.util.HashMap;
 
 import javax.swing.Timer;
 
@@ -28,11 +26,11 @@ public class ServerSlave implements Runnable {
 				if(server.authenticate(decoded[1], decoded[2])) {
 					// Authentication succeeded
 					System.out.println("Authentication OK");
-					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("%AUTHOK%");
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A0.TRUE");
 				} else {
 					// Authentication failed
 					System.out.println("Authentication FAILED");
-					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("%AUTHFAIL%");
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A0.FALSE");
 				}
 				break;
 			case "A1":
@@ -57,9 +55,9 @@ public class ServerSlave implements Runnable {
 				break;
 			case "A10":
 				if(server.newUser(decoded[1], decoded[2])) {
-					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("%USERADDED%");
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.TRUE");
 				} else {
-					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("%USEREXISTS");
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.FALSE");
 				}
 				break;
 			default:

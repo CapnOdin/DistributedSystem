@@ -13,10 +13,37 @@ public class TCPClient extends Thread {
 	private String message = "";
 	private String serverIP;
 	private String alias;
+	private String sessionID;
 	
 	private int port;
 	
 	private Socket connection;
+	
+	private void decode(String message) {
+		String[] decoded = message.split("\\.");
+		switch(decoded[0]) {
+		//AUTHENTICATION
+		case "A0":
+			if(decoded[1].equals("TRUE")) {
+				this.sessionID = decoded[2];
+			} 
+			if(decoded[1].equals("FALSE")) {
+				
+			}
+			break;
+		//NEW USER	
+		case "A1":
+			if(decoded[1].equals("TRUE")) {
+				
+			}
+			if(decoded[1].equals("FALSE")) {
+				
+			}
+			break;
+		default:
+			System.out.println("Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");
+		}
+	}
 	
 	public TCPClient(String host, int port, String alias) {
 		serverIP = host;
@@ -51,6 +78,7 @@ public class TCPClient extends Thread {
 		do {
 			try {
 				message = (String) input.readObject();
+				decode(message);
 				System.out.println(message);
 			}catch(Exception e) {
 				break;
@@ -81,6 +109,10 @@ public class TCPClient extends Thread {
 			e.printStackTrace();
 		}
 		System.out.println("[CLIENT]Closing connection and streams.");
+	}
+
+	public String getSessionID() {
+		return sessionID;
 	}
 
 }
