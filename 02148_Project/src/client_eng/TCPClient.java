@@ -10,6 +10,8 @@ public class TCPClient extends Thread {
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	
+	public static boolean isConnected = false;
+	
 	private String message = "";
 	private String serverIP;
 	private String alias;
@@ -31,33 +33,33 @@ public class TCPClient extends Thread {
 		//AUTHENTICATION
 		case "A0":
 			if(decoded[1].equals("TRUE")) {
-				System.out.println("AUTHENTICATION TRUE");
+				isConnected = true;
+				System.out.println("[CLIENT]AUTHENTICATION TRUE");
 			} 
 			if(decoded[1].equals("FALSE")) {
-				System.out.println("AUTHENTICATION FLASE");
+				System.out.println("[CLIENT]AUTHENTICATION FLASE");
 			}
 			break;
 		//NEW USER	
 		case "A1":
 			if(decoded[1].equals("TRUE")) {
-				System.out.println("SERVER CREATED USER");
+				System.out.println("[CLIENT]SERVER CREATED USER");
 			}
 			if(decoded[1].equals("FALSE")) {
-				System.out.println("USER ALREADY EXISTS");
+				System.out.println("[CLIENT]USER ALREADY EXISTS");
 			}
 			break;
 		//CONNECTION
 		case "A2":
 			if(decoded[1].equals("TRUE")) {
-				System.out.println(decoded[2]);
 				sessionID = decoded[2];
-				System.out.println("SESSION ID SET TO: " + sessionID);
+				System.out.println("[CLIENT]SESSION ID SET TO: " + sessionID);
 			}
 			if(decoded[1].equals("FALSE")) {
 				
 			}
 		default:
-			System.out.println("Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");
+			System.out.println("[CLIENT]Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");
 		}
 	}
 	

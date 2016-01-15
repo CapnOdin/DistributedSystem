@@ -77,7 +77,7 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println(((JLabel)e.getSource()).getText() + " pressed!");
+		//System.out.println(((JLabel)e.getSource()).getText() + " pressed!");
 		
 		//Connected Clients Pressed
 		if(e.getSource() == menus[0]) {
