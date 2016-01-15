@@ -49,7 +49,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 	private JButton[] actionButtons = new JButton[4];
 	
 	private String clientAlias, clientIP, selectedClient, clientSessionID;
-	//private int clientUserNo;
+	
 	public ServerConnectedClientsPanel(ServerMainFrame parent, String ID) {
 		super(parent, ID);
 		addInfoPanelContent();

@@ -35,6 +35,7 @@ public class ServerTaskBar extends JMenuBar implements MouseListener, MouseMotio
 		button_holder.add(power_button);
 		button_holder.addMouseListener(this);
 		button_holder.addMouseMotionListener(this);
+		button_holder.setBackground(Color.white);
 		power_button.addMouseListener(this);
 		this.add(button_holder, BorderLayout.EAST);
 		this.add(frametitle, BorderLayout.CENTER);

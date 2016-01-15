@@ -69,7 +69,7 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 	}
 
 	private void setDefaultProperties() {
-		this.setBackground(twitchColor);
+		this.setBackground(Color.white);
 		this.setLayout(new GridBagLayout());
 		this.setVisible(true);
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
