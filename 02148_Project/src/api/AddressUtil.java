@@ -15,7 +15,7 @@ public class AddressUtil {
 		Pattern special = Pattern.compile("[^a-zA-Z0-9&&[^ß-ýÀ-Ý]&&[^,.-]&&[^\\u0027]]"); // \u0027 is '
 		Pattern dontThinkAboutIt = Pattern.compile("[×÷]");
 		
-		System.out.println(term);
+		//System.out.println(term);
 		
 		try{
 			for(String str : term.split(" ")){
