@@ -13,7 +13,7 @@ public class TCPClient extends Thread {
 	private String message = "";
 	private String serverIP;
 	private String alias;
-	private String sessionID;
+	private static String sessionID;
 	
 	private int port;
 	
@@ -112,7 +112,7 @@ public class TCPClient extends Thread {
 		System.out.println("[CLIENT]Closing connection and streams.");
 	}
 
-	public String getSessionID() {
+	public static String getSessionID() {
 		return sessionID;
 	}
 
