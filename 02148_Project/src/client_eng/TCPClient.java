@@ -31,19 +31,19 @@ public class TCPClient extends Thread {
 		//AUTHENTICATION
 		case "A0":
 			if(decoded[1].equals("TRUE")) {
-				
+				System.out.println("AUTHENTICATION TRUE");
 			} 
 			if(decoded[1].equals("FALSE")) {
-				
+				System.out.println("AUTHENTICATION FLASE");
 			}
 			break;
 		//NEW USER	
 		case "A1":
 			if(decoded[1].equals("TRUE")) {
-				
+				System.out.println("SERVER CREATED USER");
 			}
 			if(decoded[1].equals("FALSE")) {
-				
+				System.out.println("USER ALREADY EXISTS");
 			}
 			break;
 		//CONNECTION
@@ -51,6 +51,7 @@ public class TCPClient extends Thread {
 			if(decoded[1].equals("TRUE")) {
 				System.out.println(decoded[2]);
 				sessionID = decoded[2];
+				System.out.println("SESSION ID SET TO: " + sessionID);
 			}
 			if(decoded[1].equals("FALSE")) {
 				
