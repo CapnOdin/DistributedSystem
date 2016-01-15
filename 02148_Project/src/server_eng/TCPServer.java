@@ -12,7 +12,7 @@ public class TCPServer extends Thread {
 	private HashMap<String, String> userMap = new HashMap<String, String>();
 	public static int currentTask = 0;
 	
-	private static HashMap<Integer, ConnectionThread> allConnections = new HashMap<Integer, ConnectionThread>();
+	private static HashMap<String, ConnectionThread> allConnections = new HashMap<String, ConnectionThread>();
 	
 	private ServerTupleSpace space;
 	private ServerSocket server;
@@ -58,9 +58,8 @@ public class TCPServer extends Thread {
 			userCount++;
 			System.out.println("[SERVER]Now connected to " + connection.getRemoteSocketAddress());
 			ConnectionThread newClient = new ConnectionThread(connection, userNumber);
-			allConnections.put(userNumber++, newClient);
-			System.out.println(allConnections);
 			newClient.start();
+			System.out.println(allConnections);
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -106,15 +105,17 @@ public class TCPServer extends Thread {
 	}
 	
 	public boolean authenticate(String user, String password) {
+		if(!userMap.containsKey(user)) return false;
 		if(userMap.get(user).equals(password))
 			return true;
 		else return false;
 	}
 	
-	public void newUser(String name, String password) {
+	public boolean newUser(String name, String password) {
 		if(!userMap.containsKey(name)) {
 			userMap.put(name, password);
-		}
+			return true;
+		} else return false;
 	}
 	
 	public int getPort() {
@@ -129,7 +130,7 @@ public class TCPServer extends Thread {
 		this.isRunning = isRunning;
 	}
 
-	public static HashMap<Integer, ConnectionThread> getAllConnections() {
+	public static HashMap<String, ConnectionThread> getAllConnections() {
 		return allConnections;
 	}
 

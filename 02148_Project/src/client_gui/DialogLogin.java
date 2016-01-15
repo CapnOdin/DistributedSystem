@@ -16,10 +16,11 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import client_eng.TCPClient;
 
 public class DialogLogin extends JDialog implements ActionListener, MouseListener{
 	private MainFrame parent;
@@ -120,12 +121,13 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
     	brugernavn = JTBrugernavn.getText();
     	kodeord = Kodeord.getText();
     	info = brugernavn + "." + kodeord;
-    	return "!A0." + info;
+    	return "A0." + info+".";
     }
     
     @Override
 	public void actionPerformed(ActionEvent e) {
 		if( e.getSource() == Kodeord){
+			login();
 			if (getInfo().equals(getAuthentication())) {
                 this.setVisible(false);
                 parent.mainFrameSetVisible();
@@ -143,10 +145,10 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBLogin){
+			login();
 			if (getInfo().equals(getAuthentication())) {
                 this.setVisible(false);
                 parent.mainFrameSetVisible();
-                MainFrame.client.sendMessage(getInfo());
                 
                 
                 dispose();
@@ -183,5 +185,9 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	@Override
 	public void mouseExited(MouseEvent e) {
 
+	}
+	
+	private void login(){
+        MainFrame.client.sendMessage(getInfo() + TCPClient.getSessionID());
 	}
 }

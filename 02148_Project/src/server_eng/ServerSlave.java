@@ -2,8 +2,6 @@ package server_eng;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
-import java.util.HashMap;
 
 import javax.swing.Timer;
 
@@ -27,10 +25,12 @@ public class ServerSlave implements Runnable {
 				System.out.println("Authenticating user ...");
 				if(server.authenticate(decoded[1], decoded[2])) {
 					// Authentication succeeded
-					System.out.println("Authentication OK");
+					System.out.println("[SERVER]Authentication OK " + decoded[decoded.length-1]);
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A0.TRUE");
 				} else {
 					// Authentication failed
-					System.out.println("Authentication FAILED");
+					System.out.println("[SERVER]Authentication FAILED");
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A0.FALSE");
 				}
 				break;
 			case "A1":
@@ -54,7 +54,13 @@ public class ServerSlave implements Runnable {
 			case "A9":
 				break;
 			case "A10":
-				server.newUser(decoded[1], decoded[2]);
+				if(server.newUser(decoded[1], decoded[2])) {
+					System.out.println("[SERVER]ADDED NEW USER");
+					//TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.TRUE");
+				} else {
+					System.out.println("[SERVER]USER ALREADY EXISTS");
+					//TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.FALSE");
+				}
 				break;
 			default:
 				System.out.println("Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");
@@ -68,21 +74,14 @@ public class ServerSlave implements Runnable {
 
 	@Override
 	public void run() {
-
-		// String instruction =
-		// TCPServer.getTaskBuffer().get(TCPServer.currentTask++);
-		// TaskTemplate current_task = inst_mem.get(instruction);
-		// current_task.runTask(space);
 		Timer t = new Timer(1000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println(TCPServer.getTaskBuffer().get(TCPServer.currentTask));
 				try {
 					decodeTask(TCPServer.getTaskBuffer().get(TCPServer.currentTask));
 				} catch(Exception ex) {
-					//System.out.println("HELLO");
-				}
 				
+				}			
 			}
 		});
 		t.start();

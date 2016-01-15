@@ -25,13 +25,16 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 	private GridBagConstraints c = new GridBagConstraints();
 	private DialogLogin DLogin;
 	private JLabel JLOpret, JLNavn, JLKodeord, JLGentagKodeord;
-	private JTextField JTNavn;
+	private JTextField JTBrugernavn;
 	private JPasswordField Kodeord, GentagKodeord;
 	private JButton JBGem, JBAnnuller;
 	private JPanel panel = new JPanel(new GridBagLayout());
 	private boolean loggedIn = false;
     private Insets normalInsets = new Insets(2,2,2,2);
     private Insets biggerInsets = new Insets(10,0,0,0);
+    private String brugernavn, kodeord, newUser, gentagKodeord;
+    
+    private DialogLogin Dlogin;
 
 	public DialogNyBruger(MainFrame parent) {
 		this.parent = parent;
@@ -43,7 +46,7 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 		c.anchor = GridBagConstraints.NORTHWEST;	
 		addC(JLOpret,0,i,1);i++;  c.insets = biggerInsets;
 		addC(JLNavn,0,i,1); i++;
-		addC(JTNavn,0,i,2); i++; c.insets = normalInsets;
+		addC(JTBrugernavn,0,i,2); i++; c.insets = normalInsets;
 		addC(JLKodeord,0,i,1); i++;
 		addC(Kodeord,0,i,2); i++;
 		addC(JLGentagKodeord,0,i,1); i++;
@@ -89,7 +92,7 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 		JLNavn = new JLabel("Ønskede Brugernavn");
 		JLKodeord = new JLabel("Kodeord");
 		JLGentagKodeord = new JLabel("Gentag Kodeord");
-		JTNavn = new JTextField(20);
+		JTBrugernavn = new JTextField(20);
 		Kodeord = new JPasswordField(20);
 		GentagKodeord = new JPasswordField(20);
 		JBGem = new JButton("Gem");
@@ -98,11 +101,23 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 		setJLabel(JLNavn);
 		setJLabel(JLKodeord);
 		setJLabel(JLGentagKodeord);
-		setJTextField(JTNavn);
+		setJTextField(JTBrugernavn);
 		setJTextField(Kodeord);
 		setJTextField(GentagKodeord);
 		setJButton(JBGem);
 		setJButton(JBAnnuller);
+	}
+	
+	private String getNewUser(){
+		brugernavn = JTBrugernavn.getText();
+		newUser = "A10." + brugernavn + "." + kodeord;
+		return newUser;
+	}
+	
+	private boolean getNyeKodeordOK(){
+		kodeord = Kodeord.getText();
+		gentagKodeord = GentagKodeord.getText();
+		return kodeord.equals(gentagKodeord);
 	}
 
 	private void setDefaultProperties() {
@@ -116,8 +131,9 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == JBGem){
-			dispose();
+		if (getNyeKodeordOK()){
+			makeNewUser();
+			
 		}
 		if (e.getSource() == JBAnnuller){
 			this.setVisible(false);
@@ -155,15 +171,17 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == GentagKodeord){
-			dispose();
-			loggedIn = true;
-			//parent.setVisible(true);
-			
+			if (getNyeKodeordOK()){
+				makeNewUser();
+			}			
 		}
-
 	}
 	
-	public boolean isLoggedIn(){
-		return loggedIn;
+	public void makeNewUser(){
+		MainFrame.client.sendMessage(getNewUser());
+		dispose();
+		DLogin = new DialogLogin(parent);
+		DLogin.setAlwaysOnTop(true);
+		DLogin.setVisible(true);
 	}
 }

@@ -130,7 +130,10 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	}
 	
 	private String getConnectInfo(){
-		return "Lise_Noerby@hotmail.com.projekt";  //Senere: Hent ConnectInfo direkte fra serveren tilsvarende email
+		email = JTEMail.getText();
+		kodeord = Kodeord.getText();
+		connectInfo = "A6."+ email + "." + kodeord;
+		return connectInfo;
 	}
 	
 	private String getClientInfo(){
@@ -139,7 +142,10 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		
 		if (e.getSource() == JBForbind){
+			getConnectInfo();
+			//api.MomentApi.loginMoment(email,kodeord);
 			if (Kodeord.getText().equals(getKodeord(getConnectInfo()))){;
 				System.out.println("Succes");
 			}

@@ -1,9 +1,9 @@
 package engine;
 
-import server_eng.TCPServer;
+import server_gui.ServerMainFrame;
 
 public class ServerEngine {
 	public static void main(String[] args) {
-		new TCPServer(1234).run();
+		new ServerMainFrame();
 	}
 }

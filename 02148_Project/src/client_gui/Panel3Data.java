@@ -200,7 +200,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 			harBil = "1";}
 		else{
 			harBil = "0";}
-		clientData = brugernavn + "." + kodeord + "."+ navn+"."+adresse+"."+postnummer+"."+by + "." + email +"."+ harBil;
+		clientData = "A8." + brugernavn + "." + kodeord + "."+ navn+"."+adresse+"."+postnummer+"."+by + "." + email +"."+ harBil;
 		return clientData;
 	}
 	
