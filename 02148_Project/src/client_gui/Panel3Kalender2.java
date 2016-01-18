@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-public class Panel3Kalender2 extends PanelTemplate implements ActionListener {
+public class Panel3Kalender2 extends PanelTemplate implements GeneralProperties, ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private MainFrame parent;
@@ -40,6 +40,7 @@ public class Panel3Kalender2 extends PanelTemplate implements ActionListener {
 	
 	@Override
 	void setDefaultProperties() {
+		this.setPreferredSize(frameSizePanel3);
 		allCalendarElements = new HashMap<String, CalendarTask>();
 		setContainerProperties();
 		setPanelProperties();
@@ -62,7 +63,7 @@ public class Panel3Kalender2 extends PanelTemplate implements ActionListener {
 		
 		// Toolbar properties
 		toolBar = new JPanel(new BorderLayout());
-		JBAddCalendarTask = new JButton("Tilføj");
+		JBAddCalendarTask = new JButton("TilfÃ¸j");
 		JBAddCalendarTask.addActionListener(this);
 		toolBar.add(JBAddCalendarTask, BorderLayout.EAST);
 	}
@@ -71,7 +72,7 @@ public class Panel3Kalender2 extends PanelTemplate implements ActionListener {
 		c.gridy = panelCount++;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		
-		CalendarTask task = new CalendarTask(scrollPane, ""); // FIND EN MÅDE AT GØRE HVER TASK UNIK PÅ.
+		CalendarTask task = new CalendarTask(scrollPane, ""); // FIND EN Mï¿½DE AT Gï¿½RE HVER TASK UNIK Pï¿½.
 		allCalendarElements.put(task.getID(), task);
 		
 		contentPane.add(task, c);
@@ -114,7 +115,8 @@ public class Panel3Kalender2 extends PanelTemplate implements ActionListener {
 		
 		private void setTaskPanelProperties() {
 			this.setLayout(new GridLayout(1,6));
-			this.setPreferredSize(new Dimension(parent.getViewport().getWidth(), parent.getViewport().getHeight()/10));
+			this.setPreferredSize(VagtDimension);
+			//this.setPreferredSize(new Dimension(parent.getViewport().getWidth(), parent.getViewport().getHeight()/10));
 			this.setVisible(true);
 		}
 		
