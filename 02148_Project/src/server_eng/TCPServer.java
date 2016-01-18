@@ -118,6 +118,14 @@ public class TCPServer extends Thread {
 		} else return false;
 	}
 	
+	public void changeUserPassword(String name, String currentPassword, String newPassword, String sessionID) {
+		if(userMap.get(name).equals(currentPassword)) {
+			userMap.put(name, userMap.get(name) + 1);
+			allConnections.get(sessionID).sendMessage("#Password successfully changed!");
+		}
+		allConnections.get(sessionID).sendMessage("#Wrong password!");
+	}
+	
 	public int getPort() {
 		return server.getLocalPort();
 	}
