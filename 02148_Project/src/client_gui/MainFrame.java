@@ -92,9 +92,15 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		this.setLocationRelativeTo(null);
 	}
 	
-	public boolean waitForMsg(String protocol, String value){
+	public boolean stallGUI(String protocol, String value) {
+		boolean stall = waitForMsg(protocol, value);
+		msg = null;
+		return stall;
+	}
+	
+	private boolean waitForMsg(String protocol, String value){
 		int i = 0;
-    	while(!this.msg[0].equals(protocol)){
+    	while(!MainFrame.msg[0].equals(protocol)){
     		try {
     			if(i > 20){break;}
 				Thread.sleep(500);
@@ -103,7 +109,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 				e1.printStackTrace();
 			}
     	}
-    	return this.msg[1].equals(value);
+    	return this.MainFrame[1].equals(value);
     }
 	
 	public void mainFrameSetVisible(){
