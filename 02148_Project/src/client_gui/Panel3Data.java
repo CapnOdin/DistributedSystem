@@ -264,7 +264,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	
 	private void gem(){
 		getNewClientData(); // Senere: Send opdaterede clientData til serveren
-		taskbar.addForbundet();
+		
 	}
 	
 	/*

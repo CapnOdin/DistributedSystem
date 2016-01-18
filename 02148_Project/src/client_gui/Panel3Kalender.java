@@ -8,30 +8,30 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SpringLayout;
+import javax.swing.ScrollPaneConstants;
 
 public class Panel3Kalender extends PanelTemplate implements GeneralProperties, MouseListener{
 	private MainFrame parent;
 	private GridBagConstraints c = new GridBagConstraints();
-	private JPanel JPVagter = new JPanel(new GridLayout(0,5));
+	private JPanel JPVagter = new JPanel(new GridLayout(0,6));
+	private JPanel ikoner = new JPanel(new GridBagLayout());
 	private JPanel panel = new JPanel(new GridBagLayout());
-	private JTextArea textArea;
 	private JScrollPane scrollPane;
 	private JButton JBTilfoj;
-	private String dato, tid, navn, adresse, postnummer;
 	private JLabel JLDato, JLTid, JLNavn, JLAdresse, JLPostnummer;
+	private JLabel JLSlet = new JLabel(new ImageIcon("delete.png"));
+	private JLabel JLRediger = new JLabel(new ImageIcon("edit.png"));
+	private JLabel JLTimer = new JLabel(new ImageIcon("clock.png"));
+	private String dato, tid, navn, adresse, postnummer;
 	private String[] array;
 	private String newJob;
-	private JPanel oversigt = new JPanel(new SpringLayout());
-	private JTextField[] textfield = new JTextField[75];
-	private int field = 0;
+	private int y = 0;
 	
 	private DialogTilfojVagt DTilfojVagt;
 	
@@ -39,50 +39,37 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		this.parent = parent;
 		setDefaultProperties();
 		setJComponents();
+		scrollPane =  new JScrollPane(panel,   ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		getNewJob("01-01-2016.08:00.Novo Nordisk. Hallas alle 1. 8000"); //Senere: hent direkte fra dialog
-		getNewJob("01-10-2016.10:00.Nordea. Helgeshøjalle 67. 8000");
-		/*for (int i = 0; i<75;i++){ oversigt.add(textfield[i]); }
-		SpringUtilities.makeGrid(oversigt,16, 5, 0, 0, 0, 0);
-		*/
-		addC(textArea,0,0,1);
+		//getNewJob("01-10-2016.10:00.Nordea. Helgeshøjalle 67. 8000");
+		System.out.println(frameSizePanel3);
+		System.out.println(KalenderDimension);
+		
 		c.anchor = GridBagConstraints.SOUTHEAST;
-		addC(JBTilfoj,0,1,1);
+		c.ipady = 0;
+		addC(JBTilfoj,0,1,1,0);
 		JBTilfoj.addMouseListener(this);
 		
 		this.add(panel);                                       
 	}
 	
 	private void setJComponents(){
-		textArea = new JTextArea("Fyld ud med vagter \n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEr jeg ude over nu?\n");
-		scrollPane = new JScrollPane(textArea);  
-		textArea.setPreferredSize(JTextAreaDimension);
-		textArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		//textArea.setLineWrap(true);  
-		//textArea.setWrapStyleWord(true); 
-		
-		
-		/*JPVagter.setPreferredSize(JTextAreaDimension);
+		JPVagter.setPreferredSize(VagtDimension);
 		JPVagter.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		JPVagter.setBackground(Color.white);*/
-		/*oversigt.add(new JLabel("Dato"));
-		oversigt.add(new JLabel("Tid"));
-		oversigt.add(new JLabel("Titel"));
-		oversigt.add(new JLabel("Adresse"));
-		oversigt.add(new JLabel("Postnummer"));
-		for (int i = 0; i < 75; i++) {
-			textfield[i] = new JTextField();
-		    
-		}
-		oversigt.setPreferredSize(JTextAreaDimension);
-		oversigt.setBackground(Color.white);*/
+		JPVagter.setBackground(Color.white);
+		ikoner.setPreferredSize(IkonDimension);
+		ikoner.setBackground(Color.white);
 		JBTilfoj = new JButton("Tilføj");
+		panel.setPreferredSize(KalenderDimension);
 		panel.setBackground(Color.white);	
 	}
 	
-	private void addC(JComponent comp, int x, int y, int width){
+	
+	private void addC(JComponent comp, int x, int y, int width, int height){
 		c.gridx = x;
 		c.gridy = y;
 		c.gridwidth = width;
+		c.ipady = height;
 		panel.add(comp, c);
 	}
 	
@@ -94,17 +81,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		navn = array[i];i++;
 		adresse = array[i];i++;
 		postnummer = array[i];	
-		addJob1(dato,tid,navn,adresse,postnummer);
-	}
-
-	
-	private void addJob1(String d, String t, String n, String a, String p){
-		textfield[field] = new JTextField(d);field++;
-		textfield[field] = new JTextField(t);field++;
-		textfield[field] = new JTextField(n);field++;
-		textfield[field] = new JTextField(a);field++;
-		textfield[field] = new JTextField(p);field++;
-		
+		addJob(dato,tid,navn,adresse,postnummer);
 	}
 		
 	private void addJob(String d, String t, String n, String a, String p){
@@ -113,7 +90,21 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		JPVagter.add(JLNavn = new JLabel(n));
 		JPVagter.add(JLAdresse = new JLabel(a));
 		JPVagter.add(JLPostnummer = new JLabel(p));
-		
+		ikoner.add(JLTimer,c);
+		ikoner.add(JLRediger,c);
+		ikoner.add(JLSlet,c);
+		JLTimer.addMouseListener(this);
+		JLRediger.addMouseListener(this);
+		JLSlet.addMouseListener(this);
+		/*
+		 * Jaa, rimeligt meget på røven her...
+		MouseEvent e;
+		if(e.getSource() == JLTimer){
+			
+		}
+		*/
+		JPVagter.add(ikoner);
+		addC(JPVagter,0,y,1,30);y++;
 	}	
 	
 	@Override
@@ -124,8 +115,6 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		this.setVisible(true);
 		this.validate();
 	}
-
-
 
 	@Override
 	public void mouseClicked(MouseEvent e) {

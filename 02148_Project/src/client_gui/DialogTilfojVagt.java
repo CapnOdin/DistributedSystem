@@ -118,7 +118,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	
 	private void setDefaultProperties(){
 		this.setUndecorated(true);
-		this.setPreferredSize(new Dimension(JTextAreaDimension.width+20,150));
+		this.setPreferredSize(new Dimension(KalenderDimension.width+20,150));
 		this.getRootPane().setBorder(BorderFactory.createLineBorder(Color.black));
 		this.pack();
 		this.setLocationRelativeTo(null);

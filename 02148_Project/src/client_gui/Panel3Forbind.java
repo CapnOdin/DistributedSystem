@@ -129,13 +129,7 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	public void mouseClicked(MouseEvent e) {
 		
 		if (e.getSource() == JBForbind){
-			getConnectInfo();
-			try {
-				api.MomentApi.loginMoment(email,kodeord);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}			
+			forbind();			
 		}		
 	}
 
@@ -166,17 +160,22 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == Kodeord){
-			getConnectInfo();
-			try {
-			String[] var = api.MomentApi.loginMoment(email,kodeord);
-			System.out.println(var[1]);
-			api.MomentApi.getVagter("2016-01-01",var[0]);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			forbind();
 		}
 		
+	}
+	
+	private void forbind(){
+		getConnectInfo();
+		System.out.println(email);
+		System.out.println(kodeord);
+		try {
+		String[] var = api.MomentApi.loginMoment(email,kodeord);
+		System.out.println(var[1]);
+		api.MomentApi.getVagter("2016-01-01",var[0]);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	/*

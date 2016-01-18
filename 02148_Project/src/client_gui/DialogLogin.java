@@ -19,8 +19,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
+import server_eng.TCPServer;
 import client_eng.TCPClient;
+
 
 public class DialogLogin extends JDialog implements ActionListener, MouseListener{
 	private MainFrame parent;
@@ -154,10 +157,27 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
                 
                 dispose();
             } else {
-            	this.setVisible(false);         	
-            	DForkertLogin = new DialogForkertLogin(parent);
-            	DForkertLogin.setAlwaysOnTop(true);
-            	DForkertLogin.setVisible(true);
+            	Timer t = new Timer(1000,new ActionListener() {
+        			@Override
+        			public void actionPerformed(ActionEvent e) {
+        				try {
+        					
+        				} catch(Exception ex) {
+        				
+        				}			
+        			}
+            		
+            		/*@Override
+            		public void actionPerformed(ActionEvent e){
+            			if (!TCPClient.isConnected){
+            				//this.setVisible(false);         	
+                			DForkertLogin = new DialogForkertLogin(parent);
+                			DForkertLogin.setAlwaysOnTop(true);
+                			DForkertLogin.setVisible(true);
+            			}
+            		}*/
+            	});
+            	
             }
 		}
 		if (e.getSource() == JLNyBruger){	
