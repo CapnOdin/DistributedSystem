@@ -100,7 +100,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	
 	private boolean waitForMsg(String protocol, String value){
 		int i = 0;
-    	while(!MainFrame.msg[0].equals(protocol)){
+    	while(!msg[0].equals(protocol)){
     		try {
     			if(i > 20){break;}
 				Thread.sleep(500);
@@ -109,7 +109,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 				e1.printStackTrace();
 			}
     	}
-    	return this.MainFrame[1].equals(value);
+    	return msg[1].equals(value);
     }
 	
 	public void mainFrameSetVisible(){
