@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 import api.GoogleWebApi;
+import server_gui.ServerConnectedClientsPanel;
 
 public class ServerSlave implements Runnable {
 
@@ -38,6 +39,8 @@ public class ServerSlave implements Runnable {
 				System.out.println(GoogleWebApi.distMatrix(GoogleWebApi.seachPlaces(decoded[1]).get(1), GoogleWebApi.seachPlaces(decoded[2]).get(1)));
 				break;
 			case "A2":
+				System.out.println("DECODED STRING " + java.util.Arrays.toString(decoded));
+				ServerConnectedClientsPanel.removeElementFromList(decoded[1]);
 				break;
 			case "A3":
 				break;

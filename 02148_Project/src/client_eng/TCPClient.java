@@ -119,7 +119,7 @@ public class TCPClient extends Thread {
 	
 	public void disconnect() {
 		System.out.println("Disconnecting Client..");
-		sendMessage("%DISCONNECT%");
+		sendMessage("A2."+sessionID);
 		cleanUp();
 	}
 
