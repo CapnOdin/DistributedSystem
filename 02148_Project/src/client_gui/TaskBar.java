@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
+import client_eng.TCPClient;
+
 public class TaskBar extends JMenuBar implements MouseListener, MouseMotionListener{
 
 	private static final long serialVersionUID = 1L;
@@ -82,9 +84,7 @@ public class TaskBar extends JMenuBar implements MouseListener, MouseMotionListe
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == power_button) {
-			if (MainFrame.client.isConnected){
-				MainFrame.client.disconnect();
-			}
+			MainFrame.client.disconnect();
 			System.exit(0);
 		}
 		if(e.getSource() == minimize_button){

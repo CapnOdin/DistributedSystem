@@ -32,6 +32,7 @@ public class ConnectionThread extends Thread {
 	}
 	
 	private void cleanUp() {
+		ServerConnectedClientsPanel.removeElementFromList(sessionID);
 		try {
 			input.close();
 			output.close();
