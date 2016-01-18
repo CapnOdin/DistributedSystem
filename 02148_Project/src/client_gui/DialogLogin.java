@@ -39,7 +39,9 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
     
     private DialogNyBruger DNyBruger;
     private DialogForkertLogin DForkertLogin;
-      
+
+    public static String msg = "";
+    
     public DialogLogin(MainFrame parent) {
         this.parent = parent;
         setDefaultProperties();
@@ -132,18 +134,30 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	public void actionPerformed(ActionEvent e) {
 		if( e.getSource() == Kodeord){
 			login();
-			if (getInfo().equals(getAuthentication())) {
-                this.setVisible(false);
-                parent.mainFrameSetVisible();
-                dispose();
-            } else {
-            	this.setVisible(false);         	
-            	DForkertLogin = new DialogForkertLogin(parent);
-            	DForkertLogin.setAlwaysOnTop(true);
-            	DForkertLogin.setVisible(true);
-            }
-		}
-		
+			while (this.msg.equals("")) {
+            	
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+			}
+			System.out.println("test2");
+			if( msg.equals("TRUE")){
+            	this.setVisible(false);
+            	parent.mainFrameSetVisible();
+            	DialogLogin.msg = "";
+            	dispose();
+            	System.out.println("test");
+			} 
+			else if (this.msg.equals("FALSE")){
+        		this.setVisible(false);         	
+        		DForkertLogin = new DialogForkertLogin(parent);
+        		DForkertLogin.setAlwaysOnTop(true);
+        		DForkertLogin.setVisible(true);
+			
+        	}
+		}		
 	}
 
 	@Override
@@ -209,6 +223,6 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	}
 	
 	private void login(){
-        MainFrame.client.sendMessage(getInfo() + TCPClient.getSessionID());
+        MainFrame.client.sendMessage(getInfo());
 	}
 }

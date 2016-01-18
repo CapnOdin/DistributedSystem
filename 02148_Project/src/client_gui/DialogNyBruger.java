@@ -35,6 +35,7 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
     private String brugernavn, kodeord, newUser, gentagKodeord;
     
     private DialogLogin Dlogin;
+    private DialogKodeordIkkeEns DKodeordIkkeEns;
 
 	public DialogNyBruger(MainFrame parent) {
 		this.parent = parent;
@@ -131,9 +132,8 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (getNyeKodeordOK()){
+		if (e.getSource() == JBGem){
 			makeNewUser();
-			
 		}
 		if (e.getSource() == JBAnnuller){
 			this.setVisible(false);
@@ -171,17 +171,22 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == GentagKodeord){
-			if (getNyeKodeordOK()){
-				makeNewUser();
-			}			
+			makeNewUser();
 		}
 	}
 	
 	public void makeNewUser(){
-		MainFrame.client.sendMessage(getNewUser());
-		dispose();
-		DLogin = new DialogLogin(parent);
-		DLogin.setAlwaysOnTop(true);
-		DLogin.setVisible(true);
+		if(getNyeKodeordOK()){
+			MainFrame.client.sendMessage(getNewUser());
+			dispose();
+			DLogin = new DialogLogin(parent);
+			DLogin.setAlwaysOnTop(true);
+			DLogin.setVisible(true);
+		}
+		else{
+			DKodeordIkkeEns = new DialogKodeordIkkeEns(parent);
+			DKodeordIkkeEns.setAlwaysOnTop(true);
+			DKodeordIkkeEns.setVisible(true);
+		}
 	}
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -96,6 +97,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		JLTimer.addMouseListener(this);
 		JLRediger.addMouseListener(this);
 		JLSlet.addMouseListener(this);
+		
 		/*
 		 * Jaa, rimeligt meget på røven her...
 		MouseEvent e;

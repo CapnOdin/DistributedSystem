@@ -30,6 +30,8 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	private String clientData, email, connectInfo, kodeord, sessionID;
 	private String[] array, array1;
 	
+	private DialogForkertKodeord DForkertKodeord;
+	
 	public Panel3Forbind(MainFrame parent){
 		this.parent = parent;
 		setDefaultProperties();
@@ -166,15 +168,21 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	}
 	
 	private void forbind(){
-		getConnectInfo();
-		System.out.println(email);
-		System.out.println(kodeord);
-		try {
-		String[] var = api.MomentApi.loginMoment(email,kodeord);
-		System.out.println(var[1]);
-		api.MomentApi.getVagter("2016-01-01",var[0]);
-		} catch (Exception e1) {
-			e1.printStackTrace();
+		if (false){			// Vent på authentication fra moment 
+			System.out.println(email);
+			System.out.println(kodeord);
+			try {
+				String[] var = api.MomentApi.loginMoment(email,kodeord);
+				System.out.println(var[1]);
+				api.MomentApi.getVagter("2016-01-01",var[0]);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		else{
+			DForkertKodeord = new DialogForkertKodeord(parent);
+			DForkertKodeord.setAlwaysOnTop(true);
+			DForkertKodeord.setVisible(true);
 		}
 	}
 	

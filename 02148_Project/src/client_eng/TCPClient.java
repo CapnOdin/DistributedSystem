@@ -16,7 +16,7 @@ public class TCPClient extends Thread {
 	private String serverIP;
 	private String alias;
 	private static String sessionID;
-	
+
 	private int port;
 	
 	private Socket connection;
@@ -35,9 +35,12 @@ public class TCPClient extends Thread {
 			if(decoded[1].equals("TRUE")) {
 				isConnected = true;
 				System.out.println("[CLIENT]AUTHENTICATION TRUE");
+				client_gui.DialogLogin.msg = decoded[1];
+				System.out.println(decoded[1]);
 			} 
 			if(decoded[1].equals("FALSE")) {
 				System.out.println("[CLIENT]AUTHENTICATION FLASE");
+				client_gui.DialogLogin.msg = decoded[1];
 			}
 			break;
 		//NEW USER	
