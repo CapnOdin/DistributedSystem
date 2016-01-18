@@ -16,7 +16,6 @@ public class TCPClient extends Thread {
 	private String serverIP;
 	private String alias;
 	private static String sessionID;
-
 	private int port;
 	
 	private Socket connection;
@@ -61,6 +60,10 @@ public class TCPClient extends Thread {
 				
 			}
 			break;
+		case "A3":
+			System.out.println("Server kicked you! " + decoded[1]);
+			disconnect();
+			break;
 		case "#":
 			if(decoded[1].equals("besked")) {
 				// ...
@@ -104,7 +107,7 @@ public class TCPClient extends Thread {
 				e.printStackTrace();
 				break;
 			}
-		}while(!message.equals("SERVER - END"));
+		}while(!message.contains("A3"));
 	}
 
 	private void setupStreams() throws IOException {

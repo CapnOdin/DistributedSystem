@@ -58,7 +58,7 @@ public class ConnectionThread extends Thread {
 	}
 	
 	public void disconnectClient() { 
-		sendMessage("Disconnected from server");
+		sendMessage("A3."+sessionID);
 		cleanUp();
 	}
 	
