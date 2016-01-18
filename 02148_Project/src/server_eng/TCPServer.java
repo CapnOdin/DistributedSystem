@@ -32,6 +32,10 @@ public class TCPServer extends Thread {
 	public TCPServer(int port) {
 		this.port = port;
 	}
+	
+	private void serviceMessage(String message) {
+		System.out.println("[SERVER]"+message);
+	}
 
 	private void serverSleepMode() {
 		setupSlave();
@@ -55,11 +59,11 @@ public class TCPServer extends Thread {
 	private void waitForConnection() throws IOException {	
 		while(true) {
 			serverStatus = "Waiting for someone to connect ...";
-			System.out.println("[SERVER]Waiting for someone to connect...");
+			serviceMessage(serverStatus);
 			connection = server.accept();
 			serverStatus = "Now connected to " + connection.getRemoteSocketAddress();
 			userCount++;
-			System.out.println("[SERVER]Now connected to " + connection.getRemoteSocketAddress());
+			serviceMessage(serverStatus);
 			ConnectionThread newClient = new ConnectionThread(connection, userNumber, dummyProfile);
 			newClient.start();
 			try {
@@ -73,7 +77,7 @@ public class TCPServer extends Thread {
 
 	private void cleanUp() {
 		serverStatus = "Connections closed";
-		System.out.println("[SERVER]Connections closed");
+		serviceMessage(serverStatus);
 		try {
 			connection.close();
 			server.close();

@@ -11,7 +11,7 @@ public class TCPClient extends Thread {
 	private ObjectInputStream input;
 	
 	public static boolean isConnected = false;
-	
+
 	private String message = "";
 	private String serverIP;
 	private String alias;
@@ -26,6 +26,10 @@ public class TCPClient extends Thread {
 		this.alias = alias;
 	}
 	
+	private void serviceMessage(String message) {
+		System.out.println("[CLIENT]" + message);
+	}
+	
 	private void decode(String message) {
 		String[] decoded = message.split("\\.");
 		client_gui.MainFrame.msg = decoded;
@@ -34,27 +38,26 @@ public class TCPClient extends Thread {
 			//AUTHENTICATION
 			if(decoded[1].equals("TRUE")) {
 				isConnected = true;
-				System.out.println("[CLIENT]AUTHENTICATION TRUE");
-				System.out.println(decoded[1]);
+				serviceMessage("AUTHENTICATION TRUE");
 			} 
 			if(decoded[1].equals("FALSE")) {
-				System.out.println("[CLIENT]AUTHENTICATION FLASE");
+				serviceMessage("AUTHENTICATION FALSE");
 			}
 			break;
 		case "A1":
 			//NEW USER	
 			if(decoded[1].equals("TRUE")) {
-				System.out.println("[CLIENT]SERVER CREATED USER");
+				serviceMessage("SERVER CREATED USER");
 			}
 			if(decoded[1].equals("FALSE")) {
-				System.out.println("[CLIENT]USER ALREADY EXISTS");
+				serviceMessage("USER ALREADY EXISTS");
 			}
 			break;
 		case "A2":
 			//CONNECTION
 			if(decoded[1].equals("TRUE")) {
 				sessionID = decoded[2];
-				System.out.println("[CLIENT]SESSION ID SET TO: " + sessionID);
+				serviceMessage("SESSION ID SET TO: " + sessionID);
 			}
 			if(decoded[1].equals("FALSE")) {
 				
@@ -62,7 +65,7 @@ public class TCPClient extends Thread {
 			break;
 		case "A3":
 			//Kicked from server
-			System.out.println("Server kicked you! " + decoded[1]);
+			serviceMessage("Server kicked you! reason: " + decoded[1]);
 			disconnect();
 			break;
 		case "#":
@@ -70,7 +73,7 @@ public class TCPClient extends Thread {
 				// ...
 			}
 		default:
-			System.out.println("[CLIENT]Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");
+			serviceMessage("Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");
 			break;
 		}
 	}
@@ -101,7 +104,7 @@ public class TCPClient extends Thread {
 		do {
 			try {
 				message = (String) input.readObject();
-				System.out.println(message);
+				serviceMessage(message);
 				decode(message);
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -114,18 +117,18 @@ public class TCPClient extends Thread {
 		output = new ObjectOutputStream(connection.getOutputStream());
 		output.flush();
 		input = new ObjectInputStream(connection.getInputStream());
-		System.out.println("[CLIENT]Streams successfully created.");
+		serviceMessage("Streams successfully created.");
 	}
 
 	private void connectToServer() throws IOException {
-		System.out.println("[CLIENT]Attempting connection...");
+		serviceMessage("Attempting connection...");
 		connection = new Socket(InetAddress.getByName(serverIP), port);
-		System.out.println("[CLIENT]Connected to " + connection.getInetAddress().getHostName());
+		serviceMessage("Connected to " + connection.getInetAddress().getHostName());
 	}
 	
 	public void disconnect() {
-		System.out.println("Disconnecting Client..");
-		sendMessage("A2."+sessionID);
+		serviceMessage("Disconnecting Client..");
+		sendMessage("%DISCONNECT%");
 		isConnected = false;
 		cleanUp();
 	}
@@ -138,7 +141,7 @@ public class TCPClient extends Thread {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("[CLIENT]Closing connection and streams.");
+		serviceMessage("Closing connection and streams.");
 	}
 
 	public static String getSessionID() {

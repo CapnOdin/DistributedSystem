@@ -18,6 +18,10 @@ public class ServerSlave implements Runnable {
 		this.server = server;
 		this.space = space;
 	}
+	
+	private void serviceMessage(String message) {
+		System.out.println("[SERVERSLAVE]"+message);
+	}
 
 	private void decodeTask(String task) {
 		String[] decoded = task.split("\\.");
@@ -25,25 +29,25 @@ public class ServerSlave implements Runnable {
 			switch (decoded[0]) {
 			case "A0":
 				//Authenticate User
-				System.out.println("Authenticating user ...");
+				serviceMessage("Authenticating user ...");
 				if(server.authenticate(decoded[1], decoded[2])) {
 					// Authentication succeeded
-					System.out.println("[SERVER]Authentication OK " + decoded[decoded.length-1]);
+					serviceMessage("Authentication OK " + decoded[decoded.length-1]);
 					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A0.TRUE");
 				} else {
 					// Authentication failed
-					System.out.println("[SERVER]Authentication FAILED");
+					serviceMessage("Authentication FAILED");
 					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A0.FALSE");
 				}
 				break;
 			case "A1":
 				//Calculate distance
-				System.out.println("DECODED STRING " + java.util.Arrays.toString(decoded));
-				System.out.println(GoogleWebApi.distMatrix(GoogleWebApi.seachPlaces(decoded[1]).get(1), GoogleWebApi.seachPlaces(decoded[2]).get(1)));
+				serviceMessage("DECODED STRING " + java.util.Arrays.toString(decoded));
+				//serviceMessage(GoogleWebApi.distMatrix(GoogleWebApi.seachPlaces(decoded[1]).get(1), GoogleWebApi.seachPlaces(decoded[2]).get(1)));
 				break;
 			case "A2":
 				//Disconnect client
-				System.out.println("DECODED STRING " + java.util.Arrays.toString(decoded));
+				serviceMessage("DECODED STRING " + java.util.Arrays.toString(decoded));
 				ServerConnectedClientsPanel.removeElementFromList(decoded[1]);
 				TCPServer.getAllConnections().get(decoded[1]).disconnectClient("clientLEFT");
 				break;
@@ -73,15 +77,15 @@ public class ServerSlave implements Runnable {
 				break;
 			case "A10":
 				if(server.newUser(decoded[1], decoded[2])) {
-					System.out.println("[SERVER]ADDED NEW USER");
+					serviceMessage("ADDED NEW USER");
 					//TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.TRUE");
 				} else {
-					System.out.println("[SERVER]USER ALREADY EXISTS");
+					serviceMessage("USER ALREADY EXISTS");
 					//TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.FALSE");
 				}
 				break;
 			default:
-				System.out.println("Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");
+				serviceMessage("Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");
 				break;
 			}
 		} catch (Exception e) {

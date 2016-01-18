@@ -40,14 +40,18 @@ public class ConnectionThread extends Thread {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("[SERVER]Thread " + client.getInetAddress() + " closed.");
+		serviceMessage("Thread " + client.getInetAddress() + " closed.");
+	}
+	
+	private void serviceMessage(String message) {
+		System.out.println("[THREAD " + userNo + "]" + message);
 	}
 	
 	private void setupStreams() throws IOException {
 		output = new ObjectOutputStream(client.getOutputStream());
 		output.flush();
 		input = new ObjectInputStream(client.getInputStream());
-		System.out.println("[THREAD "+ userNo + "]Streams successfully created.");
+		serviceMessage("Streams successfully created.");
 	}
 	
 	public void sendMessage(String message) {
@@ -102,7 +106,7 @@ public class ConnectionThread extends Thread {
 						clientAlias = message.substring(6); 
 						ServerConnectedClientsPanel.addElementToList(sessionID + "/" + clientAlias + clientIP);
 					}
-					System.out.println(message);
+					serviceMessage(message);
 				} catch(Exception e) {
 					break;
 				}
