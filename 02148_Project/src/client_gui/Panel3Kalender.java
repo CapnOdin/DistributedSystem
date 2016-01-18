@@ -2,6 +2,7 @@ package client_gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -25,7 +26,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 	private MainFrame parent;
 	
 	private JScrollPane scrollPane;
-	private JPanel contentPane;
+	private JPanel contentPane, overskrift;
 	private JButton JBAddCalendarTask;
 	
 	private GridBagConstraints c = new GridBagConstraints();
@@ -37,6 +38,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 	public Panel3Kalender(MainFrame parent) {
 		this.parent = parent;
 		setPanelProperties();
+		setOverskrift();
 		addContent();
 	}
 	
@@ -61,6 +63,25 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		JBAddCalendarTask.addMouseListener(this);
 	}
 	
+	private void setOverskrift(){
+		overskrift = new JPanel(new GridLayout(0,6));
+		overskrift.setPreferredSize(VagtDimension);
+		overskrift.setBackground(Color.white);
+		overskrift.add(setJLabel("Dato"));
+		overskrift.add(setJLabel("Tid"));
+		overskrift.add(setJLabel("Opgave Navn"));
+		overskrift.add(setJLabel("Adresse"));
+		overskrift.add(setJLabel("Postnummer"));
+		overskrift.add(setJLabel(""));
+	}
+	
+	private JLabel setJLabel(String name){
+		JLabel label = new JLabel(name);
+		label.setFont(new Font("SansSerif", Font.ITALIC, 14));
+		label.setVisible(true);;
+		return label;
+	}
+	
 	public void addCalendarTask(String dato, String tid, String navn, String adresse, String postnummer) {
 		c.gridy = panelCount++;
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -74,9 +95,12 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 	private void addContent() {
 		c.gridx = 0;
 		c.gridy = 0;
-		this.add(scrollPane,c);
+		this.add(overskrift,c);
 		c.gridx = 0;
 		c.gridy = 1;
+		this.add(scrollPane,c);
+		c.gridx = 0;
+		c.gridy = 2;
 		c.anchor = GridBagConstraints.EAST;
 		this.add(JBAddCalendarTask,c);
 	}

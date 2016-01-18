@@ -27,7 +27,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	private JLabel JLDato,JLTilfojVagt, JLOpgaveTitel, JLAdresse, JLPostnummer, JLStarttid;
 	private JTextField JTOpgaveTitel, JTAdresse, JTPostnummer, JTStarttid;
 	private JButton JBTilfoj, JBAnnuller;
-	private String dato, tid, jobNavn, jobAdresse, postnummer, newJob;
+	private String dato, tid, jobNavn, jobAdresse, postnummer, newJob, sessionID;
 	private JFormattedTextField JTDato, JTStarttid1;
 	
 	private Panel3Kalender p3Kalender = new Panel3Kalender(parent);
@@ -129,27 +129,28 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 		
 	}
 	
-	private void getNewJob(){
+	private String getNewJob(){
 		dato = JTDato.getText();
 		tid = JTStarttid.getText();
 		jobNavn = JTOpgaveTitel.getText();
 		jobAdresse = JTAdresse.getText();
 		postnummer = JTPostnummer.getText();
-		newJob = dato + "." + tid + "." + jobNavn + "." + jobAdresse + "." + postnummer;
+    	sessionID = MainFrame.client.getSessionID();
+		newJob = "A2." + dato + "." + tid + "." + jobNavn + "." + jobAdresse + "." + postnummer + "." + sessionID;
+		return newJob;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == JTStarttid){
 			dispose();
-		}
-		
+		}		
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBTilfoj){
-			getNewJob();
+			MainFrame.client.sendMessage(getNewJob());
 			p3Kalender.addCalendarTask(dato, tid, jobNavn, jobAdresse,postnummer);
 			parent.setFocusable(true);
 			dispose();
