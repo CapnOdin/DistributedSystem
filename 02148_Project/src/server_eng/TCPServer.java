@@ -63,7 +63,7 @@ public class TCPServer extends Thread {
 			ConnectionThread newClient = new ConnectionThread(connection, userNumber, dummyProfile);
 			newClient.start();
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(150);
 				System.out.println(allConnections);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

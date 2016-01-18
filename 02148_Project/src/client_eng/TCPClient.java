@@ -83,8 +83,7 @@ public class TCPClient extends Thread {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			System.out.println("CLIENT DEAD");
-			cleanUp();
+			if(isConnected) cleanUp();
 		}
 	}
 	

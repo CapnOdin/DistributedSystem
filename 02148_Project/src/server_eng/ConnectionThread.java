@@ -14,6 +14,8 @@ public class ConnectionThread extends Thread {
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
 	
+	private boolean isAlive = false;
+	
 	private String clientAlias;
 	private String clientIP = "";
 	
@@ -57,8 +59,9 @@ public class ConnectionThread extends Thread {
 		}
 	}
 	
-	public void disconnectClient() { 
-		sendMessage("A3."+sessionID);
+	public void disconnectClient(String kickReason) { 
+		if(!kickReason.equals("clientLEFT"))sendMessage("A3."+kickReason);
+		isAlive = false;
 		cleanUp();
 	}
 	
@@ -71,6 +74,7 @@ public class ConnectionThread extends Thread {
 		sendMessage("A2.TRUE."+message);
 		message = "Conversation ready!";
 		sendMessage(message);
+		isAlive = true;
 	}
 	
 	private String generateSessionID() {
@@ -106,7 +110,7 @@ public class ConnectionThread extends Thread {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} finally {
-			cleanUp();
+			if(this.isAlive) cleanUp();
 		}
 	}
 

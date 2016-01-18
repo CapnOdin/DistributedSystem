@@ -45,7 +45,7 @@ public class ServerSlave implements Runnable {
 				//Disconnect client
 				System.out.println("DECODED STRING " + java.util.Arrays.toString(decoded));
 				ServerConnectedClientsPanel.removeElementFromList(decoded[1]);
-				TCPServer.getAllConnections().get(decoded[1]).disconnectClient();
+				TCPServer.getAllConnections().get(decoded[1]).disconnectClient("clientLEFT");
 				break;
 			case "A3":
 				break;

@@ -194,7 +194,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		// DISCONNECT BUTTON
 		if(e.getSource() == actionButtons[0]) {
 			//System.out.println(clientUserNo);
-			TCPServer.getAllConnections().get(clientSessionID).disconnectClient();
+			TCPServer.getAllConnections().get(clientSessionID).disconnectClient("Get Rekt Son");
 			model.removeElement(selectedClient);
 			clearInformationFields();
 			TCPServer.userCount--;
