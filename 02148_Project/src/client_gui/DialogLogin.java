@@ -134,29 +134,7 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	public void actionPerformed(ActionEvent e) {
 		if( e.getSource() == Kodeord){
 			login();
-			while (this.msg.equals("")) {
-            	
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
-			}
-			System.out.println("test2");
-			if( msg.equals("TRUE")){
-            	this.setVisible(false);
-            	parent.mainFrameSetVisible();
-            	DialogLogin.msg = "";
-            	dispose();
-            	System.out.println("test");
-			} 
-			else if (this.msg.equals("FALSE")){
-        		this.setVisible(false);         	
-        		DForkertLogin = new DialogForkertLogin(parent);
-        		DForkertLogin.setAlwaysOnTop(true);
-        		DForkertLogin.setVisible(true);
 			
-        	}
 		}		
 	}
 
@@ -164,35 +142,6 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBLogin){
 			login();
-			if (getInfo().equals(getAuthentication())) {
-                this.setVisible(false);
-                parent.mainFrameSetVisible();
-                
-                
-                dispose();
-            } else {
-            	Timer t = new Timer(1000,new ActionListener() {
-        			@Override
-        			public void actionPerformed(ActionEvent e) {
-        				try {
-        					
-        				} catch(Exception ex) {
-        				
-        				}			
-        			}
-            		
-            		/*@Override
-            		public void actionPerformed(ActionEvent e){
-            			if (!TCPClient.isConnected){
-            				//this.setVisible(false);         	
-                			DForkertLogin = new DialogForkertLogin(parent);
-                			DForkertLogin.setAlwaysOnTop(true);
-                			DForkertLogin.setVisible(true);
-            			}
-            		}*/
-            	});
-            	
-            }
 		}
 		if (e.getSource() == JLNyBruger){	
 			this.setVisible(false);
@@ -224,5 +173,28 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	
 	private void login(){
         MainFrame.client.sendMessage(getInfo());
+        while (this.msg.equals("")) {
+        	
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+			}
+			System.out.println("test2");
+			if( msg.equals("TRUE")){
+            	this.setVisible(false);
+            	parent.mainFrameSetVisible();
+            	DialogLogin.msg = "";
+            	dispose();
+            	System.out.println("test");
+			} 
+			else if (this.msg.equals("FALSE")){
+        		this.setVisible(false);         	
+        		DForkertLogin = new DialogForkertLogin(parent);
+        		DForkertLogin.setAlwaysOnTop(true);
+        		DForkertLogin.setVisible(true);
+			
+        	}
 	}
 }

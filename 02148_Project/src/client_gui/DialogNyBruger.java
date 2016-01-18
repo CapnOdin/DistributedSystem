@@ -32,7 +32,7 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 	private boolean loggedIn = false;
     private Insets normalInsets = new Insets(2,2,2,2);
     private Insets biggerInsets = new Insets(10,0,0,0);
-    private String brugernavn, kodeord, newUser, gentagKodeord;
+    private String brugernavn, kodeord, newUser, gentagKodeord, sessionID;
     
     private DialogLogin Dlogin;
     private DialogKodeordIkkeEns DKodeordIkkeEns;
@@ -111,7 +111,8 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 	
 	private String getNewUser(){
 		brugernavn = JTBrugernavn.getText();
-		newUser = "A10." + brugernavn + "." + kodeord;
+		sessionID = MainFrame.client.getSessionID();
+		newUser = "A10." + brugernavn + "." + kodeord + "." + sessionID;
 		return newUser;
 	}
 	
