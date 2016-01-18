@@ -30,7 +30,7 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	private String clientData, email, connectInfo, kodeord, sessionID;
 	private String[] array, array1;
 	
-	private DialogForkertKodeord DForkertKodeord;
+	private DialogBesked DForkertKodeord;
 	
 	public Panel3Forbind(MainFrame parent){
 		this.parent = parent;
@@ -180,7 +180,7 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 			}
 		}
 		else{
-			DForkertKodeord = new DialogForkertKodeord(parent);
+			DForkertKodeord = new DialogBesked(parent);
 			DForkertKodeord.setAlwaysOnTop(true);
 			DForkertKodeord.setVisible(true);
 		}

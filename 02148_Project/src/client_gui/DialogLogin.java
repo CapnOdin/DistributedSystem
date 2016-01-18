@@ -40,7 +40,7 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
     private DialogNyBruger DNyBruger;
     private DialogForkertLogin DForkertLogin;
 
-    public static String msg = "";
+    
     
     public DialogLogin(MainFrame parent) {
         this.parent = parent;
@@ -173,23 +173,14 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	
 	private void login(){
         MainFrame.client.sendMessage(getInfo());
-        while (this.msg.equals("")) {
-        	
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
-			}
-			System.out.println("test2");
-			if( msg.equals("TRUE")){
+			if(parent.waitForMsg("A0","TRUE")){
             	this.setVisible(false);
             	parent.mainFrameSetVisible();
-            	DialogLogin.msg = "";
+            	parent.msg[0] = "";
             	dispose();
             	System.out.println("test");
 			} 
-			else if (this.msg.equals("FALSE")){
+			else {
         		this.setVisible(false);         	
         		DForkertLogin = new DialogForkertLogin(parent);
         		DForkertLogin.setAlwaysOnTop(true);

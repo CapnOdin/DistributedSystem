@@ -29,18 +29,17 @@ public class TCPClient extends Thread {
 	
 	private void decode(String message) {
 		String[] decoded = message.split("\\.");
+		client_gui.MainFrame.msg = decoded;
 		switch(decoded[0]) {
 		//AUTHENTICATION
 		case "A0":
 			if(decoded[1].equals("TRUE")) {
 				isConnected = true;
 				System.out.println("[CLIENT]AUTHENTICATION TRUE");
-				client_gui.DialogLogin.msg = decoded[1];
 				System.out.println(decoded[1]);
 			} 
 			if(decoded[1].equals("FALSE")) {
 				System.out.println("[CLIENT]AUTHENTICATION FLASE");
-				client_gui.DialogLogin.msg = decoded[1];
 			}
 			break;
 		//NEW USER	

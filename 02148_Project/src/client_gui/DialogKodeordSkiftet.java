@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -15,27 +17,29 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class DialogForkertKodeord extends JDialog implements GeneralProperties, MouseListener{
+public class DialogKodeordSkiftet extends JDialog implements ActionListener, MouseListener {
+	
 	private MainFrame parent;
 	private GridBagConstraints c = new GridBagConstraints();
 	private JPanel panel = new JPanel(new GridBagLayout());
-	private JLabel JLForkertKodeord;
-	private JButton JBProvIgen;
+	private JLabel JLKodeordSkiftet;
+	private JButton JBOK;
 	
-	private DialogLogin DLogin;
+	private DialogBesked DBesked;
 	
-	public DialogForkertKodeord(MainFrame parent){
+	public DialogKodeordSkiftet(MainFrame parent){
 		this.parent = parent;
 		setDefaultProperties();
 		setJComponents();
 		c.ipady = 50;
-		addC(JLForkertKodeord,0,0,1);
+		addC(JLKodeordSkiftet,0,0,1);
 		c.ipady = 0;
-		addC(JBProvIgen,0,1,1);
+		addC(JBOK,0,1,1);
 		this.add(panel);
 		this.pack();
 		this.setVisible(true);
 	}
+
 	
 	private void setDefaultProperties(){
 		this.setUndecorated(true);
@@ -54,18 +58,17 @@ public class DialogForkertKodeord extends JDialog implements GeneralProperties, 
 	}
 	
 	private void setJComponents(){
-		JLForkertKodeord = new JLabel("<HTML><U>Forkert Kodeord</U></HTML>");
-		JLForkertKodeord.setFont(new Font("SanSerif",Font.PLAIN,25));
-		JLForkertKodeord.setVisible(true);
-		JBProvIgen = new JButton("Prøv igen");
-		JBProvIgen.setFont(new Font("SanSerif",Font.PLAIN,14));
-		JBProvIgen.setVisible(true);
-		JBProvIgen.addMouseListener(this);
+		JLKodeordSkiftet = new JLabel("<HTML><U>Forkert Kodeord</U></HTML>");
+		JLKodeordSkiftet.setFont(new Font("SanSerif",Font.PLAIN,25));
+		JLKodeordSkiftet.setVisible(true);
+		JBOK = new JButton("Prøv igen");
+		JBOK.setFont(new Font("SanSerif",Font.PLAIN,14));
+		JBOK.setVisible(true);
+		JBOK.addMouseListener(this);
 	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == JBProvIgen){
+		if (e.getSource() == JBOK){
 			this.setVisible(false);
 		}
 		
@@ -94,4 +97,13 @@ public class DialogForkertKodeord extends JDialog implements GeneralProperties, 
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
 }

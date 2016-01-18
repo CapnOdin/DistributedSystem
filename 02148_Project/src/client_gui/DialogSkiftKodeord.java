@@ -28,8 +28,9 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	private JLabel JLSkiftKodeord, JLNuvarendeKodeord, JLNyeKodeord, JLGentagKodeord;
 	private JPasswordField JTNuvarendeKodeord, JTNyeKodeord, JTGentagKodeord;
 	private JButton JBGem, JBAnnuller;
-	private String authentication, kodeord, tastetKodeord, nyeKodeord, gentagKodeord;
-	private String[] array;
+	private String kodeord, tastetKodeord, nyeKodeord, gentagKodeord, sessionID,info;
+	
+	private DialogBesked DBesked;
 	
 	public DialogSkiftKodeord(MainFrame parent){
 		this.parent = parent;
@@ -107,52 +108,47 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 		setJButton(JBGem);
 		setJButton(JBAnnuller);
 	}
-	
-	private String getAuthentication(){
-		authentication = "Lise.projekt";	// Senere: Hent authentication direkte fra server 
-		return authentication;
-	}
 
-	private String getKodeord(){
-		array = getAuthentication().split("\\.");
-		kodeord = array[1];
+	private String getChangePassword(){
 		tastetKodeord = JTNuvarendeKodeord.getText();
 		nyeKodeord = JTNyeKodeord.getText();
 		gentagKodeord = JTGentagKodeord.getText();
-		return nyeKodeord;
+		sessionID = MainFrame.client.getSessionID();
+		info = "A3."+tastetKodeord + "." + nyeKodeord + "." + gentagKodeord + "."+ sessionID;
+		return info;
 	}
 	
-	private void setAuthentication(){
-		authentication = array[0]+"."+kodeord; //Senere: Send opdaterede authentication til serveren
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == JBGem){
-			getKodeord();
-			if (tastetKodeord.equals(kodeord)){
-				if (nyeKodeord.equals(gentagKodeord)){
-					kodeord = nyeKodeord;
-					setAuthentication();
+	private void SkiftKodeordOK(){
+		if (tastetKodeord.equals(kodeord)){
+			if (nyeKodeord.equals(gentagKodeord)){
+				MainFrame.client.sendMessage(getChangePassword());
+				if(parent.waitForMsg("#","besked")){
 					dispose();
-					JDialog dialog = new JDialog();
-					dialog.setAlwaysOnTop(true);    
-					JOptionPane.showMessageDialog(dialog, "Kodeordet ændret");
+					DBesked = new DialogBesked(parent, parent.msg);
 				}
-				else{
-					dispose();
-					JDialog dialog = new JDialog();
-					dialog.setAlwaysOnTop(true);    
-					JOptionPane.showMessageDialog(dialog, "\"Nyt kodeord\" og \"Gentag nyt kodeord\" er ikke ens");
-					
-				}
+				
 			}
 			else{
 				dispose();
 				JDialog dialog = new JDialog();
 				dialog.setAlwaysOnTop(true);    
-				JOptionPane.showMessageDialog(dialog, "Nuværende kodeord forkert");
+				JOptionPane.showMessageDialog(dialog, "\"Nyt kodeord\" og \"Gentag nyt kodeord\" er ikke ens");
+				
 			}
+		}
+		else{
+			dispose();
+			JDialog dialog = new JDialog();
+			dialog.setAlwaysOnTop(true);    
+			JOptionPane.showMessageDialog(dialog, "Nuværende kodeord forkert");
+		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == JBGem){
+			SkiftKodeordOK();
+			
 		}
 		if ( e.getSource() == JBAnnuller){
 			dispose();
@@ -186,30 +182,7 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == JTGentagKodeord){
-			getKodeord();
-			if (tastetKodeord.equals(kodeord)){
-				if (nyeKodeord.equals(gentagKodeord)){
-					kodeord = nyeKodeord;
-					setAuthentication();
-					dispose();
-					JDialog dialog = new JDialog();
-					dialog.setAlwaysOnTop(true);    
-					JOptionPane.showMessageDialog(dialog, "Kodeordet ændret");
-				}
-				else{
-					dispose();
-					JDialog dialog = new JDialog();
-					dialog.setAlwaysOnTop(true);    
-					JOptionPane.showMessageDialog(dialog, "\"Nyt kodeord\" og \"Gentag nyt kodeord\" er ikke ens");
-					
-				}
-			}
-			else{
-				dispose();
-				JDialog dialog = new JDialog();
-				dialog.setAlwaysOnTop(true);    
-				JOptionPane.showMessageDialog(dialog, "Nuværende kodeord forkert");
-			}
+			SkiftKodeordOK();
 		}		
 	}
 }

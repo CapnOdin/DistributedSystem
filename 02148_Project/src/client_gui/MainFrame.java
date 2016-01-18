@@ -18,10 +18,11 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	private PanelTemplate vistPanel3,vistPanel1;
 	private String ip;
 	private int port;
+	public static String[] msg = {""};
 	
 	private DialogLogin DLogin;
 	private DialogNyBruger DNyBruger;
-	private DialogForkertKodeord DForkertKodeord;
+	private DialogBesked DForkertKodeord;
 	
 	public static TCPClient client;
 	public Profile profile = new Profile();
@@ -90,6 +91,20 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		this.pack();
 		this.setLocationRelativeTo(null);
 	}
+	
+	public boolean waitForMsg(String protocol, String value){
+		int i = 0;
+    	while(!this.msg[0].equals(protocol)){
+    		try {
+    			if(i > 20){break;}
+				Thread.sleep(500);
+				i++;
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+    	}
+    	return this.msg[1].equals(value);
+    }
 	
 	public void mainFrameSetVisible(){
 		this.setVisible(true);
