@@ -30,8 +30,8 @@ public class TCPClient extends Thread {
 		String[] decoded = message.split("\\.");
 		client_gui.MainFrame.msg = decoded;
 		switch(decoded[0]) {
-		//AUTHENTICATION
 		case "A0":
+			//AUTHENTICATION
 			if(decoded[1].equals("TRUE")) {
 				isConnected = true;
 				System.out.println("[CLIENT]AUTHENTICATION TRUE");
@@ -41,8 +41,8 @@ public class TCPClient extends Thread {
 				System.out.println("[CLIENT]AUTHENTICATION FLASE");
 			}
 			break;
-		//NEW USER	
 		case "A1":
+			//NEW USER	
 			if(decoded[1].equals("TRUE")) {
 				System.out.println("[CLIENT]SERVER CREATED USER");
 			}
@@ -50,8 +50,8 @@ public class TCPClient extends Thread {
 				System.out.println("[CLIENT]USER ALREADY EXISTS");
 			}
 			break;
-		//CONNECTION
 		case "A2":
+			//CONNECTION
 			if(decoded[1].equals("TRUE")) {
 				sessionID = decoded[2];
 				System.out.println("[CLIENT]SESSION ID SET TO: " + sessionID);
@@ -61,6 +61,7 @@ public class TCPClient extends Thread {
 			}
 			break;
 		case "A3":
+			//Kicked from server
 			System.out.println("Server kicked you! " + decoded[1]);
 			disconnect();
 			break;
@@ -126,6 +127,7 @@ public class TCPClient extends Thread {
 	public void disconnect() {
 		System.out.println("Disconnecting Client..");
 		sendMessage("A2."+sessionID);
+		isConnected = false;
 		cleanUp();
 	}
 
