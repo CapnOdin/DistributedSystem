@@ -2,7 +2,6 @@ package client_gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -57,12 +56,14 @@ public class Panel3Kalender2 extends PanelTemplate implements GeneralProperties,
 		contentPane = new JPanel(new GridBagLayout());
 		c = new GridBagConstraints();
 		scrollPane = new JScrollPane(contentPane);
+		scrollPane.setBackground(Color.white);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		contentPane.setBackground(Color.white);
 		
 		// Toolbar properties
 		toolBar = new JPanel(new BorderLayout());
+		toolBar.setBackground(Color.white);
 		JBAddCalendarTask = new JButton("Tilføj");
 		JBAddCalendarTask.addActionListener(this);
 		toolBar.add(JBAddCalendarTask, BorderLayout.EAST);
