@@ -40,6 +40,9 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		setPanelProperties();
 		setOverskrift();
 		addContent();
+		for (int i = 0; i<20; i++){
+			addCalendarTask("1.nov", "08:00", "Novo Nordisk", "Hallas alle 1", "8000");
+		}
 	}
 	
 	@Override
@@ -47,7 +50,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		this.setPreferredSize(frameSizePanel3);
 		this.setBackground(Color.white);
 		this.setLayout(new GridBagLayout());
-		allCalendarElements = new HashMap<String, CalendarTask>();	
+		allCalendarElements = new HashMap<String, CalendarTask>();
 	}
 	
 	private void setPanelProperties() {
@@ -216,6 +219,18 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 				labels[i].setEditable(bool);
 			}
 		}
+		
+		private String updateVagt(){
+			int i = 0;
+			String dato = labels[i].getText();i++;
+			String tid = labels[i].getText();i++;
+			String navn = labels[i].getText();i++;
+			String adresse = labels[i].getText();i++;
+			String postnummer = labels[i].getText();
+			String sessionID = MainFrame.client.getSessionID();
+			String updateJob = "A12."+ dato + "." + tid + "." + navn + "." + adresse + "." + postnummer + "." + sessionID;
+			return updateJob;
+		}
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -265,6 +280,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 				for(int i = 0; i < labels.length; i++) {
 					labels[i].setEditable(false);
 				}
+				MainFrame.client.sendMessage(updateVagt());
 			}
 			
 		}

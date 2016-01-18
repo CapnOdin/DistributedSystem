@@ -124,9 +124,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 		this.getRootPane().setBorder(BorderFactory.createLineBorder(Color.black));
 		this.pack();
 		this.setLocationRelativeTo(null);
-		this.setVisible(true);
-
-		
+		this.setVisible(true);		
 	}
 	
 	private String getNewJob(){
@@ -139,21 +137,28 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 		newJob = "A2." + dato + "." + tid + "." + jobNavn + "." + jobAdresse + "." + postnummer + "." + sessionID;
 		return newJob;
 	}
+	
+	private void tilfojVagt(){
+		MainFrame.client.sendMessage(getNewJob());
+		//System.out.println(getNewJob());
+		System.out.println(dato);
+		Panel2.p3Kalender.addCalendarTask(dato, tid, jobNavn, jobAdresse, postnummer);
+		//p3Kalender.addCalendarTask(dato, tid, jobNavn, jobAdresse, postnummer);
+		parent.setFocusable(true);
+		dispose();
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == JTStarttid){
-			dispose();
+		if (e.getSource() == JTPostnummer){
+			tilfojVagt();
 		}		
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBTilfoj){
-			MainFrame.client.sendMessage(getNewJob());
-			p3Kalender.addCalendarTask(dato, tid, jobNavn, jobAdresse,postnummer);
-			parent.setFocusable(true);
-			dispose();
+			tilfojVagt();
 		}
 		if (e.getSource() == JBAnnuller){
 
