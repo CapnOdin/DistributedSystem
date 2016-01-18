@@ -240,7 +240,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 	
 	public static void removeElementFromList(String x) {
 		for(int i = 0; i < model.size(); i++) {
-			if(model.getElementAt(i).contains("x")) {
+			if(model.getElementAt(i).substring(0, 6).contains(x)) {
 				model.removeElementAt(i);
 			}
 		}

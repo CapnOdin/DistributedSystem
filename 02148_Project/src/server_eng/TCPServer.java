@@ -87,7 +87,7 @@ public class TCPServer extends Thread {
 		taskBuffer.add(task);
 	}
 	
-	public static void removeConnection(int key) {
+	public static void removeConnection(String key) {
 		if(allConnections.containsKey(key)) {
 			allConnections.remove(key);
 		}

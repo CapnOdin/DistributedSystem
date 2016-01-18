@@ -31,7 +31,7 @@ public class ConnectionThread extends Thread {
 			input.close();
 			output.close();
 			client.close();
-			TCPServer.removeConnection(userNo);
+			TCPServer.removeConnection(sessionID);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
