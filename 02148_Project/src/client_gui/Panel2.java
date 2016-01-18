@@ -23,7 +23,7 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 	
 	private Panel3Data p3Data;
 	private Panel3Forbind p3Connect;
-	private Panel3Kalender2 p3Kalender;
+	private Panel3Kalender p3Kalender;
 	private Panel3Oversigt p3Oversigt;
 	GridBagConstraints c = new GridBagConstraints();
 	
@@ -32,7 +32,7 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 		this.parent = parent;
 		p3Data = new Panel3Data(parent);
 		p3Connect = new Panel3Forbind(parent);
-		p3Kalender = new Panel3Kalender2(parent);
+		p3Kalender = new Panel3Kalender(parent);
 		p3Oversigt = new Panel3Oversigt(parent);
 		
 		addLabels();

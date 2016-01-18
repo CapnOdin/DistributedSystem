@@ -1,131 +1,93 @@
 package client_gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.JTextField;
 
-public class Panel3Kalender extends PanelTemplate implements GeneralProperties, MouseListener{
+public class Panel3Kalender extends PanelTemplate implements GeneralProperties, MouseListener {
+
+	private static final long serialVersionUID = 1L;
 	private MainFrame parent;
-	private GridBagConstraints c = new GridBagConstraints();
-	private JPanel JPVagter = new JPanel(new GridLayout(0,6));
-	private JPanel ikoner = new JPanel(new GridBagLayout());
-	private JPanel panel = new JPanel(new GridBagLayout());
-	private JScrollPane scrollPane;
-	private JButton JBTilfoj;
-	private JLabel JLDato, JLTid, JLNavn, JLAdresse, JLPostnummer;
-	private JLabel JLSlet = new JLabel(new ImageIcon("delete.png"));
-	private JLabel JLRediger = new JLabel(new ImageIcon("edit.png"));
-	private JLabel JLTimer = new JLabel(new ImageIcon("clock.png"));
-	private String dato, tid, navn, adresse, postnummer;
-	private String[] array;
-	private String newJob;
-	private int y = 0;
 	
+	private JScrollPane scrollPane;
+	private JPanel contentPane;
+	private JButton JBAddCalendarTask;
+	
+	private GridBagConstraints c = new GridBagConstraints();
+	private int panelCount;
+	
+	private HashMap<String, CalendarTask> allCalendarElements;
 	private DialogTilfojVagt DTilfojVagt;
 	
-	public Panel3Kalender(MainFrame parent){
+	public Panel3Kalender(MainFrame parent) {
 		this.parent = parent;
-		setDefaultProperties();
-		setJComponents();
-		scrollPane =  new JScrollPane(panel,   ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		getNewJob("01-01-2016.08:00.Novo Nordisk. Hallas alle 1. 8000"); //Senere: hent direkte fra dialog
-		//getNewJob("01-10-2016.10:00.Nordea. Helgeshøjalle 67. 8000");
-		System.out.println(frameSizePanel3);
-		System.out.println(KalenderDimension);
-		
-		c.anchor = GridBagConstraints.SOUTHEAST;
-		c.ipady = 0;
-		addC(JBTilfoj,0,1,1,0);
-		JBTilfoj.addMouseListener(this);
-		
-		this.add(panel);                                       
+		setPanelProperties();
+		addContent();
 	}
-	
-	private void setJComponents(){
-		JPVagter.setPreferredSize(VagtDimension);
-		JPVagter.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		JPVagter.setBackground(Color.white);
-		ikoner.setPreferredSize(IkonDimension);
-		ikoner.setBackground(Color.white);
-		JBTilfoj = new JButton("Tilføj");
-		panel.setPreferredSize(KalenderDimension);
-		panel.setBackground(Color.white);	
-	}
-	
-	
-	private void addC(JComponent comp, int x, int y, int width, int height){
-		c.gridx = x;
-		c.gridy = y;
-		c.gridwidth = width;
-		c.ipady = height;
-		panel.add(comp, c);
-	}
-	
-	private void getNewJob(String newJob){
-		array = newJob.split("\\.");
-		int i = 0;
-		dato = array[i];i++;
-		tid = array[i];i++;
-		navn = array[i];i++;
-		adresse = array[i];i++;
-		postnummer = array[i];	
-		addJob(dato,tid,navn,adresse,postnummer);
-	}
-		
-	private void addJob(String d, String t, String n, String a, String p){
-		JPVagter.add(JLDato = new JLabel(d));
-		JPVagter.add(JLTid = new JLabel(t));
-		JPVagter.add(JLNavn = new JLabel(n));
-		JPVagter.add(JLAdresse = new JLabel(a));
-		JPVagter.add(JLPostnummer = new JLabel(p));
-		ikoner.add(JLTimer,c);
-		ikoner.add(JLRediger,c);
-		ikoner.add(JLSlet,c);
-		JLTimer.addMouseListener(this);
-		JLRediger.addMouseListener(this);
-		JLSlet.addMouseListener(this);
-		
-		/*
-		 * Jaa, rimeligt meget på røven her...
-		MouseEvent e;
-		if(e.getSource() == JLTimer){
-			
-		}
-		*/
-		JPVagter.add(ikoner);
-		addC(JPVagter,0,y,1,30);y++;
-	}	
 	
 	@Override
 	void setDefaultProperties() {
 		this.setPreferredSize(frameSizePanel3);
 		this.setBackground(Color.white);
 		this.setLayout(new GridBagLayout());
-		this.setVisible(true);
-		this.validate();
+		allCalendarElements = new HashMap<String, CalendarTask>();	
 	}
-
+	
+	private void setPanelProperties() {
+		panelCount = 0;
+		contentPane = new JPanel(new GridBagLayout());
+		contentPane.setBackground(Color.white);
+		contentPane.setPreferredSize(KalenderDimension);
+		scrollPane = new JScrollPane(contentPane);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		contentPane.setBackground(Color.white);
+		JBAddCalendarTask = new JButton("Tilføj");
+		JBAddCalendarTask.addMouseListener(this);
+	}
+	
+	public void addCalendarTask(String dato, String tid, String navn, String adresse, String postnummer) {
+		c.gridy = panelCount++;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		CalendarTask task = new CalendarTask(scrollPane, dato, tid, navn, adresse, postnummer, ""); // FIND EN MÅDE AT GØRE HVER TASK UNIK PÅ.
+		allCalendarElements.put(task.getID(), task);
+		contentPane.add(task, c);		
+		scrollPane.validate();
+		contentPane.validate();
+	}
+	
+	private void addContent() {
+		c.gridx = 0;
+		c.gridy = 0;
+		this.add(scrollPane,c);
+		c.gridx = 0;
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.EAST;
+		this.add(JBAddCalendarTask,c);
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == JBTilfoj){
+		if(e.getSource() == JBAddCalendarTask) {
 			DTilfojVagt = new DialogTilfojVagt(parent);
 			DTilfojVagt.setAlwaysOnTop(true);
 			DTilfojVagt.setVisible(true);;
-		}
-		
+		}	
 	}
 
 	@Override
@@ -152,17 +114,135 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		
 	}
 	
-	/*
-	public static void main(String[] args) {
-		JFrame test = new JFrame();
-		test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		test.setPreferredSize(frameSizePanel3);
-		test.setVisible(true);
-		test.pack();
-		test.setLocationRelativeTo(null);
+	class CalendarTask extends JPanel implements MouseListener, ActionListener {
+
+		private static final long serialVersionUID = 1L;
 		
-		//test.add(new Panel3Kalender());
-		test.validate();
+		private JScrollPane parent;
+		private JPanel tools;
+		private JLabel[] toolButtons = new JLabel[3];
+		private JTextField[] labels = new JTextField[5]; 
+		
+		private String ID;
+		
+		public CalendarTask(JScrollPane parent, String dato, String tid, String navn, String adresse, String postnummer,String ID) {
+			this.parent = parent; this.ID = ID;
+			System.out.println("CREATED NEW PANEL");
+			setTaskPanelProperties();
+			setLabelProperties(dato, tid, navn, adresse, postnummer);
+			setToolsProperties();
+			addC();
+		}
+		
+		private void setTaskPanelProperties() {
+			this.setLayout(new GridLayout(1,6));
+			this.setBackground(Color.white);
+			this.setPreferredSize(VagtDimension);
+			this.setVisible(true);
+		}
+		
+		private void setLabelProperties(String dato, String tid, String navn, String adresse, String postnummer) {
+			labels[0] = new JTextField(dato);
+			labels[1] = new JTextField(tid);
+			labels[2] = new JTextField(navn);
+			labels[3] = new JTextField(adresse);
+			labels[4] = new JTextField(postnummer);
+			labels[4].addActionListener(this);
+			for(int i = 0; i < labels.length; i++) {
+				labels[i].setEditable(false);
+				labels[i].setVisible(true);
+				labels[i].setBackground(Color.white);
+			}
+		}
+		
+		private void setToolsProperties() {
+			tools = new JPanel(new GridLayout(1,3));
+			
+			toolButtons[0] = new JLabel(new ImageIcon("clock.png"));
+			toolButtons[1] = new JLabel(new ImageIcon("edit.png"));
+			toolButtons[2] = new JLabel(new ImageIcon("delete.png"));
+			
+			for(int i = 0; i < toolButtons.length; i++) {
+				toolButtons[i].addMouseListener(this);
+				tools.add(toolButtons[i]);
+			}
+			tools.setBackground(Color.white);
+			tools.setVisible(true);
+		}
+		
+		private void addC() {
+			for(int i = 0; i < labels.length; i++) {
+				this.add(labels[i]);
+			}
+			//this.setBorder(BorderFactory.createLineBorder(Color.black));
+			this.add(tools);
+			this.validate();
+		}
+		
+		public void setLabelContent(String dato, String starttid, String opgavetitel, String adresse, String postnummer) {
+			labels[0].setText(dato);
+			labels[1].setText(starttid);
+			labels[2].setText(opgavetitel);
+			labels[3].setText(adresse);
+			labels[4].setText(postnummer);
+		}
+		
+		public void setLabelsEditable(boolean bool) {
+			for(int i = 0; i < labels.length; i++) {
+				labels[i].setEditable(bool);
+			}
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			parent.requestFocus();
+			if(e.getSource() == toolButtons[1]) {
+				for(int i = 0; i < labels.length; i++) {
+					labels[i].setEditable(true);
+				}
+			}
+			if(e.getSource() == toolButtons[2]){
+				//Slet vagt
+			}
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public String getID() {
+			return ID;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == labels[4]){
+				for(int i = 0; i < labels.length; i++) {
+					labels[i].setEditable(false);
+				}
+			}
+			
+		}
 	}
-	*/
 }

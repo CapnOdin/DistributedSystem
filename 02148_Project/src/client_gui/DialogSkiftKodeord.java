@@ -122,7 +122,7 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 		if (tastetKodeord.equals(kodeord)){
 			if (nyeKodeord.equals(gentagKodeord)){
 				MainFrame.client.sendMessage(getChangePassword());
-				if(parent.waitForMsg("#","besked")){
+				if(parent.stallGUI("#","besked")){
 					dispose();
 					DBesked = new DialogBesked(parent, parent.msg);
 				}

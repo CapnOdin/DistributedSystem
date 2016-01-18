@@ -180,7 +180,7 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 			}
 		}
 		else{
-			DForkertKodeord = new DialogBesked(parent);
+			DForkertKodeord = new DialogBesked(parent, parent.msg);
 			DForkertKodeord.setAlwaysOnTop(true);
 			DForkertKodeord.setVisible(true);
 		}

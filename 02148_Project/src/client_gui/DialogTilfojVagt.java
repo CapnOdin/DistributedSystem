@@ -30,6 +30,8 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	private String dato, tid, jobNavn, jobAdresse, postnummer, newJob;
 	private JFormattedTextField JTDato, JTStarttid1;
 	
+	private Panel3Kalender p3Kalender = new Panel3Kalender(parent);
+	
 	public  DialogTilfojVagt(MainFrame parent){
 		this.parent = parent;
 		setJComponents();
@@ -118,7 +120,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	
 	private void setDefaultProperties(){
 		this.setUndecorated(true);
-		this.setPreferredSize(new Dimension(KalenderDimension.width+20,150));
+		this.setPreferredSize(new Dimension(KalenderDimension.width+50,150));
 		this.getRootPane().setBorder(BorderFactory.createLineBorder(Color.black));
 		this.pack();
 		this.setLocationRelativeTo(null);
@@ -148,7 +150,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBTilfoj){
 			getNewJob();
-			//Panel3Kalender.getNewJob(newJob); Fuck.. Hvordan kalder jeg mellem klasser her?
+			p3Kalender.addCalendarTask(dato, tid, jobNavn, jobAdresse,postnummer);
 			parent.setFocusable(true);
 			dispose();
 		}
