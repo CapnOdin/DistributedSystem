@@ -61,8 +61,10 @@ public class TCPClient extends Thread {
 			if(decoded[1].equals("FALSE")) {
 				
 			}
+			break;
 		default:
 			System.out.println("[CLIENT]Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");
+			break;
 		}
 	}
 	
