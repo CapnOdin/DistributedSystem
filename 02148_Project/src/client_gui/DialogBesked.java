@@ -28,7 +28,8 @@ public class DialogBesked extends JDialog implements GeneralProperties, MouseLis
 	public DialogBesked(MainFrame parent, String[] message){
 		this.parent = parent;
 		setDefaultProperties();
-		setJComponents();
+		setJComponents(message[2]);
+		if (message[2] == "")
 		if (message[0] == "1" ){
 			this.setPreferredSize(new Dimension(300,150));
 			c.ipady = 50;
