@@ -8,8 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.HashMap;
@@ -17,7 +15,6 @@ import java.util.HashMap;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,7 +23,7 @@ import javax.swing.JTextField;
 public class Panel3Kalender2 extends PanelTemplate implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	private JFrame parent;
+	private MainFrame parent;
 	
 	private JScrollPane scrollPane;
 	private JPanel contentPane, toolBar;
@@ -37,7 +34,7 @@ public class Panel3Kalender2 extends PanelTemplate implements ActionListener {
 	
 	private HashMap<String, CalendarTask> allCalendarElements;
 	
-	public Panel3Kalender2(JFrame parent) {
+	public Panel3Kalender2(MainFrame parent) {
 		this.parent = parent;
 	}
 	
@@ -207,16 +204,6 @@ public class Panel3Kalender2 extends PanelTemplate implements ActionListener {
 			return ID;
 		}
 		
-	}
-
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		frame.setPreferredSize(new Dimension(800,600));
-		frame.add(new Panel3Kalender2(frame));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
 	}
 
 }
