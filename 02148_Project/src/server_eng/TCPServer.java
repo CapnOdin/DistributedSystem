@@ -6,6 +6,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import client_eng.Profile;
+
 public class TCPServer extends Thread {
 	
 	private static ArrayList<String> taskBuffer = new ArrayList<String>();
@@ -17,6 +19,7 @@ public class TCPServer extends Thread {
 	private ServerTupleSpace space;
 	private ServerSocket server;
 	private Socket connection;
+	private Profile dummyProfile = new Profile();
 	
 	private String serverStatus = "";
 	
@@ -57,7 +60,7 @@ public class TCPServer extends Thread {
 			serverStatus = "Now connected to " + connection.getRemoteSocketAddress();
 			userCount++;
 			System.out.println("[SERVER]Now connected to " + connection.getRemoteSocketAddress());
-			ConnectionThread newClient = new ConnectionThread(connection, userNumber);
+			ConnectionThread newClient = new ConnectionThread(connection, userNumber, dummyProfile);
 			newClient.start();
 			try {
 				Thread.sleep(1000);

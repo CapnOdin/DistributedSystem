@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Random;
 
+import client_eng.Profile;
 import server_gui.ServerConnectedClientsPanel;
 
 public class ConnectionThread extends Thread {
@@ -20,7 +21,9 @@ public class ConnectionThread extends Thread {
 	private int userNo;
 	private String sessionID;
 	
-	public ConnectionThread(Socket client, int userNo) {
+	private Profile profile;
+	
+	public ConnectionThread(Socket client, int userNo, Profile profile) {
 		this.client = client;
 		this.userNo = userNo;
 		clientIP = client.getRemoteSocketAddress().toString();
@@ -105,6 +108,14 @@ public class ConnectionThread extends Thread {
 		} finally {
 			cleanUp();
 		}
+	}
+
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
 	}
 
 }

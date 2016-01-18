@@ -2,6 +2,7 @@ package client_eng;
 
 public class Profile {	
 	private String username ="", password="", navn="", adresse="", postnummer="", by="", eMail="", harBil="";
+	private String momentUsername = "", momentPassword = "";
 	
 	public Profile(){
 		setUsername("Lise");
@@ -12,6 +13,17 @@ public class Profile {
 		setBy("Vanløse");
 		setEMail("Lise_Noerby@hotmail.com");
 		setHarBil("1");
+	}
+	
+	public Profile(String user, String password, String name, String address, String zipcode, String city, String email, String car) {
+		this.username = user;
+		this.password = password;
+		this.navn = name;
+		this.adresse = address;
+		this.postnummer = zipcode;
+		this.by = city;
+		this.eMail = email;
+		this.harBil = car;
 	}
 
 	public String getUsername() {
@@ -76,6 +88,22 @@ public class Profile {
 
 	public void setEMail(String eMail) {
 		this.eMail = eMail;
+	}
+
+	public String getMomentUsername() {
+		return momentUsername;
+	}
+
+	public void setMomentUsername(String momentUsername) {
+		this.momentUsername = momentUsername;
+	}
+
+	public String getMomentPassword() {
+		return momentPassword;
+	}
+
+	public void setMomentPassword(String momentPassword) {
+		this.momentPassword = momentPassword;
 	}
 
 }
