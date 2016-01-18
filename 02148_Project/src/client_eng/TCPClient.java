@@ -116,9 +116,14 @@ public class TCPClient extends Thread {
 		connection = new Socket(InetAddress.getByName(serverIP), port);
 		System.out.println("[CLIENT]Connected to " + connection.getInetAddress().getHostName());
 	}
+	
+	public void disconnect() {
+		System.out.println("Disconnecting Client..");
+		sendMessage("%DISCONNECT%");
+		cleanUp();
+	}
 
 	private void cleanUp() {
-		sendMessage("%DISCONNECT%");
 		try {
 			output.close();
 			input.close();
