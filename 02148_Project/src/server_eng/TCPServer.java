@@ -63,7 +63,7 @@ public class TCPServer extends Thread {
 			serverStatus = "Now connected to " + connection.getRemoteSocketAddress();
 			userCount++;
 			serviceMessage(serverStatus);
-			ConnectionThread newClient = new ConnectionThread(connection, userNumber, dummyProfile);
+			ConnectionThread newClient = new ConnectionThread(connection, userNumber++, dummyProfile);
 			newClient.start();
 			try {
 				Thread.sleep(150);
