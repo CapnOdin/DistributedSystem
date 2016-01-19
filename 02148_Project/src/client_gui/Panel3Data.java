@@ -223,7 +223,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		}
 		if (e.getSource() == JBGem){
 			MainFrame.client.sendMessage(getNewClientData());
-			if (parent.stallGUI("A4", "true")){
+			if (parent.stallGUI("A4", "TRUE")){
 				DBesked = new DialogBesked(parent,"Profiloplysninger gemt");
 				DBesked.setAlwaysOnTop(true);
 				DBesked.setVisible(true);
