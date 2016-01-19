@@ -2,6 +2,7 @@ package client_gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -37,19 +38,16 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
 	
 	public Panel3Kalender(MainFrame parent) {
 		this.parent = parent;
+		setDefaultProperties();
 		setPanelProperties();
 		setOverskrift();
 		addContent();
-		/*for (int i = 0; i<20; i++){
-			addCalendarTask("1.nov", "08:00", "Novo Nordisk", "Hallas alle 1", "8000");
-		}
-		*/
 	}
 	
 	private void setDefaultProperties() {
 		this.setPreferredSize(frameSizePanel3);
 		this.setBackground(Color.white);
-		this.setLayout(new GridBagLayout());
+		this.setLayout(new BorderLayout());
 		allCalendarElements = new HashMap<String, CalendarTask>();
 	}
 	
@@ -57,7 +55,6 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
 		panelCount = 0;
 		contentPane = new JPanel(new GridBagLayout());
 		contentPane.setBackground(Color.white);
-		contentPane.setPreferredSize(KalenderDimension);
 		scrollPane = new JScrollPane(contentPane);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -81,7 +78,7 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
 	private JLabel setJLabel(String name){
 		JLabel label = new JLabel(name);
 		label.setFont(new Font("SansSerif", Font.ITALIC, 14));
-		label.setVisible(true);;
+		label.setVisible(true);
 		return label;
 	}
 	
@@ -91,23 +88,15 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
 		c.fill = GridBagConstraints.HORIZONTAL;
 		CalendarTask task = new CalendarTask(scrollPane, dato, tid, navn, adresse, postnummer, ""); // FIND EN MÅDE AT GØRE HVER TASK UNIK PÅ.
 		allCalendarElements.put(task.getID(), task);
-		
 		contentPane.add(task, c);		
 		scrollPane.validate();
 		contentPane.validate();
 	}
 	
 	private void addContent() {
-		c.gridx = 0;
-		c.gridy = 0;
-		this.add(overskrift,c);
-		c.gridx = 0;
-		c.gridy = 1;
-		this.add(scrollPane,c);
-		c.gridx = 0;
-		c.gridy = 2;
-		c.anchor = GridBagConstraints.EAST;
-		this.add(JBAddCalendarTask,c);
+		this.add(overskrift, BorderLayout.NORTH);
+		this.add(scrollPane, BorderLayout.CENTER);
+		this.add(JBAddCalendarTask, BorderLayout.SOUTH);
 	}
 	
 	@Override
@@ -166,7 +155,7 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
 		private void setTaskPanelProperties() {
 			this.setLayout(new GridLayout(1,6));
 			this.setBackground(Color.white);
-			this.setPreferredSize(VagtDimension);
+			this.setPreferredSize(new Dimension(parent.getWidth(), parent.getHeight()/15));
 			this.setVisible(true);
 		}
 		

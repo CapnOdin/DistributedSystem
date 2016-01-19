@@ -67,8 +67,8 @@ public class ServerSlave implements Runnable {
 			case "A8":
 				//Edit client profile.
 				serviceMessage("DECODED STRING " + java.util.Arrays.toString(decoded));
+				serviceMessage(((Profile)message.getObject()).getUsername() + " ATTEMPTING TO EDIT PROFILE ...");
 				TCPServer.findUser(((Profile)message.getObject()).getUsername()).setProfile((Profile)message.getObject());
-				serviceMessage(((Profile)message.getObject()).getUsername() + " EDITED PROFILE!");
 				//TCPServer.getAllConnections().get(decoded[decoded.length-1]).setProfile((Profile)message.getObject());
 				//serviceMessage(((Profile)message.getObject()).getAdresse());				
 				TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A4.TRUE");
