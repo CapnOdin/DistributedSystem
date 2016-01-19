@@ -40,9 +40,10 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		setPanelProperties();
 		setOverskrift();
 		addContent();
-		for (int i = 0; i<20; i++){
+		/*for (int i = 0; i<20; i++){
 			addCalendarTask("1.nov", "08:00", "Novo Nordisk", "Hallas alle 1", "8000");
 		}
+		*/
 	}
 	
 	@Override
@@ -86,10 +87,12 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 	}
 	
 	public void addCalendarTask(String dato, String tid, String navn, String adresse, String postnummer) {
+		c.anchor = GridBagConstraints.NORTH;
 		c.gridy = panelCount++;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		CalendarTask task = new CalendarTask(scrollPane, dato, tid, navn, adresse, postnummer, ""); // FIND EN MÅDE AT GØRE HVER TASK UNIK PÅ.
 		allCalendarElements.put(task.getID(), task);
+		
 		contentPane.add(task, c);		
 		scrollPane.validate();
 		contentPane.validate();
@@ -174,11 +177,11 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 			labels[2] = new JTextField(navn);
 			labels[3] = new JTextField(adresse);
 			labels[4] = new JTextField(postnummer);
-			labels[4].addActionListener(this);
 			for(int i = 0; i < labels.length; i++) {
 				labels[i].setEditable(false);
 				labels[i].setVisible(true);
 				labels[i].setBackground(Color.white);
+				labels[i].addActionListener(this);
 			}
 		}
 		
@@ -276,11 +279,13 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == labels[4]){
-				for(int i = 0; i < labels.length; i++) {
-					labels[i].setEditable(false);
+			for (int j =0;j<5;j++){
+				if (e.getSource() == labels[j]){
+					for(int i = 0; i < labels.length; i++) {
+						labels[i].setEditable(false);
+					}
+					MainFrame.client.sendMessage(updateVagt());
 				}
-				MainFrame.client.sendMessage(updateVagt());
 			}
 			
 		}

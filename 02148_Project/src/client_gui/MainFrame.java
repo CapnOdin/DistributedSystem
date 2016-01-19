@@ -23,6 +23,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	private DialogLogin DLogin;
 	private DialogNyBruger DNyBruger;
 	private DialogBesked DForkertKodeord;
+	public DialogSkiftKodeord DSkiftKodeord;
 	
 	public static TCPClient client;
 	public Profile profile = new Profile();
@@ -32,9 +33,9 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		port = 1234;
 		client =  new TCPClient(ip, port, "Lise");
 		client.start();
-		/*DLogin = new DialogLogin(this);
+		DLogin = new DialogLogin(this);
 		DLogin.setAlwaysOnTop(true);
-	    DLogin.setVisible(true);*/
+	    DLogin.setVisible(true);
 	    setDefaultProperties();
 		taskBar = new TaskBar(this);
 		vistPanel1 = new Panel1(this);
@@ -45,7 +46,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		addC(panel2, 0, 2, 1, 1);
 		addC(vistPanel3, 0, 3, 1, 1);
 		this.validate();;
-		mainFrameSetVisible();
+		//mainFrameSetVisible();
 		
 	}
 

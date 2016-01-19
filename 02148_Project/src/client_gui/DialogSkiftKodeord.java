@@ -119,29 +119,26 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	}
 	
 	private void SkiftKodeordOK(){
-		if (tastetKodeord.equals(kodeord)){
+		getChangePassword();
+		if (nyeKodeord.equals(gentagKodeord)){
 			if (nyeKodeord.equals(gentagKodeord)){
 				MainFrame.client.sendMessage(getChangePassword());
-				if(parent.stallGUI("#","besked")){
+				
+				DBesked = new DialogBesked(parent, "Kodeord Ændret");
+				/*if(parent.stallGUI("#","besked")){
 					dispose();
-					DBesked = new DialogBesked(parent, parent.msg);
-				}
-				
-			}
-			else{
-				dispose();
-				JDialog dialog = new JDialog();
-				dialog.setAlwaysOnTop(true);    
-				JOptionPane.showMessageDialog(dialog, "\"Nyt kodeord\" og \"Gentag nyt kodeord\" er ikke ens");
-				
+					DBesked = new DialogBesked(parent, parent.msg[2]);
+				}*/				
 			}
 		}
 		else{
 			dispose();
-			JDialog dialog = new JDialog();
-			dialog.setAlwaysOnTop(true);    
-			JOptionPane.showMessageDialog(dialog, "Nuværende kodeord forkert");
+			DBesked = new DialogBesked(parent, "Nye Kodeord ikke ens");
 		}
+	}
+	
+	public void disposeDialog(){
+		dispose();
 	}
 
 	@Override

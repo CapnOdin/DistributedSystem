@@ -35,7 +35,7 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
     private String brugernavn, kodeord, newUser, gentagKodeord, sessionID;
     
     private DialogLogin Dlogin;
-    private DialogKodeordIkkeEns DKodeordIkkeEns;
+    private DialogBesked DBesked;
 
 	public DialogNyBruger(MainFrame parent) {
 		this.parent = parent;
@@ -179,15 +179,22 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 	public void makeNewUser(){
 		if(getNyeKodeordOK()){
 			MainFrame.client.sendMessage(getNewUser());
-			dispose();
-			DLogin = new DialogLogin(parent);
-			DLogin.setAlwaysOnTop(true);
-			DLogin.setVisible(true);
+			if(parent.stallGUI("A1","true")){
+				dispose();
+				DLogin = new DialogLogin(parent);
+				DLogin.setAlwaysOnTop(true);
+				DLogin.setVisible(true);
+			}
+			else{
+				DBesked = new DialogBesked(parent,"Ønskede brugernavn i brug");
+				DBesked.setAlwaysOnTop(true);
+				DBesked.setVisible(true);
+			}
 		}
 		else{
-			DKodeordIkkeEns = new DialogKodeordIkkeEns(parent);
-			DKodeordIkkeEns.setAlwaysOnTop(true);
-			DKodeordIkkeEns.setVisible(true);
+			DBesked = new DialogBesked(parent,"Kodeord ikke ens");
+			DBesked.setAlwaysOnTop(true);
+			DBesked.setVisible(true);
 		}
 	}
 }

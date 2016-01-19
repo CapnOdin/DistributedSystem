@@ -35,6 +35,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	private String[] array;
 
 	private DialogSkiftKodeord DSkiftKodeord;
+	private DialogBesked DBesked;
 	private Panel1 panel1;
 	private TaskBar taskbar;
 	
@@ -221,7 +222,12 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		if (e.getSource() == JLSkiftBillede){
 		}
 		if (e.getSource() == JBGem){
-			gem();
+			MainFrame.client.sendMessage(getNewClientData());
+			if (parent.stallGUI("A4", "true")){
+				DBesked = new DialogBesked(parent,"Profiloplysninger gemt");
+				DBesked.setAlwaysOnTop(true);
+				DBesked.setVisible(true);
+			}
 		}
 	}
 
@@ -260,11 +266,6 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		DSkiftKodeord = new DialogSkiftKodeord(parent);
 		DSkiftKodeord.setAlwaysOnTop(true);
 		DSkiftKodeord.setVisible(true);
-	}
-	
-	private void gem(){
-		getNewClientData(); // Senere: Send opdaterede clientData til serveren
-		
 	}
 	
 	/*

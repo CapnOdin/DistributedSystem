@@ -58,7 +58,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 		c.fill = GridBagConstraints.HORIZONTAL;
 		addC(JBTilfoj,i,3,1);
 		
-		JTStarttid.addActionListener(this);
+		JTPostnummer.addActionListener(this);
 		JBTilfoj.addMouseListener(this);
 		JBAnnuller.addMouseListener(this);
 		
