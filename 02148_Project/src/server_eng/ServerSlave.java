@@ -78,10 +78,10 @@ public class ServerSlave implements Runnable {
 			case "A10":
 				if(server.newUser(decoded[1], decoded[2])) {
 					serviceMessage("ADDED NEW USER");
-					//TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.TRUE");
+					TCPServer.getAllConnections().get(decoded[3]).sendMessage("A1.TRUE");
 				} else {
 					serviceMessage("USER ALREADY EXISTS");
-					//TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.FALSE");
+					TCPServer.getAllConnections().get(decoded[3]).sendMessage("A1.FALSE");
 				}
 				break;
 			default:
