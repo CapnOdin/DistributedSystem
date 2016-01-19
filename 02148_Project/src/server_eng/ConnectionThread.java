@@ -24,7 +24,7 @@ public class ConnectionThread extends Thread {
 	private int userNo;
 	private String sessionID;
 	
-	private Profile profile;
+	//private Profile profile;
 	
 	public ConnectionThread(Socket client, int userNo, Profile profile) {
 		this.client = client;
@@ -34,6 +34,7 @@ public class ConnectionThread extends Thread {
 	
 	private void cleanUp() {
 		ServerConnectedClientsPanel.removeElementFromList(sessionID);
+		TCPServer.userCount--;
 		try {
 			input.close();
 			output.close();
@@ -131,12 +132,12 @@ public class ConnectionThread extends Thread {
 		}
 	}
 
-	public Profile getProfile() {
-		return profile;
-	}
-
-	public void setProfile(Profile profile) {
-		this.profile = profile;
-	}
+//	public Profile getProfile() {
+//		return profile;
+//	}
+//
+//	public void setProfile(Profile profile) {
+//		this.profile = profile;
+//	}
 
 }

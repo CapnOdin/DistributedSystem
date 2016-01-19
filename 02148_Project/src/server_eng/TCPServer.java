@@ -5,15 +5,17 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import client_eng.Profile;
+import client_eng.User;
 import engine.Message;
 
 public class TCPServer extends Thread {
 	public static int currentTask = 0;
 	private static ArrayList<Message<String, Object>> taskBuffer = new ArrayList<Message<String, Object>>();
 	private static HashMap<String, ConnectionThread> allConnections = new HashMap<String, ConnectionThread>();
-	private static HashMap<String, String> userMap = new HashMap<String, String>();
+	private static HashMap<User, String> userMap = new HashMap<User, String>();
 	
 	private ServerTupleSpace space;
 	private ServerSocket server;
@@ -117,19 +119,28 @@ public class TCPServer extends Thread {
 		else return false;
 	}
 	
-	public boolean newUser(String name, String password) {
-		if(!userMap.containsKey(name)) {
-			userMap.put(name, password);
+	public boolean newUser(User user, String password) {
+		if(!userMap.containsKey(user)) {
+			userMap.put(user, password);
 			return true;
 		} else return false;
 	}
 	
-	public static boolean changeUserPassword(String name, String currentPassword, String newPassword, String sessionID) {
-		if(userMap.get(name).equals(currentPassword)) {
-			userMap.put(name, userMap.get(name) + 1);
+	public static boolean changeUserPassword(User user, String currentPassword, String newPassword, String sessionID) {
+		if(userMap.get(user).equals(currentPassword)) {
+			userMap.put(user, userMap.get(user) + 1);
 			return true;
 		}
 		return false;
+	}
+	
+	public static User findUser(String username) {
+		for(Map.Entry<User, String> entry : userMap.entrySet()) {
+			if(entry.getKey().getUserName().equals(username)) {
+				return entry.getKey();
+			}
+		}
+		return null;
 	}
 	
 	public int getPort() {

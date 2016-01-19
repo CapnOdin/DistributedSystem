@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 import client_eng.Profile;
+import client_eng.User;
 import engine.Message;
 import server_gui.ServerConnectedClientsPanel;
 
@@ -66,8 +67,10 @@ public class ServerSlave implements Runnable {
 			case "A8":
 				//Edit client profile.
 				serviceMessage("DECODED STRING " + java.util.Arrays.toString(decoded));
-				TCPServer.getAllConnections().get(decoded[decoded.length-1]).setProfile((Profile)message.getObject());
-				serviceMessage(((Profile)message.getObject()).getAdresse());
+				TCPServer.findUser(((Profile)message.getObject()).getUsername()).setProfile((Profile)message.getObject());
+				serviceMessage(((Profile)message.getObject()).getUsername() + " EDITED PROFILE!");
+				//TCPServer.getAllConnections().get(decoded[decoded.length-1]).setProfile((Profile)message.getObject());
+				//serviceMessage(((Profile)message.getObject()).getAdresse());				
 				TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A4.TRUE");
 				break;
 			case "A9":
@@ -75,7 +78,7 @@ public class ServerSlave implements Runnable {
 				String wantRide = decoded[1], haveCar = decoded[2], sessionIDA9 = decoded[3];
 				break;
 			case "A10":
-				if(server.newUser(decoded[1], decoded[2])) {
+				if(server.newUser(new User(decoded[1], new Profile()), decoded[2])) {
 					serviceMessage("ADDED NEW USER");
 					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.TRUE");
 				} else {
@@ -84,13 +87,16 @@ public class ServerSlave implements Runnable {
 				}
 				break;
 			case "A13":
-				if(TCPServer.changeUserPassword(decoded[1], decoded[2], decoded[3], decoded[decoded.length-1])) {
+				if(TCPServer.changeUserPassword(TCPServer.findUser(decoded[1]), decoded[2], decoded[3], decoded[decoded.length-1])) {
 					serviceMessage("CHANGED USER PASSWORD");
 					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A6.TRUE");
 				} else {
 					serviceMessage("USER PASSWORD WRONG - CANT CHANGE");
 					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A6.FALSE");
 				}
+				break;
+			case "A14":
+				
 				break;
 			default:
 				serviceMessage("Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");
