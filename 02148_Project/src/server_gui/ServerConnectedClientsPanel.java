@@ -59,6 +59,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 	}
 
 	private void addChatPanelContent() {
+		JPanel whiteSpace = new JPanel();
 		chatArea.setEditable(false);
 		
 		chatLabels[0] = new JLabel(" Actions", JLabel.LEFT);
@@ -80,7 +81,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		}
 		
 		addC(info, button_holder, 0, 12, 3, 20);
-		
+		addC(info, whiteSpace, 0, 13, 3, 1);
 		actionButtons[0].setText("Disconnect");
 	}
 

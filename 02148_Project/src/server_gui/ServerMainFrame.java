@@ -15,7 +15,7 @@ public class ServerMainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	private Dimension frameSize = new Dimension((int)(screenSize.getWidth()*0.8), (int)(screenSize.getHeight()*0.8));
+	private Dimension frameSize = new Dimension((int)(800), (int)(410));
 	
 	private ServerMenuPanel smp;
 	private ServerStatusBar ssb;
