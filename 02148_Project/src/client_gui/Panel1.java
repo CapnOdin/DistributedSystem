@@ -8,7 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Panel1 extends PanelTemplate implements GeneralProperties{	
+public class Panel1 extends JPanel implements GeneralProperties{	
 	
 	private static final long serialVersionUID = 1L;
 	private MainFrame parent;
@@ -16,12 +16,12 @@ public class Panel1 extends PanelTemplate implements GeneralProperties{
 	
 	public Panel1(MainFrame parent){
 		this.parent = parent; 
+		setDefaultProperties();
 		this.add(panel, BorderLayout.EAST);
 		this.setVisible(true);
 	}
 
-	@Override
-	void setDefaultProperties() {
+	private void setDefaultProperties() {
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.white);
 		this.setPreferredSize(frameSizePanel1);

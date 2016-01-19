@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import client_eng.Profile;
@@ -15,7 +16,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	private GridBagConstraints c = new GridBagConstraints();
 	private TaskBar taskBar;
 	private Panel2 panel2;
-	private PanelTemplate vistPanel3,vistPanel1;
+	private JPanel vistPanel3,vistPanel1;
 	private String ip;
 	private int port;
 	public static String[] msg = {""};
@@ -56,7 +57,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		this.pack();
 	}
 
-	public void addPanel(PanelTemplate panel) {
+	public void addPanel(JPanel panel) {
 		removePanel();
 		vistPanel3 = panel;
 		addC(panel, 0, 3, 1, 1);

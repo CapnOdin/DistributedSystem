@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 import client_eng.Profile;
 import client_eng.TCPClient;
 
-public class Panel3Data extends PanelTemplate implements GeneralProperties, MouseListener, ActionListener{
+public class Panel3Data extends JPanel implements GeneralProperties, MouseListener, ActionListener{
 	private GridBagConstraints c = new GridBagConstraints();
 	private MainFrame parent;
 	private JPanel panel = new JPanel(new GridBagLayout());
@@ -84,8 +84,7 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		this.setVisible(true);
 	}
 	
-	@Override
-	void setDefaultProperties() {
+	private void setDefaultProperties() {
 		this.setBackground(Color.white);
 		this.setPreferredSize(frameSizePanel3);
 		this.setLayout(new GridBagLayout());

@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 import server_gui.ServerMainFrame;
 
-public class Panel2 extends PanelTemplate implements GeneralProperties, MouseListener{
+public class Panel2 extends JPanel implements GeneralProperties, MouseListener{
 	private static final long serialVersionUID = 1L;
 	private MainFrame parent;
 	private JLabel Data = new JLabel("Data", JLabel.CENTER);
@@ -30,6 +30,7 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 	
 	public Panel2(MainFrame parent) {
 		this.parent = parent;
+		setDefaultProperties();
 		p3Data = new Panel3Data(parent);
 		p3Connect = new Panel3Forbind(parent);
 		p3Kalender = new Panel3Kalender(parent);
@@ -38,7 +39,7 @@ public class Panel2 extends PanelTemplate implements GeneralProperties, MouseLis
 		addLabels();
 	}
 
-	void setDefaultProperties(){
+	private void setDefaultProperties(){
 		
 		this.setBackground(Color.gray);
 		this.setPreferredSize(frameSizePanel2);

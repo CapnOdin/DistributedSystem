@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class Panel3Forbind extends PanelTemplate implements GeneralProperties, ActionListener, MouseListener{
+public class Panel3Forbind extends JPanel implements GeneralProperties, ActionListener, MouseListener{
 	private MainFrame parent;
 	private GridBagConstraints c = new GridBagConstraints();
 	private JPanel panel = new JPanel(new GridBagLayout());
@@ -61,8 +61,7 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		this.setVisible(true);
 	}
 	
-	@Override
-	void setDefaultProperties() {
+	private void setDefaultProperties() {
 		this.setBackground(Color.white);
 		this.setPreferredSize(frameSizePanel3);
 		this.setLayout(new GridBagLayout());

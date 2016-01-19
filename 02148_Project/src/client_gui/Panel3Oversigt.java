@@ -7,18 +7,18 @@ import java.awt.GridBagLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Panel3Oversigt extends PanelTemplate implements GeneralProperties{
+public class Panel3Oversigt extends JPanel implements GeneralProperties{
 	private MainFrame parent;
 	
 	public Panel3Oversigt(MainFrame parent){
 		this.parent = parent;
+		setDefaultProperties();
 		GridBagConstraints gbc = new GridBagConstraints();
 		JPanel panel = new JPanel();
 		//this.add(panel);
 	}
 	
-	@Override
-	void setDefaultProperties() {
+	private void setDefaultProperties() {
 		this.setBackground(Color.orange);
 		this.setPreferredSize(frameSizePanel3);
 		this.setLayout(new GridBagLayout());

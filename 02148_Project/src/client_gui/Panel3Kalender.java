@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-public class Panel3Kalender extends PanelTemplate implements GeneralProperties, MouseListener {
+public class Panel3Kalender extends JPanel implements GeneralProperties, MouseListener {
 
 	private static final long serialVersionUID = 1L;
 	private MainFrame parent;
@@ -46,8 +46,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		*/
 	}
 	
-	@Override
-	void setDefaultProperties() {
+	private void setDefaultProperties() {
 		this.setPreferredSize(frameSizePanel3);
 		this.setBackground(Color.white);
 		this.setLayout(new GridBagLayout());
