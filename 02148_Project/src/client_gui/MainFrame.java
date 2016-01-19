@@ -96,6 +96,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	public boolean stallGUI(String protocol, String value) {
 		boolean stall = waitForMsg(protocol, value);
 		msg = new String[1];
+		msg[0] = "";
 		return stall;
 	}
 	
