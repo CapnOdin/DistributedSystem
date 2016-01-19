@@ -110,25 +110,21 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	}
 
 	private String getChangePassword(){
+		String brugernavn = Panel3Data.getBrugernavn();
 		tastetKodeord = JTNuvarendeKodeord.getText();
 		nyeKodeord = JTNyeKodeord.getText();
 		gentagKodeord = JTGentagKodeord.getText();
 		sessionID = MainFrame.client.getSessionID();
-		info = "A3."+tastetKodeord + "." + nyeKodeord + "." + gentagKodeord + "."+ sessionID;
+		info = "A13."+ brugernavn +"."+tastetKodeord + "." + nyeKodeord + "."+ sessionID;
 		return info;
 	}
 	
 	private void SkiftKodeordOK(){
 		getChangePassword();
 		if (nyeKodeord.equals(gentagKodeord)){
-			if (nyeKodeord.equals(gentagKodeord)){
-				MainFrame.client.sendMessage(getChangePassword());
-				
-				DBesked = new DialogBesked(parent, "Kodeord Ændret");
-				/*if(parent.stallGUI("#","besked")){
-					dispose();
-					DBesked = new DialogBesked(parent, parent.msg[2]);
-				}*/				
+			MainFrame.client.sendMessage(getChangePassword());
+			if (parent.stallGUI("A6", "TRUE")){
+				DBesked = new DialogBesked(parent, "Kodeord Ændret");			
 			}
 		}
 		else{

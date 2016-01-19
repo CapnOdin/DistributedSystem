@@ -32,7 +32,8 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	private JPasswordField Kodeord;
 	private JButton JBGem;
 	private JCheckBox JCHarBil;
-	private String clientData, brugernavn, kodeord, navn, adresse, postnummer, by, email, harBil, sessionID;
+	private String clientData, kodeord, navn, adresse, postnummer, by, email, harBil, sessionID;
+	private static String brugernavn;
 	private String[] array;
 
 	private DialogSkiftKodeord DSkiftKodeord;
@@ -210,6 +211,9 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 	
 	public void opdaterKodeord(String nyeKodeord){
 		kodeord = nyeKodeord;
+	}
+	public static String getBrugernavn(){
+		return brugernavn;
 	}
 
 	@Override
