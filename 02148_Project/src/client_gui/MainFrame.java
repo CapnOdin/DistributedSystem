@@ -65,8 +65,6 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		this.validate();
 		this.pack();
 	}
-	
-	
 
 	private void addC(JComponent comp, int x, int y, int height, int width) {
 		c.gridx = x;

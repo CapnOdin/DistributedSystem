@@ -187,7 +187,7 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
             	
 			} 
 			else {
-        		this.setVisible(false);         	
+        		this.setVisible(false);
         		DForkertLogin = new DialogForkertLogin(parent);
         		DForkertLogin.setAlwaysOnTop(true);
         		DForkertLogin.setVisible(true);
