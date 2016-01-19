@@ -30,6 +30,10 @@ public class Profile implements Serializable {
 		this.harBil = car;
 		calendar = new api.Calendar();
 	}
+	
+	public String toString(){
+		return "username = " + username + ", " + "password = " + password + ", " + "navn = " + navn + ", " + "adresse = " + adresse + ", " + "postnummer = " + postnummer + ", " + "by = " + by + ", " + "eMail = " + eMail + ", " + "harBil = " + harBil;
+	}
 
 	public String getMomentUsername() {
 		return momentUsername;
