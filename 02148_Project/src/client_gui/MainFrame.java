@@ -26,7 +26,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	public DialogSkiftKodeord DSkiftKodeord;
 	
 	public static TCPClient client;
-	public Profile profile = new Profile();
+	public static Profile profile = new Profile();
 
 	public MainFrame() {
 		ip = "2.110.0.85";

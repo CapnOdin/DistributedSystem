@@ -201,8 +201,9 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 		}
 		
 		private void addC() {
+			c.anchor = GridBagConstraints.NORTH;
 			for(int i = 0; i < labels.length; i++) {
-				this.add(labels[i]);
+				this.add(labels[i],c);
 			}
 			//this.setBorder(BorderFactory.createLineBorder(Color.black));
 			this.add(tools);

@@ -50,14 +50,6 @@ public class DialogBesked extends JDialog implements GeneralProperties, MouseLis
 			addC(JBProvIgen1,0,1,1);
 			this.add(panel);
 		}
-		else if (message == "Kodeord Ændret" || message == "Profiloplysninger gemt" || message == "Udfyld alle felter"){
-			this.setPreferredSize(new Dimension(400,150));
-			c.ipady = 50;
-			addC(JLBesked,0,0,1);
-			c.ipady = 0;
-			addC(JBOK,0,1,1);
-			this.add(panel);
-		}
 		else if (message == "Nuværende kodeord forkert" ){
 
 			this.setPreferredSize(new Dimension(400,150));
@@ -84,6 +76,14 @@ public class DialogBesked extends JDialog implements GeneralProperties, MouseLis
 			c.fill = GridBagConstraints.HORIZONTAL;
 			addC(JBSend,4,2,1);			
 			addC(JBLuk,0,3,5);
+			this.add(panel);
+		}
+		else {
+			this.setPreferredSize(new Dimension(400,150));
+			c.ipady = 50;
+			addC(JLBesked,0,0,1);
+			c.ipady = 0;
+			addC(JBOK,0,1,1);
 			this.add(panel);
 		}
 		

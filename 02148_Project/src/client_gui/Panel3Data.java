@@ -21,6 +21,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import client_eng.Profile;
+import client_eng.TCPClient;
 
 public class Panel3Data extends PanelTemplate implements GeneralProperties, MouseListener, ActionListener{
 	private GridBagConstraints c = new GridBagConstraints();
@@ -188,22 +189,19 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		 
 	}
 	
-	private String getNewClientData(){
-		brugernavn = JTBrugernavn.getText();
-		kodeord = Kodeord.getText();
-		navn = JTNavn.getText();
-		adresse = JTAdresse.getText();
-		postnummer = JTPostnummer.getText();
-		by = JTBy.getText();
-		email = JTEMail.getText();
+	private Profile getNewClientData(){
+		MainFrame.profile.setUsername(JTBrugernavn.getText());
+		MainFrame.profile.setPassword(Kodeord.getText());
+		MainFrame.profile.setNavn(JTNavn.getText());
+		MainFrame.profile.setAdresse(JTAdresse.getText());
+		MainFrame.profile.setPostnummer(JTPostnummer.getText());
+		MainFrame.profile.setBy(JTBy.getText());
+		MainFrame.profile.setEMail(JTEMail.getText());
 		if (JCHarBil.isSelected()){
-			harBil = "1";}
+			MainFrame.profile.setHarBil("TRUE");}
 		else{
-			harBil = "0";}
-		sessionID = MainFrame.client.getSessionID();
-		clientData = "A8." + brugernavn + "." + kodeord + "."+ navn+"."+adresse+"."+postnummer+"."+by + "." + email +"."+ harBil + "."+ sessionID;
-		
-		return clientData;
+			MainFrame.profile.setHarBil("FALSE");}
+		return MainFrame.profile;
 	}
 	
 	public String getEMail(){
@@ -222,9 +220,14 @@ public class Panel3Data extends PanelTemplate implements GeneralProperties, Mous
 		if (e.getSource() == JLSkiftBillede){
 		}
 		if (e.getSource() == JBGem){
-			MainFrame.client.sendMessage(getNewClientData());
+			MainFrame.client.sendMessage("A8." + TCPClient.sessionID, getNewClientData());
 			if (parent.stallGUI("A4", "TRUE")){
 				DBesked = new DialogBesked(parent,"Profiloplysninger gemt");
+				DBesked.setAlwaysOnTop(true);
+				DBesked.setVisible(true);
+			}
+			else{
+				DBesked = new DialogBesked(parent,"Fejl, prøv igen");
 				DBesked.setAlwaysOnTop(true);
 				DBesked.setVisible(true);
 			}

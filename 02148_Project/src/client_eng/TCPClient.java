@@ -17,7 +17,7 @@ public class TCPClient extends Thread {
 	private Message<String, Object> message;
 	private String serverIP;
 	private String alias;
-	private static String sessionID;
+	public static String sessionID;
 	private int port;
 	
 	private Socket connection;
