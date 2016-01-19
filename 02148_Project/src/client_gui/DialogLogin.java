@@ -176,9 +176,9 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 			if(parent.stallGUI("A0","TRUE")){
             	this.setVisible(false);
             	parent.mainFrameSetVisible();
+            	TaskBar.addForbundet();
             	parent.msg[0] = "";
             	dispose();
-            	System.out.println("test");
 			} 
 			else {
         		this.setVisible(false);         	

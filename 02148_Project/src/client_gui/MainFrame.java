@@ -29,13 +29,13 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	public Profile profile = new Profile();
 
 	public MainFrame() {
-		ip = "localhost";
+		ip = "2.110.0.85";
 		port = 1234;
 		client =  new TCPClient(ip, port, "Lise");
 		client.start();
-		DLogin = new DialogLogin(this);
+		/*DLogin = new DialogLogin(this);
 		DLogin.setAlwaysOnTop(true);
-	    DLogin.setVisible(true);
+	    DLogin.setVisible(true);*/
 	    setDefaultProperties();
 		taskBar = new TaskBar(this);
 		vistPanel1 = new Panel1(this);
@@ -46,7 +46,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		addC(panel2, 0, 2, 1, 1);
 		addC(vistPanel3, 0, 3, 1, 1);
 		this.validate();;
-		//mainFrameSetVisible();
+		mainFrameSetVisible();
 		
 	}
 
