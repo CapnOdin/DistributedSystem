@@ -32,7 +32,7 @@ public class Panel3Data extends JPanel implements GeneralProperties, MouseListen
 	private JPasswordField Kodeord;
 	private JButton JBGem;
 	private JCheckBox JCHarBil;
-	private String clientData, kodeord, navn, adresse, postnummer, by, email, harBil, sessionID;
+	private String clientData, kodeord, navn, adresse, postnummer, by, email, harBil = "0", sessionID;
 	private static String brugernavn;
 	private String[] array;
 
@@ -43,9 +43,9 @@ public class Panel3Data extends JPanel implements GeneralProperties, MouseListen
 	
 	public Panel3Data(MainFrame parent){
 		this.parent = parent;
-		setDefaultProperties();
-		setClientData(); 
-		setJComponents();	
+		setDefaultProperties(); 
+		setJComponents();
+		setClientData();
 		int spaceTop = 60;
 		int spaceMiddle = 2;
 		int space = 2;
