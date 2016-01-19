@@ -24,7 +24,7 @@ public class ServerSlave implements Runnable {
 	}
 
 	private void decodeTask(Message<String, Object> message) {
-		String[] decoded = message.getString().split("|");
+		String[] decoded = message.getString().split("\\.");
 		try {
 			switch (decoded[0]) {
 			case "A0":
@@ -67,7 +67,7 @@ public class ServerSlave implements Runnable {
 				//Edit client profile.
 				serviceMessage("DECODED STRING " + java.util.Arrays.toString(decoded));
 				TCPServer.getAllConnections().get(decoded[decoded.length-1]).setProfile((Profile)message.getObject());
-				
+				TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A4.TRUE");
 				break;
 			case "A9":
 				//Want ride?
