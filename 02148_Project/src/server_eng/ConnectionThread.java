@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.util.Random;
 
 import client_eng.Profile;
+import engine.Message;
 import server_gui.ServerConnectedClientsPanel;
 
 public class ConnectionThread extends Thread {
@@ -96,18 +97,18 @@ public class ConnectionThread extends Thread {
 	@Override
 	public void run() {
 		try {
-			String message = "";
+			Message<String, Object> message;
 			setupStreams();
 			greetUser();
 			do {
 				try {
-					message = (String) input.readObject();
+					message = (Message<String, Object>) input.readObject();
 					TCPServer.putTask(message);
-					if(message.substring(0,6).equals("ALIAS%")) {
-						clientAlias = message.substring(6); 
+					if(message.getString().substring(0,6).equals("ALIAS%")) {
+						clientAlias = message.getString().substring(6); 
 						ServerConnectedClientsPanel.addElementToList(sessionID + "/" + clientAlias + clientIP);
 					}
-					serviceMessage(message);
+					serviceMessage(message.getString());
 				} catch(Exception e) {
 					break;
 				}

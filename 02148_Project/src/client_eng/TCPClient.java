@@ -6,13 +6,15 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
+import engine.Message;
+
 public class TCPClient extends Thread {
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	
 	public static boolean isConnected = false;
 
-	private String message = "";
+	private Message<String, Object> message;
 	private String serverIP;
 	private String alias;
 	private static String sessionID;
@@ -30,8 +32,8 @@ public class TCPClient extends Thread {
 		System.out.println("[CLIENT]" + message);
 	}
 	
-	private void decode(String message) {
-		String[] decoded = message.split("\\.");
+	private void decode(Message<String, Object> message) {
+		String[] decoded = message.getString().split("\\.");
 		if(decoded.length > 0){
 			client_gui.MainFrame.msg = decoded;
 		}
@@ -105,14 +107,14 @@ public class TCPClient extends Thread {
 		sendMessage("ALIAS%"+alias);
 		do {
 			try {
-				message = (String) input.readObject();
-				serviceMessage(message);
+				message = (Message<String,Object>) input.readObject();
+				serviceMessage(message.toString());
 				decode(message);
 			}catch(Exception e) {
 				e.printStackTrace();
 				break;
 			}
-		}while(!message.contains("A3"));
+		}while(!message.getString().contains("A3"));
 	}
 
 	private void setupStreams() throws IOException {

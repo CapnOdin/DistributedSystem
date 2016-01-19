@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-import api.GoogleWebApi;
 import client_eng.Profile;
+import engine.Message;
 import server_gui.ServerConnectedClientsPanel;
 
 public class ServerSlave implements Runnable {
@@ -23,8 +23,8 @@ public class ServerSlave implements Runnable {
 		System.out.println("[SERVERSLAVE]"+message);
 	}
 
-	private void decodeTask(String task) {
-		String[] decoded = task.split("\\.");
+	private void decodeTask(Message<String, Object> message) {
+		String[] decoded = message.getString().split("|");
 		try {
 			switch (decoded[0]) {
 			case "A0":
@@ -59,18 +59,15 @@ public class ServerSlave implements Runnable {
 				break;
 			case "A6":
 				//Connect with moment.
-				String momentUsername = decoded[1], momentPassword = decoded[2], sessionID = decoded[3];
-				TCPServer.getAllConnections().get(sessionID).getProfile().setMomentUsername(momentUsername);
-				TCPServer.getAllConnections().get(sessionID).getProfile().setMomentPassword(momentPassword);
 				break;
 			case "A7":
 				//Get todays plan.
 				break;
 			case "A8":
 				//Edit client profile.
-				Profile temp = new Profile(decoded[1], decoded[2], decoded[3], decoded[4], decoded[5], decoded[6],decoded[7], decoded[8]);
-				//TCPServer.getAllConnections().get(decoded[9]).setProfile(temp);
-				TCPServer.getAllConnections().get(decoded[9]).sendMessage("A4.TRUE");
+				serviceMessage("DECODED STRING " + java.util.Arrays.toString(decoded));
+				TCPServer.getAllConnections().get(decoded[decoded.length-1]).setProfile((Profile)message.getObject());
+				
 				break;
 			case "A9":
 				//Want ride?
@@ -79,7 +76,7 @@ public class ServerSlave implements Runnable {
 			case "A10":
 				if(server.newUser(decoded[1], decoded[2])) {
 					serviceMessage("ADDED NEW USER");
-					TCPServer.getAllConnections().get(decoded[3]).sendMessage("A1.TRUE");
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.TRUE");
 				} else {
 					serviceMessage("USER ALREADY EXISTS");
 					TCPServer.getAllConnections().get(decoded[3]).sendMessage("A1.FALSE");

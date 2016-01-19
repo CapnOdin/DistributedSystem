@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import client_eng.Profile;
+import engine.Message;
 
 public class TCPServer extends Thread {
-	
-	private static ArrayList<String> taskBuffer = new ArrayList<String>();
-	private HashMap<String, String> userMap = new HashMap<String, String>();
 	public static int currentTask = 0;
-	
+	private static ArrayList<Message<String, Object>> taskBuffer = new ArrayList<Message<String, Object>>();
 	private static HashMap<String, ConnectionThread> allConnections = new HashMap<String, ConnectionThread>();
+	private HashMap<String, String> userMap = new HashMap<String, String>();
 	
 	private ServerTupleSpace space;
 	private ServerSocket server;
@@ -86,12 +85,12 @@ public class TCPServer extends Thread {
 		}
 	}
 	
-	public static ArrayList<String> getTaskBuffer() {
+	public static ArrayList<Message<String, Object>> getTaskBuffer() {
 		return taskBuffer;
 	}
 	
-	public static void putTask(String task) {
-		taskBuffer.add(task);
+	public static void putTask(Message<String, Object> message) {
+		taskBuffer.add(message);
 	}
 	
 	public static void removeConnection(String key) {
