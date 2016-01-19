@@ -37,6 +37,10 @@ public class TCPServer extends Thread {
 	private void serviceMessage(String message) {
 		System.out.println("[SERVER]"+message);
 	}
+	
+	private static void serviceSTATMessage(String message) {
+		System.out.println("[SERVER]"+message);
+	}
 
 	private void serverSleepMode() {
 		setupSlave();
@@ -115,15 +119,17 @@ public class TCPServer extends Thread {
 	public boolean authenticate(String user, String password) {
 		User temp = findUser(user);
 		if(!userMap.containsKey(temp)) return false;
-		if(userMap.get(temp).equals(password))
+		if(userMap.get(temp).equals(password)) {
+			serviceSTATMessage("CONTAINS FOLLOWING PROFILE : " + temp.getProfile().toString());
 			return true;
+		}
 		else return false;
 	}
 	
 	public boolean newUser(User user, String password) {
 		if(!userMap.containsKey(user)) {
 			userMap.put(user, password);
-			System.out.println("ALL USERS AND PASSWORDS : " + userMap);
+			serviceSTATMessage("ALL USERS AND PASSWORDS : " + userMap);
 			return true;
 		} else return false;
 	}
@@ -131,7 +137,7 @@ public class TCPServer extends Thread {
 	public static boolean changeUserPassword(User user, String currentPassword, String newPassword, String sessionID) {
 		if(userMap.get(user).equals(currentPassword)) {
 			userMap.put(user, newPassword);
-			System.out.println("ALL USERS AND PASSWORDS : " + userMap);
+			serviceSTATMessage("ALL USERS AND PASSWORDS : " + userMap);
 			return true;
 		}
 		return false;

@@ -35,6 +35,7 @@ public class ServerSlave implements Runnable {
 					// Authentication succeeded
 					serviceMessage("Authentication OK " + decoded[decoded.length-1]);
 					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A0.TRUE", TCPServer.findUser(decoded[1]).getProfile());
+					//TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A0.TRUE");
 				} else {
 					// Authentication failed
 					serviceMessage("Authentication FAILED");
@@ -68,8 +69,13 @@ public class ServerSlave implements Runnable {
 				//Edit client profile.
 				serviceMessage("DECODED STRING " + java.util.Arrays.toString(decoded));
 				serviceMessage(((Profile)message.getObject()).username + " ATTEMPTING TO EDIT PROFILE ...");
-				TCPServer.findUser(((Profile)message.getObject()).username).setProfile((Profile)message.getObject());				
-				TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A4.TRUE");
+				TCPServer.findUser(((Profile)message.getObject()).username).setProfile((Profile)message.getObject());
+				try {
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A4.TRUE");
+				} catch(NullPointerException ex) {
+					serviceMessage("CONNECTION IS CLOSED AND COULDN'T RESPOND TO CLIENT FOR THE PROFILE UPDATE");
+				}
+				
 				break;
 			case "A9":
 				//Want ride?

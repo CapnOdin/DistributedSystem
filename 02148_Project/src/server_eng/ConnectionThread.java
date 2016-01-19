@@ -70,7 +70,7 @@ public class ConnectionThread extends Thread {
 	public void sendMessage(String message, Object object) {
 		Message<String, Object> m = new Message<String, Object>(message, object);
 		try {
-			output.writeObject(message);
+			output.writeObject(m);
 			output.flush();
 		} catch(Exception e) {
 			e.printStackTrace();
