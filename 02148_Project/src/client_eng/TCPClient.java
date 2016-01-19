@@ -32,7 +32,9 @@ public class TCPClient extends Thread {
 	
 	private void decode(String message) {
 		String[] decoded = message.split("\\.");
-		client_gui.MainFrame.msg = decoded;
+		if(decoded.length > 0){
+			client_gui.MainFrame.msg = decoded;
+		}
 		switch(decoded[0]) {
 		case "A0":
 			//CONNECTION
