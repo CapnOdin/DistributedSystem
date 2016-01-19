@@ -57,6 +57,17 @@ public class ConnectionThread extends Thread {
 	}
 	
 	public void sendMessage(String message) {
+		Message<String, Object> m = new Message<String, Object>(message);
+		try {
+			output.writeObject(m);
+			output.flush();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendMessage(String message, Object object) {
+		Message<String, Object> m = new Message<String, Object>(message, object);
 		try {
 			output.writeObject(message);
 			output.flush();
