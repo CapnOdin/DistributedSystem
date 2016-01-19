@@ -84,6 +84,7 @@ public class Panel2 extends JPanel implements GeneralProperties, MouseListener{
 		}
 		if(e.getSource() == Forbind) {
 			setChosenLabel(Forbind);
+			p3Connect.setMomentBruger();
 			parent.addPanel(p3Connect);
 		}
 		if(e.getSource() == Kalender) {

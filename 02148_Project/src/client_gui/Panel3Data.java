@@ -191,9 +191,8 @@ public class Panel3Data extends JPanel implements GeneralProperties, MouseListen
 			JCHarBil.setSelected(false);
 		}
 	}
-	//JTEMail, JTNavn, JTAdresse, JTPostnummer, JTBy
 	
-	private Profile getNewClientData(){
+	public Profile getNewClientData(){
 		MainFrame.profile.navn = JTBrugernavn.getText();
 		MainFrame.profile.password = Kodeord.getText();
 		MainFrame.profile.navn = JTNavn.getText();

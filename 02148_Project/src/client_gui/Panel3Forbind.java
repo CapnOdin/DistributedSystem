@@ -122,6 +122,11 @@ public class Panel3Forbind extends JPanel implements GeneralProperties, ActionLi
 		connectInfo = "A6."+ email + "." + kodeord + "." + sessionID;
 		return connectInfo;
 	}
+	
+	public void setMomentBruger(){
+		JTEMail.setText(MainFrame.profile.momentUsername);
+		Kodeord.setText(MainFrame.profile.momentPassword);
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {

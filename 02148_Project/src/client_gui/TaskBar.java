@@ -84,6 +84,7 @@ public class TaskBar extends JMenuBar implements MouseListener, MouseMotionListe
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == power_button) {
+			MainFrame.client.sendMessage("A8." + TCPClient.sessionID, MainFrame.panel2.p3Data.getNewClientData());
 			MainFrame.client.disconnect();
 			System.exit(0);
 		}

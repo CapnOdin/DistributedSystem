@@ -178,6 +178,7 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 			if(parent.stallGUI("A0","TRUE")){
 				MainFrame.profile.username = brugernavn;
 				MainFrame.profile.password = kodeord;
+				MainFrame.profile.momentUsername = MainFrame.profile.eMail;
 				MainFrame.panel2.p3Data.setField();
             	this.setVisible(false);
             	parent.mainFrameSetVisible();
