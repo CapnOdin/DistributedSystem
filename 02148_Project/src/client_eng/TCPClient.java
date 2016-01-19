@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
+import client_gui.MainFrame;
 import engine.Message;
 
 public class TCPClient extends Thread {
@@ -43,6 +44,7 @@ public class TCPClient extends Thread {
 			if (decoded[1].equals("TRUE")) {
 				isConnected = true;
 				serviceMessage("AUTHENTICATION TRUE");
+				MainFrame.profile = (Profile)message.getObject();
 			}
 			if (decoded[1].equals("FALSE")) {
 				serviceMessage("AUTHENTICATION FALSE");

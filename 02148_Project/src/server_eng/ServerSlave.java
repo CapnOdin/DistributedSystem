@@ -34,7 +34,7 @@ public class ServerSlave implements Runnable {
 				if(server.authenticate(decoded[1], decoded[2])) {
 					// Authentication succeeded
 					serviceMessage("Authentication OK " + decoded[decoded.length-1]);
-					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A0.TRUE");
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A0.TRUE", TCPServer.findUser(decoded[1]).getProfile());
 				} else {
 					// Authentication failed
 					serviceMessage("Authentication FAILED");
@@ -67,10 +67,8 @@ public class ServerSlave implements Runnable {
 			case "A8":
 				//Edit client profile.
 				serviceMessage("DECODED STRING " + java.util.Arrays.toString(decoded));
-				serviceMessage(((Profile)message.getObject()).getUsername() + " ATTEMPTING TO EDIT PROFILE ...");
-				TCPServer.findUser(((Profile)message.getObject()).getUsername()).setProfile((Profile)message.getObject());
-				//TCPServer.getAllConnections().get(decoded[decoded.length-1]).setProfile((Profile)message.getObject());
-				//serviceMessage(((Profile)message.getObject()).getAdresse());				
+				serviceMessage(((Profile)message.getObject()).username + " ATTEMPTING TO EDIT PROFILE ...");
+				TCPServer.findUser(((Profile)message.getObject()).username).setProfile((Profile)message.getObject());				
 				TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A4.TRUE");
 				break;
 			case "A9":

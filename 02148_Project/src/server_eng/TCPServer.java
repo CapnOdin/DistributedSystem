@@ -123,13 +123,15 @@ public class TCPServer extends Thread {
 	public boolean newUser(User user, String password) {
 		if(!userMap.containsKey(user)) {
 			userMap.put(user, password);
+			System.out.println("ALL USERS AND PASSWORDS : " + userMap);
 			return true;
 		} else return false;
 	}
 	
 	public static boolean changeUserPassword(User user, String currentPassword, String newPassword, String sessionID) {
 		if(userMap.get(user).equals(currentPassword)) {
-			userMap.put(user, userMap.get(user) + 1);
+			userMap.put(user, newPassword);
+			System.out.println("ALL USERS AND PASSWORDS : " + userMap);
 			return true;
 		}
 		return false;
