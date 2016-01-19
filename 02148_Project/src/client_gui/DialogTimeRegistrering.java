@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -21,12 +22,30 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
 	private JPanel panel = new JPanel(new GridBagLayout());
 	private GridBagConstraints c = new GridBagConstraints();
 	private JLabel JLNavn, JLStarttid, JLSluttid,JLPause;
-	private JTextField JTNavn, JTStartts, JTSluttid, JTPause;
+	private JTextField JTNavn, JTStarttid, JTSluttid, JTPause;
+	private JButton JBGem;
+	private String starttid, sluttid, pause;
 	
 	public DialogTimeRegistrering(MainFrame parent){
 		this.parent = parent;
 		setDefaultProperties();
 		setJComponents();
+		
+		int i = 0;
+		addC(JLNavn,i,0,1);
+		addC(JTNavn,i,1,1);i++;
+		addC(JLStarttid,i,0,1);
+		addC(JTStarttid,i,1,1);i++;
+		addC(JLSluttid,i,0,1);
+		addC(JTSluttid,i,1,1);i++;
+		addC(JLPause,i,0,1);
+		addC(JTPause,i,1,1);
+		addC(JBGem,i,3,1);
+		
+		this.add(panel);
+		pack();
+	    setResizable(false);
+	    setLocationRelativeTo(parent);
 	}
 	
 	private void setDefaultProperties(){
@@ -39,15 +58,57 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
 	}
 	
 	private void setJComponents(){
-		
+		JLNavn = new JLabel("Opgave Navn");
+		JLStarttid = new JLabel("Starttid");
+		JLSluttid = new JLabel("Sluttid");
+		JLPause = new JLabel("Pause");
+		JTNavn = new JTextField(10);
+		JTStarttid = new JTextField(4);
+		JTSluttid = new JTextField(4);
+		JTPause = new JTextField("0");
+		JBGem = new JButton("Gem");
+		JBGem.addMouseListener(this);
+		JTPause.addActionListener(this);
 	}
 	
 	private void addC(JComponent comp, int x, int y, int width){
-		
+		c.gridx = x;
+		c.gridy = y;
+		c.gridwidth = width;
+		panel.add(comp, c);
 	}
+	
+	private String getJob(){
+		starttid = JTStarttid.getText();
+		sluttid = JTSluttid.getText();
+		pause = JTPause.getText();
+		return "A14." + starttid + "." + sluttid + "." + pause + "."+ MainFrame.client.getSessionID();
+	}
+	
+	private void addJob(){
+		getJob();
+		if (!starttid.isEmpty() && !sluttid.isEmpty() && !pause.isEmpty()){
+			MainFrame.client.sendMessage(getJob());
+			if (parent.stallGUI("A7", "TRUE")){
+				DialogBesked DBesked = new DialogBesked(parent, "Timer registreret");
+				DBesked.setAlwaysOnTop(true);
+				DBesked.setVisible(true);
+				dispose();
+			}
+			else{
+				DialogBesked DBesked = new DialogBesked(parent, "Timer ikke registreret");
+				DBesked.setAlwaysOnTop(true);
+				DBesked.setVisible(true);
+			}
+			
+		}
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource() == JBGem){
+			addJob();
+		}
 		
 	}
 
@@ -77,7 +138,9 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource() == JTPause){
+			addJob();
+		}
 		
 	}
 

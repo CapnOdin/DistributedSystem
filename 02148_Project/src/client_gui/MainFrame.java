@@ -30,7 +30,8 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	public static Profile profile = new Profile();
 
 	public MainFrame() {
-		ip = "2.110.0.85";
+		//ip = "2.110.0.85";
+		ip = "localhost";
 		port = 1234;
 		client =  new TCPClient(ip, port, "Lise");
 		client.start();

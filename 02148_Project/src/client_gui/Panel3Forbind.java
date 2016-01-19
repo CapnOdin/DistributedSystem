@@ -133,6 +133,10 @@ public class Panel3Forbind extends JPanel implements GeneralProperties, ActionLi
 		Kodeord.setText(MainFrame.profile.momentPassword);
 	}
 
+	private void setVagter(){
+		//String[] navne = MainFrame.profile.calandar.get_job_names();
+	}
+		
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
@@ -184,13 +188,13 @@ public class Panel3Forbind extends JPanel implements GeneralProperties, ActionLi
 				MainFrame.panel2.p3Data.setField();
 				MainFrame.profile.calendar.add_jobs(api.MomentApi.getVagter("2016-01-01",var[0]));
 				MainFrame.panel2.p3Data.setField();
-				if(parent.stallGUI("succes","moment")){
-					DBesked = new DialogBesked(parent, parent.msg[2]);
+				if(parent.stallGUI("success","moment")){
+					DBesked = new DialogBesked(parent, "Forbundet til moment");
 					DBesked.setAlwaysOnTop(true);
 					DBesked.setVisible(true);
 				}
 				else{
-					DBesked = new DialogBesked(parent, parent.msg[2]);
+					DBesked = new DialogBesked(parent, "Forkert login");
 					DBesked.setAlwaysOnTop(true);
 					DBesked.setVisible(true);
 				}
@@ -200,7 +204,7 @@ public class Panel3Forbind extends JPanel implements GeneralProperties, ActionLi
 			}
 		}
 		else{
-			DBesked = new DialogBesked(parent, parent.msg[2]);
+			DBesked = new DialogBesked(parent, "Indtast kodeord");
 			DBesked.setAlwaysOnTop(true);
 			DBesked.setVisible(true);
 			

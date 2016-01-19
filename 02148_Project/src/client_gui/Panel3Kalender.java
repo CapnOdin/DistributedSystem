@@ -35,6 +35,7 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
 	
 	private HashMap<String, CalendarTask> allCalendarElements;
 	private DialogTilfojVagt DTilfojVagt;
+	private DialogTimeRegistrering DTimeRegistrering;
 	
 	public Panel3Kalender(MainFrame parent) {
 		this.parent = parent;
@@ -228,6 +229,11 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			parent.requestFocus();
+			if (e.getSource() == toolButtons[0]){
+				DTimeRegistrering = new DialogTimeRegistrering(MainFrame);
+				DTimeRegistrering.setAlwaysOnTop(true);
+				DTimeRegistrering.setVisible(true);
+			}
 			if(e.getSource() == toolButtons[1]) {
 				for(int i = 0; i < labels.length; i++) {
 					labels[i].setEditable(true);
