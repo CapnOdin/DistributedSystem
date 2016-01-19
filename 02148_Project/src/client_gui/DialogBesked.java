@@ -23,7 +23,7 @@ public class DialogBesked extends JDialog implements GeneralProperties, MouseLis
 	private MainFrame parent;
 	private GridBagConstraints c = new GridBagConstraints();
 	private JPanel panel = new JPanel(new GridBagLayout());
-	private JLabel JLBesked,JLSamkørsel;
+	private JLabel JLBesked,JLSamkorsel;
 	private JButton JBOK, JBSend, JBLuk, JBProvIgen,JBProvIgen1;
 	private JTextField JTSendBesked;
 	private JTextArea JTAChat;
@@ -70,7 +70,7 @@ public class DialogBesked extends JDialog implements GeneralProperties, MouseLis
 		}
 		else if (message == "Chat"){
 			this.setPreferredSize(new Dimension(400,400));
-			addC(JLSamkørsel,0,0,5);
+			addC(JLSamkorsel,0,0,5);
 			addC(JTAChat,0,1,5);
 			addC(JTSendBesked,0,2,4);
 			c.fill = GridBagConstraints.HORIZONTAL;
@@ -111,8 +111,8 @@ public class DialogBesked extends JDialog implements GeneralProperties, MouseLis
 	private void setJComponents(String msg){
 		JLBesked = new JLabel(msg);
 		setJLabel(JLBesked);
-		JLSamkørsel = new JLabel("Væg: Arranger fælles kørsel");
-		setJLabel(JLSamkørsel);
+		JLSamkorsel = new JLabel("Væg: Arranger fælles kørsel");
+		setJLabel(JLSamkorsel);
 		JBProvIgen1 = new JButton("Prøv igen");
 		JBProvIgen = new JButton("Prøv igen");
 		JBOK = new JButton("OK");

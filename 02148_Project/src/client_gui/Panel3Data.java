@@ -215,7 +215,7 @@ public class Panel3Data extends JPanel implements GeneralProperties, MouseListen
 		return brugernavn;
 	}
 	
-	public static void setField(){
+	public void setField(){
 		JTBrugernavn.setText(MainFrame.profile.getUsername());
 		Kodeord.setText(MainFrame.profile.getPassword());
 		parent.addPanel(this);

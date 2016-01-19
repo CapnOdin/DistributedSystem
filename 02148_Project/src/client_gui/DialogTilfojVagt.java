@@ -141,7 +141,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	private void tilfojVagt(){
 		MainFrame.client.sendMessage(getNewJob());;
 		System.out.println(dato);
-		Panel2.p3Kalender.addCalendarTask(dato, tid, jobNavn, jobAdresse, postnummer);
+		MainFrame.panel2.p3Kalender.addCalendarTask(dato, tid, jobNavn, jobAdresse, postnummer);
 		parent.setFocusable(true);
 		dispose();
 	}

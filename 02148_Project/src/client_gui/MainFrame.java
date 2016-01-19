@@ -15,7 +15,7 @@ import client_eng.TCPClient;
 public class MainFrame extends JFrame implements GeneralProperties {
 	private GridBagConstraints c = new GridBagConstraints();
 	private TaskBar taskBar;
-	private Panel2 panel2;
+	public static Panel2 panel2;
 	private JPanel vistPanel3,vistPanel1;
 	private String ip;
 	private int port;

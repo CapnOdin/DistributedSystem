@@ -21,9 +21,9 @@ public class Panel2 extends JPanel implements GeneralProperties, MouseListener{
 	private JLabel Kalender = new JLabel("Kalender", JLabel.CENTER);
 	private JLabel Oversigt = new JLabel("Oversigt", JLabel.CENTER);
 	
-	private Panel3Data p3Data;
-	private Panel3Forbind p3Connect;
-	public static Panel3Kalender p3Kalender;
+	public Panel3Data p3Data;
+	public Panel3Forbind p3Connect;
+	public Panel3Kalender p3Kalender;
 	private Panel3Oversigt p3Oversigt;
 	GridBagConstraints c = new GridBagConstraints();
 	
