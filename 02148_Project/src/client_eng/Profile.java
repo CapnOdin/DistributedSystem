@@ -10,6 +10,10 @@ public class Profile implements Serializable {
 	public api.Calendar calendar;
 	
 	public Profile(){
+		calendar = new api.Calendar();
+	}
+	
+	public Profile(String str){
 		setUsername("Lise");
 		setPassword("projekt");
 		setNavn("Lise Andersen");
