@@ -178,14 +178,14 @@ public class Panel3Data extends JPanel implements GeneralProperties, MouseListen
 	
 	
 	private void setClientData(){
-		brugernavn = parent.profile.getUsername();
-		kodeord = parent.profile.getPassword();
-		navn = parent.profile.getNavn();
-		adresse = parent.profile.getAdresse();
-		postnummer = parent.profile.getPostnummer();
-		by = parent.profile.getBy();
-		email = parent.profile.getEMail();
-		harBil = parent.profile.getHarBil();
+		brugernavn = parent.profile.username;
+		kodeord = parent.profile.password;
+		navn = parent.profile.navn;
+		adresse = parent.profile.adresse;
+		postnummer = parent.profile.postnummer;
+		by = parent.profile.by;
+		email = parent.profile.eMail;
+		harBil = parent.profile.harBil;
 		 
 	}
 	
