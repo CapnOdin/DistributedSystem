@@ -113,8 +113,9 @@ public class TCPServer extends Thread {
 	}
 	
 	public boolean authenticate(String user, String password) {
-		if(!userMap.containsKey(user)) return false;
-		if(userMap.get(user).equals(password))
+		User temp = findUser(user);
+		if(!userMap.containsKey(temp)) return false;
+		if(userMap.get(temp).equals(password))
 			return true;
 		else return false;
 	}
