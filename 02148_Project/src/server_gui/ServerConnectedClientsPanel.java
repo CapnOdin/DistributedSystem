@@ -179,14 +179,19 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void mousePressed(MouseEvent e) {
-		selectedClient = ((JList)e.getSource()).getSelectedValue().toString();
-		String[] BOBROSS = ((JList)e.getSource()).getSelectedValue().toString().split("/");
-		System.out.println(java.util.Arrays.toString(BOBROSS));
-		clientSessionID = BOBROSS[0];
-		clientAlias = BOBROSS[1];
-		clientIP = BOBROSS[2];
-		setInformationFields(clientAlias, clientIP, ServerMainFrame.portNumber, "User");
-		chatArea.setText("");
+		try {
+			selectedClient = ((JList)e.getSource()).getSelectedValue().toString();
+			String[] BOBROSS = ((JList)e.getSource()).getSelectedValue().toString().split("/");
+			System.out.println(java.util.Arrays.toString(BOBROSS));
+			clientSessionID = BOBROSS[0];
+			clientAlias = BOBROSS[1];
+			clientIP = BOBROSS[2];
+			setInformationFields(clientAlias, clientIP, ServerMainFrame.portNumber, "User");
+			chatArea.setText("");
+		} catch(Exception ex) {
+			
+		}
+		
 	}
 	
 	@Override

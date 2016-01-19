@@ -63,7 +63,7 @@ public class TCPClient extends Thread {
 				
 			}
 			break;
-		case "A3":
+		case "A5":
 			//Kicked from server
 			serviceMessage("Server kicked you! reason: " + decoded[1]);
 			disconnect();
