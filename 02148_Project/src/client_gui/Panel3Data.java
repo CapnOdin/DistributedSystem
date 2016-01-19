@@ -28,7 +28,7 @@ public class Panel3Data extends JPanel implements GeneralProperties, MouseListen
 	private MainFrame parent;
 	private JPanel panel = new JPanel(new GridBagLayout());
 	private JTextField JTBrugernavn, JTEMail, JTNavn, JTAdresse, JTPostnummer, JTBy;
-	private JLabel JLBrugernavn, JLKodeord,JLSkiftKodeord, JLEMail, JLPersonlig, JLNavn, JLAdresse, JLBillede, JLPostnummer, JLBy, JLSkiftBillede;
+	private JLabel JLBrugernavn, JLKodeord, JLSkiftKodeord, JLEMail, JLPersonlig, JLNavn, JLAdresse, JLBillede, JLPostnummer, JLBy, JLSkiftBillede;
 	private JPasswordField Kodeord;
 	private JButton JBGem;
 	private JCheckBox JCHarBil;
@@ -177,17 +177,21 @@ public class Panel3Data extends JPanel implements GeneralProperties, MouseListen
 	
 	
 	
-	private void setClientData(){
-		brugernavn = parent.profile.username;
-		kodeord = parent.profile.password;
-		navn = parent.profile.navn;
-		adresse = parent.profile.adresse;
-		postnummer = parent.profile.postnummer;
-		by = parent.profile.by;
-		email = parent.profile.eMail;
-		harBil = parent.profile.harBil;
-		 
+	public void setClientData(){
+		JTBrugernavn.setText(MainFrame.profile.username);
+		Kodeord.setText(MainFrame.profile.password);
+		JTNavn.setText(MainFrame.profile.navn);
+		JTAdresse.setText(MainFrame.profile.adresse);
+		JTPostnummer.setText(MainFrame.profile.postnummer);
+		JTBy.setText(MainFrame.profile.by);
+		JTEMail.setText(MainFrame.profile.eMail);
+		if(MainFrame.profile.harBil.equals("TRUE")){
+			JCHarBil.setSelected(true);
+		} else {
+			JCHarBil.setSelected(false);
+		}
 	}
+	//JTEMail, JTNavn, JTAdresse, JTPostnummer, JTBy
 	
 	private Profile getNewClientData(){
 		MainFrame.profile.navn = JTBrugernavn.getText();
