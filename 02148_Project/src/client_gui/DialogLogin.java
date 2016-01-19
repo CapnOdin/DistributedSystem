@@ -176,8 +176,9 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
         MainFrame.client.sendMessage(getInfo());
 		this.setContentPane(new JLabel(new ImageIcon("load.gif")));
 			if(parent.stallGUI("A0","TRUE")){
-				MainFrame.profile.setNavn(brugernavn);
-				MainFrame.profile.setPassword(kodeord);
+				System.out.println(brugernavn);
+				MainFrame.profile.username = brugernavn;
+				MainFrame.profile.password = kodeord;
 				MainFrame.panel2.p3Data.setField();
             	this.setVisible(false);
             	parent.mainFrameSetVisible();
