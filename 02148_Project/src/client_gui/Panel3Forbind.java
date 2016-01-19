@@ -179,12 +179,13 @@ public class Panel3Forbind extends JPanel implements GeneralProperties, ActionLi
 			try {
 				setvars();
 				String[] var = api.MomentApi.loginMoment(email,kodeord);
-				MainFrame.profile.calendar.add_jobs(api.MomentApi.getVagter("2016-01-01",var[0]));
 				MainFrame.profile.momentUsername = email;
 				MainFrame.profile.momentPassword = kodeord;
-					for( String i : MainFrame.profile.calendar.get_job_names()){
-						System.out.println(i);
-					}
+				MainFrame.profile.calendar.add_jobs(api.MomentApi.getVagter("2016-01-01",var[0]));
+				for( String i : MainFrame.profile.calendar.get_job_names()){
+					System.out.println(i);
+				}
+				MainFrame.panel2.p3Data.setField();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
