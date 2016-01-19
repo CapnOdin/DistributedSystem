@@ -33,9 +33,9 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		port = 1234;
 		client =  new TCPClient(ip, port, "Lise");
 		client.start();
-		/*DLogin = new DialogLogin(this);
+		DLogin = new DialogLogin(this);
 		DLogin.setAlwaysOnTop(true);
-	    DLogin.setVisible(true);*/
+	    DLogin.setVisible(true);
 	    setDefaultProperties();
 		taskBar = new TaskBar(this);
 		vistPanel1 = new Panel1(this);
@@ -46,7 +46,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		addC(panel2, 0, 2, 1, 1);
 		addC(vistPanel3, 0, 3, 1, 1);
 		this.validate();;
-		mainFrameSetVisible();
+		//mainFrameSetVisible();
 		
 	}
 
@@ -95,7 +95,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 	
 	public boolean stallGUI(String protocol, String value) {
 		boolean stall = waitForMsg(protocol, value);
-		msg = null;
+		msg = new String[1];
 		return stall;
 	}
 	
@@ -103,7 +103,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		int i = 0;
     	while(!msg[0].equals(protocol)){
     		try {
-    			if(i > 20){break;}
+    			if(i > 20){return false;}
 				Thread.sleep(500);
 				i++;
 			} catch (InterruptedException e1) {
