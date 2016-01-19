@@ -10,7 +10,7 @@ public class Profile implements Serializable {
 	public api.Calendar calendar;
 	
 	public Profile(){
-		calendar = new api.Calendar(); 
+		calendar = new api.Calendar();
 	}
 	
 	public Profile(String username, String password){

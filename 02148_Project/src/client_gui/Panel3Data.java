@@ -200,6 +200,9 @@ public class Panel3Data extends JPanel implements GeneralProperties, MouseListen
 		MainFrame.profile.postnummer = JTPostnummer.getText();
 		MainFrame.profile.by = JTBy.getText();
 		MainFrame.profile.eMail = JTEMail.getText();
+		if(MainFrame.profile.momentUsername.equals("")){
+			MainFrame.profile.momentUsername = JTEMail.getText(); 
+		}
 		if (JCHarBil.isSelected()){
 			MainFrame.profile.harBil = "TRUE";}
 		else{
