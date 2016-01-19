@@ -69,7 +69,8 @@ public class ServerSlave implements Runnable {
 			case "A8":
 				//Edit client profile.
 				Profile temp = new Profile(decoded[1], decoded[2], decoded[3], decoded[4], decoded[5], decoded[6],decoded[7], decoded[8]);
-				TCPServer.getAllConnections().get(decoded[9]).setProfile(temp);
+				//TCPServer.getAllConnections().get(decoded[9]).setProfile(temp);
+				TCPServer.getAllConnections().get(decoded[9]).sendMessage("A4.TRUE");
 				break;
 			case "A9":
 				//Want ride?

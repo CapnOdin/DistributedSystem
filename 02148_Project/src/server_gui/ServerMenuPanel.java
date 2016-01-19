@@ -23,6 +23,7 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 	
 	private ServerConnectedClientsPanel sccp; 
 	private ServerTaskBar stb;
+	private ServerTupleSpaceMonitoring stsm;
 	
 	private JPanel menusPanel = new JPanel(new GridLayout(1,2));
 	private JLabel[] menus = new JLabel[2];
@@ -50,6 +51,7 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 
 	private void addMenuProperties() {
 		stb = new ServerTaskBar(parent, "SERVER");
+		stsm = new ServerTupleSpaceMonitoring(parent, "monitoring");
 		menusPanel.setBackground(twitchColor);
 		addC(stb, 0, 0);
 		for(int i = 0; i < menus.length; i++) {
@@ -63,7 +65,7 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 		}
 		
 		menus[0].setText("Connected Clients");
-		menus[1].setText("Server Setup");
+		menus[1].setText("Tuple Space Monitoring");
 		addC(menusPanel, 0, 1);
 		this.validate();
 	}
@@ -85,11 +87,10 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 			parent.addVariablePanel(sccp);
 		}
 		
-		//Server Setup Pressed
+		//Server Tuple Space Monitoring Pressed
 		if(e.getSource() == menus[1]) {
 			menus[1].setBorder(BorderFactory.createLoweredSoftBevelBorder());
-			TCPClient a = new TCPClient("localhost", 1234, "Matt");
-			a.start();
+			parent.addVariablePanel(stsm);
 		}
 	}
 	
