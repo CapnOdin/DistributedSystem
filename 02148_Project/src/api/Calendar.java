@@ -8,11 +8,11 @@ public class Calendar implements Serializable {
 	
 	private static final long serialVersionUID = -6389502885882127246L;
 	private HashMap<String, HashMap<String, String>> Vagter;
-	public String vikarGUID;
+	//public String vikarGUID;
 	
-	public Calendar(String vikarGUID) {
+	public Calendar() {
 		Vagter = new HashMap<String, HashMap<String, String>>();
-		this.vikarGUID = vikarGUID;
+		//this.vikarGUID = vikarGUID;
 	}
 	
 	public String[] get_job_names(){

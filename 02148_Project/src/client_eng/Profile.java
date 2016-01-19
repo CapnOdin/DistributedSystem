@@ -18,6 +18,7 @@ public class Profile implements Serializable {
 		setBy("Vanløse");
 		setEMail("Lise_Noerby@hotmail.com");
 		setHarBil("1");
+		calendar = new api.Calendar();
 	}
 	
 	public Profile(String user, String password, String name, String address, String zipcode, String city, String email, String car) {
@@ -29,6 +30,7 @@ public class Profile implements Serializable {
 		this.by = city;
 		this.eMail = email;
 		this.harBil = car;
+		calendar = new api.Calendar();
 	}
 
 	public String getUsername() {
