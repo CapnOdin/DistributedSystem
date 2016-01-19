@@ -28,7 +28,7 @@ public class Panel3Data extends JPanel implements GeneralProperties, MouseListen
 	private MainFrame parent;
 	private JPanel panel = new JPanel(new GridBagLayout());
 	private JTextField JTBrugernavn, JTEMail, JTNavn, JTAdresse, JTPostnummer, JTBy;
-	private JLabel JLBrugernavn, JLKodeord,JLSkiftKodeord, JLEMail, JLPersonlig, JLNavn, JLAdresse, JLBillede, JLPostnummer, JLBy, JLSkiftBillede;
+	private JLabel JLBrugernavn, JLKodeord, JLSkiftKodeord, JLEMail, JLPersonlig, JLNavn, JLAdresse, JLBillede, JLPostnummer, JLBy, JLSkiftBillede;
 	private JPasswordField Kodeord;
 	private JButton JBGem;
 	private JCheckBox JCHarBil;
@@ -177,30 +177,34 @@ public class Panel3Data extends JPanel implements GeneralProperties, MouseListen
 	
 	
 	
-	private void setClientData(){
-		brugernavn = parent.profile.getUsername();
-		kodeord = parent.profile.getPassword();
-		navn = parent.profile.getNavn();
-		adresse = parent.profile.getAdresse();
-		postnummer = parent.profile.getPostnummer();
-		by = parent.profile.getBy();
-		email = parent.profile.getEMail();
-		harBil = parent.profile.getHarBil();
-		 
+	public void setClientData(){
+		JTBrugernavn.setText(MainFrame.profile.username);
+		Kodeord.setText(MainFrame.profile.password);
+		JTNavn.setText(MainFrame.profile.navn);
+		JTAdresse.setText(MainFrame.profile.adresse);
+		JTPostnummer.setText(MainFrame.profile.postnummer);
+		JTBy.setText(MainFrame.profile.by);
+		JTEMail.setText(MainFrame.profile.eMail);
+		if(MainFrame.profile.harBil.equals("TRUE")){
+			JCHarBil.setSelected(true);
+		} else {
+			JCHarBil.setSelected(false);
+		}
 	}
+	//JTEMail, JTNavn, JTAdresse, JTPostnummer, JTBy
 	
 	private Profile getNewClientData(){
-		MainFrame.profile.setUsername(JTBrugernavn.getText());
-		MainFrame.profile.setPassword(Kodeord.getText());
-		MainFrame.profile.setNavn(JTNavn.getText());
-		MainFrame.profile.setAdresse(JTAdresse.getText());
-		MainFrame.profile.setPostnummer(JTPostnummer.getText());
-		MainFrame.profile.setBy(JTBy.getText());
-		MainFrame.profile.setEMail(JTEMail.getText());
+		MainFrame.profile.navn = JTBrugernavn.getText();
+		MainFrame.profile.password = Kodeord.getText();
+		MainFrame.profile.navn = JTNavn.getText();
+		MainFrame.profile.adresse = JTAdresse.getText();
+		MainFrame.profile.postnummer = JTPostnummer.getText();
+		MainFrame.profile.by = JTBy.getText();
+		MainFrame.profile.eMail = JTEMail.getText();
 		if (JCHarBil.isSelected()){
-			MainFrame.profile.setHarBil("TRUE");}
+			MainFrame.profile.harBil = "TRUE";}
 		else{
-			MainFrame.profile.setHarBil("FALSE");}
+			MainFrame.profile.harBil = "FALSE";}
 		return MainFrame.profile;
 	}
 	

@@ -13,9 +13,9 @@ public class Profile implements Serializable {
 		calendar = new api.Calendar(); 
 	}
 	
-	public Profile(String name, String pass){
-		setUsername(name);
-		setPassword(pass);
+	public Profile(String username, String password){
+		this.username = username;
+		this.password = password;
 		calendar = new api.Calendar();
 	}
 	

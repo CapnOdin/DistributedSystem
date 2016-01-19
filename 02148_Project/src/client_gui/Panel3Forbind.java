@@ -103,7 +103,7 @@ public class Panel3Forbind extends JPanel implements GeneralProperties, ActionLi
 		JLForbind = new JLabel("<HTML> <U>Forbind bruger med Moment konto</U></HTML>"); 
 		JLEMail = new JLabel("E-Mail");
 		JLKodeord = new JLabel("Kodeord");
-		JTEMail = new JTextField(parent.profile.getEMail());
+		JTEMail = new JTextField(parent.profile.eMail);
 		Kodeord = new JPasswordField();
 		JBForbind = new JButton("Forbind");
 		JLForbind.setFont(new Font("SansSerif", Font.PLAIN, 20));
