@@ -13,15 +13,9 @@ public class Profile implements Serializable {
 		calendar = new api.Calendar();
 	}
 	
-	public Profile(String str){
-		setUsername("Lise");
-		setPassword("projekt");
-		setNavn("Lise Andersen");
-		setAdresse("Grønnehøj 39");
-		setPostnummer("2720");
-		setBy("Vanløse");
-		setEMail("Lise_Noerby@hotmail.com");
-		setHarBil("1");
+	public Profile(String name, String pass){
+		setUsername(name);
+		setPassword(pass);
 		calendar = new api.Calendar();
 	}
 	
