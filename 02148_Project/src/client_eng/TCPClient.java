@@ -15,7 +15,6 @@ public class TCPClient extends Thread {
 
 	public static boolean isConnected = false;
 
-	private Message<String, Object> message = null;
 	private String serverIP;
 	private String alias;
 	public static String sessionID;
@@ -118,6 +117,7 @@ public class TCPClient extends Thread {
 	}
 
 	private void whileConnected() throws IOException {
+		Message<String, Object> message = null;
 		sendMessage("ALIAS%" + alias);
 		do {
 			try {
