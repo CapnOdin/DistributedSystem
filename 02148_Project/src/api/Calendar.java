@@ -12,39 +12,39 @@ public class Calendar implements Serializable {
 	
 	public Calendar(String vikarGUID) {
 		Vagter = new HashMap<String, HashMap<String, String>>();
-		this.vikarGUID = vikarGUID;	
+		this.vikarGUID = vikarGUID;
 	}
 	
 	public String[] get_job_names(){
 			return Vagter.keySet().toArray(new String[Vagter.keySet().size()]);
 	}
 	
-	public HashMap<String, String> get_job(String TaskId){
-		if(Vagter.containsKey(TaskId)){
-			return Vagter.get(TaskId);
+	public HashMap<String, String> get_job(String Start){
+		if(Vagter.containsKey(Start)){
+			return Vagter.get(Start);
 		}
 		return null;
 	}
 	
-	public void edit_job(String TaskId, String key, String val){
-		if(Vagter.containsKey(TaskId)){
-			Vagter.get(TaskId).put(key, val);
+	public void edit_job(String Start, String key, String val){
+		if(Vagter.containsKey(Start)){
+			Vagter.get(Start).put(key, val);
 		}
 	}
 	
-	public void edit_job_multi(String TaskId, HashMap<String, String> edits){
-		if(Vagter.containsKey(TaskId)){
+	public void edit_job_multi(String Start, HashMap<String, String> edits){
+		if(Vagter.containsKey(Start)){
 			for(String str : edits.keySet()){
-				if(Vagter.get(TaskId).containsKey(str)){
-					Vagter.get(TaskId).put(str, edits.get(str));
+				if(Vagter.get(Start).containsKey(str)){
+					Vagter.get(Start).put(str, edits.get(str));
 				}
 			}
 		}
 	}
 	
 	public void add_job(HashMap<String, String> job){
-		if(!Vagter.containsKey(job.get("TaskId"))){
-			Vagter.put(job.get("TaskId"), job);
+		if(!Vagter.containsKey(job.get("Start"))){
+			Vagter.put(job.get("Start"), job);
 		}
 	}
 	
@@ -54,9 +54,9 @@ public class Calendar implements Serializable {
 		}
 	}
 	
-	public void delete_job(String TaskId){
-		if(Vagter.containsKey(TaskId)){
-			Vagter.remove(TaskId);
+	public void delete_job(String Start){
+		if(Vagter.containsKey(Start)){
+			Vagter.remove(Start);
 		}
 	}
 	
