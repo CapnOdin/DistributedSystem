@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 public class Panel3Forbind extends PanelTemplate implements GeneralProperties, ActionListener, MouseListener{
 	private MainFrame parent;
 	private GridBagConstraints c = new GridBagConstraints();
-	JPanel panel = new JPanel(new GridBagLayout());
+	private JPanel panel = new JPanel(new GridBagLayout());
 	private JLabel JLForbind, JLEMail, JLKodeord;
 	private JTextField JTEMail;
 	private JPasswordField Kodeord;
@@ -30,7 +30,7 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	private String clientData, email, connectInfo, kodeord, sessionID;
 	private String[] array, array1;
 	
-	private DialogBesked DForkertKodeord;
+	private DialogBesked DBesked;
 	
 	public Panel3Forbind(MainFrame parent){
 		this.parent = parent;
@@ -52,8 +52,7 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		addC(JTEMail,			0,	i,	1,	1,		new Insets(spaceSTD,			space,	0,	space));i++;c.ipadx = 0;
 		addC(JLKodeord,			0,	i,	1,	1,		new Insets(spaceExtra,			space,	0,	space));i++;
 		addC(Kodeord,			0,	i,	1,	1,		new Insets(spaceSTD,			space,	0,	space));i++;
-		addC(JCGemOplysninger,	0,	i,	1,	1,		new Insets(spaceExtra,			space,	0,	space));i++;
-		addC(JBForbind,			0,	i,	1,	1,		new Insets(spaceSTD,			space,	200,	space));i++;
+		addC(JBForbind,			0,	i,	1,	1,		new Insets(spaceExtra,			space,	200,	space));i++;
 		
 		Kodeord.addActionListener(this);
 		JBForbind.addMouseListener(this);
@@ -107,7 +106,6 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		JLKodeord = new JLabel("Kodeord");
 		JTEMail = new JTextField(parent.profile.getEMail());
 		Kodeord = new JPasswordField();
-		JCGemOplysninger = new JCheckBox("Gem oplysninger");
 		JBForbind = new JButton("Forbind");
 		JLForbind.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		JLForbind.setVisible(true);
@@ -115,7 +113,6 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 		setJLabel(JLKodeord);
 		setJTextField(JTEMail);
 		setJTextField(Kodeord);
-		setJCheckBox(JCGemOplysninger);
 		setJButton(JBForbind);
 	}
 	
@@ -168,36 +165,23 @@ public class Panel3Forbind extends PanelTemplate implements GeneralProperties, A
 	}
 	
 	private void forbind(){
-		if (false){			// Vent på authentication fra moment 
-			System.out.println(email);
-			System.out.println(kodeord);
-			try {
-				String[] var = api.MomentApi.loginMoment(email,kodeord);
-				System.out.println(var[1]);
-				api.MomentApi.getVagter("2016-01-01",var[0]);
-			} catch (Exception e1) {
-				e1.printStackTrace();
+		if (!Kodeord.getText().isEmpty()){
+			if (false){		
+				System.out.println(email);
+				System.out.println(kodeord);
+				try {
+					String[] var = api.MomentApi.loginMoment(email,kodeord);
+					System.out.println(var[1]);
+					api.MomentApi.getVagter("2016-01-01",var[0]);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+			else{
+				DBesked = new DialogBesked(parent, parent.msg[2]);
+				DBesked.setAlwaysOnTop(true);
+				DBesked.setVisible(true);
 			}
 		}
-		else{
-			DForkertKodeord = new DialogBesked(parent, parent.msg[2]);
-			DForkertKodeord.setAlwaysOnTop(true);
-			DForkertKodeord.setVisible(true);
-		}
 	}
-	
-	/*
-	public static void main(String[] args) {
-		System.out.println(frameSizePanel3);
-		JFrame test = new JFrame();
-		test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		test.setPreferredSize(frameSizePanel3);
-		test.setVisible(true);
-		test.pack();
-		test.setLocationRelativeTo(null);
-		
-		test.add(new Panel3Connect());
-		test.validate();
-	}
-	*/
 }

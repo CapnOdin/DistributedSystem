@@ -139,26 +139,36 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
 	}
 	
 	private void tilfojVagt(){
-		MainFrame.client.sendMessage(getNewJob());
-		//System.out.println(getNewJob());
+		MainFrame.client.sendMessage(getNewJob());;
 		System.out.println(dato);
 		Panel2.p3Kalender.addCalendarTask(dato, tid, jobNavn, jobAdresse, postnummer);
-		//p3Kalender.addCalendarTask(dato, tid, jobNavn, jobAdresse, postnummer);
 		parent.setFocusable(true);
 		dispose();
+	}
+	
+	private void fieldsEmpty(){
+		getNewJob();
+		if (!dato.isEmpty() && !tid.isEmpty() && !jobNavn.isEmpty() && !jobAdresse.isEmpty() && !postnummer.isEmpty()){
+			tilfojVagt();
+		}
+		else{
+			DialogBesked DBesked = new DialogBesked(parent, "Udfyld alle felter");
+			DBesked.setAlwaysOnTop(true);
+			DBesked.setVisible(true);
+		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == JTPostnummer){
-			tilfojVagt();
+			fieldsEmpty();
 		}		
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == JBTilfoj){
-			tilfojVagt();
+			fieldsEmpty();
 		}
 		if (e.getSource() == JBAnnuller){
 

@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -173,12 +174,12 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
 	
 	private void login(){
         MainFrame.client.sendMessage(getInfo());
+		this.setContentPane(new JLabel(new ImageIcon("load.gif")));
 			if(parent.stallGUI("A0","TRUE")){
             	this.setVisible(false);
             	parent.mainFrameSetVisible();
-            	parent.msg[0] = "";
+            	TaskBar.addForbundet();
             	dispose();
-            	System.out.println("test");
 			} 
 			else {
         		this.setVisible(false);         	

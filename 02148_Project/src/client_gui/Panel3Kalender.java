@@ -235,6 +235,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 			return updateJob;
 		}
 
+
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			parent.requestFocus();
@@ -245,8 +246,7 @@ public class Panel3Kalender extends PanelTemplate implements GeneralProperties, 
 			}
 			if(e.getSource() == toolButtons[2]){
 				//Slet vagt
-			}
-			
+			}			
 		}
 
 		@Override

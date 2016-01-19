@@ -179,7 +179,7 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 	public void makeNewUser(){
 		if(getNyeKodeordOK()){
 			MainFrame.client.sendMessage(getNewUser());
-			if(parent.stallGUI("A1","true")){
+			if(parent.stallGUI("A1","TRUE")){
 				dispose();
 				DLogin = new DialogLogin(parent);
 				DLogin.setAlwaysOnTop(true);

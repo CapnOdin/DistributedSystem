@@ -50,7 +50,7 @@ public class DialogBesked extends JDialog implements GeneralProperties, MouseLis
 			addC(JBProvIgen1,0,1,1);
 			this.add(panel);
 		}
-		else if (message == "Kodeord Ændret" || message == "Profiloplysninger gemt"){
+		else if (message == "Kodeord Ændret" || message == "Profiloplysninger gemt" || message == "Udfyld alle felter"){
 			this.setPreferredSize(new Dimension(400,150));
 			c.ipady = 50;
 			addC(JLBesked,0,0,1);
