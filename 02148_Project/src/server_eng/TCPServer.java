@@ -13,7 +13,7 @@ public class TCPServer extends Thread {
 	public static int currentTask = 0;
 	private static ArrayList<Message<String, Object>> taskBuffer = new ArrayList<Message<String, Object>>();
 	private static HashMap<String, ConnectionThread> allConnections = new HashMap<String, ConnectionThread>();
-	private HashMap<String, String> userMap = new HashMap<String, String>();
+	private static HashMap<String, String> userMap = new HashMap<String, String>();
 	
 	private ServerTupleSpace space;
 	private ServerSocket server;
@@ -124,12 +124,12 @@ public class TCPServer extends Thread {
 		} else return false;
 	}
 	
-	public void changeUserPassword(String name, String currentPassword, String newPassword, String sessionID) {
+	public static boolean changeUserPassword(String name, String currentPassword, String newPassword, String sessionID) {
 		if(userMap.get(name).equals(currentPassword)) {
 			userMap.put(name, userMap.get(name) + 1);
-			allConnections.get(sessionID).sendMessage("#Password successfully changed!");
+			return true;
 		}
-		allConnections.get(sessionID).sendMessage("#Wrong password!");
+		return false;
 	}
 	
 	public int getPort() {

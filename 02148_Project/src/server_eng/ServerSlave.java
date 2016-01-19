@@ -83,6 +83,15 @@ public class ServerSlave implements Runnable {
 					TCPServer.getAllConnections().get(decoded[3]).sendMessage("A1.FALSE");
 				}
 				break;
+			case "A13":
+				if(TCPServer.changeUserPassword(decoded[1], decoded[2], decoded[3], decoded[decoded.length-1])) {
+					serviceMessage("CHANGED USER PASSWORD");
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A6.TRUE");
+				} else {
+					serviceMessage("USER PASSWORD WRONG - CANT CHANGE");
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A6.FALSE");
+				}
+				break;
 			default:
 				serviceMessage("Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");
 				break;
