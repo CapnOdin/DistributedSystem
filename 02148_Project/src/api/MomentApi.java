@@ -16,6 +16,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import client_gui.MainFrame;
+
 
 public class MomentApi {
 	public static String[] loginMoment(String email, String pass) throws Exception {
@@ -86,6 +88,8 @@ public class MomentApi {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		MainFrame.msg = new String[] {"success", "moment"};
 		
 		return new String[] {vikarGUID, address};
 	}
