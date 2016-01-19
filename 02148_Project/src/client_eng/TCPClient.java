@@ -35,7 +35,7 @@ public class TCPClient extends Thread {
 		client_gui.MainFrame.msg = decoded;
 		switch(decoded[0]) {
 		case "A0":
-			//AUTHENTICATION
+			//CONNECTION
 			if(decoded[1].equals("TRUE")) {
 				isConnected = true;
 				serviceMessage("AUTHENTICATION TRUE");
@@ -54,7 +54,7 @@ public class TCPClient extends Thread {
 			}
 			break;
 		case "A2":
-			//CONNECTION
+			//AUTHENTICATION
 			if(decoded[1].equals("TRUE")) {
 				sessionID = decoded[2];
 				serviceMessage("SESSION ID SET TO: " + sessionID);
