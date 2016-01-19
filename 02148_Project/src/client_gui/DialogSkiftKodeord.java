@@ -110,7 +110,7 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 	}
 
 	private String getChangePassword(){
-		String brugernavn = Panel3Data.getBrugernavn();
+		String brugernavn = MainFrame.profile.username;
 		tastetKodeord = JTNuvarendeKodeord.getText();
 		nyeKodeord = JTNyeKodeord.getText();
 		gentagKodeord = JTGentagKodeord.getText();
@@ -124,6 +124,7 @@ public class DialogSkiftKodeord extends JDialog implements ActionListener, Mouse
 		if (nyeKodeord.equals(gentagKodeord)){
 			MainFrame.client.sendMessage(getChangePassword());
 			if (parent.stallGUI("A6", "TRUE")){
+				this.setVisible(false);
 				DBesked = new DialogBesked(parent, "Kodeord Ændret");
 				MainFrame.profile.password = nyeKodeord;
 				MainFrame.panel2.p3Data.setField();

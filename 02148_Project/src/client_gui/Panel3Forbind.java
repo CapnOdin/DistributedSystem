@@ -169,23 +169,22 @@ public class Panel3Forbind extends JPanel implements GeneralProperties, ActionLi
 	}
 	
 	private void forbind(){
-		if (!Kodeord.getText().isEmpty()){
-			if (false){		
-				System.out.println(email);
-				System.out.println(kodeord);
-				try {
-					String[] var = api.MomentApi.loginMoment(email,kodeord);
-					System.out.println(var[1]);
-					api.MomentApi.getVagter("2016-01-01",var[0]);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
+		if (!Kodeord.getText().isEmpty()){		
+			try {
+				String[] var = api.MomentApi.loginMoment(JTEMail.getText(),Kodeord.getText());
+				MainFrame.profile.calendar.add_jobs(api.MomentApi.getVagter("2016-01-01",var[0]));
+					for( String i : MainFrame.profile.calendar.get_job_names()){
+						System.out.println(i);
+					}
+			} catch (Exception e1) {
+				e1.printStackTrace();
 			}
-			else{
-				DBesked = new DialogBesked(parent, parent.msg[2]);
-				DBesked.setAlwaysOnTop(true);
-				DBesked.setVisible(true);
-			}
+		}
+		else{
+			DBesked = new DialogBesked(parent, parent.msg[2]);
+			DBesked.setAlwaysOnTop(true);
+			DBesked.setVisible(true);
+			
 		}
 	}
 }

@@ -183,6 +183,9 @@ public class DialogLogin extends JDialog implements ActionListener, MouseListene
             	this.setVisible(false);
             	parent.mainFrameSetVisible();
             	TaskBar.addForbundet();
+            	for( String i : MainFrame.profile.calendar.get_job_names()){
+					System.out.println(i);
+				}
             	dispose();
             	
             	
