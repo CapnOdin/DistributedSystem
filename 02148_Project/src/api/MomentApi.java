@@ -82,7 +82,7 @@ public class MomentApi {
 	}
 	
 	
-	public static List<Map<String, String>> getVagter(String date, String vikarGUID) throws Exception {
+	public static List<HashMap<String, String>> getVagter(String date, String vikarGUID) throws Exception {
 		String vagter = "{\"state\":\"Error\"}";
 		
 		HttpClient httpClient = HttpClientBuilder.create().build();
@@ -106,8 +106,8 @@ public class MomentApi {
 	}
 	
 	
-	public static List<Map<String, String>> generateListOfDictionaries(String str) {
-		List<Map<String, String>> dictvagt = new ArrayList<Map<String, String>>();
+	public static List<HashMap<String, String>> generateListOfDictionaries(String str) {
+		List<HashMap<String, String>> dictvagt = new ArrayList<HashMap<String, String>>();
 		try{
 			String[] dics = str.substring(1, str.length() - 2).replaceAll("\"", "").replace("{", "").split("},");
 			for (String dic : dics) {
@@ -120,8 +120,8 @@ public class MomentApi {
 	}
 	
 	
-	public static Map<String, String> generateDictionarie(String str) {
-		Map<String, String> dict = new HashMap<String, String>();
+	public static HashMap<String, String> generateDictionarie(String str) {
+		HashMap<String, String> dict = new HashMap<String, String>();
 		try{
 			String[] pairs = str.replace(", ", "; ").split(",");
 			for (String pair : pairs) {
