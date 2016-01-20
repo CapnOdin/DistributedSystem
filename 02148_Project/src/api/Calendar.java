@@ -80,9 +80,9 @@ public class Calendar implements Serializable {
 			temp = job.get("JobName").split(", ")[1];
 		}
 		if(temp.contains(",")){
-			temp = job.get("JobName").split(", ")[0];
+			temp = temp.split(", ")[0];
 		} else {
-			temp = job.get("JobName").split(". ")[1];
+			temp = temp.split(". ")[1];
 		}
 		
 		formatedJop.put("Name", temp);
