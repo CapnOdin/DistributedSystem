@@ -12,6 +12,7 @@ import engine.Message;
 
 public class ServerSlave implements Runnable {
 
+	@SuppressWarnings("unused")
 	private ServerTupleSpace space;
 	private TCPServer server;
 	
