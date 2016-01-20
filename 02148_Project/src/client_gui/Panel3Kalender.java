@@ -262,7 +262,10 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
                 }
             }
             if(e.getSource() == toolButtons[2]){
-                //Slet vagt
+            	updateVagt();
+                MainFrame.profile.calendar.delete_job(labels[0]+ "T" + labels[1]);
+                this.removeAll();
+                frame.addPanel(MainFrame.panel2.p3Kalender);
             }          
         }
  
@@ -301,11 +304,12 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
                     for(int i = 0; i < labels.length; i++) {
                         labels[i].setEditable(false);
                     }
-                    /*MainFrame.profile.calendar.set_job(navne[i]).get("Date");
-                    String tid = MainFrame.profile.calendar.get_job(navne[i]).get("Time");
-                    String navn = MainFrame.profile.calendar.get_job(navne[i]).get("Name");
-                    String adresse = MainFrame.profile.calendar.get_job(navne[i]).get("Address");
-                    String postnummer = MainFrame.profile.calendar.get_job(navne[i]).get("Date");*/
+                    updateVagt();
+                    MainFrame.profile.calendar.edit_job(labels[0]+ "T" + labels[1], "Date",dato);
+                    MainFrame.profile.calendar.edit_job(labels[0]+ "T" + labels[1],"Time",tid);
+                    MainFrame.profile.calendar.edit_job(labels[0]+ "T" + labels[1],"Name",navn);
+                    MainFrame.profile.calendar.edit_job(labels[0]+ "T" + labels[1],"Address", adresse);
+                    MainFrame.profile.calendar.edit_job(labels[0]+ "T" + labels[1],"Date",dato);
                 }
             }
            
