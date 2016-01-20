@@ -89,7 +89,7 @@ public class ServerSlave implements Runnable {
 					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.TRUE");
 				} else {
 					serviceMessage("USER ALREADY EXISTS");
-					TCPServer.getAllConnections().get(decoded[3]).sendMessage("A1.FALSE");
+					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.FALSE");
 				}
 				break;
 			case "A13":

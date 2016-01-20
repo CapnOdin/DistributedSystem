@@ -59,7 +59,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 	}
 
 	private void addChatPanelContent() {
-		JPanel whiteSpace = new JPanel();
+		//JPanel whiteSpace = new JPanel();
 		chatArea.setEditable(false);
 		
 		chatLabels[0] = new JLabel(" Actions", JLabel.LEFT);
@@ -70,7 +70,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		
 		addC(info, chatLabels[0], 0, 7, 3, 0);
 		addC(info, chatLabels[1], 0, 8, 1, 0);
-		addC(info, chatPane, 0, 9, 3, 50);
+		addC(info, chatPane, 0, 9, 3, 150);
 		addC(info, chatMessage, 0, 10, 2, 0);
 		addC(info, send, 2, 10, 1, 0);
 		
@@ -81,7 +81,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		}
 		
 		addC(info, button_holder, 0, 12, 3, 20);
-		addC(info, whiteSpace, 0, 13, 3, 1);
+		//addC(info, whiteSpace, 0, 13, 3, 1);
 		actionButtons[0].setText("Disconnect");
 	}
 
@@ -130,7 +130,7 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 		
 		addC(info, infoLabels[5], 0, 5, 1, 0);
 		clientHistory = new JScrollPane(infoLabelFields[0]);
-		addC(info, clientHistory, 0, 6, 3, 50);
+		addC(info, clientHistory, 0, 6, 3, 100);
 	}
 	
 	private void addC(JComponent comp1, JComponent comp, int gridx, int gridy, int gridwidth, int ipady) {

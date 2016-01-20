@@ -125,15 +125,18 @@ public class TCPServer extends Thread {
 			serviceSTATMessage("CONTAINS FOLLOWING PROFILE : " + temp.getProfile().toString());
 			return true;
 		}
-		else return false;
+		return false;
 	}
 	
 	public boolean newUser(User user, String password) {
-		if(!userMap.containsKey(user)) {
-			userMap.put(user, password);
-			serviceSTATMessage("ALL USERS AND PASSWORDS : " + userMap);
-			return true;
-		} else return false;
+		for (Map.Entry<User, String> entry : userMap.entrySet()) {
+			if(entry.getKey().getUserName().equals(user.getUserName())) {
+				return false;
+			}
+		}
+		serviceSTATMessage("ALL USERS AND PASSWORDS : " + userMap);
+		userMap.put(user, password);
+		return true;
 	}
 	
 	public static boolean changeUserPassword(User user, String currentPassword, String newPassword, String sessionID) {
