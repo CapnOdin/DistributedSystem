@@ -1,7 +1,6 @@
 package server_gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -204,7 +203,6 @@ public class ServerConnectedClientsPanel extends ServerPanelTemplate implements 
 			TCPServer.getAllConnections().get(clientSessionID).disconnectClient("Get Rekt Son");
 			model.removeElement(selectedClient);
 			clearInformationFields();
-			TCPServer.userCount--;
 		}
 		// SEND MESSAGE BUTTON
 		if(e.getSource() == send) {

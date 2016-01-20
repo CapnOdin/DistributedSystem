@@ -9,7 +9,6 @@ import javax.swing.Timer;
 import client_eng.Profile;
 import client_eng.User;
 import engine.Message;
-import server_gui.ServerConnectedClientsPanel;
 
 public class ServerSlave implements Runnable {
 
@@ -46,13 +45,12 @@ public class ServerSlave implements Runnable {
 				break;
 			case "A1":
 				//Calculate distance
-				serviceMessage("DECODED STRING " + java.util.Arrays.toString(decoded));
+				serviceMessage("Decoded String " + java.util.Arrays.toString(decoded));
 				//serviceMessage(GoogleWebApi.distMatrix(GoogleWebApi.seachPlaces(decoded[1]).get(1), GoogleWebApi.seachPlaces(decoded[2]).get(1)));
 				break;
 			case "A2":
 				//Disconnect client
-				serviceMessage("DECODED STRING " + java.util.Arrays.toString(decoded));
-				ServerConnectedClientsPanel.removeElementFromList(decoded[1]);
+				serviceMessage("Decoded String " + java.util.Arrays.toString(decoded));
 				TCPServer.getAllConnections().get(decoded[1]).disconnectClient("clientLEFT");
 				break;
 			case "A3":
@@ -69,35 +67,35 @@ public class ServerSlave implements Runnable {
 				break;
 			case "A8":
 				//Edit client profile.
-				serviceMessage("DECODED STRING " + java.util.Arrays.toString(decoded));
+				serviceMessage("Decoded String " + java.util.Arrays.toString(decoded));
 				serviceMessage(((Profile)message.getObject()).username + " ATTEMPTING TO EDIT PROFILE ...");
 				TCPServer.findUser(((Profile)message.getObject()).username).setProfile((Profile)message.getObject());
 				try {
 					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A4.TRUE");
 				} catch(NullPointerException ex) {
-					serviceMessage("CONNECTION IS CLOSED AND COULDN'T RESPOND TO CLIENT FOR THE PROFILE UPDATE");
+					serviceMessage("Connection is closed and couldn't respond to client for the profile update status.");
 				}
 				
 				break;
 			case "A9":
 				//Want ride?
-				String wantRide = decoded[1], haveCar = decoded[2], sessionIDA9 = decoded[3];
+				//String wantRide = decoded[1], haveCar = decoded[2], sessionIDA9 = decoded[3];
 				break;
 			case "A10":
 				if(server.newUser(new User(decoded[1], new Profile()), decoded[2])) {
-					serviceMessage("ADDED NEW USER");
+					serviceMessage("Added new user.");
 					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.TRUE");
 				} else {
-					serviceMessage("USER ALREADY EXISTS");
+					serviceMessage("User already exists.");
 					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A1.FALSE");
 				}
 				break;
 			case "A13":
 				if(TCPServer.changeUserPassword(TCPServer.findUser(decoded[1]), decoded[2], decoded[3], decoded[decoded.length-1])) {
-					serviceMessage("CHANGED USER PASSWORD");
+					serviceMessage("Changes user password.");
 					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A6.TRUE");
 				} else {
-					serviceMessage("USER PASSWORD WRONG - CANT CHANGE");
+					serviceMessage("User password wrong, can't change.");
 					TCPServer.getAllConnections().get(decoded[decoded.length-1]).sendMessage("A6.FALSE");
 				}
 				break;

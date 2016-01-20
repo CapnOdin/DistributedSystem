@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import client_eng.Profile;
 import client_eng.User;
 import engine.Message;
 
@@ -21,7 +20,6 @@ public class TCPServer extends Thread {
 	private ServerTupleSpace space;
 	private ServerSocket server;
 	private Socket connection;
-	private Profile dummyProfile = new Profile();
 	
 	private String serverStatus = "";
 	
@@ -71,11 +69,11 @@ public class TCPServer extends Thread {
 			serverStatus = "Now connected to " + connection.getRemoteSocketAddress();
 			userCount++;
 			serviceMessage(serverStatus);
-			ConnectionThread newClient = new ConnectionThread(connection, userCount++, dummyProfile);
+			ConnectionThread newClient = new ConnectionThread(connection);
 			newClient.start();
 			try {
 				Thread.sleep(150);
-				System.out.println(allConnections);
+				serviceMessage("ALL ACTIVE CONNECTIONS: " + allConnections);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -105,7 +103,6 @@ public class TCPServer extends Thread {
 		if(allConnections.containsKey(key)) {
 			allConnections.remove(key);
 		}
-		System.out.println(allConnections);
 	}
 
 	@Override
@@ -134,8 +131,8 @@ public class TCPServer extends Thread {
 				return false;
 			}
 		}
-		serviceSTATMessage("ALL USERS AND PASSWORDS : " + userMap);
 		userMap.put(user, password);
+		serviceSTATMessage("ALL USERS AND PASSWORDS : " + userMap);
 		return true;
 	}
 	
