@@ -71,8 +71,7 @@ public class Calendar implements Serializable {
 		formatedJop.put("StartTime", job.get("Start").split("T")[1].substring(0, 5));
 		formatedJop.put("EndTime", job.get("End").split("T")[1].substring(0, 5));
 		formatedJop.put("Address", job.get("Title").split(", ")[1]);
-		System.out.println(job.get("Description"));
-		System.out.println(job.get("JobName"));
+		
 		String temp = job.get("JobName");
 		if(temp.contains(":")){
 			temp = job.get("JobName").split(": ")[1];
