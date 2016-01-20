@@ -50,7 +50,9 @@ public class Calendar implements Serializable {
 	
 	public void add_jobs(List<HashMap<String, String>> jobs){
 		for(HashMap<String, String> job : jobs){
-			this.add_job(job);
+			if(job.get("AvailabilityType").equals("3")){
+				this.add_job(process(job));
+			}
 		}
 	}
 	
@@ -58,6 +60,19 @@ public class Calendar implements Serializable {
 		if(Vagter.containsKey(Start)){
 			Vagter.remove(Start);
 		}
+	}
+	
+	private HashMap<String, String> process(HashMap<String, String> job){
+		HashMap<String, String> formatedJop = new HashMap<String, String>();
+		
+		formatedJop.put("Start", job.get("Start"));
+		
+		formatedJop.put("Date", job.get("Start").split("T")[0]);
+		formatedJop.put("Tid", job.get("Start").split("T")[1] + " - " + job.get("End").split("T")[1]);
+		formatedJop.put("Address", job.get("Title").split(", ")[1]);
+		formatedJop.put("Name", job.get("Title").split(", ")[0]);
+		
+		return formatedJop;
 	}
 	
 	

@@ -34,6 +34,7 @@ public class Serializer {
 		for(String job : cal.calendar.get_job_names()){
 			System.out.print(cal.calendar.get_job(job).get("Title") + "; ");
 		}
+		
 		System.out.println("");
 		Serializer.save(cal);
 		cal = null;

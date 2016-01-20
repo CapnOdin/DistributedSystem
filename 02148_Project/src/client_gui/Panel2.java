@@ -15,7 +15,7 @@ import server_gui.ServerMainFrame;
 
 public class Panel2 extends JPanel implements GeneralProperties, MouseListener{
 	private static final long serialVersionUID = 1L;
-	private MainFrame parent;
+	public MainFrame parent;
 	private JLabel Data = new JLabel("Data", JLabel.CENTER);
 	private JLabel Forbind = new JLabel("Forbind", JLabel.CENTER);
 	private JLabel Kalender = new JLabel("Kalender", JLabel.CENTER);
