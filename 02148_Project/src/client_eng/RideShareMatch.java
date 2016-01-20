@@ -44,7 +44,7 @@ public class RideShareMatch {
 					
                     String usrname = "Ole";
     
-    //travel tuple definition: (mode = "travel")           
+    //travel (mode = "travel")           
 	//mode, name of user, destination and date
 					put(new Tuple( "travel" , usrname, "DTU","today"  ) , Self.SELF);
 					
