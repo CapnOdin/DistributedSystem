@@ -73,16 +73,16 @@ public class Calendar implements Serializable {
 		formatedJop.put("Address", job.get("Title").split(", ")[1]);
 		System.out.println(job.get("Description"));
 		System.out.println(job.get("JobName"));
-		String temp = "";
-		if(job.get("JobName").contains(":")){
+		String temp = job.get("JobName");
+		if(temp.contains(":")){
 			temp = job.get("JobName").split(": ")[1];
-		} else {
+		} else if(temp.contains(",")) {
 			temp = job.get("JobName").split(", ")[1];
 		}
 		if(temp.contains(",")){
-			temp = temp.split(", ")[0];
-		} else {
-			temp = temp.split(". ")[1];
+			temp = temp.split(",")[0];
+		} else if(temp.contains(".")) {
+			temp = temp.split(".")[0];
 		}
 		
 		formatedJop.put("Name", temp);
