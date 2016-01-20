@@ -97,9 +97,18 @@ public class Calendar implements Serializable {
 	}
 	
 	private String removeNum(String str){
+		String res = "";
+		str = str.replace(" d.", "");
+		for(char c : str.toCharArray()){
+			if(!Character.isDigit(c)){
+				res += c;
+			}
+		}
+		if(res.endsWith(" ")){
+			res = res.substring(0, res.length() -1);
+		}
 		
-		
-		return str;
+		return res;
 	}
 	
 //	AvailabilityType
