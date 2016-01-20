@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.swing.ImageIcon;
@@ -103,9 +104,10 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
    
     public void setVagter(){
         String[] navne = MainFrame.profile.calendar.get_job_names();
+        Arrays.sort(navne);
         for ( int i = 0; i < navne.length;i++){
             String dato = MainFrame.profile.calendar.get_job(navne[i]).get("Date");
-            String tid = MainFrame.profile.calendar.get_job(navne[i]).get("Time");
+            String tid = MainFrame.profile.calendar.get_job(navne[i]).get("StartTime");
             String navn = MainFrame.profile.calendar.get_job(navne[i]).get("Name");
             String adresse = MainFrame.profile.calendar.get_job(navne[i]).get("Address");
             String afstand = MainFrame.profile.calendar.get_job(navne[i]).get("Date");
@@ -306,7 +308,7 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
                     }
                     updateVagt();
                     MainFrame.profile.calendar.edit_job(labels[0]+ "T" + labels[1], "Date",dato);
-                    MainFrame.profile.calendar.edit_job(labels[0]+ "T" + labels[1],"Time",tid);
+                    MainFrame.profile.calendar.edit_job(labels[0]+ "T" + labels[1],"StartTime",tid);
                     MainFrame.profile.calendar.edit_job(labels[0]+ "T" + labels[1],"Name",navn);
                     MainFrame.profile.calendar.edit_job(labels[0]+ "T" + labels[1],"Address", adresse);
                     MainFrame.profile.calendar.edit_job(labels[0]+ "T" + labels[1],"Date",dato);

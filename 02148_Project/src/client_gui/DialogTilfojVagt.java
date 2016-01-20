@@ -93,7 +93,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
     private void setJComponents(){
         JTDato = new JFormattedTextField(new java.util.Date());
         JLDato = new JLabel("Dato");
-        JLTilfojVagt = new JLabel("<HTML><U> Tilføj Vagt <U> </HTML>");
+        JLTilfojVagt = new JLabel("<HTML><U> TilfÃ¸j Vagt <U> </HTML>");
         JLTilfojVagt.setFont(new Font("SanSerif",Font.PLAIN,25));
         JLOpgaveTitel = new JLabel("Opgave Titel");
         JLAdresse = new JLabel("Adresse");
@@ -103,7 +103,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
         JTAdresse = new JTextField(22);
         JTPostnummer = new JTextField(4);
         JTStarttid = new JTextField(6);
-        JBTilfoj = new JButton("Tilføj");
+        JBTilfoj = new JButton("TilfÃ¸j");
         JBAnnuller = new JButton("Annuller");
         setJLabel(JLOpgaveTitel);
         setJLabel(JLAdresse);

@@ -2,13 +2,14 @@ package client_gui;
  
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
- 
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -21,9 +22,9 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
     private MainFrame parent;
     private JPanel panel = new JPanel(new GridBagLayout());
     private GridBagConstraints c = new GridBagConstraints();
-    private JLabel JLNavn, JLStarttid, JLSluttid,JLPause;
+    private JLabel JLTimeRegistrering,JLNavn, JLStarttid, JLSluttid,JLPause;
     private JTextField JTNavn, JTStarttid, JTSluttid, JTPause;
-    private JButton JBGem;
+    private JButton JBGem, JBAnuller;
     private String dato, tid, navn, adresse, postnummer,starttid, sluttid, pause;
    
     public DialogTimeRegistrering(MainFrame parent, String dato, String tid, String navn, String adresse, String postnummer){
@@ -36,16 +37,18 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
         setDefaultProperties();
         setJComponents();
        
-        int i = 0;
-        addC(JLNavn,i,0,1);
-        addC(JTNavn,i,1,1);i++;
-        addC(JLStarttid,i,0,1);
-        addC(JTStarttid,i,1,1);i++;
-        addC(JLSluttid,i,0,1);
-        addC(JTSluttid,i,1,1);i++;
-        addC(JLPause,i,0,1);
-        addC(JTPause,i,1,1);
-        addC(JBGem,i,3,1);
+        int i = 1;
+        addC(JLTimeRegistrering,0,0,3,0);
+        addC(JLNavn,i,1,1,200);
+        addC(JTNavn,i,2,1,200);i++;
+        addC(JLStarttid,i,1,1,20);
+        addC(JTStarttid,i,2,1,20);i++;
+        addC(JLSluttid,i,1,1,20);
+        addC(JTSluttid,i,2,1,20);
+        addC(JBAnuller,i,3,1,20);i++;
+        addC(JLPause,i,2,1,20);
+        addC(JTPause,i,2,1,20);
+        addC(JBGem,i,3,1,20);
        
         this.add(panel);
         pack();
@@ -55,7 +58,7 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
    
     private void setDefaultProperties(){
         this.setUndecorated(true);
-        this.setPreferredSize(new Dimension(500,300));
+        this.setPreferredSize(new Dimension(500,150));
         this.getRootPane().setBorder(BorderFactory.createLineBorder(Color.black));
         this.pack();
         this.setLocationRelativeTo(null);
@@ -63,6 +66,8 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
     }
    
     private void setJComponents(){
+    	JLTimeRegistrering = new JLabel("<HTML><U> Time Registrering<U> </HTML>");
+        JLTimeRegistrering.setFont(new Font("SanSerif",Font.PLAIN,25));
         JLNavn = new JLabel("Opgave Navn");
         JLStarttid = new JLabel("Starttid");
         JLSluttid = new JLabel("Sluttid");
@@ -70,16 +75,20 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
         JTNavn = new JTextField(navn);
         JTStarttid = new JTextField(4);
         JTSluttid = new JTextField(4);
-        JTPause = new JTextField("0");
+        JTPause = new JTextField("00:00");
         JBGem = new JButton("Gem");
+        JBAnuller = new JButton("Anuller");
         JBGem.addMouseListener(this);
         JTPause.addActionListener(this);
+        JBAnuller.addMouseListener(this);
     }
    
-    private void addC(JComponent comp, int x, int y, int width){
+    private void addC(JComponent comp, int x, int y, int width, int width1){
+    	c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = x;
         c.gridy = y;
         c.gridwidth = width;
+        c.ipadx = width1;
         panel.add(comp, c);
     }
    
@@ -119,6 +128,9 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == JBGem){
             addJob();
+        }
+        if(e.getSource() == JBAnuller){
+        	dispose();
         }
        
     }

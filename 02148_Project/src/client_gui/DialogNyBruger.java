@@ -185,13 +185,8 @@ public class DialogNyBruger extends JDialog implements ActionListener,MouseListe
 				DLogin.setAlwaysOnTop(true);
 				DLogin.setVisible(true);
 			}
-			else if (parent.stallGUI("A1","FALSE")){
+			else {
 				DBesked = new DialogBesked(parent,"Ønskede brugernavn i brug");
-				DBesked.setAlwaysOnTop(true);
-				DBesked.setVisible(true);
-			}
-			else{
-				DBesked = new DialogBesked(parent,"Fejl, prøv igen");
 				DBesked.setAlwaysOnTop(true);
 				DBesked.setVisible(true);
 			}
