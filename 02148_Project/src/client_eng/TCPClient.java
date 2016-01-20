@@ -118,6 +118,7 @@ public class TCPClient extends Thread {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void whileConnected() throws IOException {
 		Message<String, Object> message = null;
 		//sendMessage("ALIAS%" + alias);
