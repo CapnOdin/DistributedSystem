@@ -7,7 +7,6 @@ import java.net.Socket;
 import java.util.Date;
 import java.util.Random;
 
-import client_eng.Profile;
 import engine.Message;
 import server_gui.ServerConnectedClientsPanel;
 
@@ -18,16 +17,13 @@ public class ConnectionThread extends Thread {
 	
 	private boolean isAlive = false;
 	
-	private String clientAlias;
 	private String clientIP = "";
 	
 	private Socket client;
-	private int userNo;
 	private String sessionID;
 	
-	public ConnectionThread(Socket client, int userNo, Profile profile) {
+	public ConnectionThread(Socket client) {
 		this.client = client;
-		this.userNo = userNo;
 		clientIP = client.getRemoteSocketAddress().toString();
 	}
 	
@@ -47,14 +43,14 @@ public class ConnectionThread extends Thread {
 	
 	private void serviceMessage(String message) {
 		String timeStamp = "{" + new Date().toString().substring(11, 19) + "}";
-		System.out.println(timeStamp+"[THREAD "+ userNo + "]" +message);
+		System.out.println(timeStamp+"[THREAD "+ sessionID + "]" +message);
 	}
 	
 	private void setupStreams() throws IOException {
 		output = new ObjectOutputStream(client.getOutputStream());
 		output.flush();
 		input = new ObjectInputStream(client.getInputStream());
-		serviceMessage("Streams successfully created.");
+		serviceMessage("Conversation IO streams created");
 	}
 	
 	public void sendMessage(String message) {
@@ -92,6 +88,7 @@ public class ConnectionThread extends Thread {
 		sendMessage("A2.TRUE."+message);
 		message = "Conversation ready!";
 		sendMessage(message);
+		ServerConnectedClientsPanel.addElementToList(sessionID + "/" + "USERNAME" + clientIP);
 		isAlive = true;
 	}
 	
@@ -106,6 +103,7 @@ public class ConnectionThread extends Thread {
 		return sb.toString();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void run() {
 		try {
@@ -116,10 +114,10 @@ public class ConnectionThread extends Thread {
 				try {
 					message = (Message<String, Object>) input.readObject();
 					TCPServer.putTask(message);
-					if(message.getString().substring(0,6).equals("ALIAS%")) {
-						clientAlias = message.getString().substring(6); 
-						ServerConnectedClientsPanel.addElementToList(sessionID + "/" + clientAlias + clientIP);
-					}
+//					if(message.getString().substring(0,6).equals("ALIAS%")) {
+//						clientAlias = message.getString().substring(6); 
+//						ServerConnectedClientsPanel.addElementToList(sessionID + "/" + clientAlias + clientIP);
+//					}
 					serviceMessage(message.getString());
 				} catch(Exception e) {
 					break;

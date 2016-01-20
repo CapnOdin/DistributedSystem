@@ -17,16 +17,16 @@ public class TCPClient extends Thread {
 	public static boolean isConnected = false;
 
 	private String serverIP;
-	private String alias;
+	//private String alias;
 	public static String sessionID;
 	private int port;
 
 	private Socket connection;
 
-	public TCPClient(String host, int port, String alias) {
+	public TCPClient(String host, int port) {
 		serverIP = host;
 		this.port = port;
-		this.alias = alias;
+		//this.alias = alias;
 	}
 	
 	private void serviceMessage(String message) {
@@ -120,7 +120,7 @@ public class TCPClient extends Thread {
 
 	private void whileConnected() throws IOException {
 		Message<String, Object> message = null;
-		sendMessage("ALIAS%" + alias);
+		//sendMessage("ALIAS%" + alias);
 		do {
 			try {
 				message = (Message<String, Object>) input.readObject();
