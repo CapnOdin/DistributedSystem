@@ -75,5 +75,21 @@ public class Calendar implements Serializable {
 		return formatedJop;
 	}
 	
+//	AvailabilityType
+//	AvailabilityTypeText
+//	Description
+//	End
+//	EndTimezone
+//	IsAllDay
+//	JobName
+//	Msg
+//	ShiftStatus
+//	Start
+//	StartTimezone
+//	TaskId
+//	Title
+//	ViewSideBySideBpData
+//	VikarGuid
+//	VikarId
 	
 }
