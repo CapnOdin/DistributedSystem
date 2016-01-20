@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import client_eng.TCPClient;
+
 public class Panel3Kalender extends JPanel implements GeneralProperties, MouseListener {
 
 	private static final long serialVersionUID = 1L;
@@ -236,7 +238,7 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
 			String navn = labels[i].getText();i++;
 			String adresse = labels[i].getText();i++;
 			String postnummer = labels[i].getText();
-			String sessionID = MainFrame.client.getSessionID();
+			String sessionID = TCPClient.getSessionID();
 			String updateJob = "A12."+ dato + "." + tid + "." + navn + "." + adresse + "." + postnummer + "." + sessionID;
 			return updateJob;
 		}
@@ -246,9 +248,9 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
 		public void mouseClicked(MouseEvent e) {
 			parent.requestFocus();
 			if (e.getSource() == toolButtons[0]){
-				/*DTimeRegistrering = new DialogTimeRegistrering(MainFrame);
+				DTimeRegistrering = new DialogTimeRegistrering(MainFrame.panel2.parent);
 				DTimeRegistrering.setAlwaysOnTop(true);
-				DTimeRegistrering.setVisible(true);*/
+				DTimeRegistrering.setVisible(true);
 			}
 			if(e.getSource() == toolButtons[1]) {
 				for(int i = 0; i < labels.length; i++) {
