@@ -100,7 +100,9 @@ public class Calendar implements Serializable {
 				res += c;
 			}
 		}
+		System.out.println(res);
 		if(res.endsWith(" ")){
+			
 			res = res.substring(0, res.length() -1);
 		}
 		

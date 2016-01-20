@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -40,19 +41,22 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
         setDefaultProperties();
         setJComponents();
        
-        int i = 1;
-        addC(JLTimeRegistrering,0,0,3,0);
+        int i = 0;
+        c.insets = new Insets(0,20,0,0);
+        addC(JLTimeRegistrering,0,0,1,0);
         c.ipady = 20;
-        addC(JLNavn,i,1,1,200);
+        addC(JLNavn,i,1,1,160);
         c.ipady = 0;
-        addC(JTNavn,i,2,1,180);i++;
+        addC(JTNavn,i,2,1,160);i++;
+        c.insets = new Insets(0,0,0,0);
+        addC(JLPause,i,1,1,20);
+        addC(JTPause,i,2,1,20);i++;
         addC(JLStarttid,i,1,1,0);
-        addC(JTStarttid,i,2,1,0);i++;
+        addC(JTStarttid,i,2,1,0);
+        addC(JBAnuller,i,3,1,0);i++;
+        c.insets = new Insets(0,0,0,20);
         addC(JLSluttid,i,1,1,0);
         addC(JTSluttid,i,2,1,0);
-        addC(JBAnuller,i,3,1,0);i++;
-        addC(JLPause,i,1,1,0);
-        addC(JTPause,i,2,1,0);
         addC(JBGem,i,3,1,0);
        
         this.add(panel);
@@ -85,14 +89,13 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
 			JTPause = new JFormattedTextField(new MaskFormatter("##:##"));
 		} catch (ParseException e) {
 		}
-		JTStarttid.setText("Starttid");
-        JTSluttid.setText("Sluttid");
-        JTPause.setText("Pause");
-        JLNavn = new JLabel("Opgave Navn");
+		JTStarttid.setText(tid);
+		JTPause.setText("00:00");
         JTNavn = new JTextField(navn);
-        JTStarttid = new JTextField(tid);
-        JTSluttid = new JTextField(4);
-        JTPause = new JTextField("00:00");
+        JLNavn = new JLabel("Opgave Navn");
+        JLStarttid = new JLabel("Starttid");
+        JLSluttid = new JLabel("Sluttid");
+        JLPause = new JLabel("Pause");
         JBGem = new JButton("Gem");
         JBAnuller = new JButton("Anuller");
         JTNavn.setEditable(false);
