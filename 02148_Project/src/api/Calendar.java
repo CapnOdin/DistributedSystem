@@ -81,9 +81,7 @@ public class Calendar implements Serializable {
 		if(temp.contains(",")){
 			temp = temp.split(",")[0];
 		} else if(temp.contains(".")) {
-			System.out.println(temp);
-			temp = temp.split(".")[0];
-			System.out.println(temp);
+			temp = temp.split("\\.")[0];
 		}
 		
 		formatedJop.put("Name", temp);
