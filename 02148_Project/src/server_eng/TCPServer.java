@@ -73,9 +73,11 @@ public class TCPServer extends Thread {
 			newClient.start();
 			try {
 				Thread.sleep(150);
+				serviceMessage("============ All Active Connections ============");
 				for(Map.Entry<String, ConnectionThread> entry : allConnections.entrySet()) {
-					serviceMessage("Active connection: " + entry.getKey() + " Thread: " + entry.getValue());
+					serviceMessage("| Active connection: " + entry.getKey() + " Thread: " + entry.getValue() + "|");
 				}
+				serviceMessage("================================================");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
