@@ -74,6 +74,7 @@ public class Calendar implements Serializable {
 		formatedJop.put("EndTime", job.get("End").split("T")[1].substring(0, 5));
 		formatedJop.put("Address", formatStr(job.get("Title")));
 		formatedJop.put("Name", formatStr(job.get("JobName")));
+		System.out.println(formatStr(job.get("JobName")) + " : " + job.get("JobName"));
 		
 		return formatedJop;
 	}
@@ -89,6 +90,12 @@ public class Calendar implements Serializable {
 		} else if(str.contains(".")) {
 			str = str.split("\\.")[0];
 		}
+		
+		return str;
+	}
+	
+	private String removeNum(String str){
+		
 		
 		return str;
 	}
