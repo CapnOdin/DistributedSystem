@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Profile implements Serializable {
 	private static final long serialVersionUID = -4449140117055382236L;
-	public String username ="", password="", navn="", adresse="", postnummer="", by="", eMail="", harBil="";
+	public String username ="", password="", navn="", adresse="", postnummer="", by="", eMail="Lise_Noerby@hotmail.com", harBil="";
 	public String momentUsername = "", momentPassword = "";
 	public String vikarGUID;
 	public api.Calendar calendar;
