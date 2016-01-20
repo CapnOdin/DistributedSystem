@@ -65,8 +65,6 @@ public class Calendar implements Serializable {
 	private HashMap<String, String> process(HashMap<String, String> job){
 		HashMap<String, String> formatedJop = new HashMap<String, String>();
 		
-		String temp = "";
-		
 		formatedJop.put("Start", job.get("Start"));
 		
 		formatedJop.put("Date", job.get("Start").split("T")[0]);
