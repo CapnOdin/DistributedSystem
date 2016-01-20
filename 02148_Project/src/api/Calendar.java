@@ -85,7 +85,7 @@ public class Calendar implements Serializable {
 		} else if(str.contains(", ")) {
 			str = str.split(", ")[1];
 		} else {
-			str = str.split(" ")[1];
+			//str = str.split(" ")[1];
 		}
 		if(str.contains(",")){
 			str = str.split(",")[0];

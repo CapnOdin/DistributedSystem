@@ -111,11 +111,6 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
             String navn = MainFrame.profile.calendar.get_job(navne[i]).get("Name");
             String adresse = MainFrame.profile.calendar.get_job(navne[i]).get("Address");
             String afstand = MainFrame.profile.calendar.get_job(navne[i]).get("Date");
-            //String[] jobs = MainFrame.profile.calendar.get_job(navne[i]);
-            System.out.println(dato);
-            System.out.println(tid);
-            System.out.println(navn);
-            System.out.println(adresse);
             addCalendarTask(dato, tid, navn, adresse, afstand);
         }
     }
