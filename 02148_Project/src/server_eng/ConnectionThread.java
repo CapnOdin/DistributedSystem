@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Date;
 import java.util.Random;
 
 import client_eng.Profile;
@@ -23,8 +24,6 @@ public class ConnectionThread extends Thread {
 	private Socket client;
 	private int userNo;
 	private String sessionID;
-	
-	//private Profile profile;
 	
 	public ConnectionThread(Socket client, int userNo, Profile profile) {
 		this.client = client;
@@ -47,7 +46,8 @@ public class ConnectionThread extends Thread {
 	}
 	
 	private void serviceMessage(String message) {
-		System.out.println("[THREAD " + userNo + "]" + message);
+		String timeStamp = "{" + new Date().toString().substring(11, 19) + "}";
+		System.out.println("[THREAD "+ userNo + "]" +timeStamp+message);
 	}
 	
 	private void setupStreams() throws IOException {
@@ -131,13 +131,5 @@ public class ConnectionThread extends Thread {
 			if(this.isAlive) cleanUp();
 		}
 	}
-
-//	public Profile getProfile() {
-//		return profile;
-//	}
-//
-//	public void setProfile(Profile profile) {
-//		this.profile = profile;
-//	}
 
 }

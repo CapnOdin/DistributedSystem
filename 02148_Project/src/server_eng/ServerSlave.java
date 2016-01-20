@@ -2,6 +2,7 @@ package server_eng;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.Timer;
 
@@ -21,7 +22,8 @@ public class ServerSlave implements Runnable {
 	}
 	
 	private void serviceMessage(String message) {
-		System.out.println("[SERVERSLAVE]"+message);
+		String timeStamp = "{" + new Date().toString().substring(11, 19) + "}";
+		System.out.println("[SERVERSLAVE]"+timeStamp+message);
 	}
 
 	private void decodeTask(Message<String, Object> message) {
@@ -100,7 +102,10 @@ public class ServerSlave implements Runnable {
 				}
 				break;
 			case "A14":
-				
+				// Register Time. RECEIVED STRING: A14.Date.AppointmentName.Address.ZipCode.StartTime.EndTime.BreakTime.sessionID.
+ 				
+				break;
+			case "A15":
 				break;
 			default:
 				serviceMessage("Message \"" + java.util.Arrays.toString(decoded) + "\" couldn't be decoded.");

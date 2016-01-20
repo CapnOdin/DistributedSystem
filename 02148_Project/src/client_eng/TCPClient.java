@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Date;
 
 import client_gui.MainFrame;
 import engine.Message;
@@ -27,9 +28,10 @@ public class TCPClient extends Thread {
 		this.port = port;
 		this.alias = alias;
 	}
-
+	
 	private void serviceMessage(String message) {
-		System.out.println("[CLIENT]" + message);
+		String timeStamp = "{" + new Date().toString().substring(11, 19) + "}";
+		System.out.println("[CLIENT]"+timeStamp+message);
 	}
 
 	private void decode(Message<String, Object> message) {

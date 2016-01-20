@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,11 +36,13 @@ public class TCPServer extends Thread {
 	}
 	
 	private void serviceMessage(String message) {
-		System.out.println("[SERVER]"+message);
+		String timeStamp = "{" + new Date().toString().substring(11, 19) + "}";
+		System.out.println("[SERVER]"+timeStamp+message);
 	}
 	
 	private static void serviceSTATMessage(String message) {
-		System.out.println("[SERVER]"+message);
+		String timeStamp = "{" + new Date().toString().substring(11, 19) + "}";
+		System.out.println("[SERVER]"+timeStamp+message);
 	}
 
 	private void serverSleepMode() {
