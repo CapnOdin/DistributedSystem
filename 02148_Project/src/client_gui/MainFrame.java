@@ -33,7 +33,7 @@ public class MainFrame extends JFrame implements GeneralProperties {
 		ip = "2.110.0.85";
 		//ip = "localhost";
 		port = 1234;
-		client =  new TCPClient(ip, port, "Lise");
+		client =  new TCPClient(ip, port);
 		client.start();
 		DLogin = new DialogLogin(this);
 		DLogin.setAlwaysOnTop(true);

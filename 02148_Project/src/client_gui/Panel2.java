@@ -89,6 +89,8 @@ public class Panel2 extends JPanel implements GeneralProperties, MouseListener{
 		}
 		if(e.getSource() == Kalender) {
 			setChosenLabel(Kalender);
+			MainFrame.panel2.p3Kalender.setVagter();
+			//MainFrame.addPanel(MainFrame.panel2.p3Kalender);
 			parent.addPanel(p3Kalender);
 		}
 		if(e.getSource() == Oversigt) {

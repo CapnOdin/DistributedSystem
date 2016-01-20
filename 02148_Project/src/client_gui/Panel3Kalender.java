@@ -62,7 +62,7 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         contentPane.setBackground(Color.white);
-        JBAddCalendarTask = new JButton("Tilf�j");
+        JBAddCalendarTask = new JButton("Tilføj");
         JBAddCalendarTask.addMouseListener(this);
     }
    
@@ -71,7 +71,7 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
         overskrift.setPreferredSize(VagtDimension);
         overskrift.setBackground(Color.white);
         overskrift.add(setJLabel("Dato"));
-        overskrift.add(setJLabel("Tid"));
+        overskrift.add(setJLabel("Mødetid"));
         overskrift.add(setJLabel("Opgave Navn"));
         overskrift.add(setJLabel("Adresse"));
         overskrift.add(setJLabel("Afstand"));

@@ -9,14 +9,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.ParseException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
  
 public class DialogTimeRegistrering extends JDialog implements ActionListener, MouseListener{
     private MainFrame parent;
@@ -39,16 +42,18 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
        
         int i = 1;
         addC(JLTimeRegistrering,0,0,3,0);
+        c.ipady = 20;
         addC(JLNavn,i,1,1,200);
-        addC(JTNavn,i,2,1,200);i++;
-        addC(JLStarttid,i,1,1,20);
-        addC(JTStarttid,i,2,1,20);i++;
-        addC(JLSluttid,i,1,1,20);
-        addC(JTSluttid,i,2,1,20);
-        addC(JBAnuller,i,3,1,20);i++;
-        addC(JLPause,i,2,1,20);
-        addC(JTPause,i,2,1,20);
-        addC(JBGem,i,3,1,20);
+        c.ipady = 0;
+        addC(JTNavn,i,2,1,180);i++;
+        addC(JLStarttid,i,1,1,0);
+        addC(JTStarttid,i,2,1,0);i++;
+        addC(JLSluttid,i,1,1,0);
+        addC(JTSluttid,i,2,1,0);
+        addC(JBAnuller,i,3,1,0);i++;
+        addC(JLPause,i,1,1,0);
+        addC(JTPause,i,2,1,0);
+        addC(JBGem,i,3,1,0);
        
         this.add(panel);
         pack();
@@ -68,16 +73,29 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
     private void setJComponents(){
     	JLTimeRegistrering = new JLabel("<HTML><U> Time Registrering<U> </HTML>");
         JLTimeRegistrering.setFont(new Font("SanSerif",Font.PLAIN,25));
+        try {
+			JTStarttid = new JFormattedTextField(new MaskFormatter("##:##"));
+		} catch (ParseException e) {
+		}
+        try {
+			JTSluttid = new JFormattedTextField(new MaskFormatter("##:##"));
+		} catch (ParseException e) {
+		}
+        try {
+			JTPause = new JFormattedTextField(new MaskFormatter("##:##"));
+		} catch (ParseException e) {
+		}
+		JTStarttid.setText("Starttid");
+        JTSluttid.setText("Sluttid");
+        JTPause.setText("Pause");
         JLNavn = new JLabel("Opgave Navn");
-        JLStarttid = new JLabel("Starttid");
-        JLSluttid = new JLabel("Sluttid");
-        JLPause = new JLabel("Pause");
         JTNavn = new JTextField(navn);
-        JTStarttid = new JTextField(4);
+        JTStarttid = new JTextField(tid);
         JTSluttid = new JTextField(4);
         JTPause = new JTextField("00:00");
         JBGem = new JButton("Gem");
         JBAnuller = new JButton("Anuller");
+        JTNavn.setEditable(false);
         JBGem.addMouseListener(this);
         JTPause.addActionListener(this);
         JBAnuller.addMouseListener(this);

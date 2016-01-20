@@ -10,7 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
- 
+import java.text.ParseException;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -19,6 +20,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
  
 public class DialogTilfojVagt extends JDialog implements GeneralProperties, ActionListener, MouseListener {
     private MainFrame parent;
@@ -92,6 +94,11 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
    
     private void setJComponents(){
         JTDato = new JFormattedTextField(new java.util.Date());
+        try {
+			JTStarttid = new JFormattedTextField(new MaskFormatter("##:##"));
+		} catch (ParseException e) {
+		}
+        JTStarttid.setText("00:00");
         JLDato = new JLabel("Dato");
         JLTilfojVagt = new JLabel("<HTML><U> Tilføj Vagt <U> </HTML>");
         JLTilfojVagt.setFont(new Font("SanSerif",Font.PLAIN,25));
@@ -102,7 +109,7 @@ public class DialogTilfojVagt extends JDialog implements GeneralProperties, Acti
         JTOpgaveTitel = new JTextField(22);
         JTAdresse = new JTextField(22);
         JTPostnummer = new JTextField(4);
-        JTStarttid = new JTextField(6);
+        
         JBTilfoj = new JButton("Tilføj");
         JBAnnuller = new JButton("Annuller");
         setJLabel(JLOpgaveTitel);
