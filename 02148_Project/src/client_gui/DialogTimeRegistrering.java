@@ -21,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+
+import client_eng.TCPClient;
  
 public class DialogTimeRegistrering extends JDialog implements ActionListener, MouseListener{
     private MainFrame parent;
@@ -29,15 +31,16 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
     private JLabel JLTimeRegistrering,JLNavn, JLStarttid, JLSluttid,JLPause;
     private JTextField JTNavn, JTStarttid, JTSluttid, JTPause;
     private JButton JBGem, JBAnuller;
-    private String dato, tid, navn, adresse, postnummer,starttid, sluttid, pause;
+    private String dato, tid, navn, adresse, postnummer,starttid, sluttid, pause, start;
    
-    public DialogTimeRegistrering(MainFrame parent, String dato, String tid, String navn, String adresse, String postnummer){
+    public DialogTimeRegistrering(MainFrame parent, String dato, String tid, String navn, String adresse, String postnummer, String start){
         this.parent = parent;
         this.dato = dato;
         this.tid = tid;
         this.navn = navn;
         this.adresse = adresse;
         this.postnummer = postnummer;
+        this.start = start;
         setDefaultProperties();
         setJComponents();
        
@@ -116,8 +119,11 @@ public class DialogTimeRegistrering extends JDialog implements ActionListener, M
     private String getJob(){
         starttid = JTStarttid.getText();
         sluttid = JTSluttid.getText();
+        MainFrame.profile.calendar.edit_job(start, "StartTime", starttid);
+        MainFrame.profile.calendar.edit_job(start, "EndTime", sluttid);
+        MainFrame.profile.archive_job(start);
         pause = JTPause.getText();
-        return "A14." + dato + "." + navn + "."+ adresse + "." + postnummer + "." + starttid + "." + sluttid + "." + pause + "."+ MainFrame.client.getSessionID();
+        return "A14." + dato + "." + navn + "."+ adresse + "." + postnummer + "." + starttid + "." + sluttid + "." + pause + "."+ TCPClient.getSessionID();
     }
    
     private void addJob(){

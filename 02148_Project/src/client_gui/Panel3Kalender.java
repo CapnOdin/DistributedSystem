@@ -85,11 +85,11 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
         return label;
     }
    
-    public void addCalendarTask(String dato, String tid, String navn, String adresse, String afstand) {
+    public void addCalendarTask(String dato, String tid, String navn, String adresse, String afstand, String start) {
         c.anchor = GridBagConstraints.NORTH;
         c.gridy = panelCount++;
         c.fill = GridBagConstraints.HORIZONTAL;
-        CalendarTask task = new CalendarTask(scrollPane, dato, tid, navn, adresse, afstand, "", parent); // FIND EN M�DE AT G�RE HVER TASK UNIK P�.
+        CalendarTask task = new CalendarTask(scrollPane, dato, tid, navn, adresse, afstand, "", parent, start); // FIND EN M�DE AT G�RE HVER TASK UNIK P�.
         allCalendarElements.put(task.getID(), task);
         contentPane.add(task, c);      
         scrollPane.validate();
@@ -111,7 +111,8 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
             String navn = MainFrame.profile.calendar.get_job(navne[i]).get("Name");
             String adresse = MainFrame.profile.calendar.get_job(navne[i]).get("Address");
             String afstand = MainFrame.profile.calendar.get_job(navne[i]).get("Date");
-            addCalendarTask(dato, tid, navn, adresse, afstand);
+            String start = MainFrame.profile.calendar.get_job(navne[i]).get("Start");
+            addCalendarTask(dato, tid, navn, adresse, afstand, start);
         }
     }
    
@@ -157,13 +158,14 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
         private JLabel[] toolButtons = new JLabel[3];
         private JTextField[] labels = new JTextField[5];
         private MainFrame frame;
-        private String dato, tid, navn, adresse, afstand;
+        private String dato, tid, navn, adresse, afstand, start;
        
         private String ID;
        
-        public CalendarTask(JScrollPane parent, String dato, String tid, String navn, String adresse, String afstand,String ID,MainFrame frame) {
+        public CalendarTask(JScrollPane parent, String dato, String tid, String navn, String adresse, String afstand, String ID, MainFrame frame, String start) {
             this.parent = parent; this.ID = ID;
             this.frame = frame;
+            this.start = start;
             System.out.println("CREATED NEW PANEL");
             setTaskPanelProperties();
             setLabelProperties(dato, tid, navn, adresse, afstand);
@@ -249,7 +251,7 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
             parent.requestFocus();
             if (e.getSource() == toolButtons[0]){
                 updateVagt();
-                DTimeRegistrering = new DialogTimeRegistrering(frame,dato,tid,navn,adresse,afstand);
+                DTimeRegistrering = new DialogTimeRegistrering(frame,dato,tid,navn,adresse,afstand,start);
                 DTimeRegistrering.setAlwaysOnTop(true);
                 DTimeRegistrering.setVisible(true);
             }

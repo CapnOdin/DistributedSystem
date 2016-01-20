@@ -7,16 +7,16 @@ public class Profile implements Serializable {
 	public String username ="", password="", navn="", adresse="", postnummer="", by="", eMail="Lise_Noerby@hotmail.com", harBil="";
 	public String momentUsername = "", momentPassword = "";
 	public String vikarGUID;
-	public api.Calendar calendar;
+	public api.Calendar calendar, archive;
 	
 	public Profile(){
-		calendar = new api.Calendar();
+		instanciate_calendar();
 	}
 	
 	public Profile(String username, String password){
 		this.username = username;
 		this.password = password;
-		calendar = new api.Calendar();
+		instanciate_calendar();
 	}
 	
 	public Profile(String user, String password, String name, String address, String zipcode, String city, String email, String car) {
@@ -28,11 +28,21 @@ public class Profile implements Serializable {
 		this.by = city;
 		this.eMail = email;
 		this.harBil = car;
-		calendar = new api.Calendar();
+		instanciate_calendar();
+	}
+	
+	private void instanciate_calendar(){
+		calendar = new api.Calendar(this);
+		archive = new api.Calendar(this);
 	}
 	
 	public String toString(){
 		return "username = " + username + ", " + "password = " + password + ", " + "navn = " + navn + ", " + "adresse = " + adresse + ", " + "postnummer = " + postnummer + ", " + "by = " + by + ", " + "eMail = " + eMail + ", " + "harBil = " + harBil;
+	}
+	
+	public void archive_job(String Start){
+		archive.add_job(calendar.get_job(Start));
+		calendar.delete_job(Start);
 	}
 
 }

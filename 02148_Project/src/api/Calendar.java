@@ -4,13 +4,17 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
+import client_eng.Profile;
+
 public class Calendar implements Serializable {
 	
 	private static final long serialVersionUID = -6389502885882127246L;
 	private HashMap<String, HashMap<String, String>> Vagter;
+	Profile parent;
 	//public String vikarGUID;
 	
-	public Calendar() {
+	public Calendar(Profile parent) {
+		this.parent = parent;
 		Vagter = new HashMap<String, HashMap<String, String>>();
 		//this.vikarGUID = vikarGUID;
 	}
@@ -43,7 +47,7 @@ public class Calendar implements Serializable {
 	}
 	
 	public void add_job(HashMap<String, String> job){
-		if(!Vagter.containsKey(job.get("Start"))){
+		if(!Vagter.containsKey(job.get("Start")) && archive_contains(job.get("Start"))){
 			Vagter.put(job.get("Start"), job);
 		}
 	}
@@ -61,6 +65,11 @@ public class Calendar implements Serializable {
 			Vagter.remove(Start);
 		}
 	}
+	
+	private boolean archive_contains(String key){
+		return parent.archive.Vagter.containsKey(key);
+	}
+	
 	
 	private HashMap<String, String> process(HashMap<String, String> job){
 		HashMap<String, String> formatedJop = new HashMap<String, String>();
