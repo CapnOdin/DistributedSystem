@@ -31,7 +31,7 @@ public class TCPClient extends Thread {
 	
 	private void serviceMessage(String message) {
 		String timeStamp = "{" + new Date().toString().substring(11, 19) + "}";
-		System.out.println("[CLIENT]"+timeStamp+message);
+		System.out.println(timeStamp+"[CLIENT]"+message);
 	}
 
 	private void decode(Message<String, Object> message) {

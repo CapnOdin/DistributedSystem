@@ -47,7 +47,7 @@ public class ConnectionThread extends Thread {
 	
 	private void serviceMessage(String message) {
 		String timeStamp = "{" + new Date().toString().substring(11, 19) + "}";
-		System.out.println("[THREAD "+ userNo + "]" +timeStamp+message);
+		System.out.println(timeStamp+"[THREAD "+ userNo + "]" +message);
 	}
 	
 	private void setupStreams() throws IOException {

@@ -23,7 +23,7 @@ public class ServerSlave implements Runnable {
 	
 	private void serviceMessage(String message) {
 		String timeStamp = "{" + new Date().toString().substring(11, 19) + "}";
-		System.out.println("[SERVERSLAVE]"+timeStamp+message);
+		System.out.println(timeStamp+"[SERVERSLAVE]"+message);
 	}
 
 	private void decodeTask(Message<String, Object> message) {

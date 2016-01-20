@@ -37,12 +37,12 @@ public class TCPServer extends Thread {
 	
 	private void serviceMessage(String message) {
 		String timeStamp = "{" + new Date().toString().substring(11, 19) + "}";
-		System.out.println("[SERVER]"+timeStamp+message);
+		System.out.println(timeStamp+"[SERVER]"+message);
 	}
 	
 	private static void serviceSTATMessage(String message) {
 		String timeStamp = "{" + new Date().toString().substring(11, 19) + "}";
-		System.out.println("[SERVER]"+timeStamp+message);
+		System.out.println(timeStamp+"[SERVER]"+message);
 	}
 
 	private void serverSleepMode() {
