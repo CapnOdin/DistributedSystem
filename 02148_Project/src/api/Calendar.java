@@ -80,14 +80,7 @@ public class Calendar implements Serializable {
 	}
 	
 	private String formatStr(String str){
-		if(str.contains(": ")){
-			str = str.split(": ")[1];
-		} else if(str.contains(", ")) {
-			str = str.split(", ")[1];
-		} else {
-			//str = str.split(" ")[1];
 		str = str.replace(" d. ", "");
-		}
 		if(str.contains(" ")){
 			str = str.split(" ")[1];
 		}
