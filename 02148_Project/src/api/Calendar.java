@@ -65,28 +65,32 @@ public class Calendar implements Serializable {
 	private HashMap<String, String> process(HashMap<String, String> job){
 		HashMap<String, String> formatedJop = new HashMap<String, String>();
 		
+		String temp = "";
+		
 		formatedJop.put("Start", job.get("Start"));
 		
 		formatedJop.put("Date", job.get("Start").split("T")[0]);
 		formatedJop.put("StartTime", job.get("Start").split("T")[1].substring(0, 5));
 		formatedJop.put("EndTime", job.get("End").split("T")[1].substring(0, 5));
-		formatedJop.put("Address", job.get("Title").split(", ")[1]);
-		
-		String temp = job.get("JobName");
-		if(temp.contains(":")){
-			temp = job.get("JobName").split(": ")[1];
-		} else if(temp.contains(",")) {
-			temp = job.get("JobName").split(", ")[1];
-		}
-		if(temp.contains(",")){
-			temp = temp.split(",")[0];
-		} else if(temp.contains(".")) {
-			temp = temp.split("\\.")[0];
-		}
-		
-		formatedJop.put("Name", temp);
+		formatedJop.put("Address", formatStr(job.get("Title")));
+		formatedJop.put("Name", formatStr(job.get("JobName")));
 		
 		return formatedJop;
+	}
+	
+	private String formatStr(String str){
+		if(str.contains(":")){
+			str = str.split(": ")[1];
+		} else if(str.contains(",")) {
+			str = str.split(", ")[1];
+		}
+		if(str.contains(",")){
+			str = str.split(",")[0];
+		} else if(str.contains(".")) {
+			str = str.split("\\.")[0];
+		}
+		
+		return str;
 	}
 	
 //	AvailabilityType
