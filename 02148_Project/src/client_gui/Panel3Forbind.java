@@ -182,7 +182,7 @@ public class Panel3Forbind extends JPanel implements GeneralProperties, ActionLi
 				MainFrame.profile.momentUsername = email;
 				MainFrame.profile.momentPassword = kodeord;
 				MainFrame.panel2.p3Data.setField();
-				MainFrame.profile.calendar.add_jobs(api.MomentApi.getVagter("2016-01-01",var[0]));
+				MainFrame.profile.calendar.add_jobs(api.MomentApi.getVagter("2015-03-22",var[0]));
 				MainFrame.panel2.p3Data.setField();
 				if(parent.stallGUI("success","moment")){
 					MainFrame.panel2.p3Kalender.setVagter();
