@@ -6,5 +6,25 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Internet"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/add external jars"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netværk"/>
+	<classpathentry kind="lib" path="httpcomponents-client-4.5.1/lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="httpcomponents-client-4.5.1/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="httpcomponents-client-4.5.1/lib/fluent-hc-4.5.1.jar"/>
+	<classpathentry kind="lib" path="httpcomponents-client-4.5.1/lib/httpclient-4.5.1.jar"/>
+	<classpathentry kind="lib" path="httpcomponents-client-4.5.1/lib/httpclient-cache-4.5.1.jar"/>
+	<classpathentry kind="lib" path="httpcomponents-client-4.5.1/lib/httpclient-win-4.5.1.jar"/>
+	<classpathentry kind="lib" path="httpcomponents-client-4.5.1/lib/httpcore-4.4.3.jar"/>
+	<classpathentry kind="lib" path="httpcomponents-client-4.5.1/lib/httpmime-4.5.1.jar"/>
+	<classpathentry kind="lib" path="httpcomponents-client-4.5.1/lib/jna-4.1.0.jar"/>
+	<classpathentry kind="lib" path="httpcomponents-client-4.5.1/lib/jna-platform-4.1.0.jar"/>
+	<classpathentry kind="lib" path="commons-io-2.4/commons-io-2.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="commons-io-2.4/commons-io-2.4-sources.jar"/>
+	<classpathentry kind="lib" path="commons-io-2.4/commons-io-2.4-test-sources.jar"/>
+	<classpathentry kind="lib" path="commons-io-2.4/commons-io-2.4-tests.jar"/>
+	<classpathentry kind="lib" path="commons-io-2.4/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="org.cmg.resp.core/lib/abcl-contrib.jar"/>
+	<classpathentry kind="lib" path="org.cmg.resp.core/lib/abcl.jar"/>
+	<classpathentry kind="lib" path="org.cmg.resp.core/lib/pastry.jar"/>
+	<classpathentry kind="lib" path="JRESP/jresp_3.2_lib.jar"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
