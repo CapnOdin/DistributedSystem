@@ -100,6 +100,22 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
 		this.add(JBAddCalendarTask, BorderLayout.SOUTH);
 	}
 	
+	public void setVagter(){
+		String[] navne = MainFrame.profile.calendar.get_job_names();
+		for ( int i = 0; i < navne.length;i++){
+			String dato = MainFrame.profile.calendar.get_job(navne[i]).get("start");
+			String tid = MainFrame.profile.calendar.get_job(navne[i]).get("start");
+			String navn = MainFrame.profile.calendar.get_job(navne[i]).get("description");
+			String adresse = MainFrame.profile.calendar.get_job(navne[i]).get("title");
+			String postnummer = MainFrame.profile.calendar.get_job(navne[i]).get("title");
+			//String[] jobs = MainFrame.profile.calendar.get_job(navne[i]);
+			System.out.println(dato);
+			System.out.println(tid);
+			System.out.println(navn);
+			addCalendarTask(dato, tid, navn, adresse, postnummer);
+		}
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == JBAddCalendarTask) {
@@ -230,9 +246,9 @@ public class Panel3Kalender extends JPanel implements GeneralProperties, MouseLi
 		public void mouseClicked(MouseEvent e) {
 			parent.requestFocus();
 			if (e.getSource() == toolButtons[0]){
-				DTimeRegistrering = new DialogTimeRegistrering(MainFrame);
+				/*DTimeRegistrering = new DialogTimeRegistrering(MainFrame);
 				DTimeRegistrering.setAlwaysOnTop(true);
-				DTimeRegistrering.setVisible(true);
+				DTimeRegistrering.setVisible(true);*/
 			}
 			if(e.getSource() == toolButtons[1]) {
 				for(int i = 0; i < labels.length; i++) {

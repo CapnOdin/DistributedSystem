@@ -132,10 +132,6 @@ public class Panel3Forbind extends JPanel implements GeneralProperties, ActionLi
 		JTEMail.setText(MainFrame.profile.momentUsername);
 		Kodeord.setText(MainFrame.profile.momentPassword);
 	}
-
-	private void setVagter(){
-		//String[] navne = MainFrame.profile.calandar.get_job_names();
-	}
 		
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -189,6 +185,7 @@ public class Panel3Forbind extends JPanel implements GeneralProperties, ActionLi
 				MainFrame.profile.calendar.add_jobs(api.MomentApi.getVagter("2016-01-01",var[0]));
 				MainFrame.panel2.p3Data.setField();
 				if(parent.stallGUI("success","moment")){
+					MainFrame.panel2.p3Kalender.setVagter();
 					DBesked = new DialogBesked(parent, "Forbundet til moment");
 					DBesked.setAlwaysOnTop(true);
 					DBesked.setVisible(true);
