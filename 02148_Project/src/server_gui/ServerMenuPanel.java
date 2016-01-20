@@ -24,9 +24,10 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 	private ServerConnectedClientsPanel sccp; 
 	private ServerTaskBar stb;
 	private ServerTupleSpaceMonitoring stsm;
+	private ServerConsole sc;
 	
 	private JPanel menusPanel = new JPanel(new GridLayout(1,2));
-	private JLabel[] menus = new JLabel[2];
+	private JLabel[] menus = new JLabel[3];
 	private Color twitchColor = new Color(100,65,165);
 	
 	public ServerMenuPanel(ServerMainFrame parent) {
@@ -51,7 +52,8 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 
 	private void addMenuProperties() {
 		stb = new ServerTaskBar(parent, "SERVER");
-		stsm = new ServerTupleSpaceMonitoring(parent, "monitoring");
+		stsm = new ServerTupleSpaceMonitoring(parent, "TUPLE SPACE MONITORING");
+		sc = new ServerConsole(parent, "CONSOLE");
 		menusPanel.setBackground(twitchColor);
 		addC(stb, 0, 0);
 		for(int i = 0; i < menus.length; i++) {
@@ -66,6 +68,7 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 		
 		menus[0].setText("Connected Clients");
 		menus[1].setText("Tuple Space Monitoring");
+		menus[2].setText("Console Monitoring");
 		addC(menusPanel, 0, 1);
 		this.validate();
 	}
@@ -91,6 +94,12 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 		if(e.getSource() == menus[1]) {
 			menus[1].setBorder(BorderFactory.createLoweredSoftBevelBorder());
 			parent.addVariablePanel(stsm);
+		}
+		
+		// Console Monitoring pressed
+		if(e.getSource() == menus[2]) {
+			menus[2].setBorder(BorderFactory.createLoweredSoftBevelBorder());
+			parent.addVariablePanel(sc);
 		}
 	}
 	
@@ -119,6 +128,9 @@ public class ServerMenuPanel extends JPanel implements MouseListener {
 		}
 		if(e.getSource() == menus[1]) {
 			menus[1].setBorder(BorderFactory.createRaisedSoftBevelBorder());
+		}
+		if(e.getSource() == menus[2]) {
+			menus[2].setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		}
 		
 	}
