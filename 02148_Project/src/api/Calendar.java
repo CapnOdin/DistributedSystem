@@ -73,7 +73,7 @@ public class Calendar implements Serializable {
 		formatedJop.put("StartTime", job.get("Start").split("T")[1].substring(0, 5));
 		formatedJop.put("EndTime", job.get("End").split("T")[1].substring(0, 5));
 		formatedJop.put("Address", formatStr(job.get("Title")));
-		formatedJop.put("Name", formatStr(job.get("JobName")));
+		formatedJop.put("Name", removeNum(formatStr(job.get("JobName"))));
 		System.out.println(formatStr(job.get("JobName")) + " : " + job.get("JobName"));
 		
 		return formatedJop;
