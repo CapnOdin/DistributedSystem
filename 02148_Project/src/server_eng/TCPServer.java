@@ -73,7 +73,9 @@ public class TCPServer extends Thread {
 			newClient.start();
 			try {
 				Thread.sleep(150);
-				serviceMessage("ALL ACTIVE CONNECTIONS: " + allConnections);
+				for(Map.Entry<String, ConnectionThread> entry : allConnections.entrySet()) {
+					serviceMessage("Active connection: " + entry.getKey() + " Thread: " + entry.getValue());
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -119,7 +121,6 @@ public class TCPServer extends Thread {
 		User temp = findUser(user);
 		if(!userMap.containsKey(temp)) return false;
 		if(userMap.get(temp).equals(password)) {
-			serviceSTATMessage("CONTAINS FOLLOWING PROFILE : " + temp.getProfile().toString());
 			return true;
 		}
 		return false;
@@ -132,14 +133,18 @@ public class TCPServer extends Thread {
 			}
 		}
 		userMap.put(user, password);
-		serviceSTATMessage("ALL USERS AND PASSWORDS : " + userMap);
+		for(Map.Entry<User, String> entry : userMap.entrySet()) {
+			serviceSTATMessage("User: " + entry.getKey().getUserName() + " Password: " + entry.getValue());
+		}
 		return true;
 	}
 	
 	public static boolean changeUserPassword(User user, String currentPassword, String newPassword, String sessionID) {
 		if(userMap.get(user).equals(currentPassword)) {
 			userMap.put(user, newPassword);
-			serviceSTATMessage("ALL USERS AND PASSWORDS : " + userMap);
+			for(Map.Entry<User, String> entry : userMap.entrySet()) {
+				serviceSTATMessage("User: " + entry.getKey().getUserName() + " Password: " + entry.getValue());
+			}
 			return true;
 		}
 		return false;
